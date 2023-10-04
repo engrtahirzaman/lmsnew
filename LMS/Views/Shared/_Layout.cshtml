@@ -1,0 +1,539 @@
+﻿@using LMS.Models;
+@{
+    CMSEntities db = new CMSEntities();
+    int StudentID = Convert.ToInt32(Session["StudentID"]);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="~/Content/assets/images/favicon-32x32.png">
+
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Content/assets/css/fonts.googleapis.com.css" />
+    <link href="~/Content/assets/css/jquery.gritter.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap-multiselect.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Content/assets/css/daterangepicker.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap-datepicker3.min.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="~/Content/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="~/Content/assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="~/Content/assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="~/Content/assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="~/Content/assets/js/html5shiv.min.js"></script>
+    <script src="~/Content/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="no-skin" oncontextmenu="return false">
+    <div id="navbar" class="navbar navbar-default          ace-save-state">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <span class="img-responsive card-img-top">
+
+                    <img src="~/Content/assets/images/Logo.png" style="max-width: 25em" />
+
+                </span>
+            </div>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="light-blue dropdown-modal">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            @if (db.Students.Find(Convert.ToInt32(Session["StudentID"])).Admission.Photo != null)
+                            {
+                                <img id="avatar" class="nav-user-photo" src="data:image/jpeg;base64,@(Convert.ToBase64String(db.Students.Find(Convert.ToInt32(Session["StudentID"])).Admission.Photo))" />
+
+                            }
+                            else
+                            {
+                                <img class="nav-user-photo" src="~/Content/assets/images/avatars/user.jpg" alt="Photo" />
+                            }
+
+                            <span class="user-info">
+                                <small>Welcome,</small>
+                                @Session["Username"]
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })" title="Edit Profile">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "StudentProfile", new { Area = "StudentAccount" })" title="Change Password">
+                                    <i class="menu-icon fa fa-key"></i>
+                                    <span class="menu-text"> Change Password</span>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="@Url.Action("Logout", "Account", new { Area = "StudentAccount" })" title="Logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <div class="main-container ace-save-state" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>
+
+        <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+            <script type="text/javascript">
+                try { ace.settings.loadState('sidebar') } catch (e) { }
+            </script>
+
+            @*<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                        <button class="btn btn-success">
+                            <i class="ace-icon fa fa-signal"></i>
+                        </button>
+
+                        <button class="btn btn-info">
+                            <i class="ace-icon fa fa-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-warning">
+                            <i class="ace-icon fa fa-users"></i>
+                        </button>
+
+                        <button class="btn btn-danger">
+                            <i class="ace-icon fa fa-cogs"></i>
+                        </button>
+                    </div>
+
+                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                        <span class="btn btn-success"></span>
+
+                        <span class="btn btn-info"></span>
+
+                        <span class="btn btn-warning"></span>
+
+                        <span class="btn btn-danger"></span>
+                    </div>
+                </div>*@<!-- /.sidebar-shortcuts -->
+
+            <ul class="nav nav-list">
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="My Dashboard">
+                        <i class="menu-icon fa fa-dashboard"></i>
+                        <span class="menu-text"> My Dashboard </span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "UpdateProfile" ? "active" : "")">
+                    <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })" title="Profile">
+                        <i class="menu-icon fa fa-user"></i>
+                        <span class="menu-text"> Profile</span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllCourses" ? "active" : "")@(ViewContext.RouteData.Values["Action"].ToString() == "ApplyCourses" ? "active" : "")">
+                    <a href="@Url.Action("AllCourses","MyCourses", new { Area = "Courses"})" title="Courses">
+                        <i class="menu-icon fa fa-book"></i>
+                        <span class="menu-text"> Courses </span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllFee" ? "active" : "")">
+                    <a href="@Url.Action("AllFee","MyFees", new { area = "Fees"})" title="Fee Payments">
+                        <i class="menu-icon fa fa-money"></i>
+                        <span class="menu-text"> Fee Payments </span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Assignments" ? "active" : "")">
+                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Assignments">
+                        <i class="menu-icon fa fa-clipboard"></i>
+                        <span class="menu-text"> Assignments </span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Attendance" ? "active" : "")">
+                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Attendance">
+                        <i class="menu-icon fa fa-calendar-check-o"></i>
+                        <span class="menu-text"> Attendance </span>
+
+                    </a>
+                </li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Notice Board">
+                        <i class="menu-icon fa fa-sticky-note-o"></i>
+                        <span class="menu-text"> Notice Board </span>
+
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("Logout", "Account", new { Area = "StudentAccount" })" title="Logout">
+                        <i class="menu-icon fa fa-power-off"></i>
+                        <span class="menu-text"> Logout</span>
+                    </a>
+                </li>
+            </ul><!-- /.nav-list -->
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                @RenderBody()
+            </div>
+        </div><!-- /.main-content -->
+        <hr />
+        <br />
+        <div class="footer">
+            <div class="footer-inner">
+
+                @*<div class="footer-content">*@
+                <div class="col">
+                    <span class="bigger-120">
+                        <span class="blue bolder">PAK-AUSTRIA FACHHOCHSCHULE:</span> <br />
+                        Learning Management System (LMS) Portal &copy; @DateTime.Now.Year
+                    </span>
+
+
+                    &nbsp; &nbsp;
+                    <span class="action-buttons">
+                        <a href="#">
+                            <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                        </a>
+
+                        @*<a href="#">
+                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                        </a>*@
+                    </span>
+
+                </div>
+                <div class="col" id="AdmissionOfficeCnt">
+                    For any query / assistance please drop mail to: lms@paf-iast.edu.pk
+                </div>
+                @*</div>*@
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div><!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="~/Content/assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <!-- ace scripts -->
+    <script src="~/Content/assets/js/ace-elements.min.js"></script>
+    <script src="~/Content/assets/js/ace.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="~/Content/assets/js/wizard.min.js"></script>
+    <script src="~/Content/assets/js/jquery.inputlimiter.min.js"></script>
+    <script src="~/Content/assets/js/jquery.maskedinput.min.js"></script>
+    <script src="~/Content/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/assets/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/js/buttons.flash.min.js"></script>
+    <script src="~/Content/assets/js/buttons.html5.min.js"></script>
+    <script src="~/Content/assets/js/buttons.print.min.js"></script>
+    <script src="~/Content/assets/js/buttons.colVis.min.js"></script>
+    <script src="~/Content/assets/js/dataTables.select.min.js"></script>
+    <script src="~/Content/assets/js/bootbox.js"></script>
+    <script src="~/Content/assets/js/jquery.gritter.min.js"></script>
+    <script src="~/Content/assets/js/chosen.jquery.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap-multiselect.min.js"></script>
+
+
+    @*<script src="~/Content/assets/js/daterangepicker.min.js"></script>*@
+    <script src="~/Content/assets/js/bootstrap-datepicker.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+
+    <script type="text/javascript">
+        //datatable
+        $('#datatable').dataTable({
+            "pageLength": 100
+        });
+
+        //when
+        $("input").on("focus", function () {
+            $(this).select();
+        });
+
+        //border color default
+        function borderColor(elem) {
+            elem.style.borderColor = '';
+        }
+
+        //accept only txt.
+        $(document).ready(function () {
+            $(".txtOnly").keypress(function (e) {
+                var keyCode = e.keyCode || e.which;
+
+                //Regex for Valid Characters i.e. Alphabets.
+                var regex = /^[a-zA-Z\s]+$/;
+
+
+                //Validate TextBox value against the Regex.
+                var isValid = regex.test(String.fromCharCode(keyCode));
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+
+        //accept only number.
+        $(document).ready(function () {
+            $(".numOnly").keypress(function (e) {
+                var keyCode = e.keyCode || e.which;
+
+
+                // Allow backspace, delete, tab, and decimal point
+                if (keyCode == 8 || keyCode == 9 || keyCode == 46 || keyCode == 110 || keyCode == 190) {
+                    return true;
+                }
+
+                // Check if the key is a digit (0-9)
+                if (keyCode < 48 || keyCode > 57) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        //accept only txt and numbers
+        $(document).ready(function () {
+            $(".txtnumOnly").keypress(function (e) {
+                var keyCode = e.keyCode || e.which;
+
+                //Regex for Valid Characters i.e. Alphabets and Numbers.
+                var regex = /^[A-Za-z0-9]+$/;
+
+                //Validate TextBox value against the Regex.
+                var isValid = regex.test(String.fromCharCode(keyCode));
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        //popup validation messages
+        function popup_validation(elem_id, msg) {
+            $(elem_id).css("border-color", "red").focus();
+            $.gritter.add({
+                title: "<i class='ace-icon fa fa-times'></i> Sorry !</strong>",
+                text: msg,
+                image: "/Content/assets/images/avatars/avatar3.png",
+                class_name: "gritter-error"
+            });
+        }
+
+        //popup success messages
+        function popup_success(msg) {
+            $.gritter.add({
+                title: "<i class='ace-icon fa fa-check'></i> Done !</strong>",
+                text: msg,
+                image: "/Content/assets/images/avatars/avatar4.png",
+                class_name: "gritter-success"
+            });
+        }
+
+        //popup error messages
+        function popup_danger(msg) {
+            $.gritter.add({
+                title: "<i class='ace-icon fa fa-times'></i> Error !</strong>",
+                text: msg,
+                image: "/Content/assets/images/avatars/avatar3.png",
+                class_name: "gritter-error"
+            });
+        }
+
+        jQuery(function ($) {
+
+            if (!ace.vars['touch']) {
+                $('.chosen-select').chosen({ allow_single_deselect: true });
+                //resize the chosen on window resize
+            }
+
+            //////////////////
+            $('.multiselect').multiselect({
+                enableFiltering: true,
+                enableHTML: true,
+                buttonClass: 'btn btn-white btn-primary',
+                templates: {
+                    button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> &nbsp;<b class="fa fa-caret-down"></b></button>',
+                    ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+                    filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+                    filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default btn-white btn-grey multiselect-clear-filter" type="button"><i class="fa fa-times-circle red2"></i></button></span>',
+                    li: '<li><a tabindex="0"><label></label></a></li>',
+                    divider: '<li class="multiselect-item divider"></li>',
+                    liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+                }
+            });
+        });
+
+
+        jQuery(function ($) {
+            $('#loading-btn').on(ace.click_event, function () {
+                var btn = $(this);
+                btn.button('loading')
+                setTimeout(function () {
+                    btn.button('reset')
+                }, 20000)
+            });
+
+            $('#id-button-borders').attr('checked', 'checked').on('click', function () {
+                $('#default-buttons .btn').toggleClass('no-border');
+            });
+        })
+
+
+
+        // File type validation
+        $(".onlyimage").change(function () {
+
+            var filesize = this.files[0].size;
+
+            var file = this.files[0];
+            var fileType = file.type;
+            //var match = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'image/jpeg', 'image/png', 'image/jpg'];
+            var match = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!((fileType == match[0]) || (fileType == match[1]) || (fileType == match[2]))) {
+                $("#msg").html("<br><span class='alert alert-danger'>Sorry, only JPG/JPEG/PNG images are allowed..</span>");
+                $(".onlyimage").val('');
+                return false;
+            }
+            else if (filesize > 200000) {
+                $("#msg").html("<br><span class='alert alert-danger'>Sorry, only 200 KB image size is allowed..</span>");
+                $(".onlyimage").val('');
+                return false;
+            }
+            else {
+
+                $("#msg").html("");
+
+                var output = document.getElementById('img');
+                output.src = URL.createObjectURL(this.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            }
+
+        });
+
+
+
+        //input file
+        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+            no_file: 'No Selection ...',
+            btn_choose: 'Choose',
+            btn_change: 'Change',
+            droppable: false,
+            onchange: null,
+            thumbnail: false //| true | large
+            //whitelist:'gif|png|jpg|jpeg'
+            //blacklist:'exe|php'
+            //onchange:''
+            //
+        });
+
+
+        //chosen-select start....
+        if (!ace.vars['touch']) {
+            $('.chosen-select').chosen({ allow_single_deselect: true });
+            //resize the chosen on window resize
+
+            $(window)
+                .off('resize.chosen')
+                .on('resize.chosen', function () {
+                    $('.chosen-select').each(function () {
+                        var $this = $(this);
+                        $this.next().css({ 'width': $this.parent().width() });
+                    })
+                }).trigger('resize.chosen');
+            //resize chosen on sidebar collapse/expand
+            $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+                if (event_name != 'sidebar_collapsed') return;
+                $('.chosen-select').each(function () {
+                    var $this = $(this);
+                    $this.next().css({ 'width': $this.parent().width() });
+                })
+            });
+
+
+
+        } //chosen-select end....
+
+    </script>
+
+</body>
+</html>

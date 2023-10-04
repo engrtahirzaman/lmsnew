@@ -1,0 +1,494 @@
+﻿@model LMS.Models.Student
+
+@{
+    ViewBag.Title = "Student Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="form-horizontal">
+    <div class="page-header col-md-12 col-xs-12 col-sm-12">
+        <h1>
+            Please fill out this admission form carefully as changes will not be incorporated once submitted. <br />
+            @Html.Raw(@TempData["Message"])
+        </h1>
+    </div>
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(t => t.ID)
+            @Html.HiddenFor(t => t.Admission.ApplicantID)
+            @Html.HiddenFor(t => t.AdmissionID)
+            @Html.HiddenFor(t => t.Admission.ID)
+            @Html.HiddenFor(t => t.Admission.SessionID)
+            @Html.HiddenFor(t => t.RegNo)
+            @Html.HiddenFor(t => t.Password)
+            @Html.HiddenFor(t => t.BatchID)
+            @Html.HiddenFor(t => t.Admission.Photo)
+            @Html.HiddenFor(t => t.Admission.CNICCopy)
+            @Html.HiddenFor(t => t.Admission.FatherCNICCopy)
+            @Html.HiddenFor(t => t.CrDate)
+            @Html.HiddenFor(t => t.Admission.CrDate)
+            @Html.HiddenFor(t => t.Admission.AgreedUndertaking)
+            @Html.HiddenFor(t => t.Admission.AgreedUndertakingHSSCPart2)
+
+            <div class="col-md-12 col-xs-12 col-sm-6">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                @if (Model.Admission.Photo != null)
+                                {
+                                    @*<img id="avatar" class="img-responsive" alt="Choose Picture" src="~/ApplicantPictures/@Model.PicturePath" style="width:8em" /><br />*@
+                                    <img id="img" title="Upload passport size picture" class="img-responsive" alt="Choose Picture" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Admission.Photo))" style="width:8em" /><br />
+
+
+
+                                }
+                                else
+                                {
+                                    <img id="img" title="Upload passport size picture only" class="img-responsive" alt="Choose Picture" src="~/Content/assets/images/photo-sample.png" style="width:8em" /><br />
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                @if (Model.Admission.CNICCopy != null)
+                                {
+                                    <img id="cnicimg" title="Upload your CNIC/FormB" class="img-responsive" alt="Choose CNIC" src="~/ApplicantCNICFormB/@Model.Admission.CNICCopy" style="width:8em" /><br />
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                @if (Model.Admission.FatherCNICCopy != null)
+                                {
+                                    <img id="fcnicimg" title="Upload Father/Guardian CNIC" class="img-responsive" alt="Choose CNIC" src="~/ApplicantFatherCNIC/@Model.Admission.FatherCNICCopy" style="width:8em" /><br />
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div id="msg"></div>
+                                <strong class="text-danger">
+
+                                    @Html.ValidationMessage("Picture")
+
+                                </strong>
+                                <label class="control-label" for="form-field-1"> Upload your Picture <strong class="text-danger">* </strong> </label>
+                                <input type="file" class="onlyimage" name="file" id="id-input-file-2" accept="image/*" />
+                                <strong class="text-danger">(Only .png | .gif | .jpg | .jpeg formats of max 200 KB size are allowed! )</strong><br />
+                                <strong class="text-danger">(Upload passport size picture and must show a close-up of your full face and shoulders.)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div id="cnicmsg"></div>
+                                <strong class="text-danger">
+                                    @Html.ValidationMessage("CNICCopy")
+                                </strong>
+                                <label class="control-label">Upload your CNIC/Form-B <strong class="text-danger"> *</strong> </label>
+                                <input type="file" class="cnic" name="cnic" id="id-input-file-2" accept="image/*" />
+                                <strong class="text-danger">(only .png | .gif | .jpg | .jpeg formats are allowed!)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+
+                                <div id="fcnicmsg"></div>
+                                <strong class="text-danger">
+                                    @Html.ValidationMessage("FatherCNICCopy")
+                                </strong>
+
+                                <label class="control-label">Upload Father/Guardian  CNIC <strong class="text-danger"> *</strong> </label>
+                                <input type="file" class="fcnic" name="fathercnic" id="id-input-file-2" accept="image/*" />
+                                <strong class="text-danger">(only .png | .gif | .jpg | .jpeg formats are allowed!)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Title <strong class="text-danger"> *</strong> </label>
+                                @Html.DropDownListFor(model => model.Admission.TitleID, ViewBag.TitleID as SelectList, "Select Title", new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">First Name <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FirstName, new { @class = "form-control", @placeholder = "First Name", @required = "required", @maxlength = "50" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Last Name <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.LastName, new { @class = "form-control", @placeholder = "Last Name", @required = "required", @maxlength = "50" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Father's Name <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FatherName, new { @class = "form-control", @placeholder = "Father Name", @required = "required", @maxlength = "200" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Continue adding more rows and columns for other fields -->
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Mother's Name <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.MotherName, new { @class = "form-control", @placeholder = "Mother Name", @required = "required", @maxlength = "200" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Father's/Guardian's CNIC No. <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FatherCNIC, new { @class = "form-control", @placeholder = "Father/Guardian's CNIC", @maxlength = "15", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Father Occupation <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FatherOccupation, new { @class = "form-control", @placeholder = "Father Occupation", @maxlength = "50", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Father Employer <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FatherOrganizationName, new { @class = "form-control", @placeholder = "Father Employer", @maxlength = "200", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Father Monthly Income <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.FatherIncome, new { @class = "form-control", @maxlength = "50", @placeholder = "Father Monthly Income", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">
+                                    Your CNIC/Form-B No
+                                    <span class="middle">Without dashes(-)</span><strong class="text-danger"> *</strong>
+                                </label>
+                                @Html.TextBoxFor(model => model.Admission.CNICNo, new { @class = "form-control numOnly", @placeholder = "without (-) dashes i.e. xxxxxxxxxxxxx", @maxlength = "13", @required = "required" })
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">
+                                    Passport No.
+                                    <span class="middle">(Foreigners only)</span><strong class="text-danger"> *</strong>
+                                </label>
+                                @Html.TextBoxFor(model => model.Admission.PassportNo, new { @class = "form-control", @placeholder = "Passport No.", @maxlength = "50" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Date of Birth <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.DOB, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Mobile No. <span class="middle">i.e. +923xxxxxxxxx</span><strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.MobileNo, new { @class = "form-control", @placeholder = "Mobile No.", @required = "required", @maxlength = "50" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Email Address <strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.EmailAddress, new { type = "email", @class = "form-control", @placeholder = "someone@example.com", @required = "required", @maxlength = "100" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Father/Guardian Mobile No. <span class="middle">i.e. +923xxxxxxxxx</span><strong class="text-danger"> *</strong> </label>
+                                @Html.TextBoxFor(model => model.Admission.GuardianMobileNo, new { @class = "form-control", @placeholder = "Father/Guardian Mobile No.", @required = "required", @maxlength = "50" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Landline / Residance No. <span class="middle">(optional)</span></label>
+                                @Html.TextBoxFor(model => model.Admission.LandLineNo, new { @class = "form-control", @placeholder = "Landline No.", @required = "required", @maxlength = "12" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Gender <strong class="text-danger"> *</strong></label>
+                                @Html.DropDownListFor(model => model.Admission.Gender, ViewBag.Gender as SelectList, "Select Gender", new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Religion <strong class="text-danger"> *</strong></label>
+                                @Html.DropDownListFor(model => model.Admission.ReligionID, ViewBag.ReligionID as SelectList, "Select Religion", new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Blood Group <strong class="text-danger"> *</strong></label>
+                                @Html.DropDownListFor(model => model.Admission.BloodGroup, ViewBag.BloodGroup as SelectList, "Select Blood Group", new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Disability? <strong class="text-danger"> *</strong></label>
+
+                                @Html.RadioButtonFor(t => t.Admission.IsDisable, true, new { @onchange = "Disability()", @id = "disability" }) Yes
+                                @Html.RadioButtonFor(t => t.Admission.IsDisable, false, new { @onchange = "Disability()", @id = "disability" }) No
+
+                                @Html.EditorFor(model => model.Admission.DescribeDisability, new { htmlAttributes = new { @id = "dd", @class = "form-control", @placeholder = "Discribe Disability (if yes)", @maxlength = "100" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Education Sponsered by? <span class="middle">(optional)</span></label>
+                                @Html.TextBoxFor(model => model.Admission.SponsoredBy, new { @class = "form-control", @placeholder = "Education Sponsered by", @maxlength = "50" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Nationality <strong class="text-danger"> *</strong></label>
+                                @Html.DropDownListFor(model => model.Admission.NationalityID, ViewBag.NationalityID as SelectList, "Select Nationality", new { @class = "form-control chosen-select", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Province/State <strong class="text-danger"> *</strong></label>
+                                @Html.DropDownListFor(model => model.Admission.ProvinceID, ViewBag.ProvinceID as SelectList, "Select Province", new { @class = "form-control chosen-select", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">  District/City <strong class="text-danger"> *</strong></label>
+
+                                @Html.DropDownListFor(model => model.Admission.DistrictID, ViewBag.DistrictID as SelectList, "Select District", new { @class = "form-control chosen-select", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">   Domicile District <strong class="text-danger"> *</strong></label>
+
+                                @Html.DropDownListFor(model => model.Admission.DomicileID, ViewBag.DomicileID as SelectList, "Select Domicile", new { @class = "form-control chosen-select", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Present Postal Address <strong class="text-danger"> *</strong></label>
+
+                                @Html.TextAreaFor(model => model.Admission.PresentAddress, new { @class = "form-control", @rows = 5, @maxlength = "500", @placeholder = "House#, Street#, Area Name", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label"> Permanent Address <span class="middle">(optional)</span>  <input type="checkbox" id="checkBox" onclick="FillAddressInput()"> Same as present postal address</label>
+                                @Html.TextAreaFor(model => model.Admission.PermanentAddress, new { @class = "form-control", @rows = 5, @maxlength = "500", @placeholder = "House#, Street#, Area Name", @required = "required" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-4 col-md-12">
+                        <button class="btn btn-primary btn-lg" type="submit" title="Subit Form" id="loading-btn" data-loading-text="Please wait...">
+
+                            <i class="ace-icon fa fa-save bigger-110"></i>
+                            Submit Form
+                        </button>
+                        <button class="btn btn-default btn-lg" type="reset" title="Reset" id="loading-btn" data-loading-text="Please wait...">
+
+                            <i class="ace-icon fa fa-refresh bigger-110"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+
+
+<script src="~/Content/assets/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+    // File type validation
+    $(".cnic").change(function () {
+        
+        var filesize = this.files[0].size;
+
+        var file = this.files[0];
+        var fileType = file.type;
+        //var match = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'image/jpeg', 'image/png', 'image/jpg'];
+        var match = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!((fileType == match[0]) || (fileType == match[1]) || (fileType == match[2]))) {
+            $("#cnicmsg").html("<br><span class='alert alert-danger'>Sorry, only JPG/JPEG/PNG images are allowed..</span>");
+            $(".cnic").val('');
+            return false;
+        }
+
+    });
+
+    // File type validation
+    $(".fcnic").change(function () {
+        
+        var filesize = this.files[0].size;
+
+        var file = this.files[0];
+        var fileType = file.type;
+        //var match = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'image/jpeg', 'image/png', 'image/jpg'];
+        var match = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!((fileType == match[0]) || (fileType == match[1]) || (fileType == match[2]))) {
+            $("#fcnicmsg").html("<br><span class='alert alert-danger'>Sorry, only JPG/JPEG/PNG images are allowed..</span>");
+            $(".fcnic").val('');
+            return false;
+        }
+
+    });
+
+    function FillAddressInput() {
+
+        if (document.getElementById('checkBox').checked == true) {
+
+            document.getElementById("PermanentAddress").value = document.getElementById("PresentAddress").value;
+
+        }
+        else {
+            document.getElementById("PermanentAddress").value = "";
+        }
+    }
+
+    function Disability() {
+        
+        if (document.getElementById('disability').checked == true) {
+            $('#dd').attr('required', 'required');
+        }
+        else {
+            $('#dd').val(null);
+        }
+    }
+
+</script>

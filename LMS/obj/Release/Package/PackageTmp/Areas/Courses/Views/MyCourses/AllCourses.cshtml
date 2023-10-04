@@ -1,0 +1,160 @@
+﻿@model IEnumerable<LMS.Models.StudentCours>
+@{
+    ViewBag.Title = "AllCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("Index","MyDashboard", new { area =""})">Dashboard</a>
+        </li>
+        <li class="active">My Courses</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="page-header">
+                <h1>
+                    <a href="@Url.Action("Index","MyDashboard", new { area =""})" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    |
+                    My Courses
+                    <a href="@Url.Action("ApplyCourses","MyCourses", new { area ="Courses"})" class="btn btn-inverse btn-xs pull-right" title="Register Course">New Course <i class="fa fa-arrow-circle-o-right"></i> </a>
+                </h1>
+            </div>
+            <!-- div.table-responsive -->
+            <!-- div.dataTables_borderWrap -->
+            <h1 class="text-danger">@ViewBag.Error</h1>
+            @Html.Raw(TempData["Sucess"])
+            @Html.Raw(TempData["Failed"])
+            <div>
+                @foreach (var session in Model.GroupBy(t => t.SessionID))
+                {
+
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-flat">
+                            <h5 class="widget-title lighter">
+                                <i class="ace-icon fa fa-book orange"></i>
+                                @session.Select(t => t.Session.Session1).First() Registered Courses
+
+                            </h5>
+
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="ace-icon fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main no-padding" style="overflow-y: scroll;">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thin-border-bottom">
+                                        <tr>
+                                            <th width="5%">S#</th>
+                                            <th width="10%">
+                                                Course Code
+                                            </th>
+                                            <th width="20%">Course Title</th>
+                                            <th width="5%">Cr Hrs.</th>
+                                            <th width="5%">Status</th>
+                                            <td width="10%">Actions</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @{ int sno = 1;}
+                                        @foreach (var item in Model.Where(t => t.SessionID == session.Key))
+                                        {
+                                            <tr>
+                                                <td>@sno</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Course.Code)</td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Course.Title)
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
+                                                <td>
+                                                    @if (item.IsWithdraw == false && item.IsDropped == false)
+                                                    {
+                                                        <span class="label label-white label-success middle">Active</span>
+                                                    }
+                                                    @if (item.IsDropped == true)
+                                                    {
+                                                        <span class="label label-white label-danger middle">Dropped</span>
+                                                    }
+                                                    @if (item.IsWithdraw == true)
+                                                    {
+                                                        <span class="label label-white label-info middle">Withdrawn</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button data-toggle="dropdown" class="btn btn-info btn-xs dropdown-toggle">
+                                                            Actions
+                                                            <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                                            <li>
+                                                                @using (Html.BeginForm("DropCourse", "MyCourses", FormMethod.Post, new { @class = "dropform" }))
+                                                                {
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="dropCourseLink" title="Drop this course"><i class="fa fa-trash-o"></i> Drop this course</a>
+                                                            </li>
+
+                                                            <li>
+                                                                @using (Html.BeginForm("WithDrawCourse", "MyCourses", FormMethod.Post, new { @class = "withdrawform" }))
+                                                                {
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+
+                                                                }
+                                                                <a href="#" class="withdrawCourseLink" title="Widraw this course"><i class="fa fa-remove"></i> Widraw this course</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            sno++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div><!-- /.widget-main -->
+                        </div><!-- /.widget-body -->
+                    </div>
+                }
+            </div>
+
+        </div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.page-content -->
+<script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+<script>
+
+    $(document).on("click", ".dropCourseLink", function (e) {
+        var Okay = confirm("Are you sure you want to drop this course?");
+        if (Okay) {
+            e.preventDefault();
+            $(this).prev(".dropform").submit();
+        }
+    });
+
+    $(document).on("click", ".withdrawCourseLink", function (e) {
+        var Okay = confirm("Are you sure you want to withdraw this course?");
+        if (Okay) {
+            e.preventDefault();
+            $(this).prev(".withdrawform").submit();
+        }
+    });
+
+
+</script>

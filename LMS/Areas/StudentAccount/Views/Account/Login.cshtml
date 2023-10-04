@@ -1,0 +1,289 @@
+﻿@model LMS.UserLoginModel
+@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>PAF-IAST LMS | Login</title>
+
+    <meta name="description" content="PAF-IAST LMS official portal." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="~/Content/assets/images/favicon-32x32.png">
+    <!-- favicon -->
+    <link rel="icon" href="~/Content/assets/images/favicon.jpeg" type="image/gif" sizes="16x16">
+
+    <!-- bootstrap & fontawesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="~/Content/assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="~/Content/assets/css/ace.min.css" />
+
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="~/Content/assets/css/ace-part2.min.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="~/Content/assets/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="~/Content/assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="~/Content/assets/js/html5shiv.min.js"></script>
+    <script src="~/Content/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="login-layout light-login" style="background-image: url('https://paf-iast.edu.pk/wp-content/uploads/2021/03/home1New.png'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-12" style="background-color:steelblue;">
+
+
+                    <div class="row">
+                        <div class="col-10">
+                            <img src="~/Content/assets/images/Logo.png" class="img-responsive" style="margin:auto; width:30em" />
+                        </div>
+                    </div>
+
+                </div><!-- /.col -->
+                <br />
+
+                <div class="space-6"></div>
+
+                <div class="login-container">
+
+
+                    <div class="position-relative">
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <div class="center">
+                                            <h3 class="header blue lighter bigger">
+                                                Student Login <i class="ace-icon fa fa-sign-in icon-animated-vertical bigger-125"></i>
+                                            </h3>
+                                        </div>
+
+                                        <strong class="text-danger">
+                                            @Html.ValidationSummary()
+                                        </strong>
+
+                                        @*<Place for success message when user successfuly signup---------------------------></------------------------------>*@
+
+                                        <div class="form-floating">
+
+
+                                            @Html.EditorFor(model => model.RegNo, new
+                                       {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control mb-4",
+                                               @Style = "height:50px; border-radius: 1rem;",
+                                                    @title = "Enter Registration No.",
+                                               @placeholder = "Registration No."
+                                           }
+                                       })
+                                            <label for="RegNo" class="blue"><i class="ace-icon fa fa-user"></i> ENTER REGISTRATION NO.</label>
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.RegNo, "", new { @class = "text-danger" })
+
+
+                                        <div class="form-floating">
+
+                                            @Html.EditorFor(model => model.Password, new
+                                       {
+                                                htmlAttributes = new
+                                                {
+
+                                           @class = "form-control",
+                                           @Style = "height:50px; border-radius: 1rem;",
+                                           @type = "password",
+                                                    @title = "Type Password.",
+                                                    @placeholder = "Password"
+                                                }
+                                            })
+                                            <label for="Password" class="blue"><i class="ace-icon fa fa-key"></i> ENTER PASSWORD.</label>
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                                        @*</span>
+        </label>*@
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    @Html.Captcha("Refresh", "Enter the text shown in image", 4, "Is required field.", true)
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" id="loading-btn" data-loading-text="Please wait..." class="btn btn-sm btn-primary" title="Login" style="margin-top: 8em; margin-right: 6em;">
+                                                            <i class="ace-icon fa fa-sign-in"></i>
+                                                            <span class="bigger-110">Login</span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+                                    </div><!-- /.widget-main -->
+                                        <div class="toolbar clearfix">
+                                            <div style="font-size:small;">
+                                                <a style="font-size:small; color:chartreuse" href="#" data-target="#forgot-box" class="" title="Forgot my password">
+                                                    <i class="ace-icon fa fa-arrow-left"></i>
+                                                    Forgot my password
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            }
+                        </div><!-- /.widget-body -->
+                    </div><!-- /.position-relative -->
+
+
+                    <div id="forgot-box" class="forgot-box widget-box no-border">
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <h4 class="header red lighter bigger">
+                                    <i class="ace-icon fa fa-key"></i>
+                                    Retrieve Password
+                                </h4>
+                                <strong id="msg"></strong>
+                                <div class="space-6"></div>
+                                <p>
+                                    Enter your registered email to receive the password.
+                                </p>
+
+                                <fieldset>
+                                    <label class="block clearfix">
+                                        <div class="form-floating">
+
+                                            <input id="email" class="form-control" style="height:50px;" placeholder="Email" onclick="borderColor(this);" />
+
+                                            <label for="email" class="blue"> <i class="ace-icon fa fa-envelope"></i> Email Address.</label>
+
+                                        </div>
+                                    </label>
+
+                                    <div class="clearfix">
+                                        <button type="button" id="SendBtn" data-loading-text="Please wait..." class="width-35 pull-right btn btn-sm btn-danger" title="Send Me!">
+                                            <i class="ace-icon fa fa-lightbulb-o"></i>
+                                            <span class="bigger-110">Send Me!</span>
+                                        </button>
+                                    </div>
+                                </fieldset>
+
+                            </div><!-- /.widget-main -->
+
+                            <div class="toolbar center">
+                                <a href="#" data-target="#login-box" style="font-size:small;" class="back-to-login-link" title="Back to login">
+                                    Back to login
+                                    <i class="ace-icon fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div><!-- /.widget-body -->
+                    </div><!-- /.forgot-box -->
+
+                </div>
+            </div><!-- /.col -->
+          
+            <!-- /.row -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="~/Content/assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <!-- ace scripts -->
+    <script src="~/Content/assets/js/ace-elements.min.js"></script>
+    <script src="~/Content/assets/js/ace.min.js"></script>
+
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        //border color default
+        function borderColor(elem) {
+            elem.style.borderColor = '';
+        }
+
+        jQuery(function ($) {
+            $(document).on('click', '.toolbar a[data-target]', function (e) {
+                e.preventDefault();
+                var target = $(this).data('target');
+                $('.widget-box.visible').removeClass('visible');//hide others
+                $(target).addClass('visible');//show target
+            });
+        });
+
+        jQuery(function ($) {
+            $('#loading-btn').on(ace.click_event, function () {
+                var btn = $(this);
+                btn.button('loading')
+                setTimeout(function () {
+                    btn.button('reset')
+                }, 20000)
+            });
+
+        });
+
+
+        $("#SendBtn").on("click", function (e) {
+            var email = $("#email").val();
+            if (email == "") {
+                $("#email").css("border-color", "red").focus();
+            }
+            else {
+                //btn loading...
+                var btn = $(this);
+                btn.button('loading')
+
+                $.ajax({
+                    type: "POST",
+                    url: '/StudentAccount/Account/RetrievePassword',
+                    data: { email: email },
+                    success: function (data) {
+                        $("#msg").html(data.Message);
+                        $("#email").val('');
+                        btn.button('reset');
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

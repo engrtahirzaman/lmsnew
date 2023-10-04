@@ -1,0 +1,286 @@
+﻿@model IEnumerable<LMS.Models.StudentCourseSelection>
+@{
+    Layout = null;
+    int sno = 1;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Course Registration</title>
+
+    <!-- Include Bootstrap CSS for styling -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Define print-specific styles -->
+    <style type="text/css">
+        /* Define styles for the table when printing */
+        @@media print {
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+            /* Hide non-printable elements */
+            .no-print {
+                display: none;
+            }
+            /* Additional styles for the header */
+            .header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Additional styles for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Define a print button style */
+        .print-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Define styles for the certificate and advisor section */
+        .certificate-section {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .advisor-section {
+            margin-top: 20px;
+        }
+
+        /* Adjust the styles for the advisor table */
+        .advisor-table {
+            width: 50%;
+            float: left;
+        }
+
+        /* Additional styles for the "For Official Use" section */
+        .official-use-section {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="path_to_logo_image.jpg" alt="Pak-Austria Fachhochschule Logo" width="150">
+        <h1>Pak-Austria Fachhochschule:</h1>
+        <h3>Institute of Applied Sciences & Technology</h3>
+        <h2>COURSE REGISTRATION</h2>
+    </div>
+
+    <!-- Student Information Section -->
+    <div>
+        <h4>Student Information:</h4>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Registration No.</th>
+                    <th>Session</th>
+                    <th>Semester</th>
+                    <th>Department</th>
+                </tr>
+                <tr>
+                    <td>@Model.Select(t => t.Student.Admission.FirstName).First() @Model.Select(t => t.Student.Admission.MiddleName).First() @Model.Select(t => t.Student.Admission.LastName).First()</td>
+
+                    <td>@Model.Select(t => t.Student.RegNo).First()</td>
+                    <td>@Model.Select(t => t.Student.ProgramOffered.Session.Session1).First()</td>
+                    <td>@Methods.GetStudentCurrentSemesterNumber(Model.Select(t => t.Student.ID).First())</td>
+                    <td>@Model.Select(t => t.Student.ProgramOffered.DepartmentProgram.Department.DepartmentTitle).First()</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Course Details Section -->
+    <div>
+        <h4>Courses Details:</h4>
+        <table class="table table-bordered table-striped">
+            <thead class="thin-border-bottom">
+                <tr>
+                    <th>S#</th>
+                    <th>Course Code.</th>
+                    <th>Course Title</th>
+                    <th>Cr. Hrs.</th>
+                    <th>
+                        New Course
+                        <br />
+                        Please tick &#10003;
+                    </th>
+                    <th>
+                        Repeat
+                        <br />
+                        Prev. Grade
+                    </th>
+                    <th>
+                        Pre-requisites <br />
+                        Course Code. | Grade
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(sno++)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Course.Code)</td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.Title)
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <table style="width:51%">
+            <tr>
+                <td><strong>TOTAL CREDIT HOURS &#8594;</strong></td>
+                <td><strong>@Model.Sum(t => t.Course.CrHr)</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Additional Table -->
+    <div>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Last SGPA</th>
+                <th>CGPA</th>
+                <th>Student Signature</th>
+                <th>Date</th>
+            </tr>
+            <tr style=" height: 2em;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        </div>
+
+        <!-- Certificate Section -->
+        <div class="certificate-section">
+            <h4>Certificate from the Faculty:</h4>
+            <table class="table">
+                <tr>
+                    <th>Advisor</th>
+                    <th>Remarks</th>
+                </tr>
+                <tr>
+                    <td>The course numbers, titles, and credit hours assigned are correct.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>These courses are in accordance with the degree plan of the student.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>The student has completed the pre-requisite(s) of the above courses.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>The timetable circulated for the semester shows no restriction.</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        I recommend him/her for registration of the courses listed above.
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Advisor’s Signature: ___________________
+                    </td>
+                    <td>
+
+                        Date: ___________________________
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        HoD Signature: ________________________
+                    </td>
+                    <td>
+
+                        Date: ___________________________
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <!-- For Official Use Section -->
+        <div class="official-use-section">
+            <h4>For Official Use (do not write below this line):</h4>
+            <table class="table">
+                <tr>
+                    <td>The student has paid all the fees for the current academic year.</td>
+                    <td>
+                        Signature: ___________________________ <br />
+                        (Dir. Accounts)
+                    </td>
+                    <td>Date:</td>
+                </tr>
+                <tr>
+                    <td> Not Accepted</td>
+                    <td> Provisionally Accepted</td>
+                    <td> Accepted</td>
+                </tr>
+            </table>
+            <br />
+            <strong style="float:right"><u>Director Establishment</u></strong>
+        </div>
+
+        <!-- Print button to trigger printing -->
+        <button class="print-button no-print" onclick="window.print()">Print</button>
+</body>
+</html>
+
+
+
+
