@@ -674,9 +674,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Icons\Advisor.png" />
+    <Content Include="Content\Icons\assignment.png" />
     <Content Include="Content\Icons\attendance.png" />
+    <Content Include="Content\Icons\attendance1.png" />
     <Content Include="Content\Icons\courseregistration.png" />
+    <Content Include="Content\Icons\courses.png" />
     <Content Include="Content\Icons\myprofile.png" />
+    <Content Include="Content\Icons\notice-board.png" />
+    <Content Include="Content\Icons\payment.png" />
+    <Content Include="Content\Icons\Project.png" />
+    <Content Include="Content\Icons\Supervisor.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

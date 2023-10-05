@@ -1,7 +1,15 @@
-﻿
+﻿@using LMS.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int StudentID = Convert.ToInt32(Session["StudentID"]);
+    CMSEntities db = new CMSEntities();
+    var Student = db.Students.Where(t => t.ID == StudentID).ToList();
+    var Advisor = Student.FirstOrDefault().StudentsAdvisors.Where(t => t.ToDate == null).ToList();
+    var AdvisorPhoto = Advisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
+    var Supervisor = Student.FirstOrDefault().StudentsSupervisors.Where(t => t.ToDate == null).ToList();
+    var SupervisorPhoto = Supervisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
 }
 <style>
     /* Define the CSS for the icon boxes */
@@ -44,11 +52,20 @@
                     <a href="@Url.Action("Index","MyDashboard")">My Dashboard</a>
                 </li>
             </ul><!-- /.breadcrumb -->
+
+            <span class="pull-right blue">(@Student.FirstOrDefault().ProgramOffered.BatchTitle)&nbsp;&nbsp;</span>
+            <span class="pull-right"><span class="text-black">Program: </span><span class="brown">
+                                      @Student.FirstOrDefault().ProgramOffered.DepartmentProgram.Program.ProgramTitle&nbsp;&nbsp;
+                   </span></span>
+            <span class="pull-right">RegNo: <span class="brown">@Student.FirstOrDefault().RegNo&nbsp;&nbsp;</span></span>
+
+
         </div>
 
 
         <div class="page-content">
             <div class="row">
+
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })">
                         <div class="icon-box">
@@ -76,7 +93,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/assignment.png" alt="Courses">
+                            <img src="~/Content/Icons/assignment.png" alt="Assignment">
                             <p>ASSIGNMENTS</p>
                         </div>
                     </a>
@@ -84,7 +101,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/attendance1.png" alt="Courses">
+                            <img src="~/Content/Icons/attendance1.png" alt="Attendance">
                             <p>ATTENDANCE</p>
                         </div>
                     </a>
@@ -92,8 +109,63 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/notice-board.png" alt="Courses">
+                            <img src="~/Content/Icons/notice-board.png" alt="NoticeBoard">
                             <p>NOTICE BOARD</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            @if (AdvisorPhoto == null)
+                            {
+                                <img src="~/Content/Icons/Advisor.png" alt="Advisor">
+                                <small class="red">No Advisor Assigned</small>
+                            }
+                            else if (AdvisorPhoto != null && AdvisorPhoto.Any())
+                            {
+
+                                <img class="nav-user-photo"
+                                     src="data:image/jpeg;base64,@(Convert.ToBase64String(AdvisorPhoto))"
+                                     width="70"
+                                     height="70"
+                                     style="border-radius: 5%;" />
+
+                                <p>@Advisor.FirstOrDefault().EmpForm.Title.Title1  @Advisor.FirstOrDefault().EmpForm.Name</p>
+
+                            }
+
+                            <p>ADVISOR</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            @if (SupervisorPhoto == null)
+                            {
+                                <img src="~/Content/Icons/Supervisor.png" alt="Supervisor">
+                                <small class="red">No Supervisor Assigned</small>
+                            }
+                            else if (SupervisorPhoto != null && SupervisorPhoto.Any())
+                            {
+
+                                <img class="nav-user-photo"
+                                     src="data:image/jpeg;base64,@(Convert.ToBase64String(SupervisorPhoto))"
+                                     width="70"
+                                     height="70"
+                                     style="border-radius: 5%;" />
+                                <p>@Supervisor.FirstOrDefault().EmpForm.Title.Title1 &nbsp; @Supervisor.FirstOrDefault().EmpForm.Name</p>
+                            }
+                            <p>SUPERVISOR</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/Project.png" alt="Project">
+                            <p>PROJECT</p>
                         </div>
                     </a>
                 </div>

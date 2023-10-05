@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using CaptchaMvc.HtmlHelpers;
 using LMS.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace LMS.Areas.StudentAccount.Controllers
 {
@@ -34,24 +35,43 @@ namespace LMS.Areas.StudentAccount.Controllers
                 {
 
                     //checking if record exists,active,not expelled and not blocked...
-                    bool IsValidUser = db.Students.Any(t => t.RegNo.ToLower() == model.RegNo.ToLower()
-                && t.Password == model.Password);
-                    if (IsValidUser)
+                    bool IsDefaulter = db.FinanceUnpaidDataForLMControls.Any(t => t.RegNo.ToLower() == model.RegNo.ToLower());
+                    if (!IsDefaulter)
                     {
-                        Session["StudentID"] = db.Students.Where(t => t.RegNo == model.RegNo && t.Password == model.Password).FirstOrDefault().ID;
-                        Session["Username"] = db.Students.Where(t => t.RegNo == model.RegNo && t.Password == model.Password).FirstOrDefault()?.Admission.FirstName;
-
-                        // Check if returnUrl is not null and valid addresss
-                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        //checking if record exists,active,not expelled and not blocked...
+                        bool IsValidUser = db.Students.Any(t => t.RegNo.ToLower() == model.RegNo.ToLower()
+                    && t.Password == model.Password);
+                        if (IsValidUser)
                         {
-                            // Redirect to the specified ReturnUrl (page C)
-                            return Redirect(returnUrl);
-                        }
+                            Session["StudentID"] = db.Students.Where(t => t.RegNo == model.RegNo && t.Password == model.Password).FirstOrDefault().ID;
+                            Session["Username"] = db.Students.Where(t => t.RegNo == model.RegNo && t.Password == model.Password).FirstOrDefault()?.Admission.FirstName;
 
-                        //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
-                        return RedirectToAction("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" });
-                        //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
+                            // Check if returnUrl is not null and valid addresss
+                            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                            {
+                                // Redirect to the specified ReturnUrl (page C)
+                                return Redirect(returnUrl);
+                            }
+
+                            //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
+                            return RedirectToAction("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" });
+                           //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
+                        }
                     }
+                    else {
+                        TempData["Failed"] = "<style>.danger {background-color: #ffdddd; border-left: 6px solid #f44336;}</style><div class=\"alert alert-danger danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                          "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                          "<strong>Outstanding Dues/Fees! </strong><br>Dear Student,<br> You currently have outstanding dues/ fees from previous semesters, marking you as a defaulter in the Account Section. " +
+                            "Please visit Finance Section (Management Block, 1st Floor) and clear these payments promptly to avoid academic or administrative issues." +
+                            "<br>When you settle your dues/fees, you will regain access to your login </div>";
+
+                        //ModelState.AddModelError("Important Notice: Outstanding Dues/Fees Defaulter",
+                        //    "Dear Student,<br /> You currently have outstanding dues/fees from previous semesters, marking you as a defaulter in the Account Section. " +
+                        //    "Please visit and Finance Section (Management Block, 1st Floor) clear these payments promptly to avoid academic or administrative issues." +
+                        //    "<br />When you settle your dues/fees, you will regain access to your login");
+                        return View(model);
+                    }
+
                 }
                 ModelState.AddModelError("InvalidMessage", "The provided credentials are incorrect. Please try again.");
             }
