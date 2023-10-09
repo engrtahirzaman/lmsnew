@@ -89,12 +89,21 @@ namespace LMS.Models
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<OnlinePaymentMapping> OnlinePaymentMappings { get; set; }
         public virtual DbSet<OnlinePaymentVender> OnlinePaymentVenders { get; set; }
+        public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<OrganizationLegalType> OrganizationLegalTypes { get; set; }
+        public virtual DbSet<OrganizationSectorType> OrganizationSectorTypes { get; set; }
         public virtual DbSet<ProgramCoordinator> ProgramCoordinators { get; set; }
         public virtual DbSet<ProgramEligibility> ProgramEligibilities { get; set; }
         public virtual DbSet<ProgramLevel> ProgramLevels { get; set; }
         public virtual DbSet<ProgramOffered> ProgramOffereds { get; set; }
         public virtual DbSet<ProgramPreference> ProgramPreferences { get; set; }
         public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectAwardedByOrganization> ProjectAwardedByOrganizations { get; set; }
+        public virtual DbSet<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
+        public virtual DbSet<ProjectInvestigationType> ProjectInvestigationTypes { get; set; }
+        public virtual DbSet<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
+        public virtual DbSet<ProjectType> ProjectTypes { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<PublicationType> PublicationTypes { get; set; }
@@ -103,6 +112,7 @@ namespace LMS.Models
         public virtual DbSet<RoleWiseMenu> RoleWiseMenus { get; set; }
         public virtual DbSet<ScholarshipHead> ScholarshipHeads { get; set; }
         public virtual DbSet<ScholarshipHeadsApplyOnFeeHead> ScholarshipHeadsApplyOnFeeHeads { get; set; }
+        public virtual DbSet<SemesterCourseLoad> SemesterCourseLoads { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<SessionWiseMeritList> SessionWiseMeritLists { get; set; }
         public virtual DbSet<SessionWiseMeritListDet> SessionWiseMeritListDets { get; set; }
@@ -111,8 +121,11 @@ namespace LMS.Models
         public virtual DbSet<StudentCours> StudentCourses { get; set; }
         public virtual DbSet<StudentCourseSelection> StudentCourseSelections { get; set; }
         public virtual DbSet<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
+        public virtual DbSet<StudentFee> StudentFees { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentsAdvisor> StudentsAdvisors { get; set; }
         public virtual DbSet<StudentSemester> StudentSemesters { get; set; }
+        public virtual DbSet<StudentsSupervisor> StudentsSupervisors { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
         public virtual DbSet<TeacherCours> TeacherCourses { get; set; }
         public virtual DbSet<TestApplicant> TestApplicants { get; set; }
@@ -128,19 +141,6 @@ namespace LMS.Models
         public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
         public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
         public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
-        public virtual DbSet<Organization> Organizations { get; set; }
-        public virtual DbSet<OrganizationLegalType> OrganizationLegalTypes { get; set; }
-        public virtual DbSet<OrganizationSectorType> OrganizationSectorTypes { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<ProjectAwardedByOrganization> ProjectAwardedByOrganizations { get; set; }
-        public virtual DbSet<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
-        public virtual DbSet<ProjectInvestigationType> ProjectInvestigationTypes { get; set; }
-        public virtual DbSet<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
-        public virtual DbSet<ProjectType> ProjectTypes { get; set; }
-        public virtual DbSet<SemesterCourseLoad> SemesterCourseLoads { get; set; }
-        public virtual DbSet<StudentFee> StudentFees { get; set; }
-        public virtual DbSet<StudentsAdvisor> StudentsAdvisors { get; set; }
-        public virtual DbSet<StudentsSupervisor> StudentsSupervisors { get; set; }
         public virtual DbSet<FinanceUnpaidDataForLMControl> FinanceUnpaidDataForLMControls { get; set; }
     }
 }

@@ -21,7 +21,7 @@
                     <a href="@Url.Action("Index","MyDashboard", new { area =""})" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                     |
                     My Courses
-                    <a href="@Url.Action("ApplyCourses","MyCourses", new { area ="Courses"})" class="btn btn-inverse btn-xs pull-right" title="Register Course">New Course <i class="fa fa-arrow-circle-o-right"></i> </a>
+                    @*<a href="@Url.Action("ApplyCourses","MyCourses", new { area ="Courses"})" class="btn btn-inverse btn-xs pull-right" title="Register Course">New Course <i class="fa fa-arrow-circle-o-right"></i> </a>*@
                 </h1>
             </div>
             <!-- div.table-responsive -->
@@ -37,7 +37,7 @@
                         <div class="widget-header widget-header-flat">
                             <h5 class="widget-title lighter">
                                 <i class="ace-icon fa fa-book orange"></i>
-                                @session.Select(t => t.Session.Session1).First() Registered Courses
+                                @session.Select(t => t.Session.Session1).First() Registered Courses <span style="color:darkgreen"> @session.Sum(t => t.Course.CrHr).ToString()CrHr</span> @session.Sum(t => t.Course.ContHr).ToString()CnHr
 
                             </h5>
 

@@ -61,10 +61,10 @@ namespace LMS.Areas.StudentAccount.Controllers
                     else {
                         TempData["Failed"] = "<style>.danger {background-color: #ffdddd; border-left: 6px solid #f44336;}</style><div class=\"alert alert-danger danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
                           "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
-                          "<strong>Outstanding Dues/Fees! </strong><br>Dear Student,<br> You currently have outstanding dues/ fees from previous semesters, marking you as a defaulter in the Account Section. " +
+                          "<strong>Outstanding Dues/Fees! </strong><br>Dear Student,<br> You currently have Rs." + db.FinanceUnpaidDataForLMControls.Where(t => t.RegNo == model.RegNo).Select(t=>t.Amount)?.FirstOrDefault() + "/- outstanding dues/ fees from previous semesters, marking you as a defaulter in the Account Section. " +
                             "Please visit Finance Section (Management Block, 1st Floor) and clear these payments promptly to avoid academic or administrative issues." +
                             "<br>When you settle your dues/fees, you will regain access to your login </div>";
-
+                        
                         //ModelState.AddModelError("Important Notice: Outstanding Dues/Fees Defaulter",
                         //    "Dear Student,<br /> You currently have outstanding dues/fees from previous semesters, marking you as a defaulter in the Account Section. " +
                         //    "Please visit and Finance Section (Management Block, 1st Floor) clear these payments promptly to avoid academic or administrative issues." +

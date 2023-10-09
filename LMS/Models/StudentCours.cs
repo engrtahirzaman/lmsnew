@@ -33,17 +33,17 @@ namespace LMS.Models
         public bool IsResultFinalized { get; set; }
         public bool IsMakeUp { get; set; }
         public bool IsDropped { get; set; }
+        public Nullable<System.DateTime> IsDroppedDate { get; set; }
+        public Nullable<System.TimeSpan> IsDroppedTime { get; set; }
+        public Nullable<int> IsDroppedBy { get; set; }
         public bool IsWithdraw { get; set; }
+        public Nullable<System.DateTime> IsWithdrawDate { get; set; }
+        public Nullable<System.TimeSpan> IsWithdrawTime { get; set; }
+        public Nullable<int> IsWithdrawBy { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
-        public Nullable<System.DateTime> IsDroppedDate { get; set; }
-        public Nullable<System.TimeSpan> IsDroppedTime { get; set; }
-        public Nullable<int> IsDroppedBy { get; set; }
-        public Nullable<System.DateTime> IsWithdrawDate { get; set; }
-        public Nullable<System.TimeSpan> IsWithdrawTime { get; set; }
-        public Nullable<int> IsWithdrawBy { get; set; }
     
         public virtual Campus Campus { get; set; }
         public virtual Course Course { get; set; }

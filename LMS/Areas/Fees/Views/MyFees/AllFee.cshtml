@@ -58,12 +58,9 @@
 
                                     @foreach (var voucherGroup in session.GroupBy(t => t.VoucherNo))
                                     {
-                                        var VoucherDet = voucherGroup.Select(t => t.Student.ProgramOffered.DepartmentProgram.Program.ProgramLevel.ShortAlpha).First() +
-                                            session.Select(t => t.Session.ShortAlpha).First() + "-" + voucherGroup.Key;
-
                                         <tr>
                                             <td>
-                                                @VoucherDet
+                                                @voucherGroup.Key
                                             </td>
                                             <td>
                                                 @if (voucherGroup.Any(t => t.IsPaid) == true)
@@ -88,7 +85,7 @@
                                                         <input type="hidden" name="SessionID" value="@session.Key" />
                                                         <input type="hidden" name="VoucherNo" value="@voucherGroup.Key" />
                                                         <button type="submit" class="btn btn-info btn-minier" title="Print"><i class="fa fa-print"></i> Print</button>
-                                                        <a href="#" data-toggle="modal" data-target="#myModal" onclick="PayNow(@voucherGroup.Key,'@VoucherDet','@SessionDet')" class="btn btn-minier btn-success" title="Upload"><i class="fa fa-upload"></i> Upload</a>
+                                                        <a href="#" data-toggle="modal" data-target="#myModal" onclick="PayNow('@voucherGroup.Key','@SessionDet')" class="btn btn-minier btn-success" title="Upload"><i class="fa fa-upload"></i> Upload</a>
 
                                                     }
                                                 }
@@ -168,8 +165,9 @@
 
         <!-- Modal content-->
         <div class="modal-content">
+
             <div class="modal-header">
-                <h5 class="lighter blue">Please make your payment against the <strong class="SessionDet"></strong> session with Voucher No: <strong class="VoucherDet"></strong></h5>                
+                <h5 class="lighter blue">Please make your payment against the <strong class="SessionDet"></strong> session with Voucher No: <strong class="VoucherDet"></strong></h5>
             </div>
             <div class="modal-body">
 
@@ -248,9 +246,9 @@
 </div>
 
 <script>
-    function PayNow(VoucherNo, VoucherDet, SessionDet) {        
+    function PayNow(VoucherNo, SessionDet) {
         $("#VoucherNo").val(VoucherNo);
-        $(".VoucherDet").html(VoucherDet);
+        $(".VoucherDet").html(VoucherNo);
         $(".SessionDet").html(SessionDet);
     }
 </script>

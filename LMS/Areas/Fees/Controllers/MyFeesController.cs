@@ -77,7 +77,7 @@ namespace LMS.Areas.Fees.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult PrintVoucher(int SessionID, int VoucherNo)
+        public ActionResult PrintVoucher(int SessionID, string VoucherNo)
         {
             int StudentID = Convert.ToInt32(Session["StudentID"]);
             string CurrentSemesterNo = GetOrdinal(Methods.GetStudentCurrentSemesterNumber(StudentID));
@@ -85,7 +85,7 @@ namespace LMS.Areas.Fees.Controllers
             var student = db.Students.Find(StudentID);
 
             var BatchTitle = student.ProgramOffered.BatchTitle;
-           
+
 
 
             //FOR FORIEGNERS FEE WILL MULTIPLY WITH 2
@@ -97,8 +97,6 @@ namespace LMS.Areas.Fees.Controllers
             string receiverName = student.Admission.FirstName + " " + student.Admission.MiddleName + " " + student.Admission.LastName;
 
             var studentFee = db.StudentFees.Where(t => t.VoucherNo == VoucherNo && t.IsPaid == false).ToList();
-            var VoucherDet = student.ProgramOffered.DepartmentProgram.Program.ProgramLevel.ShortAlpha + db.Sessions.Find(SessionID).ShortAlpha + "-" + VoucherNo;
-
 
             var Total = (studentFee.Sum(t => t.Amount) * multiply);
             var TotalinWords = ConvertAmountToWords(Convert.ToDecimal(Total));
@@ -361,7 +359,7 @@ font-size: 10px;
             <p>Date: _____________________________</p>
           </div>
           <div class = ""due_date"">
-            <span class=""voucherno"">Voucher No." + VoucherDet + @"</span>
+            <span class=""voucherno"">Voucher No." + VoucherNo + @"</span>
 
           </div>
  <hr>
@@ -509,7 +507,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
             <p>Date: _____________________________</p>
           </div>
 <div class = ""due_date"">
-            <span class=""voucherno"">Voucher No." + VoucherDet + @"</span>
+            <span class=""voucherno"">Voucher No." + VoucherNo + @"</span>
 
           </div>
 <hr>
@@ -657,7 +655,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
             <p>Date: _____________________________</p>
           </div>
 <div class = ""due_date"">
-            <span class=""voucherno"">Voucher No." + VoucherDet + @"</span>
+            <span class=""voucherno"">Voucher No." + VoucherNo + @"</span>
 
           </div>
  <hr>
@@ -805,7 +803,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadFee(HttpPostedFileBase file)
         {
-            int VoucherNo = Convert.ToInt32(Request.Form["VoucherNo"]);
+            var VoucherNo = Request.Form["VoucherNo"];
             var BankVoucherNo = Request.Form["BankVoucherNo"];
             var BankName = Request.Form["BankName"];
             var BranchCode = Request.Form["BranchCode"];
@@ -817,7 +815,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
        || string.Equals(Path.GetExtension(file.FileName), ".png", StringComparison.OrdinalIgnoreCase)
        || string.Equals(Path.GetExtension(file.FileName), ".jpeg", StringComparison.OrdinalIgnoreCase)))
             {
-                var studentFees = db.StudentFees.Where(t=>t.VoucherNo == VoucherNo).ToList();
+                var studentFees = db.StudentFees.Where(t => t.VoucherNo == VoucherNo).ToList();
 
                 var filename = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Server.MapPath("~/FeeVouchers/"), VoucherNo + Path.GetExtension(file.FileName));

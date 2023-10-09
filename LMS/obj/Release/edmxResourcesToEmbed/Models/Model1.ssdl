@@ -811,6 +811,7 @@
     <Property Name="NextOfKinMobile" Type="nvarchar" MaxLength="20" />
     <Property Name="NextOfKinUDate" Type="date" />
     <Property Name="NextofKinTime" Type="time" Precision="7" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
     <Property Name="CrBy" Type="int" Nullable="false" />
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />
@@ -1007,6 +1008,16 @@
     <Property Name="UBy" Type="int" Nullable="false" />
     <Property Name="UDate" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="FinanceUnpaidDataForLMControl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPaid" Type="bit" />
+  </EntityType>
   <EntityType Name="Grading">
     <Key>
       <PropertyRef Name="ID" />
@@ -1182,6 +1193,68 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="UBy" Type="int" />
     <Property Name="UDate" Type="date" />
   </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="OrganizationLegalTypeID" Type="int" Nullable="false" />
+    <Property Name="OrganizationSectorTypeID" Type="int" Nullable="false" />
+    <Property Name="FoundedDate" Type="date" />
+    <Property Name="Website" Type="nvarchar" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="Landline" Type="nvarchar" MaxLength="20" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="255" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="255" />
+    <Property Name="DistrictID" Type="int" />
+    <Property Name="ProvinceID" Type="int" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="CEOName" Type="nvarchar" MaxLength="255" />
+    <Property Name="FocalPersonName" Type="nvarchar" MaxLength="255" />
+    <Property Name="FocalPersonMobile" Type="nvarchar" MaxLength="100" />
+    <Property Name="FocalPersonEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmployeeCount" Type="int" />
+    <Property Name="Revenue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPubliclyTraded" Type="bit" />
+    <Property Name="StockSymbol" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastUpdated" Type="datetime" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UTime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="OrganizationLegalType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="OrganizationSectorType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
   <EntityType Name="ProgramCoordinator">
     <Key>
       <PropertyRef Name="ID" />
@@ -1276,6 +1349,115 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />
     <Property Name="UDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="ProjectTypeID" Type="int" Nullable="false" />
+    <Property Name="FundingAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsFunded" Type="bit" />
+    <Property Name="IsAwarded" Type="bit" />
+    <Property Name="IsClassified" Type="bit" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="PositionForBSStudents" Type="int" />
+    <Property Name="PositionForMSStudents" Type="int" />
+    <Property Name="PositionForPhDStudents" Type="int" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="UTime" Type="time" Precision="7" />
+    <Property Name="CBy" Type="int" />
+    <Property Name="CDate" Type="date" />
+    <Property Name="CTime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="ProjectAwardedByOrganization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectID" Type="int" Nullable="false" />
+    <Property Name="OrganizationID" Type="int" Nullable="false" />
+    <Property Name="FundedAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AwardLetter" Type="nvarchar" MaxLength="150" />
+    <Property Name="AwardDate" Type="date" />
+    <Property Name="AwardLocation" Type="nvarchar" MaxLength="255" />
+    <Property Name="AwardType" Type="nvarchar" MaxLength="50" />
+    <Property Name="AwardStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="GrantReference" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContractNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="FundingSource" Type="nvarchar" MaxLength="255" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="AwardFocalPersonName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AwardFocalPersonMobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="AwardFocalPersonEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="ProjectInvestigatedByEmpForm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectID" Type="int" Nullable="false" />
+    <Property Name="EmpFormID" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="ProjectInvestigationTypeID" Type="int" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="ProjectInvestigationType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="ProjectStudentsInvestigatedBy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectID" Type="int" Nullable="false" />
+    <Property Name="StudentsID" Type="int" Nullable="false" />
+    <Property Name="ProjectInvestigationTypeID" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="ProjectType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="CrTime" Type="time" Precision="7" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+    <Property Name="Utime" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="Provinces">
     <Key>
@@ -1383,6 +1565,21 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="UBy" Type="int" />
     <Property Name="UDate" Type="date" />
   </EntityType>
+  <EntityType Name="SemesterCourseLoad">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampusID" Type="int" />
+    <Property Name="BatchID" Type="int" Nullable="false" />
+    <Property Name="SemesterNo" Type="int" Nullable="false" />
+    <Property Name="minCrHrs" Type="int" />
+    <Property Name="maxCrHrs" Type="int" Nullable="false" />
+    <Property Name="CrBy" Type="int" Nullable="false" />
+    <Property Name="CrDate" Type="date" Nullable="false" />
+    <Property Name="UBy" Type="int" Nullable="false" />
+    <Property Name="UDate" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="Sessions">
     <Key>
       <PropertyRef Name="ID" />
@@ -1483,7 +1680,13 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="IsResultFinalized" Type="bit" Nullable="false" />
     <Property Name="IsMakeUp" Type="bit" Nullable="false" />
     <Property Name="IsDropped" Type="bit" Nullable="false" />
+    <Property Name="IsDroppedDate" Type="date" />
+    <Property Name="IsDroppedTime" Type="time" Precision="7" />
+    <Property Name="IsDroppedBy" Type="int" />
     <Property Name="IsWithdraw" Type="bit" Nullable="false" />
+    <Property Name="IsWithdrawDate" Type="date" />
+    <Property Name="IsWithdrawTime" Type="time" Precision="7" />
+    <Property Name="IsWithdrawBy" Type="int" />
     <Property Name="CrBy" Type="int" Nullable="false" />
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />
@@ -1539,10 +1742,24 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="SessionID" Type="int" Nullable="false" />
     <Property Name="FeeHeadID" Type="int" Nullable="false" />
     <Property Name="Amount" Type="decimal" Precision="10" Scale="0" Nullable="false" />
-    <Property Name="IsPaid" Type="bit" Nullable="false" />
-    <Property Name="ReceiveDate" Type="date" />
     <Property Name="Description" Type="varchar" MaxLength="300" />
-    <Property Name="VoucherNo" Type="int" />
+    <Property Name="VoucherNo" Type="nvarchar" MaxLength="100" />
+    <Property Name="BankVoucherNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankBranch" Type="nvarchar" MaxLength="100" />
+    <Property Name="PaymentDate" Type="date" />
+    <Property Name="PaymentTime" Type="time" Precision="7" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
+    <Property Name="VerifiedBy" Type="int" />
+    <Property Name="VerifiedDate" Type="date" />
+    <Property Name="VerifiedTime" Type="time" Precision="7" />
+    <Property Name="Attachment" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsFake" Type="bit" Nullable="false" />
+    <Property Name="FakeBy" Type="int" />
+    <Property Name="FakeDate" Type="date" />
+    <Property Name="FakeTime" Type="time" Precision="7" />
     <Property Name="IsRefund" Type="bit" Nullable="false" />
     <Property Name="IsRefundBy" Type="int" />
     <Property Name="IsRefundDate" Type="date" />
@@ -1575,6 +1792,28 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="UBy" Type="int" Nullable="false" />
     <Property Name="UDate" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="StudentsAdvisor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="EmpFormID" Type="int" Nullable="false" />
+    <Property Name="FromDate" Type="date" />
+    <Property Name="ToDate" Type="date" />
+    <Property Name="LetterOfAppointment" Type="nvarchar" MaxLength="200" />
+    <Property Name="LetterOfAppointmentReferNo" Type="nvarchar" MaxLength="80" />
+    <Property Name="LetterOfAppointmentDate" Type="date" />
+    <Property Name="AppointedBy" Type="int" />
+    <Property Name="AppointedDate" Type="date" />
+    <Property Name="AppointedTime" Type="time" Precision="7" />
+    <Property Name="Other1" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
+  </EntityType>
   <EntityType Name="StudentSemester">
     <Key>
       <PropertyRef Name="ID" />
@@ -1592,6 +1831,29 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />
     <Property Name="UDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentsSupervisor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="EmpFormID" Type="int" Nullable="false" />
+    <Property Name="StudentCoursesID" Type="int" Nullable="false" />
+    <Property Name="FromDate" Type="date" />
+    <Property Name="ToDate" Type="date" />
+    <Property Name="LetterOfAppointment" Type="nvarchar" MaxLength="200" />
+    <Property Name="LetterOfAppointmentReferNo" Type="nvarchar" MaxLength="80" />
+    <Property Name="LetterOfAppointmentDate" Type="date" />
+    <Property Name="AppointedBy" Type="int" />
+    <Property Name="AppointedDate" Type="date" />
+    <Property Name="AppointedTime" Type="time" Precision="7" />
+    <Property Name="Other1" Type="nvarchar" MaxLength="50" />
+    <Property Name="CrBy" Type="int" />
+    <Property Name="CrDate" Type="date" />
+    <Property Name="UBy" Type="int" />
+    <Property Name="UDate" Type="date" />
   </EntityType>
   <EntityType Name="SubMenus">
     <Key>
@@ -3152,6 +3414,30 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Organization_OrganizationLegalType">
+    <End Role="OrganizationLegalType" Type="Self.OrganizationLegalType" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrganizationLegalType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="OrganizationLegalTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_OrganizationSectorType">
+    <End Role="OrganizationSectorType" Type="Self.OrganizationSectorType" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrganizationSectorType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="OrganizationSectorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProgramEligibility_Campuses">
     <End Role="Campuses" Type="Self.Campuses" Multiplicity="0..1" />
     <End Role="ProgramEligibility" Type="Self.ProgramEligibility" Multiplicity="*" />
@@ -3344,6 +3630,114 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Project_ProjectType">
+    <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="ProjectTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAwardedBy_Organization">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="ProjectAwardedByOrganization" Type="Self.ProjectAwardedByOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAwardedByOrganization">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAwardedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectAwardedByOrganization" Type="Self.ProjectAwardedByOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAwardedByOrganization">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectInvestigatedBy_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="EmpFormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectInvestigatedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectInvestigatedBy_ProjectInvestigationType">
+    <End Role="ProjectInvestigationType" Type="Self.ProjectInvestigationType" Multiplicity="0..1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectInvestigationType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="ProjectInvestigationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
+    <End Role="ProjectInvestigationType" Type="Self.ProjectInvestigationType" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectInvestigationType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="ProjectInvestigationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="StudentsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Publishing_PublishingType">
     <End Role="PublicationType" Type="Self.PublicationType" Multiplicity="0..1" />
     <End Role="Publication" Type="Self.Publication" Multiplicity="*" />
@@ -3425,6 +3819,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Principal>
       <Dependent Role="ScholarshipHeads">
         <PropertyRef Name="CampusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SemesterCourseLoad_ProgramOffered">
+    <End Role="ProgramOffered" Type="Self.ProgramOffered" Multiplicity="1" />
+    <End Role="SemesterCourseLoad" Type="Self.SemesterCourseLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProgramOffered">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SemesterCourseLoad">
+        <PropertyRef Name="BatchID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3560,6 +3966,42 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseDropped_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseDropped_Sessions">
+    <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseDropped_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourses_Campuses">
     <End Role="Campuses" Type="Self.Campuses" Multiplicity="0..1" />
     <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="*" />
@@ -3668,6 +4110,42 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Sessions">
+    <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentFee_Campuses">
     <End Role="Campuses" Type="Self.Campuses" Multiplicity="0..1" />
     <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
@@ -3740,6 +4218,30 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentsAdvisor_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="StudentsAdvisor" Type="Self.StudentsAdvisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsAdvisor">
+        <PropertyRef Name="EmpFormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsAdvisor_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentsAdvisor" Type="Self.StudentsAdvisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsAdvisor">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentSemester_Campuses">
     <End Role="Campuses" Type="Self.Campuses" Multiplicity="0..1" />
     <End Role="StudentSemester" Type="Self.StudentSemester" Multiplicity="*" />
@@ -3773,6 +4275,42 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Principal>
       <Dependent Role="StudentSemester">
         <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
+        <PropertyRef Name="EmpFormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_StudentCourses">
+    <End Role="StudentCourses" Type="Self.StudentCourses" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
+        <PropertyRef Name="StudentCoursesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_Students">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
+        <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4037,6 +4575,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <EntitySet Name="FacultyHead" EntityType="Self.FacultyHead" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeeCriteria" EntityType="Self.FeeCriteria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeeHeads" EntityType="Self.FeeHeads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinanceUnpaidDataForLMControl" EntityType="Self.FinanceUnpaidDataForLMControl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Grading" EntityType="Self.Grading" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GradingPolicy" EntityType="Self.GradingPolicy" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JobNature" EntityType="Self.JobNature" Schema="dbo" store:Type="Tables" />
@@ -4049,12 +4588,21 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <EntitySet Name="Nationality" EntityType="Self.Nationality" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnlinePaymentMapping" EntityType="Self.OnlinePaymentMapping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnlinePaymentVender" EntityType="Self.OnlinePaymentVender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationLegalType" EntityType="Self.OrganizationLegalType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationSectorType" EntityType="Self.OrganizationSectorType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProgramCoordinator" EntityType="Self.ProgramCoordinator" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProgramEligibility" EntityType="Self.ProgramEligibility" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProgramLevels" EntityType="Self.ProgramLevels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProgramOffered" EntityType="Self.ProgramOffered" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProgramPreferences" EntityType="Self.ProgramPreferences" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectAwardedByOrganization" EntityType="Self.ProjectAwardedByOrganization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectInvestigatedByEmpForm" EntityType="Self.ProjectInvestigatedByEmpForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectInvestigationType" EntityType="Self.ProjectInvestigationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectStudentsInvestigatedBy" EntityType="Self.ProjectStudentsInvestigatedBy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectType" EntityType="Self.ProjectType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Provinces" EntityType="Self.Provinces" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Publication" EntityType="Self.Publication" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PublicationType" EntityType="Self.PublicationType" Schema="dbo" store:Type="Tables" />
@@ -4063,6 +4611,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <EntitySet Name="RoleWiseMenus" EntityType="Self.RoleWiseMenus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ScholarshipHeads" EntityType="Self.ScholarshipHeads" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ScholarshipHeadsApplyOnFeeHead" EntityType="Self.ScholarshipHeadsApplyOnFeeHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SemesterCourseLoad" EntityType="Self.SemesterCourseLoad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SessionWiseMeritList" EntityType="Self.SessionWiseMeritList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SessionWiseMeritListDet" EntityType="Self.SessionWiseMeritListDet" Schema="dbo" store:Type="Tables" />
@@ -4073,7 +4622,9 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <EntitySet Name="StudentCourseWithDrawn" EntityType="Self.StudentCourseWithDrawn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentFee" EntityType="Self.StudentFee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentsAdvisor" EntityType="Self.StudentsAdvisor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentSemester" EntityType="Self.StudentSemester" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentsSupervisor" EntityType="Self.StudentsSupervisor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubMenus" EntityType="Self.SubMenus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TeacherCourses" EntityType="Self.TeacherCourses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestApplicants" EntityType="Self.TestApplicants" Schema="dbo" store:Type="Tables" />
@@ -4604,6 +5155,14 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="MeritListMarksCriteria" EntitySet="MeritListMarksCriteria" />
     </AssociationSet>
+    <AssociationSet Name="FK_Organization_OrganizationLegalType" Association="Self.FK_Organization_OrganizationLegalType">
+      <End Role="OrganizationLegalType" EntitySet="OrganizationLegalType" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_OrganizationSectorType" Association="Self.FK_Organization_OrganizationSectorType">
+      <End Role="OrganizationSectorType" EntitySet="OrganizationSectorType" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProgramEligibility_Campuses" Association="Self.FK_ProgramEligibility_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="ProgramEligibility" EntitySet="ProgramEligibility" />
@@ -4668,6 +5227,42 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       <End Role="ProgramLevels" EntitySet="ProgramLevels" />
       <End Role="Programs" EntitySet="Programs" />
     </AssociationSet>
+    <AssociationSet Name="FK_Project_ProjectType" Association="Self.FK_Project_ProjectType">
+      <End Role="ProjectType" EntitySet="ProjectType" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAwardedBy_Organization" Association="Self.FK_ProjectAwardedBy_Organization">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAwardedBy_Project" Association="Self.FK_ProjectAwardedBy_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_EmpForm" Association="Self.FK_ProjectInvestigatedBy_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForm" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_Project" Association="Self.FK_ProjectInvestigatedBy_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_ProjectInvestigationType" Association="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType">
+      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationType" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Project" Association="Self.FK_ProjectStudentsInvestigatedBy_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" Association="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
+      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationType" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Students" Association="Self.FK_ProjectStudentsInvestigatedBy_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBy" />
+    </AssociationSet>
     <AssociationSet Name="FK_Publishing_PublishingType" Association="Self.FK_Publishing_PublishingType">
       <End Role="PublicationType" EntitySet="PublicationType" />
       <End Role="Publication" EntitySet="Publication" />
@@ -4695,6 +5290,10 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <AssociationSet Name="FK_ScholarshipHeads_Campus" Association="Self.FK_ScholarshipHeads_Campus">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="ScholarshipHeads" EntitySet="ScholarshipHeads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SemesterCourseLoad_ProgramOffered" Association="Self.FK_SemesterCourseLoad_ProgramOffered">
+      <End Role="ProgramOffered" EntitySet="ProgramOffered" />
+      <End Role="SemesterCourseLoad" EntitySet="SemesterCourseLoad" />
     </AssociationSet>
     <AssociationSet Name="FK_SemesterwiseCourses_Campuses" Association="Self.FK_SemesterwiseCourses_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
@@ -4740,6 +5339,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritList" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Course" Association="Self.FK_StudentCourseDropped_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDropped" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Sessions" Association="Self.FK_StudentCourseDropped_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDropped" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Students" Association="Self.FK_StudentCourseDropped_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDropped" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_Campuses" Association="Self.FK_StudentCourses_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentCourses" EntitySet="StudentCourses" />
@@ -4776,6 +5387,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelection" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Course" Association="Self.FK_StudentCourseWithDrawn_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Sessions" Association="Self.FK_StudentCourseWithDrawn_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Students" Association="Self.FK_StudentCourseWithDrawn_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawn" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentFee_Campuses" Association="Self.FK_StudentFee_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentFee" EntitySet="StudentFee" />
@@ -4800,6 +5423,14 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       <End Role="ProgramOffered" EntitySet="ProgramOffered" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentsAdvisor_EmpForm" Association="Self.FK_StudentsAdvisor_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForm" />
+      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsAdvisor_Students" Association="Self.FK_StudentsAdvisor_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisor" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentSemester_Campuses" Association="Self.FK_StudentSemester_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentSemester" EntitySet="StudentSemester" />
@@ -4811,6 +5442,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     <AssociationSet Name="FK_StudentSessions_Sessions" Association="Self.FK_StudentSessions_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentSemester" EntitySet="StudentSemester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_EmpForm" Association="Self.FK_StudentsSupervisor_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForm" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_StudentCourses" Association="Self.FK_StudentsSupervisor_StudentCourses">
+      <End Role="StudentCourses" EntitySet="StudentCourses" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_Students" Association="Self.FK_StudentsSupervisor_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisor" />
     </AssociationSet>
     <AssociationSet Name="FK_SubMenus_Menus" Association="Self.FK_SubMenus_Menus">
       <End Role="Menus" EntitySet="Menus" />

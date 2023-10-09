@@ -19,6 +19,7 @@
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(t => t.ID)
+            @Html.HiddenFor(t => t.IsActive)
             @Html.HiddenFor(t => t.Admission.ApplicantID)
             @Html.HiddenFor(t => t.AdmissionID)
             @Html.HiddenFor(t => t.Admission.ID)
@@ -189,6 +190,7 @@
                             <div class="col-sm-12">
                                 <label class="control-label"> Father's/Guardian's CNIC No. <strong class="text-danger"> *</strong> </label>
                                 @Html.TextBoxFor(model => model.Admission.FatherCNIC, new { @class = "form-control", @placeholder = "Father/Guardian's CNIC", @maxlength = "15", @required = "required" })
+                                <span class="middle">Without dashes(-) i.e. xxxxxxxxxxxxx</span>
                             </div>
                         </div>
                     </div>
@@ -228,9 +230,10 @@
                             <div class="col-sm-12">
                                 <label class="control-label">
                                     Your CNIC/Form-B No
-                                    <span class="middle">Without dashes(-)</span><strong class="text-danger"> *</strong>
+                                    <strong class="text-danger"> *</strong>
                                 </label>
                                 @Html.TextBoxFor(model => model.Admission.CNICNo, new { @class = "form-control numOnly", @placeholder = "without (-) dashes i.e. xxxxxxxxxxxxx", @maxlength = "13", @required = "required" })
+                                <span class="middle">Without dashes(-) i.e. xxxxxxxxxxxxx</span>
 
                             </div>
                         </div>
@@ -266,8 +269,9 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <label class="control-label"> Mobile No. <span class="middle">i.e. +923xxxxxxxxx</span><strong class="text-danger"> *</strong> </label>
+                                <label class="control-label"> Mobile No.<strong class="text-danger"> *</strong> </label>
                                 @Html.TextBoxFor(model => model.Admission.MobileNo, new { @class = "form-control", @placeholder = "Mobile No.", @required = "required", @maxlength = "50" })
+                                <span class="middle">i.e. +923xxxxxxxxx</span>
                             </div>
                         </div>
                     </div>
@@ -282,8 +286,9 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <label class="control-label"> Father/Guardian Mobile No. <span class="middle">i.e. +923xxxxxxxxx</span><strong class="text-danger"> *</strong> </label>
+                                <label class="control-label"> Father/Guardian Mobile No. <strong class="text-danger"> *</strong> </label>
                                 @Html.TextBoxFor(model => model.Admission.GuardianMobileNo, new { @class = "form-control", @placeholder = "Father/Guardian Mobile No.", @required = "required", @maxlength = "50" })
+                                <span class="middle">i.e. +923xxxxxxxxx</span>
                             </div>
                         </div>
                     </div>

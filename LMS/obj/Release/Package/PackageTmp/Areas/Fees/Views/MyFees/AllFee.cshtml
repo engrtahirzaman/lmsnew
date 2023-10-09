@@ -31,15 +31,14 @@
             <div>
                 @foreach (var session in Model.GroupBy(t => t.SessionID))
                 {
+                    var SessionDet = session.Select(t => t.Session.Session1).First();
 
                     <div class="widget-box transparent">
                         <div class="widget-header widget-header-flat">
                             <h5 class="widget-title lighter">
-                                <i class="ace-icon fa fa-book orange"></i>
-                                @session.Select(t => t.Session.Session1).First() Fee Records.
-
+                                <i class="ace-icon fa fa-money orange"></i>
+                                @SessionDet Fee Records.
                             </h5>
-
                             <div class="widget-toolbar">
                                 <a href="#" data-action="collapse">
                                     <i class="ace-icon fa fa-chevron-up"></i>
@@ -49,6 +48,54 @@
 
                         <div class="widget-body" style="display: block;">
                             <div class="widget-main no-padding" style="overflow-y: scroll;">
+
+                                <strong>The following vouchers have been created for the @(session.Select(t => t.Session.Session1).First()).</strong>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th width="10%">Voucher No</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    @foreach (var voucherGroup in session.GroupBy(t => t.VoucherNo))
+                                    {
+                                        <tr>
+                                            <td>
+                                                @voucherGroup.Key
+                                            </td>
+                                            <td>
+                                                @if (voucherGroup.Any(t => t.IsPaid) == true)
+                                                {
+                                                    <span class="label label-white label-success middle">Paid</span>
+
+                                                    if (voucherGroup.Any(t => t.IsVerified) == true)
+                                                    {
+                                                        <span class="label label-white label-success middle"><i class="fa fa-check-circle-o"></i> Verified</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-white label-danger middle"><i class="fa fa-times-circle-o"></i> Not Verified</span>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    using (Html.BeginForm("PrintVoucher", "MyFees", FormMethod.Post, new { target = "_blank" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="SessionID" value="@session.Key" />
+                                                        <input type="hidden" name="VoucherNo" value="@voucherGroup.Key" />
+                                                        <button type="submit" class="btn btn-info btn-minier" title="Print"><i class="fa fa-print"></i> Print</button>
+                                                        <a href="#" data-toggle="modal" data-target="#myModal" onclick="PayNow('@voucherGroup.Key','@SessionDet')" class="btn btn-minier btn-success" title="Upload"><i class="fa fa-upload"></i> Upload</a>
+
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                                <hr />
+                                <strong>The following vouchers details...</strong>
+
                                 <table class="table table-bordered table-striped">
                                     <thead class="thin-border-bottom">
                                         <tr>
@@ -61,7 +108,6 @@
                                             </th>
                                             <th width="5%">Date of Payment</th>
                                             <th width="5%">Status</th>
-                                            <td width="10%">Actions</td>
                                         </tr>
                                     </thead>
 
@@ -77,48 +123,25 @@
                                                     @Html.DisplayFor(modelItem => item.Amount)
                                                 </td>
                                                 <td>
-                                                    @String.Format("{0:dd-MMM-yyyy}", item.ReceiveDate)
+                                                    @String.Format("{0:dd-MMM-yyyy}", item.PaymentDate)
                                                 </td>
                                                 <td>
                                                     @if (item.IsPaid == true)
                                                     {
-                                                        <span class="label label-white label-danger middle">Paid</span>
+                                                        <span class="label label-white label-success middle">Paid</span>
                                                     }
                                                     else
                                                     {
                                                         <span class="label label-white label-info middle">Pending</span>
                                                     }
-                                                </td>
-                                                <td>
-                                                    @*<div class="btn-group">
-                                                        <button data-toggle="dropdown" class="btn btn-info btn-xs dropdown-toggle">
-                                                            Actions
-                                                            <span class="ace-icon fa fa-caret-down icon-on-right"></span>
-                                                        </button>
-
-                                                        <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-                                                            <li>
-                                                                @using (Html.BeginForm("DropCourse", "MyCourses", FormMethod.Post, new { @class = "dropform" }))
-                                                                {
-                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
-                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
-                                                                    <input type="submit" value="Submit" style="display:none">
-                                                                }
-                                                                <a href="#" class="dropCourseLink">Drop this course</a>
-                                                            </li>
-
-                                                            <li>
-                                                                @using (Html.BeginForm("WithDrawCourse", "MyCourses", FormMethod.Post, new { @id = "withdrawform" }))
-                                                                {
-                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
-                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
-                                                                    <input type="submit" value="Submit" style="display:none">
-
-                                                                }
-                                                                <a href="#" id="withdrawCourseLink">Widraw this course</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>*@
+                                                    @if (item.IsVerified == true)
+                                                    {
+                                                        <span class="label label-white label-success middle"><i class="fa fa-check-circle-o"></i> Verified</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-white label-danger middle"><i class="fa fa-times-circle-o"></i> Not Verified</span>
+                                                    }
                                                 </td>
                                             </tr>
                                             sno++;
@@ -136,20 +159,96 @@
         <!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->
 </div><!-- /.page-content -->
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="lighter blue">Please make your payment against the <strong class="SessionDet"></strong> session with Voucher No: <strong class="VoucherDet"></strong></h5>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UploadFee", "MyFees", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" class="input-large" id="VoucherNo" name="VoucherNo" />
+
+                    <div class="form-group">
+
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1"> Upload Bank Voucher <strong class="text-danger">* </strong> </label>
+
+                        <div class="col-md-6">
+                            <div id="msg" class="text-danger"></div>
+                            <strong class="text-danger">
+                                @Html.ValidationMessage("Picture")
+                            </strong>
+                            <input type="file" class="col-md-4 VoucherFile" name="file" id="id-input-file-2" accept="image/*" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label no-padding-right" for="form-field-1"> Bank Voucher No <strong class="text-danger"> *</strong></label>
+
+                        <div class="col-md-9">
+                            <input type="text" class="input-large" placeholder="Bank Voucher No." name="BankVoucherNo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Branch Code <strong class="text-danger"> *</strong></label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="input-large" placeholder="Branch Code." name="BranchCode" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Bank Name <strong class="text-danger"> *</strong></label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="input-large" placeholder="Bank Name." name="BankName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Bank Branch <strong class="text-danger"> *</strong></label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="input-large" placeholder="Branch Name." name="BankBranch" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Payment Date <strong class="text-danger"> *</strong></label>
+
+                        <div class="col-sm-9">
+                            <input type="date" class="input-large" placeholder="Branch Name." name="PaymentDate" required>
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-4 col-md-12">
+                            <button class="btn btn-success" type="submit" title="Submit Voucher Details">
+                                <i class="ace-icon fa fa-check-circle-o bigger-110"></i>
+                                Submit
+                            </button>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal" title="Close"><i class="ace-icon fa fa-times-circle-o bigger-110"></i> Close</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
-    $(document).ready(function () {
-        $(".dropCourseLink").on("click", function (e) {
-            e.preventDefault();
-            $(this).prev(".dropform").submit();
-        });
-    });
-
-    document.getElementById('withdrawCourseLink').addEventListener('click', function (e) {
-        var Okay = confirm("Are you sure you want to withdraw this course?");
-        if (Okay) {
-            e.preventDefault();
-            document.getElementById('withdrawform').submit();
-        }
-    });
+    function PayNow(VoucherNo, SessionDet) {
+        $("#VoucherNo").val(VoucherNo);
+        $(".VoucherDet").html(VoucherNo);
+        $(".SessionDet").html(SessionDet);
+    }
 </script>

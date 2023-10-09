@@ -24,13 +24,13 @@ namespace LMS.Models
             this.ProgramOffereds = new HashSet<ProgramOffered>();
             this.ProgramPreferences = new HashSet<ProgramPreference>();
             this.SessionWiseMeritLists = new HashSet<SessionWiseMeritList>();
+            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
-            this.StudentSemesters = new HashSet<StudentSemester>();
-            this.TeacherCourses = new HashSet<TeacherCours>();
-            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
             this.StudentFees = new HashSet<StudentFee>();
+            this.StudentSemesters = new HashSet<StudentSemester>();
+            this.TeacherCourses = new HashSet<TeacherCours>();
         }
     
         public int ID { get; set; }
@@ -59,18 +59,18 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionWiseMeritList> SessionWiseMeritLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseSelection> StudentCourseSelections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFee> StudentFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
     }
 }

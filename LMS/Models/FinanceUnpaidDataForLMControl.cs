@@ -16,8 +16,8 @@ namespace LMS.Models
     {
         public int ID { get; set; }
         public string RegNo { get; set; }
+        public Nullable<int> Amount { get; set; }
         public string FullName { get; set; }
-        public string Amount { get; set; }
         public Nullable<bool> IsPaid { get; set; }
     }
 }

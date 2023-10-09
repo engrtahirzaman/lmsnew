@@ -21,7 +21,7 @@ namespace LMS.Models
         public int FeeHeadID { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public Nullable<int> VoucherNo { get; set; }
+        public string VoucherNo { get; set; }
         public string BankVoucherNo { get; set; }
         public string BankName { get; set; }
         public string BranchCode { get; set; }

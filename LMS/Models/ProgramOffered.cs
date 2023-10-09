@@ -19,8 +19,8 @@ namespace LMS.Models
         {
             this.BatchWiseCourses = new HashSet<BatchWiseCours>();
             this.FeeCriterias = new HashSet<FeeCriteria>();
-            this.Students = new HashSet<Student>();
             this.SemesterCourseLoads = new HashSet<SemesterCourseLoad>();
+            this.Students = new HashSet<Student>();
         }
     
         public int ID { get; set; }
@@ -43,8 +43,8 @@ namespace LMS.Models
         public virtual ICollection<FeeCriteria> FeeCriterias { get; set; }
         public virtual Session Session { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemesterCourseLoad> SemesterCourseLoads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

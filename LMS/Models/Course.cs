@@ -26,9 +26,9 @@ namespace LMS.Models
             this.CoursePreRequisites1 = new HashSet<CoursePreRequisite>();
             this.CourseProgramLevels = new HashSet<CourseProgramLevel>();
             this.CoursePublications = new HashSet<CoursePublication>();
+            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
-            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
         }
     
@@ -68,11 +68,11 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursePublication> CoursePublications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseSelection> StudentCourseSelections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
     }

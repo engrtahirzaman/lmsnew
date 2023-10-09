@@ -83,8 +83,9 @@
 
                                         <strong class="text-danger">
                                             @Html.ValidationSummary()
-                                        </strong>
 
+                                        </strong>
+                                        @Html.Raw(TempData["Failed"])
                                         @*<Place for success message when user successfuly signup---------------------------></------------------------------>*@
 
                                         <div class="form-floating">

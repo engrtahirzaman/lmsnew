@@ -477,10 +477,10 @@
     <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Campuses" FromRole="Campuses" ToRole="Sessions" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Campuses" FromRole="Campuses" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Campuses" FromRole="Campuses" ToRole="StudentCourseSelection" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Campuses" FromRole="Campuses" ToRole="StudentFee" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Campuses" FromRole="Campuses" ToRole="StudentSemester" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Campuses" FromRole="Campuses" ToRole="TeacherCourses" />
     <NavigationProperty Name="Tests" Relationship="Self.FK_Tests_Campuses" FromRole="Campuses" ToRole="Tests" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Campuses" FromRole="Campus" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="CMSUser">
     <Key>
@@ -525,10 +525,10 @@
     <NavigationProperty Name="CoursePreRequisites1" Relationship="Self.FK_CoursePreRequisite_CoursePreRequisiteID" FromRole="Course" ToRole="CoursePreRequisite" />
     <NavigationProperty Name="CourseProgramLevels" Relationship="Self.FK_CourseProgramLevel_Course" FromRole="Course" ToRole="CourseProgramLevel" />
     <NavigationProperty Name="CoursePublications" Relationship="Self.FK_CoursePublication_Course" FromRole="Course" ToRole="CoursePublication" />
+    <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Course" FromRole="Course" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Course" FromRole="Course" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Course" FromRole="Course" ToRole="StudentCourseSelection" />
-    <NavigationProperty Name="StudentCourseDroppeds" Relationship="CMSModel.FK_StudentCourseDropped_Course" FromRole="Course" ToRole="StudentCourseDropped" />
-    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="CMSModel.FK_StudentCourseWithDrawn_Course" FromRole="Course" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Course" FromRole="Course" ToRole="StudentCourseWithDrawn" />
   </EntityType>
   <EntityType Name="CourseCategoryInstitutional">
     <Key>
@@ -960,6 +960,7 @@
     <Property Name="NextOfKinMobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="NextOfKinUDate" Type="DateTime" Precision="0" />
     <Property Name="NextofKinTime" Type="Time" Precision="7" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
@@ -988,14 +989,13 @@
     <NavigationProperty Name="EmpQualifications" Relationship="Self.FK_EmpQualification_EmpForm" FromRole="EmpForm" ToRole="EmpQualification" />
     <NavigationProperty Name="EmpReferences" Relationship="Self.FK_EmpReferences_EmpForm" FromRole="EmpForm" ToRole="EmpReferences" />
     <NavigationProperty Name="EmpTrainings" Relationship="Self.FK_EmpTraining_EmpForm" FromRole="EmpForm" ToRole="EmpTraining" />
+    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_EmpForm" FromRole="EmpForm" ToRole="ProjectInvestigatedByEmpForm" />
     <NavigationProperty Name="SessionWiseMeritLists" Relationship="Self.FK_SessionWiseMertiList_EmpForm" FromRole="EmpForm" ToRole="SessionWiseMeritList" />
     <NavigationProperty Name="SessionWiseMeritLists1" Relationship="Self.FK_SessionWiseMertiList_EmpForm1" FromRole="EmpForm" ToRole="SessionWiseMeritList" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_EmpForm" FromRole="EmpForm" ToRole="StudentCourseSelection" />
+    <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_EmpForm" FromRole="EmpForm" ToRole="StudentsAdvisor" />
+    <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_EmpForm" FromRole="EmpForm" ToRole="StudentsSupervisor" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="EmpForm" ToRole="TeacherCourses" />
-    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="CMSModel.FK_ProjectInvestigatedBy_EmpForm" FromRole="EmpForm" ToRole="ProjectInvestigatedByEmpForm" />
-    <NavigationProperty Name="StudentsAdvisors" Relationship="CMSModel.FK_StudentsAdvisor_EmpForm" FromRole="EmpForm" ToRole="StudentsAdvisor" />
-    <NavigationProperty Name="StudentsSupervisors" Relationship="CMSModel.FK_StudentsSupervisor_EmpForm" FromRole="EmpForm" ToRole="StudentsSupervisor" />
   </EntityType>
   <EntityType Name="EmpFormJobNature">
     <Key>
@@ -1208,7 +1208,7 @@
     <NavigationProperty Name="Campus" Relationship="Self.FK_FeeHeads_Campuses" FromRole="FeeHeads" ToRole="Campuses" />
     <NavigationProperty Name="FeeCriterias" Relationship="Self.FK_FeeCriteria_FeeCriteria1" FromRole="FeeHeads" ToRole="FeeCriteria" />
     <NavigationProperty Name="ScholarshipHeadsApplyOnFeeHeads" Relationship="Self.FK_ScholarhipHeadsApplyOnFeeHead_FeeHead" FromRole="FeeHeads" ToRole="ScholarshipHeadsApplyOnFeeHead" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_FeeHeads" FromRole="FeeHead" ToRole="StudentFee" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="FeeHeads" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="Grading">
     <Key>
@@ -1389,6 +1389,73 @@
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Precision="0" />
   </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OrganizationLegalTypeID" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationSectorTypeID" Type="Int32" Nullable="false" />
+    <Property Name="FoundedDate" Type="DateTime" Precision="0" />
+    <Property Name="Website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Landline" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictID" Type="Int32" />
+    <Property Name="ProvinceID" Type="Int32" />
+    <Property Name="PostalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CountryID" Type="Int32" />
+    <Property Name="CEOName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FocalPersonName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FocalPersonMobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FocalPersonEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeCount" Type="Int32" />
+    <Property Name="Revenue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPubliclyTraded" Type="Boolean" />
+    <Property Name="StockSymbol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="OrganizationLegalType" Relationship="Self.FK_Organization_OrganizationLegalType" FromRole="Organization" ToRole="OrganizationLegalType" />
+    <NavigationProperty Name="OrganizationSectorType" Relationship="Self.FK_Organization_OrganizationSectorType" FromRole="Organization" ToRole="OrganizationSectorType" />
+    <NavigationProperty Name="ProjectAwardedByOrganizations" Relationship="Self.FK_ProjectAwardedBy_Organization" FromRole="Organization" ToRole="ProjectAwardedByOrganization" />
+  </EntityType>
+  <EntityType Name="OrganizationLegalType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Organizations" Relationship="Self.FK_Organization_OrganizationLegalType" FromRole="OrganizationLegalType" ToRole="Organization" />
+  </EntityType>
+  <EntityType Name="OrganizationSectorType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Organizations" Relationship="Self.FK_Organization_OrganizationSectorType" FromRole="OrganizationSectorType" ToRole="Organization" />
+  </EntityType>
   <EntityType Name="ProgramCoordinator">
     <Key>
       <PropertyRef Name="ID" />
@@ -1466,8 +1533,8 @@
     <NavigationProperty Name="DepartmentProgram" Relationship="Self.FK_ProgramOffered_DepartmentPrograms" FromRole="ProgramOffered" ToRole="DepartmentPrograms" />
     <NavigationProperty Name="FeeCriterias" Relationship="Self.FK_FeeCriteria_ProgramOffered" FromRole="ProgramOffered" ToRole="FeeCriteria" />
     <NavigationProperty Name="Session" Relationship="Self.FK_ProgramOffered_Sessions" FromRole="ProgramOffered" ToRole="Sessions" />
+    <NavigationProperty Name="SemesterCourseLoads" Relationship="Self.FK_SemesterCourseLoad_ProgramOffered" FromRole="ProgramOffered" ToRole="SemesterCourseLoad" />
     <NavigationProperty Name="Students" Relationship="Self.FK_Students_ProgramOffered" FromRole="ProgramOffered" ToRole="Students" />
-    <NavigationProperty Name="SemesterCourseLoads" Relationship="CMSModel.FK_SemesterCourseLoad_ProgramOffered" FromRole="ProgramOffered" ToRole="SemesterCourseLoad" />
   </EntityType>
   <EntityType Name="ProgramPreference">
     <Key>
@@ -1509,6 +1576,130 @@
     <NavigationProperty Name="DepartmentPrograms" Relationship="Self.FK_DepartmentPrograms_Programs" FromRole="Programs" ToRole="DepartmentPrograms" />
     <NavigationProperty Name="ProgramCoordinators" Relationship="Self.FK__ProgramCo__Progr__24BD5A91" FromRole="Programs" ToRole="ProgramCoordinator" />
     <NavigationProperty Name="ProgramLevel" Relationship="Self.FK_Programs_ProgramLevels" FromRole="Programs" ToRole="ProgramLevels" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectTypeID" Type="Int32" Nullable="false" />
+    <Property Name="FundingAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsFunded" Type="Boolean" />
+    <Property Name="IsAwarded" Type="Boolean" />
+    <Property Name="IsClassified" Type="Boolean" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="PositionForBSStudents" Type="Int32" />
+    <Property Name="PositionForMSStudents" Type="Int32" />
+    <Property Name="PositionForPhDStudents" Type="Int32" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="CBy" Type="Int32" />
+    <Property Name="CDate" Type="DateTime" Precision="0" />
+    <Property Name="CTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="ProjectType" Relationship="Self.FK_Project_ProjectType" FromRole="Project" ToRole="ProjectType" />
+    <NavigationProperty Name="ProjectAwardedByOrganizations" Relationship="Self.FK_ProjectAwardedBy_Project" FromRole="Project" ToRole="ProjectAwardedByOrganization" />
+    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_Project" FromRole="Project" ToRole="ProjectInvestigatedByEmpForm" />
+    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="Project" ToRole="ProjectStudentsInvestigatedBy" />
+  </EntityType>
+  <EntityType Name="ProjectAwardedByOrganization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationID" Type="Int32" Nullable="false" />
+    <Property Name="FundedAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AwardLetter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AwardDate" Type="DateTime" Precision="0" />
+    <Property Name="AwardLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AwardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AwardStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GrantReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContractNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FundingSource" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AwardFocalPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AwardFocalPersonMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AwardFocalPersonEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Organization" Relationship="Self.FK_ProjectAwardedBy_Organization" FromRole="ProjectAwardedByOrganization" ToRole="Organization" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_ProjectAwardedBy_Project" FromRole="ProjectAwardedByOrganization" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="ProjectInvestigatedByEmpForm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectInvestigationTypeID" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="EmpForm" Relationship="Self.FK_ProjectInvestigatedBy_EmpForm" FromRole="ProjectInvestigatedByEmpForm" ToRole="EmpForm" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_ProjectInvestigatedBy_Project" FromRole="ProjectInvestigatedByEmpForm" ToRole="Project" />
+    <NavigationProperty Name="ProjectInvestigationType" Relationship="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigatedByEmpForm" ToRole="ProjectInvestigationType" />
+  </EntityType>
+  <EntityType Name="ProjectInvestigationType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigationType" ToRole="ProjectInvestigatedByEmpForm" />
+    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectInvestigationType" ToRole="ProjectStudentsInvestigatedBy" />
+  </EntityType>
+  <EntityType Name="ProjectStudentsInvestigatedBy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="StudentsID" Type="Int32" Nullable="false" />
+    <Property Name="ProjectInvestigationTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="ProjectStudentsInvestigatedBy" ToRole="Project" />
+    <NavigationProperty Name="ProjectInvestigationType" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectStudentsInvestigatedBy" ToRole="ProjectInvestigationType" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="ProjectStudentsInvestigatedBy" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="ProjectType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_ProjectType" FromRole="ProjectType" ToRole="Project" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -1636,6 +1827,22 @@
     <NavigationProperty Name="FeeHead" Relationship="Self.FK_ScholarhipHeadsApplyOnFeeHead_FeeHead" FromRole="ScholarshipHeadsApplyOnFeeHead" ToRole="FeeHeads" />
     <NavigationProperty Name="ScholarshipHead" Relationship="Self.FK_ScholarhipHeadsApplyOnFeeHead_ScholarhipHead" FromRole="ScholarshipHeadsApplyOnFeeHead" ToRole="ScholarshipHeads" />
   </EntityType>
+  <EntityType Name="SemesterCourseLoad">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="BatchID" Type="Int32" Nullable="false" />
+    <Property Name="SemesterNo" Type="Int32" Nullable="false" />
+    <Property Name="minCrHrs" Type="Int32" />
+    <Property Name="maxCrHrs" Type="Int32" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UBy" Type="Int32" Nullable="false" />
+    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="ProgramOffered" Relationship="Self.FK_SemesterCourseLoad_ProgramOffered" FromRole="SemesterCourseLoad" ToRole="ProgramOffered" />
+  </EntityType>
   <EntityType Name="Session">
     <Key>
       <PropertyRef Name="ID" />
@@ -1657,13 +1864,13 @@
     <NavigationProperty Name="ProgramOffereds" Relationship="Self.FK_ProgramOffered_Sessions" FromRole="Sessions" ToRole="ProgramOffered" />
     <NavigationProperty Name="ProgramPreferences" Relationship="Self.FK_ProgramPreferences_Sessions" FromRole="Sessions" ToRole="ProgramPreferences" />
     <NavigationProperty Name="SessionWiseMeritLists" Relationship="Self.FK_SessionWiseMertiList_Sessions" FromRole="Sessions" ToRole="SessionWiseMeritList" />
+    <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Sessions" FromRole="Sessions" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Sessions" FromRole="Sessions" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Sessions" FromRole="Sessions" ToRole="StudentCourseSelection" />
+    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Sessions" FromRole="Sessions" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Sessions" FromRole="Sessions" ToRole="StudentFee" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSessions_Sessions" FromRole="Sessions" ToRole="StudentSemester" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Sessions" FromRole="Sessions" ToRole="TeacherCourses" />
-    <NavigationProperty Name="StudentCourseDroppeds" Relationship="CMSModel.FK_StudentCourseDropped_Sessions" FromRole="Session" ToRole="StudentCourseDropped" />
-    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="CMSModel.FK_StudentCourseWithDrawn_Sessions" FromRole="Session" ToRole="StudentCourseWithDrawn" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Sessions" FromRole="Session" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="SessionWiseMeritList">
     <Key>
@@ -1741,9 +1948,9 @@
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Course" Relationship="CMSModel.FK_StudentCourseDropped_Course" FromRole="StudentCourseDropped" ToRole="Course" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_StudentCourseDropped_Sessions" FromRole="StudentCourseDropped" ToRole="Session" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentCourseDropped_Students" FromRole="StudentCourseDropped" ToRole="Student" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourseDropped_Course" FromRole="StudentCourseDropped" ToRole="Course" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentCourseDropped_Sessions" FromRole="StudentCourseDropped" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourseDropped_Students" FromRole="StudentCourseDropped" ToRole="Students" />
   </EntityType>
   <EntityType Name="StudentCours">
     <Key>
@@ -1762,7 +1969,13 @@
     <Property Name="IsResultFinalized" Type="Boolean" Nullable="false" />
     <Property Name="IsMakeUp" Type="Boolean" Nullable="false" />
     <Property Name="IsDropped" Type="Boolean" Nullable="false" />
+    <Property Name="IsDroppedDate" Type="DateTime" Precision="0" />
+    <Property Name="IsDroppedTime" Type="Time" Precision="7" />
+    <Property Name="IsDroppedBy" Type="Int32" />
     <Property Name="IsWithdraw" Type="Boolean" Nullable="false" />
+    <Property Name="IsWithdrawDate" Type="DateTime" Precision="0" />
+    <Property Name="IsWithdrawTime" Type="Time" Precision="7" />
+    <Property Name="IsWithdrawBy" Type="Int32" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
@@ -1771,13 +1984,7 @@
     <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourses_Course" FromRole="StudentCourses" ToRole="Course" />
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentCourses_Sessions" FromRole="StudentCourses" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourses_Students" FromRole="StudentCourses" ToRole="Students" />
-    <Property Name="IsDroppedDate" Type="DateTime" Precision="0" />
-    <Property Name="IsDroppedTime" Type="Time" Precision="7" />
-    <Property Name="IsDroppedBy" Type="Int32" />
-    <Property Name="IsWithdrawDate" Type="DateTime" Precision="0" />
-    <Property Name="IsWithdrawTime" Type="Time" Precision="7" />
-    <Property Name="IsWithdrawBy" Type="Int32" />
-    <NavigationProperty Name="StudentsSupervisors" Relationship="CMSModel.FK_StudentsSupervisor_StudentCourses" FromRole="StudentCours" ToRole="StudentsSupervisor" />
+    <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_StudentCourses" FromRole="StudentCourses" ToRole="StudentsSupervisor" />
   </EntityType>
   <EntityType Name="StudentCourseSelection">
     <Key>
@@ -1823,9 +2030,52 @@
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Course" Relationship="CMSModel.FK_StudentCourseWithDrawn_Course" FromRole="StudentCourseWithDrawn" ToRole="Course" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_StudentCourseWithDrawn_Sessions" FromRole="StudentCourseWithDrawn" ToRole="Session" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentCourseWithDrawn_Students" FromRole="StudentCourseWithDrawn" ToRole="Student" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_StudentCourseWithDrawn_Course" FromRole="StudentCourseWithDrawn" ToRole="Course" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentCourseWithDrawn_Sessions" FromRole="StudentCourseWithDrawn" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourseWithDrawn_Students" FromRole="StudentCourseWithDrawn" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="StudentFee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="FeeHeadID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="VoucherNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BankVoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+    <Property Name="PaymentTime" Type="Time" Precision="7" />
+    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+    <Property Name="VerifiedBy" Type="Int32" />
+    <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="VerifiedTime" Type="Time" Precision="7" />
+    <Property Name="Attachment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsFake" Type="Boolean" Nullable="false" />
+    <Property Name="FakeBy" Type="Int32" />
+    <Property Name="FakeDate" Type="DateTime" Precision="0" />
+    <Property Name="FakeTime" Type="Time" Precision="7" />
+    <Property Name="IsRefund" Type="Boolean" Nullable="false" />
+    <Property Name="IsRefundBy" Type="Int32" />
+    <Property Name="IsRefundDate" Type="DateTime" Precision="0" />
+    <Property Name="IsRefundTime" Type="Time" Precision="7" />
+    <Property Name="IsRefundComments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsRefundPercent" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UBy" Type="Int32" Nullable="false" />
+    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Campus" Relationship="Self.FK_StudentFee_Campuses" FromRole="StudentFee" ToRole="Campuses" />
+    <NavigationProperty Name="FeeHead" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHeads" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -1849,15 +2099,39 @@
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Admission" Relationship="Self.FK_Students_Admission" FromRole="Students" ToRole="Admission" />
     <NavigationProperty Name="ProgramOffered" Relationship="Self.FK_Students_ProgramOffered" FromRole="Students" ToRole="ProgramOffered" />
+    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="Students" ToRole="ProjectStudentsInvestigatedBy" />
+    <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Students" FromRole="Students" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Students" FromRole="Students" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Students" FromRole="Students" ToRole="StudentCourseSelection" />
+    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Students" FromRole="Students" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Students" FromRole="Students" ToRole="StudentFee" />
+    <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_Students" FromRole="Students" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Students" FromRole="Students" ToRole="StudentSemester" />
-    <NavigationProperty Name="StudentCourseDroppeds" Relationship="CMSModel.FK_StudentCourseDropped_Students" FromRole="Student" ToRole="StudentCourseDropped" />
-    <NavigationProperty Name="StudentCourseWithDrawns" Relationship="CMSModel.FK_StudentCourseWithDrawn_Students" FromRole="Student" ToRole="StudentCourseWithDrawn" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_Students" FromRole="Student" ToRole="ProjectStudentsInvestigatedBy" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Students" FromRole="Student" ToRole="StudentFee" />
-    <NavigationProperty Name="StudentsAdvisors" Relationship="CMSModel.FK_StudentsAdvisor_Students" FromRole="Student" ToRole="StudentsAdvisor" />
-    <NavigationProperty Name="StudentsSupervisors" Relationship="CMSModel.FK_StudentsSupervisor_Students" FromRole="Student" ToRole="StudentsSupervisor" />
+    <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_Students" FromRole="Students" ToRole="StudentsSupervisor" />
+  </EntityType>
+  <EntityType Name="StudentsAdvisor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="LetterOfAppointment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LetterOfAppointmentReferNo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="LetterOfAppointmentDate" Type="DateTime" Precision="0" />
+    <Property Name="AppointedBy" Type="Int32" />
+    <Property Name="AppointedDate" Type="DateTime" Precision="0" />
+    <Property Name="AppointedTime" Type="Time" Precision="7" />
+    <Property Name="Other1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="EmpForm" Relationship="Self.FK_StudentsAdvisor_EmpForm" FromRole="StudentsAdvisor" ToRole="EmpForm" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentsAdvisor_Students" FromRole="StudentsAdvisor" ToRole="Students" />
   </EntityType>
   <EntityType Name="StudentSemester">
     <Key>
@@ -1879,6 +2153,32 @@
     <NavigationProperty Name="Campus" Relationship="Self.FK_StudentSemester_Campuses" FromRole="StudentSemester" ToRole="Campuses" />
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentSessions_Sessions" FromRole="StudentSemester" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentSemester_Students" FromRole="StudentSemester" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="StudentsSupervisor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
+    <Property Name="StudentCoursesID" Type="Int32" Nullable="false" />
+    <Property Name="FromDate" Type="DateTime" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="LetterOfAppointment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LetterOfAppointmentReferNo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="LetterOfAppointmentDate" Type="DateTime" Precision="0" />
+    <Property Name="AppointedBy" Type="Int32" />
+    <Property Name="AppointedDate" Type="DateTime" Precision="0" />
+    <Property Name="AppointedTime" Type="Time" Precision="7" />
+    <Property Name="Other1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="EmpForm" Relationship="Self.FK_StudentsSupervisor_EmpForm" FromRole="StudentsSupervisor" ToRole="EmpForm" />
+    <NavigationProperty Name="StudentCours" Relationship="Self.FK_StudentsSupervisor_StudentCourses" FromRole="StudentsSupervisor" ToRole="StudentCourses" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentsSupervisor_Students" FromRole="StudentsSupervisor" ToRole="Students" />
   </EntityType>
   <EntityType Name="SubMenu">
     <Key>
@@ -2998,6 +3298,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentFee_Campuses">
+    <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campuses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="CampusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentSemester_Campuses">
     <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
     <End Role="StudentSemester" Type="Self.StudentSemester" Multiplicity="*" />
@@ -3154,6 +3466,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseDropped_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourses_Course">
     <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
     <End Role="StudentCourses" Type="Self.StudentCours" Multiplicity="*" />
@@ -3174,6 +3498,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentCourseSelection">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
         <PropertyRef Name="CourseID" />
       </Dependent>
     </ReferentialConstraint>
@@ -3694,6 +4030,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProjectInvestigatedBy_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="EmpFormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SessionWiseMertiList_EmpForm">
     <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="0..1" />
     <End Role="SessionWiseMeritList" Type="Self.SessionWiseMeritList" Multiplicity="*" />
@@ -3727,6 +4075,30 @@
       </Principal>
       <Dependent Role="StudentCourseSelection">
         <PropertyRef Name="CourseApprovalBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsAdvisor_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="StudentsAdvisor" Type="Self.StudentsAdvisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsAdvisor">
+        <PropertyRef Name="EmpFormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
+        <PropertyRef Name="EmpFormID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3838,6 +4210,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentFee_FeeHeads">
+    <End Role="FeeHeads" Type="Self.FeeHead" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeeHeads">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="FeeHeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Grading_GradingPollicy">
     <End Role="GradingPolicy" Type="Self.GradingPolicy" Multiplicity="1" />
     <End Role="Grading" Type="Self.Grading" Multiplicity="*" />
@@ -3910,6 +4294,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Organization_OrganizationLegalType">
+    <End Role="OrganizationLegalType" Type="Self.OrganizationLegalType" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrganizationLegalType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="OrganizationLegalTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_OrganizationSectorType">
+    <End Role="OrganizationSectorType" Type="Self.OrganizationSectorType" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrganizationSectorType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="OrganizationSectorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAwardedBy_Organization">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="ProjectAwardedByOrganization" Type="Self.ProjectAwardedByOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAwardedByOrganization">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ProgramCo__Progr__24BD5A91">
     <End Role="Programs" Type="Self.Program" Multiplicity="0..1" />
     <End Role="ProgramCoordinator" Type="Self.ProgramCoordinator" Multiplicity="*" />
@@ -3958,6 +4378,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SemesterCourseLoad_ProgramOffered">
+    <End Role="ProgramOffered" Type="Self.ProgramOffered" Multiplicity="1" />
+    <End Role="SemesterCourseLoad" Type="Self.SemesterCourseLoad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProgramOffered">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SemesterCourseLoad">
+        <PropertyRef Name="BatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Students_ProgramOffered">
     <End Role="ProgramOffered" Type="Self.ProgramOffered" Multiplicity="1" />
     <End Role="Students" Type="Self.Student" Multiplicity="*" />
@@ -3979,6 +4411,90 @@
       </Principal>
       <Dependent Role="ProgramPreferences">
         <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_ProjectType">
+    <End Role="ProjectType" Type="Self.ProjectType" Multiplicity="1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="ProjectTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectAwardedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectAwardedByOrganization" Type="Self.ProjectAwardedByOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectAwardedByOrganization">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectInvestigatedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectInvestigatedBy_ProjectInvestigationType">
+    <End Role="ProjectInvestigationType" Type="Self.ProjectInvestigationType" Multiplicity="0..1" />
+    <End Role="ProjectInvestigatedByEmpForm" Type="Self.ProjectInvestigatedByEmpForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectInvestigationType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectInvestigatedByEmpForm">
+        <PropertyRef Name="ProjectInvestigationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
+    <End Role="ProjectInvestigationType" Type="Self.ProjectInvestigationType" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectInvestigationType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="ProjectInvestigationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectStudentsInvestigatedBy_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProjectStudentsInvestigatedBy">
+        <PropertyRef Name="StudentsID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4042,6 +4558,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseDropped_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourses_Sessions">
     <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
     <End Role="StudentCourses" Type="Self.StudentCours" Multiplicity="*" />
@@ -4062,6 +4590,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentCourseSelection">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentFee_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
         <PropertyRef Name="SessionID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4102,6 +4654,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseDropped_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseDropped">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourses_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentCourses" Type="Self.StudentCours" Multiplicity="*" />
@@ -4111,6 +4675,18 @@
       </Principal>
       <Dependent Role="StudentCourses">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_StudentCourses">
+    <End Role="StudentCourses" Type="Self.StudentCours" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
+        <PropertyRef Name="StudentCoursesID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4126,6 +4702,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentCourseWithDrawn_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentCourseWithDrawn" Type="Self.StudentCourseWithDrawn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentFee_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsAdvisor_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentsAdvisor" Type="Self.StudentsAdvisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsAdvisor">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentSemester_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentSemester" Type="Self.StudentSemester" Multiplicity="*" />
@@ -4134,6 +4746,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentSemester">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentsSupervisor_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsSupervisor">
         <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4311,12 +4935,21 @@
     <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
     <EntitySet Name="OnlinePaymentMappings" EntityType="Self.OnlinePaymentMapping" />
     <EntitySet Name="OnlinePaymentVenders" EntityType="Self.OnlinePaymentVender" />
+    <EntitySet Name="Organizations" EntityType="Self.Organization" />
+    <EntitySet Name="OrganizationLegalTypes" EntityType="Self.OrganizationLegalType" />
+    <EntitySet Name="OrganizationSectorTypes" EntityType="Self.OrganizationSectorType" />
     <EntitySet Name="ProgramCoordinators" EntityType="Self.ProgramCoordinator" />
     <EntitySet Name="ProgramEligibilities" EntityType="Self.ProgramEligibility" />
     <EntitySet Name="ProgramLevels" EntityType="Self.ProgramLevel" />
     <EntitySet Name="ProgramOffereds" EntityType="Self.ProgramOffered" />
     <EntitySet Name="ProgramPreferences" EntityType="Self.ProgramPreference" />
     <EntitySet Name="Programs" EntityType="Self.Program" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="ProjectAwardedByOrganizations" EntityType="Self.ProjectAwardedByOrganization" />
+    <EntitySet Name="ProjectInvestigatedByEmpForms" EntityType="Self.ProjectInvestigatedByEmpForm" />
+    <EntitySet Name="ProjectInvestigationTypes" EntityType="Self.ProjectInvestigationType" />
+    <EntitySet Name="ProjectStudentsInvestigatedBies" EntityType="Self.ProjectStudentsInvestigatedBy" />
+    <EntitySet Name="ProjectTypes" EntityType="Self.ProjectType" />
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="Publications" EntityType="Self.Publication" />
     <EntitySet Name="PublicationTypes" EntityType="Self.PublicationType" />
@@ -4325,6 +4958,7 @@
     <EntitySet Name="RoleWiseMenus" EntityType="Self.RoleWiseMenu" />
     <EntitySet Name="ScholarshipHeads" EntityType="Self.ScholarshipHead" />
     <EntitySet Name="ScholarshipHeadsApplyOnFeeHeads" EntityType="Self.ScholarshipHeadsApplyOnFeeHead" />
+    <EntitySet Name="SemesterCourseLoads" EntityType="Self.SemesterCourseLoad" />
     <EntitySet Name="Sessions" EntityType="Self.Session" />
     <EntitySet Name="SessionWiseMeritLists" EntityType="Self.SessionWiseMeritList" />
     <EntitySet Name="SessionWiseMeritListDets" EntityType="Self.SessionWiseMeritListDet" />
@@ -4333,8 +4967,11 @@
     <EntitySet Name="StudentCourses" EntityType="Self.StudentCours" />
     <EntitySet Name="StudentCourseSelections" EntityType="Self.StudentCourseSelection" />
     <EntitySet Name="StudentCourseWithDrawns" EntityType="Self.StudentCourseWithDrawn" />
+    <EntitySet Name="StudentFees" EntityType="Self.StudentFee" />
     <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentsAdvisors" EntityType="Self.StudentsAdvisor" />
     <EntitySet Name="StudentSemesters" EntityType="Self.StudentSemester" />
+    <EntitySet Name="StudentsSupervisors" EntityType="Self.StudentsSupervisor" />
     <EntitySet Name="SubMenus" EntityType="Self.SubMenu" />
     <EntitySet Name="TeacherCourses" EntityType="Self.TeacherCours" />
     <EntitySet Name="TestApplicants" EntityType="Self.TestApplicant" />
@@ -4594,6 +5231,10 @@
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Campuses" Association="Self.FK_StudentFee_Campuses">
+      <End Role="Campuses" EntitySet="Campuses" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentSemester_Campuses" Association="Self.FK_StudentSemester_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentSemester" EntitySet="StudentSemesters" />
@@ -4646,6 +5287,10 @@
       <End Role="Course" EntitySet="Courses" />
       <End Role="CoursePublication" EntitySet="CoursePublications" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Course" Association="Self.FK_StudentCourseDropped_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_Course" Association="Self.FK_StudentCourses_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentCourses" EntitySet="StudentCourses" />
@@ -4653,6 +5298,10 @@
     <AssociationSet Name="FK_StudentCourseSelection_Course" Association="Self.FK_StudentCourseSelection_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Course" Association="Self.FK_StudentCourseWithDrawn_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
     </AssociationSet>
     <AssociationSet Name="FK_CourseProgramLevel_ProgramLevels" Association="Self.FK_CourseProgramLevel_ProgramLevels">
       <End Role="ProgramLevels" EntitySet="ProgramLevels" />
@@ -4826,6 +5475,10 @@
       <End Role="EmpForm" EntitySet="EmpForms" />
       <End Role="EmpTraining" EntitySet="EmpTrainings" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_EmpForm" Association="Self.FK_ProjectInvestigatedBy_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForms" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
+    </AssociationSet>
     <AssociationSet Name="FK_SessionWiseMertiList_EmpForm" Association="Self.FK_SessionWiseMertiList_EmpForm">
       <End Role="EmpForm" EntitySet="EmpForms" />
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritLists" />
@@ -4837,6 +5490,14 @@
     <AssociationSet Name="FK_StudentCourseSelection_EmpForm" Association="Self.FK_StudentCourseSelection_EmpForm">
       <End Role="EmpForm" EntitySet="EmpForms" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsAdvisor_EmpForm" Association="Self.FK_StudentsAdvisor_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForms" />
+      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_EmpForm" Association="Self.FK_StudentsSupervisor_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForms" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherCourses_EmpRegistration" Association="Self.FK_TeacherCourses_EmpRegistration">
       <End Role="EmpForm" EntitySet="EmpForms" />
@@ -4874,6 +5535,10 @@
       <End Role="FeeHeads" EntitySet="FeeHeads" />
       <End Role="ScholarshipHeadsApplyOnFeeHead" EntitySet="ScholarshipHeadsApplyOnFeeHeads" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_FeeHeads" Association="Self.FK_StudentFee_FeeHeads">
+      <End Role="FeeHeads" EntitySet="FeeHeads" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
     <AssociationSet Name="FK_Grading_GradingPollicy" Association="Self.FK_Grading_GradingPollicy">
       <End Role="GradingPolicy" EntitySet="GradingPolicies" />
       <End Role="Grading" EntitySet="Gradings" />
@@ -4898,6 +5563,18 @@
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="MeritListMarksCriteria" EntitySet="MeritListMarksCriterias" />
     </AssociationSet>
+    <AssociationSet Name="FK_Organization_OrganizationLegalType" Association="Self.FK_Organization_OrganizationLegalType">
+      <End Role="OrganizationLegalType" EntitySet="OrganizationLegalTypes" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_OrganizationSectorType" Association="Self.FK_Organization_OrganizationSectorType">
+      <End Role="OrganizationSectorType" EntitySet="OrganizationSectorTypes" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAwardedBy_Organization" Association="Self.FK_ProjectAwardedBy_Organization">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganizations" />
+    </AssociationSet>
     <AssociationSet Name="FK__ProgramCo__Progr__24BD5A91" Association="Self.FK__ProgramCo__Progr__24BD5A91">
       <End Role="Programs" EntitySet="Programs" />
       <End Role="ProgramCoordinator" EntitySet="ProgramCoordinators" />
@@ -4914,6 +5591,10 @@
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="ProgramOffered" EntitySet="ProgramOffereds" />
     </AssociationSet>
+    <AssociationSet Name="FK_SemesterCourseLoad_ProgramOffered" Association="Self.FK_SemesterCourseLoad_ProgramOffered">
+      <End Role="ProgramOffered" EntitySet="ProgramOffereds" />
+      <End Role="SemesterCourseLoad" EntitySet="SemesterCourseLoads" />
+    </AssociationSet>
     <AssociationSet Name="FK_Students_ProgramOffered" Association="Self.FK_Students_ProgramOffered">
       <End Role="ProgramOffered" EntitySet="ProgramOffereds" />
       <End Role="Students" EntitySet="Students" />
@@ -4921,6 +5602,34 @@
     <AssociationSet Name="FK_ProgramPreferences_Sessions" Association="Self.FK_ProgramPreferences_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="ProgramPreferences" EntitySet="ProgramPreferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_ProjectType" Association="Self.FK_Project_ProjectType">
+      <End Role="ProjectType" EntitySet="ProjectTypes" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectAwardedBy_Project" Association="Self.FK_ProjectAwardedBy_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_Project" Association="Self.FK_ProjectInvestigatedBy_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Project" Association="Self.FK_ProjectStudentsInvestigatedBy_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectInvestigatedBy_ProjectInvestigationType" Association="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType">
+      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
+      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" Association="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
+      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Students" Association="Self.FK_ProjectStudentsInvestigatedBy_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
     </AssociationSet>
     <AssociationSet Name="FK_Publishing_PublishingType" Association="Self.FK_Publishing_PublishingType">
       <End Role="PublicationType" EntitySet="PublicationTypes" />
@@ -4942,6 +5651,10 @@
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritLists" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Sessions" Association="Self.FK_StudentCourseDropped_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_Sessions" Association="Self.FK_StudentCourses_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentCourses" EntitySet="StudentCourses" />
@@ -4949,6 +5662,14 @@
     <AssociationSet Name="FK_StudentCourseSelection_Sessions" Association="Self.FK_StudentCourseSelection_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Sessions" Association="Self.FK_StudentCourseWithDrawn_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Sessions" Association="Self.FK_StudentFee_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentSessions_Sessions" Association="Self.FK_StudentSessions_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
@@ -4962,17 +5683,41 @@
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritLists" />
       <End Role="SessionWiseMeritListDet" EntitySet="SessionWiseMeritListDets" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseDropped_Students" Association="Self.FK_StudentCourseDropped_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourses_Students" Association="Self.FK_StudentCourses_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourses" EntitySet="StudentCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_StudentCourses" Association="Self.FK_StudentsSupervisor_StudentCourses">
+      <End Role="StudentCourses" EntitySet="StudentCourses" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentCourseSelection_Students" Association="Self.FK_StudentCourseSelection_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentCourseWithDrawn_Students" Association="Self.FK_StudentCourseWithDrawn_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Students" Association="Self.FK_StudentFee_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsAdvisor_Students" Association="Self.FK_StudentsAdvisor_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisors" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentSemester_Students" Association="Self.FK_StudentSemester_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentSemester" EntitySet="StudentSemesters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentsSupervisor_Students" Association="Self.FK_StudentsSupervisor_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
     </AssociationSet>
     <AssociationSet Name="FK_TestApplicants_TestCalenders" Association="Self.FK_TestApplicants_TestCalenders">
       <End Role="TestCalenders" EntitySet="TestCalenders" />
@@ -5010,761 +5755,16 @@
       <End Role="TestSessions" EntitySet="TestSessions" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseDropped_Course" Association="CMSModel.FK_StudentCourseDropped_Course">
-      <End Role="Course" EntitySet="Courses" />
-      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseWithDrawn_Course" Association="CMSModel.FK_StudentCourseWithDrawn_Course">
-      <End Role="Course" EntitySet="Courses" />
-      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseDropped_Sessions" Association="CMSModel.FK_StudentCourseDropped_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseWithDrawn_Sessions" Association="CMSModel.FK_StudentCourseWithDrawn_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseDropped_Students" Association="CMSModel.FK_StudentCourseDropped_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentCourseWithDrawn_Students" Association="CMSModel.FK_StudentCourseWithDrawn_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
-    </AssociationSet>
-    <EntitySet Name="Organizations" EntityType="CMSModel.Organization" />
-    <EntitySet Name="OrganizationLegalTypes" EntityType="CMSModel.OrganizationLegalType" />
-    <EntitySet Name="OrganizationSectorTypes" EntityType="CMSModel.OrganizationSectorType" />
-    <EntitySet Name="Projects" EntityType="CMSModel.Project" />
-    <EntitySet Name="ProjectAwardedByOrganizations" EntityType="CMSModel.ProjectAwardedByOrganization" />
-    <EntitySet Name="ProjectInvestigatedByEmpForms" EntityType="CMSModel.ProjectInvestigatedByEmpForm" />
-    <EntitySet Name="ProjectInvestigationTypes" EntityType="CMSModel.ProjectInvestigationType" />
-    <EntitySet Name="ProjectStudentsInvestigatedBies" EntityType="CMSModel.ProjectStudentsInvestigatedBy" />
-    <EntitySet Name="ProjectTypes" EntityType="CMSModel.ProjectType" />
-    <EntitySet Name="SemesterCourseLoads" EntityType="CMSModel.SemesterCourseLoad" />
-    <EntitySet Name="StudentFees" EntityType="CMSModel.StudentFee" />
-    <EntitySet Name="StudentsAdvisors" EntityType="CMSModel.StudentsAdvisor" />
-    <EntitySet Name="StudentsSupervisors" EntityType="CMSModel.StudentsSupervisor" />
-    <AssociationSet Name="FK_StudentFee_Campuses" Association="CMSModel.FK_StudentFee_Campuses">
-      <End Role="Campus" EntitySet="Campuses" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectInvestigatedBy_EmpForm" Association="CMSModel.FK_ProjectInvestigatedBy_EmpForm">
-      <End Role="EmpForm" EntitySet="EmpForms" />
-      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentsAdvisor_EmpForm" Association="CMSModel.FK_StudentsAdvisor_EmpForm">
-      <End Role="EmpForm" EntitySet="EmpForms" />
-      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisors" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentsSupervisor_EmpForm" Association="CMSModel.FK_StudentsSupervisor_EmpForm">
-      <End Role="EmpForm" EntitySet="EmpForms" />
-      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_FeeHeads" Association="CMSModel.FK_StudentFee_FeeHeads">
-      <End Role="FeeHead" EntitySet="FeeHeads" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Organization_OrganizationLegalType" Association="CMSModel.FK_Organization_OrganizationLegalType">
-      <End Role="OrganizationLegalType" EntitySet="OrganizationLegalTypes" />
-      <End Role="Organization" EntitySet="Organizations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Organization_OrganizationSectorType" Association="CMSModel.FK_Organization_OrganizationSectorType">
-      <End Role="OrganizationSectorType" EntitySet="OrganizationSectorTypes" />
-      <End Role="Organization" EntitySet="Organizations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectAwardedBy_Organization" Association="CMSModel.FK_ProjectAwardedBy_Organization">
-      <End Role="Organization" EntitySet="Organizations" />
-      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganizations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SemesterCourseLoad_ProgramOffered" Association="CMSModel.FK_SemesterCourseLoad_ProgramOffered">
-      <End Role="ProgramOffered" EntitySet="ProgramOffereds" />
-      <End Role="SemesterCourseLoad" EntitySet="SemesterCourseLoads" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Project_ProjectType" Association="CMSModel.FK_Project_ProjectType">
-      <End Role="ProjectType" EntitySet="ProjectTypes" />
-      <End Role="Project" EntitySet="Projects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectAwardedBy_Project" Association="CMSModel.FK_ProjectAwardedBy_Project">
-      <End Role="Project" EntitySet="Projects" />
-      <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganizations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectInvestigatedBy_Project" Association="CMSModel.FK_ProjectInvestigatedBy_Project">
-      <End Role="Project" EntitySet="Projects" />
-      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Project" Association="CMSModel.FK_ProjectStudentsInvestigatedBy_Project">
-      <End Role="Project" EntitySet="Projects" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectInvestigatedBy_ProjectInvestigationType" Association="CMSModel.FK_ProjectInvestigatedBy_ProjectInvestigationType">
-      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
-      <End Role="ProjectInvestigatedByEmpForm" EntitySet="ProjectInvestigatedByEmpForms" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" Association="CMSModel.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
-      <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Students" Association="CMSModel.FK_ProjectStudentsInvestigatedBy_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_Sessions" Association="CMSModel.FK_StudentFee_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentsSupervisor_StudentCourses" Association="CMSModel.FK_StudentsSupervisor_StudentCourses">
-      <End Role="StudentCours" EntitySet="StudentCourses" />
-      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_Students" Association="CMSModel.FK_StudentFee_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentsAdvisor_Students" Association="CMSModel.FK_StudentsAdvisor_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentsAdvisor" EntitySet="StudentsAdvisors" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentsSupervisor_Students" Association="CMSModel.FK_StudentsSupervisor_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
-    </AssociationSet>
     <EntitySet Name="FinanceUnpaidDataForLMControls" EntityType="CMSModel.FinanceUnpaidDataForLMControl" />
   </EntityContainer>
-  <Association Name="FK_StudentCourseDropped_Course">
-    <End Type="CMSModel.Course" Role="Course" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseDropped" Role="StudentCourseDropped" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseDropped">
-        <PropertyRef Name="CourseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentCourseWithDrawn_Course">
-    <End Type="CMSModel.Course" Role="Course" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseWithDrawn" Role="StudentCourseWithDrawn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseWithDrawn">
-        <PropertyRef Name="CourseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentCourseDropped_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseDropped" Role="StudentCourseDropped" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseDropped">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentCourseWithDrawn_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseWithDrawn" Role="StudentCourseWithDrawn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseWithDrawn">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentCourseDropped_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseDropped" Role="StudentCourseDropped" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseDropped">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentCourseWithDrawn_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentCourseWithDrawn" Role="StudentCourseWithDrawn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentCourseWithDrawn">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Organization">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="OrganizationLegalTypeID" Type="Int32" Nullable="false" />
-    <Property Name="OrganizationSectorTypeID" Type="Int32" Nullable="false" />
-    <Property Name="FoundedDate" Type="DateTime" Precision="0" />
-    <Property Name="Website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Landline" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="DistrictID" Type="Int32" />
-    <Property Name="ProvinceID" Type="Int32" />
-    <Property Name="PostalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="CountryID" Type="Int32" />
-    <Property Name="CEOName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="FocalPersonName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="FocalPersonMobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="FocalPersonEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="EmployeeCount" Type="Int32" />
-    <Property Name="Revenue" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IsPubliclyTraded" Type="Boolean" />
-    <Property Name="StockSymbol" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="OrganizationLegalType" Relationship="CMSModel.FK_Organization_OrganizationLegalType" FromRole="Organization" ToRole="OrganizationLegalType" />
-    <NavigationProperty Name="OrganizationSectorType" Relationship="CMSModel.FK_Organization_OrganizationSectorType" FromRole="Organization" ToRole="OrganizationSectorType" />
-    <NavigationProperty Name="ProjectAwardedByOrganizations" Relationship="CMSModel.FK_ProjectAwardedBy_Organization" FromRole="Organization" ToRole="ProjectAwardedByOrganization" />
-  </EntityType>
-  <EntityType Name="OrganizationLegalType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Organizations" Relationship="CMSModel.FK_Organization_OrganizationLegalType" FromRole="OrganizationLegalType" ToRole="Organization" />
-  </EntityType>
-  <EntityType Name="OrganizationSectorType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Organizations" Relationship="CMSModel.FK_Organization_OrganizationSectorType" FromRole="OrganizationSectorType" ToRole="Organization" />
-  </EntityType>
-  <EntityType Name="Project">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ProjectTypeID" Type="Int32" Nullable="false" />
-    <Property Name="FundingAmount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IsFunded" Type="Boolean" />
-    <Property Name="IsAwarded" Type="Boolean" />
-    <Property Name="IsClassified" Type="Boolean" />
-    <Property Name="StartDate" Type="DateTime" Precision="0" />
-    <Property Name="EndDate" Type="DateTime" Precision="0" />
-    <Property Name="PositionForBSStudents" Type="Int32" />
-    <Property Name="PositionForMSStudents" Type="Int32" />
-    <Property Name="PositionForPhDStudents" Type="Int32" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <Property Name="CBy" Type="Int32" />
-    <Property Name="CDate" Type="DateTime" Precision="0" />
-    <Property Name="CTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="ProjectType" Relationship="CMSModel.FK_Project_ProjectType" FromRole="Project" ToRole="ProjectType" />
-    <NavigationProperty Name="ProjectAwardedByOrganizations" Relationship="CMSModel.FK_ProjectAwardedBy_Project" FromRole="Project" ToRole="ProjectAwardedByOrganization" />
-    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="CMSModel.FK_ProjectInvestigatedBy_Project" FromRole="Project" ToRole="ProjectInvestigatedByEmpForm" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_Project" FromRole="Project" ToRole="ProjectStudentsInvestigatedBy" />
-  </EntityType>
-  <EntityType Name="ProjectAwardedByOrganization">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <Property Name="OrganizationID" Type="Int32" Nullable="false" />
-    <Property Name="FundedAmount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="AwardLetter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="AwardDate" Type="DateTime" Precision="0" />
-    <Property Name="AwardLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="AwardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AwardStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GrantReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ContractNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FundingSource" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="AwardFocalPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AwardFocalPersonMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AwardFocalPersonEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Organization" Relationship="CMSModel.FK_ProjectAwardedBy_Organization" FromRole="ProjectAwardedByOrganization" ToRole="Organization" />
-    <NavigationProperty Name="Project" Relationship="CMSModel.FK_ProjectAwardedBy_Project" FromRole="ProjectAwardedByOrganization" ToRole="Project" />
-  </EntityType>
-  <EntityType Name="ProjectInvestigatedByEmpForm">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
-    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ProjectInvestigationTypeID" Type="Int32" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="EmpForm" Relationship="CMSModel.FK_ProjectInvestigatedBy_EmpForm" FromRole="ProjectInvestigatedByEmpForm" ToRole="EmpForm" />
-    <NavigationProperty Name="Project" Relationship="CMSModel.FK_ProjectInvestigatedBy_Project" FromRole="ProjectInvestigatedByEmpForm" ToRole="Project" />
-    <NavigationProperty Name="ProjectInvestigationType" Relationship="CMSModel.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigatedByEmpForm" ToRole="ProjectInvestigationType" />
-  </EntityType>
-  <EntityType Name="ProjectInvestigationType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="CMSModel.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigationType" ToRole="ProjectInvestigatedByEmpForm" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectInvestigationType" ToRole="ProjectStudentsInvestigatedBy" />
-  </EntityType>
-  <EntityType Name="ProjectStudentsInvestigatedBy">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProjectID" Type="Int32" Nullable="false" />
-    <Property Name="StudentsID" Type="Int32" Nullable="false" />
-    <Property Name="ProjectInvestigationTypeID" Type="Int32" Nullable="false" />
-    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Project" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_Project" FromRole="ProjectStudentsInvestigatedBy" ToRole="Project" />
-    <NavigationProperty Name="ProjectInvestigationType" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectStudentsInvestigatedBy" ToRole="ProjectInvestigationType" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_ProjectStudentsInvestigatedBy_Students" FromRole="ProjectStudentsInvestigatedBy" ToRole="Student" />
-  </EntityType>
-  <EntityType Name="ProjectType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Projects" Relationship="CMSModel.FK_Project_ProjectType" FromRole="ProjectType" ToRole="Project" />
-  </EntityType>
-  <EntityType Name="SemesterCourseLoad">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CampusID" Type="Int32" />
-    <Property Name="BatchID" Type="Int32" Nullable="false" />
-    <Property Name="SemesterNo" Type="Int32" Nullable="false" />
-    <Property Name="minCrHrs" Type="Int32" />
-    <Property Name="maxCrHrs" Type="Int32" Nullable="false" />
-    <Property Name="CrBy" Type="Int32" Nullable="false" />
-    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="UBy" Type="Int32" Nullable="false" />
-    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="ProgramOffered" Relationship="CMSModel.FK_SemesterCourseLoad_ProgramOffered" FromRole="SemesterCourseLoad" ToRole="ProgramOffered" />
-  </EntityType>
-  <EntityType Name="StudentFee">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CampusID" Type="Int32" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
-    <Property Name="SessionID" Type="Int32" Nullable="false" />
-    <Property Name="FeeHeadID" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
-    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="VoucherNo" Type="Int32" />
-    <Property Name="BankVoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
-    <Property Name="PaymentTime" Type="Time" Precision="7" />
-    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
-    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
-    <Property Name="VerifiedBy" Type="Int32" />
-    <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="VerifiedTime" Type="Time" Precision="7" />
-    <Property Name="Attachment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsFake" Type="Boolean" Nullable="false" />
-    <Property Name="FakeBy" Type="Int32" />
-    <Property Name="FakeDate" Type="DateTime" Precision="0" />
-    <Property Name="FakeTime" Type="Time" Precision="7" />
-    <Property Name="IsRefund" Type="Boolean" Nullable="false" />
-    <Property Name="IsRefundBy" Type="Int32" />
-    <Property Name="IsRefundDate" Type="DateTime" Precision="0" />
-    <Property Name="IsRefundTime" Type="Time" Precision="7" />
-    <Property Name="IsRefundComments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IsRefundPercent" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="CrBy" Type="Int32" Nullable="false" />
-    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="UBy" Type="Int32" Nullable="false" />
-    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Campus" Relationship="CMSModel.FK_StudentFee_Campuses" FromRole="StudentFee" ToRole="Campus" />
-    <NavigationProperty Name="FeeHead" Relationship="CMSModel.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHead" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Session" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Student" />
-  </EntityType>
-  <EntityType Name="StudentsAdvisor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
-    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
-    <Property Name="FromDate" Type="DateTime" Precision="0" />
-    <Property Name="ToDate" Type="DateTime" Precision="0" />
-    <Property Name="LetterOfAppointment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="LetterOfAppointmentReferNo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="LetterOfAppointmentDate" Type="DateTime" Precision="0" />
-    <Property Name="AppointedBy" Type="Int32" />
-    <Property Name="AppointedDate" Type="DateTime" Precision="0" />
-    <Property Name="AppointedTime" Type="Time" Precision="7" />
-    <Property Name="Other1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="EmpForm" Relationship="CMSModel.FK_StudentsAdvisor_EmpForm" FromRole="StudentsAdvisor" ToRole="EmpForm" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentsAdvisor_Students" FromRole="StudentsAdvisor" ToRole="Student" />
-  </EntityType>
-  <EntityType Name="StudentsSupervisor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
-    <Property Name="EmpFormID" Type="Int32" Nullable="false" />
-    <Property Name="StudentCoursesID" Type="Int32" Nullable="false" />
-    <Property Name="FromDate" Type="DateTime" Precision="0" />
-    <Property Name="ToDate" Type="DateTime" Precision="0" />
-    <Property Name="LetterOfAppointment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="LetterOfAppointmentReferNo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="LetterOfAppointmentDate" Type="DateTime" Precision="0" />
-    <Property Name="AppointedBy" Type="Int32" />
-    <Property Name="AppointedDate" Type="DateTime" Precision="0" />
-    <Property Name="AppointedTime" Type="Time" Precision="7" />
-    <Property Name="Other1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="EmpForm" Relationship="CMSModel.FK_StudentsSupervisor_EmpForm" FromRole="StudentsSupervisor" ToRole="EmpForm" />
-    <NavigationProperty Name="StudentCours" Relationship="CMSModel.FK_StudentsSupervisor_StudentCourses" FromRole="StudentsSupervisor" ToRole="StudentCours" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentsSupervisor_Students" FromRole="StudentsSupervisor" ToRole="Student" />
-  </EntityType>
-  <Association Name="FK_StudentFee_Campuses">
-    <End Type="CMSModel.Campus" Role="Campus" Multiplicity="0..1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Campus">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="CampusID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectInvestigatedBy_EmpForm">
-    <End Type="CMSModel.EmpForm" Role="EmpForm" Multiplicity="1" />
-    <End Type="CMSModel.ProjectInvestigatedByEmpForm" Role="ProjectInvestigatedByEmpForm" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmpForm">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectInvestigatedByEmpForm">
-        <PropertyRef Name="EmpFormID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentsAdvisor_EmpForm">
-    <End Type="CMSModel.EmpForm" Role="EmpForm" Multiplicity="1" />
-    <End Type="CMSModel.StudentsAdvisor" Role="StudentsAdvisor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmpForm">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentsAdvisor">
-        <PropertyRef Name="EmpFormID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentsSupervisor_EmpForm">
-    <End Type="CMSModel.EmpForm" Role="EmpForm" Multiplicity="1" />
-    <End Type="CMSModel.StudentsSupervisor" Role="StudentsSupervisor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmpForm">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentsSupervisor">
-        <PropertyRef Name="EmpFormID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_FeeHeads">
-    <End Type="CMSModel.FeeHead" Role="FeeHead" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FeeHead">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="FeeHeadID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Organization_OrganizationLegalType">
-    <End Type="CMSModel.OrganizationLegalType" Role="OrganizationLegalType" Multiplicity="1" />
-    <End Type="CMSModel.Organization" Role="Organization" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrganizationLegalType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Organization">
-        <PropertyRef Name="OrganizationLegalTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Organization_OrganizationSectorType">
-    <End Type="CMSModel.OrganizationSectorType" Role="OrganizationSectorType" Multiplicity="1" />
-    <End Type="CMSModel.Organization" Role="Organization" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrganizationSectorType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Organization">
-        <PropertyRef Name="OrganizationSectorTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectAwardedBy_Organization">
-    <End Type="CMSModel.Organization" Role="Organization" Multiplicity="1" />
-    <End Type="CMSModel.ProjectAwardedByOrganization" Role="ProjectAwardedByOrganization" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Organization">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectAwardedByOrganization">
-        <PropertyRef Name="OrganizationID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SemesterCourseLoad_ProgramOffered">
-    <End Type="CMSModel.ProgramOffered" Role="ProgramOffered" Multiplicity="1" />
-    <End Type="CMSModel.SemesterCourseLoad" Role="SemesterCourseLoad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProgramOffered">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SemesterCourseLoad">
-        <PropertyRef Name="BatchID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Project_ProjectType">
-    <End Type="CMSModel.ProjectType" Role="ProjectType" Multiplicity="1" />
-    <End Type="CMSModel.Project" Role="Project" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProjectType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Project">
-        <PropertyRef Name="ProjectTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectAwardedBy_Project">
-    <End Type="CMSModel.Project" Role="Project" Multiplicity="1" />
-    <End Type="CMSModel.ProjectAwardedByOrganization" Role="ProjectAwardedByOrganization" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectAwardedByOrganization">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectInvestigatedBy_Project">
-    <End Type="CMSModel.Project" Role="Project" Multiplicity="1" />
-    <End Type="CMSModel.ProjectInvestigatedByEmpForm" Role="ProjectInvestigatedByEmpForm" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectInvestigatedByEmpForm">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectStudentsInvestigatedBy_Project">
-    <End Type="CMSModel.Project" Role="Project" Multiplicity="1" />
-    <End Type="CMSModel.ProjectStudentsInvestigatedBy" Role="ProjectStudentsInvestigatedBy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectInvestigatedBy_ProjectInvestigationType">
-    <End Type="CMSModel.ProjectInvestigationType" Role="ProjectInvestigationType" Multiplicity="0..1" />
-    <End Type="CMSModel.ProjectInvestigatedByEmpForm" Role="ProjectInvestigatedByEmpForm" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProjectInvestigationType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectInvestigatedByEmpForm">
-        <PropertyRef Name="ProjectInvestigationTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
-    <End Type="CMSModel.ProjectInvestigationType" Role="ProjectInvestigationType" Multiplicity="1" />
-    <End Type="CMSModel.ProjectStudentsInvestigatedBy" Role="ProjectStudentsInvestigatedBy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProjectInvestigationType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
-        <PropertyRef Name="ProjectInvestigationTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ProjectStudentsInvestigatedBy_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.ProjectStudentsInvestigatedBy" Role="ProjectStudentsInvestigatedBy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
-        <PropertyRef Name="StudentsID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentsSupervisor_StudentCourses">
-    <End Type="CMSModel.StudentCours" Role="StudentCours" Multiplicity="1" />
-    <End Type="CMSModel.StudentsSupervisor" Role="StudentsSupervisor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StudentCours">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentsSupervisor">
-        <PropertyRef Name="StudentCoursesID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentsAdvisor_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentsAdvisor" Role="StudentsAdvisor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentsAdvisor">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentsSupervisor_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentsSupervisor" Role="StudentsSupervisor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentsSupervisor">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="FinanceUnpaidDataForLMControl">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
     <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Amount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="IsPaid" Type="Boolean" />
   </EntityType>
 </Schema>

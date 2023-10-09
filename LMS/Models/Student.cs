@@ -17,14 +17,14 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.ProjectStudentsInvestigatedBies = new HashSet<ProjectStudentsInvestigatedBy>();
+            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
-            this.StudentSemesters = new HashSet<StudentSemester>();
-            this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
-            this.ProjectStudentsInvestigatedBies = new HashSet<ProjectStudentsInvestigatedBy>();
             this.StudentFees = new HashSet<StudentFee>();
             this.StudentsAdvisors = new HashSet<StudentsAdvisor>();
+            this.StudentSemesters = new HashSet<StudentSemester>();
             this.StudentsSupervisors = new HashSet<StudentsSupervisor>();
         }
     
@@ -48,21 +48,21 @@ namespace LMS.Models
         public virtual Admission Admission { get; set; }
         public virtual ProgramOffered ProgramOffered { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseSelection> StudentCourseSelections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFee> StudentFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsAdvisor> StudentsAdvisors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsSupervisor> StudentsSupervisors { get; set; }
     }

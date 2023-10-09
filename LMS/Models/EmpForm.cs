@@ -29,13 +29,13 @@ namespace LMS.Models
             this.EmpQualifications = new HashSet<EmpQualification>();
             this.EmpReferences = new HashSet<EmpReference>();
             this.EmpTrainings = new HashSet<EmpTraining>();
+            this.ProjectInvestigatedByEmpForms = new HashSet<ProjectInvestigatedByEmpForm>();
             this.SessionWiseMeritLists = new HashSet<SessionWiseMeritList>();
             this.SessionWiseMeritLists1 = new HashSet<SessionWiseMeritList>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
-            this.TeacherCourses = new HashSet<TeacherCours>();
-            this.ProjectInvestigatedByEmpForms = new HashSet<ProjectInvestigatedByEmpForm>();
             this.StudentsAdvisors = new HashSet<StudentsAdvisor>();
             this.StudentsSupervisors = new HashSet<StudentsSupervisor>();
+            this.TeacherCourses = new HashSet<TeacherCours>();
         }
     
         public int ID { get; set; }
@@ -99,11 +99,11 @@ namespace LMS.Models
         public string NextOfKinMobile { get; set; }
         public Nullable<System.DateTime> NextOfKinUDate { get; set; }
         public Nullable<System.TimeSpan> NextofKinTime { get; set; }
+        public string Color { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
-        public string Color { get; set; }
     
         public virtual Campus Campus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -142,18 +142,18 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpTraining> EmpTrainings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionWiseMeritList> SessionWiseMeritLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionWiseMeritList> SessionWiseMeritLists1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseSelection> StudentCourseSelections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsAdvisor> StudentsAdvisors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsSupervisor> StudentsSupervisors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
     }
 }
