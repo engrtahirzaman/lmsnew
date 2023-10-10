@@ -120,7 +120,7 @@
                             @if (AdvisorPhoto == null)
                             {
                                 <img src="~/Content/Icons/Advisor.png" alt="Advisor">
-                                <small class="red">No Advisor Assigned</small>
+                                <p>ADVISOR <small class="red">Not Assigned</small></p>
                             }
                             else if (AdvisorPhoto != null && AdvisorPhoto.Any())
                             {
@@ -131,11 +131,9 @@
                                      height="70"
                                      style="border-radius: 5%;" />
 
-                                <p>@Advisor.FirstOrDefault().EmpForm.Title.Title1  @Advisor.FirstOrDefault().EmpForm.Name</p>
-
+                                <p>ADVISOR @Advisor.FirstOrDefault().EmpForm.Title.Title1  @Advisor.FirstOrDefault().EmpForm.Name</p>
                             }
 
-                            <p>ADVISOR</p>
                         </div>
                     </a>
                 </div>
@@ -145,7 +143,8 @@
                             @if (SupervisorPhoto == null)
                             {
                                 <img src="~/Content/Icons/Supervisor.png" alt="Supervisor">
-                                <small class="red">No Supervisor Assigned</small>
+
+                                <p>SUPERVISOR <small class="red">Not Assigned</small></p>
                             }
                             else if (SupervisorPhoto != null && SupervisorPhoto.Any())
                             {
@@ -155,9 +154,8 @@
                                      width="70"
                                      height="70"
                                      style="border-radius: 5%;" />
-                                <p>@Supervisor.FirstOrDefault().EmpForm.Title.Title1 &nbsp; @Supervisor.FirstOrDefault().EmpForm.Name</p>
+                                <p>SUPERVISOR @Supervisor.FirstOrDefault().EmpForm.Title.Title1 &nbsp; @Supervisor.FirstOrDefault().EmpForm.Name</p>
                             }
-                            <p>SUPERVISOR</p>
                         </div>
                     </a>
                 </div>
@@ -166,6 +164,38 @@
                         <div class="icon-box">
                             <img src="~/Content/Icons/Project.png" alt="Project">
                             <p>PROJECT</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/degree.png" alt="Project">
+                            <p>TRANSCRIPT & DEGREE </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/library.png" alt="Project">
+                            <p>LIBRARY</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/awards.png" alt="Project">
+                            <p>AWARDSS</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/society.png" alt="Project">
+                            <p>SOCIETY</p>
                         </div>
                     </a>
                 </div>
