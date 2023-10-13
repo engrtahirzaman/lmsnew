@@ -102,7 +102,7 @@ namespace LMS.Areas.Fees.Controllers
             var TotalinWords = ConvertAmountToWords(Convert.ToDecimal(Total));
 
 
-            var DueDate = "10-Oct-2023";
+            var DueDate = "27-Oct-2023";
 
             // Create a PDF converter object
             HtmlToPdf converter = new HtmlToPdf();

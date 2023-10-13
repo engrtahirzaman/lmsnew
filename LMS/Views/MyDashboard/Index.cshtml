@@ -1,14 +1,14 @@
 ﻿@using LMS.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     int StudentID = Convert.ToInt32(Session["StudentID"]);
     CMSEntities db = new CMSEntities();
-    var Student = db.Students.Where(t => t.ID == StudentID).ToList();
-    var Advisor = Student.FirstOrDefault().StudentsAdvisors.Where(t => t.ToDate == null).ToList();
+    var Student = db.Students.Find(StudentID);
+    var Advisor = Student.StudentsAdvisors.Where(t => t.ToDate == null).ToList();
     var AdvisorPhoto = Advisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
-    var Supervisor = Student.FirstOrDefault().StudentsSupervisors.Where(t => t.ToDate == null).ToList();
+    var Supervisor = Student.StudentsSupervisors.Where(t => t.ToDate == null).ToList();
     var SupervisorPhoto = Supervisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
 }
 <style>
@@ -53,13 +53,8 @@
                 </li>
             </ul><!-- /.breadcrumb -->
 
-            <span class="pull-right blue">(@Student.FirstOrDefault().ProgramOffered.BatchTitle)&nbsp;&nbsp;</span>
-            <span class="pull-right"><span class="text-black">Program: </span><span class="brown">
-                                      @Student.FirstOrDefault().ProgramOffered.DepartmentProgram.Program.ProgramTitle&nbsp;&nbsp;
-                   </span></span>
-            <span class="pull-right">RegNo: <span class="brown">@Student.FirstOrDefault().RegNo&nbsp;&nbsp;</span></span>
-
-
+            <strong class="text-warning bigger-110 orange pull-right">@Student.RegNo (@Student.ProgramOffered.BatchTitle) - @Student.ProgramOffered.DepartmentProgram.Program.ProgramTitle</strong>
+          
         </div>
 
 

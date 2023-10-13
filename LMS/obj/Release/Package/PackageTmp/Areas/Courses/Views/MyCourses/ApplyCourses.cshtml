@@ -6,8 +6,8 @@
 }
 <style>
     .column-box {
-        border: 1px dotted #ccc; /* Adjust border style and color as needed */
-        padding: 10px; /* Add padding for spacing */
+        border: 2px dotted #ccc; /* Adjust border style and color as needed */
+        padding: 2px; /* Add padding for spacing */
     }
 </style>
 
@@ -21,7 +21,7 @@
             <i class="ace-icon fa fa-book"></i>
             <a href="@Url.Action("AllCourses","MyCourses", new { area ="Courses"})">My Courses</a>
         </li>
-        <li class="active">Apply Courses</li>
+        <li class="active">Apply for Courses</li>
     </ul><!-- /.breadcrumb -->
 </div>
 <div class="page-content">
@@ -32,7 +32,7 @@
                 <h1>
                     <a href="@Url.Action("AllCourses","MyCourses", new { area ="Courses"})" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
                     |
-                    Apply Courses
+                    Apply for Courses
                 </h1>
             </div>
 
@@ -43,8 +43,8 @@
                     <div class="widget-main no-padding">
                         <div class="widget-header">
                             <h4 class="widget-title lighter smaller">
-                                <i class="ace-icon fa fa-book blue"></i>
-                                Choose courses from the list.
+                                <i class="ace-icon fa fa-check-square-o blue"></i>
+                                Please consult the ADVISOR/HoD/SUPERVISOR before selecting courses.
                             </h4>
                         </div>
                         @using (Html.BeginForm("ApplyCourses", "MyCourses", FormMethod.Post))
@@ -57,13 +57,13 @@
                                     @{ int cno = 1; }
                                     @foreach (var c in ViewBag.NewCourses)
                                     {
-                                        <div class="col-sm-3 column-box">
+                                        <div class="col-sm-4 column-box">
 
                                             <div class="checkbox">
                                                 (@cno).
                                                 <label>
                                                     <input name="Courses" class="ace ace-checkbox-2" type="checkbox" value="@c.CourseID">
-                                                    <span class="lbl"> @c.Course.Title</span>
+                                                    <small class="lbl"> (@c.Course.Code) <br /> @c.Course.Title (crHr:@c.Course.CrHr|cnHr.@c.Course.ContHr)</small>
                                                 </label>
                                             </div>
                                         </div>
@@ -78,9 +78,9 @@
                             <div class="form-actions">
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary no-radius pull-right" title="Submit your request." type="submit">
+                                        <button class="btn btn-sm btn-primary no-radius pull-right" title="SUBMIT" type="submit">
                                             <i class="ace-icon fa fa-save"></i>
-                                            Submit your request.
+                                            SUBMIT
                                         </button>
                                     </span>
                                 </div>
