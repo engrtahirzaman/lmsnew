@@ -77,7 +77,7 @@ namespace LMS.Areas.Courses.Controllers
 
                         TempData["Sucess"] = "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">\r\n  " +
                             "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
-                            "<strong>Done! </strong>" + " You have successfully applied for the courses. Please wait for the Head of Department's (HOD) approvals.</strong>." +
+                            "<strong>Done! </strong>" + " You have successfully applied. Now, click on the 'Print' button to obtain a printout of the course registration form, sign the form, and submit it to your advisor.</strong>." +
                          "</div>";
                     }
                     else

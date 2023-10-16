@@ -15,6 +15,7 @@
     <link rel="icon" type="image/x-icon" href="~/Content/assets/images/favicon-32x32.png">
 
 
+
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -165,64 +166,114 @@
                     </div>
                 </div>*@<!-- /.sidebar-shortcuts -->
 
-            <ul class="nav nav-list">
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
-                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="My Dashboard">
-                        <i class="menu-icon fa fa-dashboard"></i>
-                        <span class="menu-text"> My Dashboard </span>
+        <ul class="nav nav-list">
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="My Dashboard">
+                    <i class="menu-icon fa fa-dashboard"></i>
+                    <span class="menu-text"> My Dashboard </span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "UpdateProfile" ? "active" : "")">
-                    <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })" title="Profile">
-                        <i class="menu-icon fa fa-user"></i>
-                        <span class="menu-text"> Profile</span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "UpdateProfile" ? "active" : "")">
+                <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })" title="Profile">
+                    <i class="menu-icon fa fa-user"></i>
+                    <span class="menu-text"> Profile</span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllCourses" ? "active" : "")@(ViewContext.RouteData.Values["Action"].ToString() == "ApplyCourses" ? "active" : "")">
-                    <a href="@Url.Action("AllCourses","MyCourses", new { Area = "Courses"})" title="Courses">
-                        <i class="menu-icon fa fa-book"></i>
-                        <span class="menu-text"> Courses </span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllCourses" ? "active" : "")@(ViewContext.RouteData.Values["Action"].ToString() == "ApplyCourses" ? "active" : "")">
+                <a href="@Url.Action("AllCourses","MyCourses", new { Area = "Courses"})" title="Courses">
+                    <i class="menu-icon fa fa-book"></i>
+                    <span class="menu-text"> Courses </span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllFee" ? "active" : "")">
-                    <a href="@Url.Action("AllFee","MyFees", new { area = "Fees"})" title="Fee Payments">
-                        <i class="menu-icon fa fa-money"></i>
-                        <span class="menu-text"> Fee Payments </span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllFee" ? "active" : "")">
+                <a href="@Url.Action("AllFee","MyFees", new { area = "Fees"})" title="Fee Payments">
+                    <i class="menu-icon fa fa-money"></i>
+                    <span class="menu-text"> Fee Payments </span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Assignments" ? "active" : "")">
-                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Assignments">
-                        <i class="menu-icon fa fa-clipboard"></i>
-                        <span class="menu-text"> Assignments </span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Assignments" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Assignments">
+                    <i class="menu-icon fa fa-clipboard"></i>
+                    <span class="menu-text"> Assignments </span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Attendance" ? "active" : "")">
-                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Attendance">
-                        <i class="menu-icon fa fa-calendar-check-o"></i>
-                        <span class="menu-text"> Attendance </span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Attendance" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Attendance">
+                    <i class="menu-icon fa fa-calendar-check-o"></i>
+                    <span class="menu-text"> Attendance </span>
 
-                    </a>
-                </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
-                    <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Notice Board">
-                        <i class="menu-icon fa fa-sticky-note-o"></i>
-                        <span class="menu-text"> Notice Board </span>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Notice Board">
+                    <i class="menu-icon fa fa-sticky-note-o"></i>
+                    <span class="menu-text"> Notice Board </span>
 
-                    </a>
-                </li>
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Advisor">
+                    <i class="menu-icon fa fa-user"></i>
+                    <span class="menu-text"> Advisor </span>
 
-                <li>
-                    <a href="@Url.Action("Logout", "Account", new { Area = "StudentAccount" })" title="Logout">
-                        <i class="menu-icon fa fa-power-off"></i>
-                        <span class="menu-text"> Logout</span>
-                    </a>
-                </li>
-            </ul><!-- /.nav-list -->
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Supervisor">
+                    <i class="menu-icon fa fa-user"></i>
+                    <span class="menu-text"> Supervisor </span>
+
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Projects">
+                    <i class="menu-icon fa fa-clipboard"></i>
+                    <span class="menu-text"> Projects </span>
+
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Transcripts & Degrees">
+                    <i class="menu-icon fa fa-certificate"></i>
+                    <span class="menu-text"> Trans. & Degrees </span>
+
+                </a>
+            </li>
+
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Library">
+                    <i class="menu-icon fa fa-book"></i>
+                    <span class="menu-text"> Library </span>
+
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Awards">
+                    <i class="menu-icon fa fa-trophy"></i>
+                    <span class="menu-text"> Awards </span>
+
+                </a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "NoticeBoard" ? "active" : "")">
+                <a href="@Url.Action("Index","MyDashboard", new { Area = ""})" title="Society">
+                    <i class="menu-icon fa fa-soccer-ball-o"></i>
+                    <span class="menu-text"> Society </span>
+
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action("Logout", "Account", new { Area = "StudentAccount" })" title="Logout">
+                    <i class="menu-icon fa fa-power-off"></i>
+                    <span class="menu-text"> Logout</span>
+                </a>
+            </li>
+        </ul><!-- /.nav-list -->
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                 <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>

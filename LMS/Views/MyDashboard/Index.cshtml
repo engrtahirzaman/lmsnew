@@ -1,14 +1,14 @@
 ﻿@using LMS.Models
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     int StudentID = Convert.ToInt32(Session["StudentID"]);
     CMSEntities db = new CMSEntities();
-    var Student = db.Students.Where(t => t.ID == StudentID).ToList();
-    var Advisor = Student.FirstOrDefault().StudentsAdvisors.Where(t => t.ToDate == null).ToList();
+    var Student = db.Students.Find(StudentID);
+    var Advisor = Student.StudentsAdvisors.Where(t => t.ToDate == null).ToList();
     var AdvisorPhoto = Advisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
-    var Supervisor = Student.FirstOrDefault().StudentsSupervisors.Where(t => t.ToDate == null).ToList();
+    var Supervisor = Student.StudentsSupervisors.Where(t => t.ToDate == null).ToList();
     var SupervisorPhoto = Supervisor?.FirstOrDefault()?.EmpForm?.Photo ?? null;
 }
 <style>
@@ -53,13 +53,8 @@
                 </li>
             </ul><!-- /.breadcrumb -->
 
-            <span class="pull-right blue">(@Student.FirstOrDefault().ProgramOffered.BatchTitle)&nbsp;&nbsp;</span>
-            <span class="pull-right"><span class="text-black">Program: </span><span class="brown">
-                                      @Student.FirstOrDefault().ProgramOffered.DepartmentProgram.Program.ProgramTitle&nbsp;&nbsp;
-                   </span></span>
-            <span class="pull-right">RegNo: <span class="brown">@Student.FirstOrDefault().RegNo&nbsp;&nbsp;</span></span>
-
-
+            <strong class="text-warning bigger-110 orange pull-right">@Student.RegNo (@Student.ProgramOffered.BatchTitle) - @Student.ProgramOffered.DepartmentProgram.Program.ProgramTitle</strong>
+          
         </div>
 
 
@@ -69,7 +64,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="@Url.Action("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" })">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/myprofile.png" alt="My Profile">
+                            <img src="~/Content/Icons/myprofile.png" alt="PROFILE">
                             <p>PROFILE</p>
                         </div>
                     </a>
@@ -77,7 +72,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="@Url.Action("AllCourses","MyCourses", new { area = "Courses"})">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/courses.png" alt="Courses">
+                            <img src="~/Content/Icons/courses.png" alt="COURSES">
                             <p>COURSES</p>
                         </div>
                     </a>
@@ -85,7 +80,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="@Url.Action("AllFee","MyFees", new { area = "Fees"})">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/payment.png" alt="Courses">
+                            <img src="~/Content/Icons/payment.png" alt="FEE PAYMENTS">
                             <p>FEE PAYMENTS</p>
                         </div>
                     </a>
@@ -93,7 +88,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/assignment.png" alt="Assignment">
+                            <img src="~/Content/Icons/assignment.png" alt="ASSIGNMENTS">
                             <p>ASSIGNMENTS</p>
                         </div>
                     </a>
@@ -101,7 +96,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/attendance1.png" alt="Attendance">
+                            <img src="~/Content/Icons/attendance1.png" alt="ATTENDANCE">
                             <p>ATTENDANCE</p>
                         </div>
                     </a>
@@ -109,7 +104,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/notice-board.png" alt="NoticeBoard">
+                            <img src="~/Content/Icons/notice-board.png" alt="NOTICE BOARD">
                             <p>NOTICE BOARD</p>
                         </div>
                     </a>
@@ -119,8 +114,8 @@
                         <div class="icon-box">
                             @if (AdvisorPhoto == null)
                             {
-                                <img src="~/Content/Icons/Advisor.png" alt="Advisor">
-                                <small class="red">No Advisor Assigned</small>
+                                <img src="~/Content/Icons/Advisor.png" alt="ADVISOR">
+                                <p>ADVISOR <small class="red">Not Assigned</small></p>
                             }
                             else if (AdvisorPhoto != null && AdvisorPhoto.Any())
                             {
@@ -131,11 +126,9 @@
                                      height="70"
                                      style="border-radius: 5%;" />
 
-                                <p>@Advisor.FirstOrDefault().EmpForm.Title.Title1  @Advisor.FirstOrDefault().EmpForm.Name</p>
-
+                                <p>ADVISOR @Advisor.FirstOrDefault().EmpForm.Title.Title1  @Advisor.FirstOrDefault().EmpForm.Name</p>
                             }
 
-                            <p>ADVISOR</p>
                         </div>
                     </a>
                 </div>
@@ -144,8 +137,9 @@
                         <div class="icon-box">
                             @if (SupervisorPhoto == null)
                             {
-                                <img src="~/Content/Icons/Supervisor.png" alt="Supervisor">
-                                <small class="red">No Supervisor Assigned</small>
+                                <img src="~/Content/Icons/Supervisor.png" alt="SUPERVISOR">
+
+                                <p>SUPERVISOR <small class="red">Not Assigned</small></p>
                             }
                             else if (SupervisorPhoto != null && SupervisorPhoto.Any())
                             {
@@ -155,17 +149,48 @@
                                      width="70"
                                      height="70"
                                      style="border-radius: 5%;" />
-                                <p>@Supervisor.FirstOrDefault().EmpForm.Title.Title1 &nbsp; @Supervisor.FirstOrDefault().EmpForm.Name</p>
+                                <p>SUPERVISOR @Supervisor.FirstOrDefault().EmpForm.Title.Title1 &nbsp; @Supervisor.FirstOrDefault().EmpForm.Name</p>
                             }
-                            <p>SUPERVISOR</p>
                         </div>
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <a href="#">
                         <div class="icon-box">
-                            <img src="~/Content/Icons/Project.png" alt="Project">
+                            <img src="~/Content/Icons/Project.png" alt="PROJECT">
                             <p>PROJECT</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/degree.png" alt="TRANSCRIPTS & DEGREE">
+                            <p>TRANSCRIPTS & DEGREE </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/library.png" alt="LIBRARY">
+                            <p>LIBRARY</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/awards.png" alt="AWARDS">
+                            <p>AWARDS</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <a href="#">
+                        <div class="icon-box">
+                            <img src="~/Content/Icons/society.png" alt="SOCIETY">
+                            <p>SOCIETY</p>
                         </div>
                     </a>
                 </div>

@@ -54,8 +54,8 @@ namespace LMS.Areas.StudentAccount.Controllers
                             }
 
                             //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
-                            return RedirectToAction("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" });
-                           //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
+                            //return RedirectToAction("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" });
+                           return RedirectToAction("Index", "MyDashboard", new { Area = "" });
                         }
                     }
                     else {
