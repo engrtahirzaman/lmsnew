@@ -86,12 +86,12 @@ namespace LMS.Areas.StudentAccount.Controllers
         }
 
         [HttpPost]
-        public JsonResult RetrievePassword(string email)
+        public JsonResult RetrievePassword(string regno)
         {
             var Message = "";
-            if (db.Students.Any(t => t.Admission.EmailAddress == email) == true)
+            if (db.Students.Any(t => t.RegNo == regno) == true)
             {
-                var model = db.Students.Where(t => t.Admission.EmailAddress == email).FirstOrDefault();
+                var model = db.Students.Where(t => t.RegNo == regno).FirstOrDefault();
 
                 //Sending email
                 string ToEmail = model.Admission.EmailAddress;
@@ -113,14 +113,14 @@ namespace LMS.Areas.StudentAccount.Controllers
                 }
                 else
                 {
-                    Message = "<span class='text-danger'>Sorry, Something went wrong on email outgoing. Please contact PAF-IAST Admission Section using admissions@paf-iast.edu.pk</span>";
+                    Message = "<span class='text-danger'>Sorry, Something went wrong on email outgoing. Please contact PAF-IAST Software Cell via lms@paf-iast.edu.pk</span>";
                     return Json(new { Status = "true", Message = Message });
                 }
 
             }
             else
             {
-                Message = "<span class='text-danger'>We do not have an account associated with the provided email address " + email + ". Please enter a registered email address. Thank you.</span>";
+                Message = "<span class='text-danger'>We do not have the provided Reg No. " + regno + ". Please try again with a valid registration no. Thank you.</span>";
                 return Json(new { Status = "false", Message = Message });
             }
 

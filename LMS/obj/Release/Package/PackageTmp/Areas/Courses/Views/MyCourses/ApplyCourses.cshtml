@@ -44,7 +44,7 @@
                         <div class="widget-header">
                             <h4 class="widget-title lighter smaller">
                                 <i class="ace-icon fa fa-check-square-o blue"></i>
-                                Please consult the ADVISOR/HoD/SUPERVISOR before selecting courses.
+                                <strong> Please consult your ADVISOR, HoD, or SUPERVISOR before selecting courses. Enrolling in more than 18 credit hours may result in additional fees.</strong>
                             </h4>
                         </div>
                         @using (Html.BeginForm("ApplyCourses", "MyCourses", FormMethod.Post))
@@ -63,7 +63,7 @@
                                                 (@cno).
                                                 <label>
                                                     <input name="Courses" class="ace ace-checkbox-2" type="checkbox" value="@c.CourseID">
-                                                    <small class="lbl"> (@c.Course.Code) <br /> @c.Course.Title (crHr:@c.Course.CrHr|cnHr.@c.Course.ContHr)</small>
+                                                    <span class="lbl"> (@c.Course.Code | crHr:@c.Course.CrHr|cnHr.@c.Course.ContHr)<br /> @c.Course.Title </span>
                                                 </label>
                                             </div>
                                         </div>

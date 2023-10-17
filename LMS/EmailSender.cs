@@ -20,17 +20,17 @@ namespace LMS
             {
                 // Sending email
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("lms@paf-iast.edu.pk");
-                mail.ReplyToList.Add(new MailAddress("admission@paf-iast.edu.pk"));
+                mail.From = new MailAddress("donotreply@paf-iast.edu.pk");
+                //mail.ReplyToList.Add(new MailAddress("admission@paf-iast.edu.pk"));
                 mail.To.Add(ToEmail);
-                mail.Bcc.Add("lms@paf-iast.edu.pk");
+                //mail.Bcc.Add("lms@paf-iast.edu.pk");
                 mail.Subject = Subject;
                 mail.Body = BodyMessage;
                 mail.IsBodyHtml = true;
 
                 SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("lms@paf-iast.edu.pk", "PAF@2023");
+                smtp.Credentials = new System.Net.NetworkCredential("donotreply@paf-iast.edu.pk", "PAF@2024");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 

@@ -59,6 +59,7 @@
                                             </th>
                                             <th width="20%">Course Title</th>
                                             <th width="5%">Cr Hrs.</th>
+                                            <th width="5%">Section</th>
                                             <th width="5%">Status</th>
                                             <td width="10%">Actions</td>
                                         </tr>
@@ -76,6 +77,7 @@
                                                     @Html.DisplayFor(modelItem => item.Course.Title)
                                                 </td>
                                                 <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Section)</td>
                                                 <td>
                                                     @if (item.IsWithdraw == false && item.IsDropped == false)
                                                     {

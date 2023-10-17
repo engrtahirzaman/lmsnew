@@ -175,16 +175,16 @@
                                 <strong id="msg"></strong>
                                 <div class="space-6"></div>
                                 <p>
-                                    Enter your registered email to receive the password.
+                                    Enter your Registration No. to receive the password.
                                 </p>
 
                                 <fieldset>
                                     <label class="block clearfix">
                                         <div class="form-floating">
 
-                                            <input id="email" class="form-control" style="height:50px;" placeholder="Email" onclick="borderColor(this);" />
+                                            <input id="regno" class="form-control" style="height:50px;" placeholder="Registration No." onclick="borderColor(this);" />
 
-                                            <label for="email" class="blue"> <i class="ace-icon fa fa-envelope"></i> Email Address.</label>
+                                            <label for="regno" class="blue"> <i class="ace-icon fa fa-user"></i> REGISTRATION NO.</label>
 
                                         </div>
                                     </label>
@@ -263,9 +263,9 @@
 
 
         $("#SendBtn").on("click", function (e) {
-            var email = $("#email").val();
-            if (email == "") {
-                $("#email").css("border-color", "red").focus();
+            var regno = $("#regno").val();
+            if (regno == "") {
+                $("#regno").css("border-color", "red").focus();
             }
             else {
                 //btn loading...
@@ -275,7 +275,7 @@
                 $.ajax({
                     type: "POST",
                     url: '/StudentAccount/Account/RetrievePassword',
-                    data: { email: email },
+                    data: { regno: regno },
                     success: function (data) {
                         $("#msg").html(data.Message);
                         $("#email").val('');
