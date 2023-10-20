@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<LMS.Models.StudentCourseSelection>
+
 @{
     ViewBag.Title = "Apply Courses";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -147,6 +148,7 @@
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Course.Title)
                                                     </td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
                                                     <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
                                                     <td>
                                                         @if (item.IsApproved == true)
