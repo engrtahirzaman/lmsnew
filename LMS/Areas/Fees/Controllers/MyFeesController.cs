@@ -103,6 +103,7 @@ namespace LMS.Areas.Fees.Controllers
 
 
             var DueDate = "27-Oct-2023";
+            var IssueDate = "20-Oct-2023";
 
             // Create a PDF converter object
             HtmlToPdf converter = new HtmlToPdf();
@@ -364,7 +365,7 @@ font-size: 10px;
           </div>
  <hr>
 <div class = ""due_date"">
-            <span class=""voucherno"">Issue:" + DateTime.Now.ToString("dd-MMM-yyyy") + @"</span>
+            <span class=""voucherno"">Issue:" + IssueDate + @"</span>
             <span class=""voucherno"">Due : " + DueDate + @"</span>
 
           </div>
@@ -373,20 +374,20 @@ font-size: 10px;
             <table class = ""table1"">
             
               <tr>
-                <td>Name:</td>
-                <td>" + receiverName + " (Batch: " + student.ProgramOffered.DepartmentProgram.Program.ProgramLevel.ShortAlpha + "-" + BatchTitle + @")</td>
+                <td>Reg No:</td>
+                <td>" + student.RegNo + @"</td>
               </tr>
               <tr>
-                <td>F/Name:</td>
-                <td>" + student.Admission.FatherName + @"</td>
+                <td>Name:</td>
+                <td>" + receiverName + @"</td>
               </tr>
               <tr>
                 <td>  Mobile No:</td>
                 <td>" + student.Admission.MobileNo + @"</td>
               </tr>
               <tr>
-                <th>Program Offered</th>
-                <th>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</th>
+                <td>  Program:</td>
+                <td>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</td>
               </tr>
               
             </table>
@@ -401,13 +402,31 @@ font-size: 10px;
                     <th>Amount (PKR)</th>
                   </tr>";
 
+            decimal tuitionAmount = 0;
             foreach (var item in studentFee)
             {
                 string formattedFee = string.Format("{0:#,0}/-", item.Amount * multiply);
-                template += " <tr>" +
+                if (item.FeeHead.FeeType == "Tuition Charges")
+                {
+                    // Add the tuition fee to the accumulated amount
+                    tuitionAmount += item.Amount;
+                }
+                else
+                {
+                    // Display other fee items
+                    template += " <tr>" +
                         "<td>" + item.FeeHead.HeadName + "</td>" +
                         "<td>" + formattedFee + "</th>" +
                         "</tr>";
+                }
+            }
+            // After iterating, check if there was any tuition fee to display
+            if (tuitionAmount > 0)
+            {
+                template += " <tr>" +
+                    "<td>Tuition Fee</td>" +
+                    "<td>" + string.Format("{0:#,0}/-", tuitionAmount * multiply) + "</th>" +
+                    "</tr>";
             }
 
             template += @"
@@ -512,29 +531,28 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
           </div>
 <hr>
 <div class = ""due_date"">
-            <span class=""voucherno"">Issue:" + DateTime.Now.ToString("dd-MMM-yyyy") + @"</span>
+            <span class=""voucherno"">Issue:" + IssueDate + @"</span>
             <span class=""voucherno"">Due : " + DueDate + @"</span>
 
           </div>
           <hr>
           <div class = ""personal_details"">
             <table class = ""table1"">
-             
               <tr>
-                <td>Name:</td>
-                <td>" + receiverName + " (Batch: " + student.ProgramOffered.DepartmentProgram.Program.ProgramLevel.ShortAlpha + "-" + BatchTitle + @")</td>
+                <td>Reg No:</td>
+                <td>" + student.RegNo + @"</td>
               </tr>
               <tr>
-                <td>F/Name:</td>
-                <td>" + student.Admission.FatherName + @"</td>
+                <td>Name:</td>
+                <td>" + receiverName + @"</td>
               </tr>
               <tr>
                 <td>  Mobile No:</td>
                 <td>" + student.Admission.MobileNo + @"</td>
               </tr>
-              <tr>
-                <th>Program Offered</th>
-                <th>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</th>
+<tr>
+                <td>  Program:</td>
+                <td>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</td>
               </tr>
               
             </table>
@@ -548,13 +566,31 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
                     <th>Amount (PKR)</th>
                   </tr>";
 
+            decimal tuitionAmount2 = 0;
             foreach (var item in studentFee)
             {
                 string formattedFee = string.Format("{0:#,0}/-", item.Amount * multiply);
-                template += " <tr>" +
+                if (item.FeeHead.FeeType == "Tuition Charges")
+                {
+                    // Add the tuition fee to the accumulated amount
+                    tuitionAmount2 += item.Amount;
+                }
+                else
+                {
+                    // Display other fee items
+                    template += " <tr>" +
                         "<td>" + item.FeeHead.HeadName + "</td>" +
                         "<td>" + formattedFee + "</th>" +
                         "</tr>";
+                }
+            }
+            // After iterating, check if there was any tuition fee to display
+            if (tuitionAmount2 > 0)
+            {
+                template += " <tr>" +
+                    "<td>Tuition Fee</td>" +
+                    "<td>" + string.Format("{0:#,0}/-", tuitionAmount2 * multiply) + "</th>" +
+                    "</tr>";
             }
 
             template += @"
@@ -660,7 +696,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
           </div>
  <hr>
          <div class = ""due_date"">
-            <span class=""voucherno"">Issue:" + DateTime.Now.ToString("dd-MMM-yyyy") + @"</span>
+            <span class=""voucherno"">Issue:" + IssueDate + @"</span>
             <span class=""voucherno"">Due : " + DueDate + @"</span>
 
           </div>
@@ -669,22 +705,21 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
           <div class = ""personal_details"">
             <table class = ""table1"">
              
-             
               <tr>
-                <td>Name:</td>
-                <td>" + receiverName + " (Batch: " + student.ProgramOffered.DepartmentProgram.Program.ProgramLevel.ShortAlpha + "-" + BatchTitle + @")</td>
+                <td>Reg No:</td>
+                <td>" + student.RegNo + @"</td>
               </tr>
               <tr>
-                <td>F/Name:</td>
-                <td>" + student.Admission.FatherName + @"</td>
+                <td>Name:</td>
+                <td>" + receiverName + @"</td>
               </tr>
               <tr>
                 <td>  Mobile No:</td>
                 <td>" + student.Admission.MobileNo + @"</td>
               </tr>
               <tr>
-                <th>Program Offered</th>
-                <th>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</th>
+                <td>  Program:</td>
+                <td>" + student.ProgramOffered.DepartmentProgram.Program.ProgramTitle + @"</td>
               </tr>
               
             </table>
@@ -698,13 +733,31 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
                     <th>Amount (PKR)</th>
                   </tr>";
 
+            decimal tuitionAmount3 = 0;
             foreach (var item in studentFee)
             {
                 string formattedFee = string.Format("{0:#,0}/-", item.Amount * multiply);
-                template += " <tr>" +
+                if (item.FeeHead.FeeType == "Tuition Charges")
+                {
+                    // Add the tuition fee to the accumulated amount
+                    tuitionAmount3 += item.Amount;
+                }
+                else
+                {
+                    // Display other fee items
+                    template += " <tr>" +
                         "<td>" + item.FeeHead.HeadName + "</td>" +
                         "<td>" + formattedFee + "</th>" +
                         "</tr>";
+                }
+            }
+            // After iterating, check if there was any tuition fee to display
+            if (tuitionAmount3 > 0)
+            {
+                template += " <tr>" +
+                    "<td>Tuition Fee</td>" +
+                    "<td>" + string.Format("{0:#,0}/-", tuitionAmount3 * multiply) + "</th>" +
+                    "</tr>";
             }
 
             template += @"

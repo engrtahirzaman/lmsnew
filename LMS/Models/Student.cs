@@ -17,7 +17,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.ProjectStudentsInvestigatedBies = new HashSet<ProjectStudentsInvestigatedBy>();
+            this.ProjectInvestigatedByStudents = new HashSet<ProjectInvestigatedByStudent>();
+            this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
@@ -25,6 +26,7 @@ namespace LMS.Models
             this.StudentFees = new HashSet<StudentFee>();
             this.StudentsAdvisors = new HashSet<StudentsAdvisor>();
             this.StudentSemesters = new HashSet<StudentSemester>();
+            this.StudentsIDcards = new HashSet<StudentsIDcard>();
             this.StudentsSupervisors = new HashSet<StudentsSupervisor>();
         }
     
@@ -32,6 +34,7 @@ namespace LMS.Models
         public int AdmissionID { get; set; }
         public int BatchID { get; set; }
         public string RegNo { get; set; }
+        public Nullable<int> RegNumber { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
         public bool IsFreezed { get; set; }
@@ -48,7 +51,9 @@ namespace LMS.Models
         public virtual Admission Admission { get; set; }
         public virtual ProgramOffered ProgramOffered { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
+        public virtual ICollection<ProjectInvestigatedByStudent> ProjectInvestigatedByStudents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -63,6 +68,8 @@ namespace LMS.Models
         public virtual ICollection<StudentsAdvisor> StudentsAdvisors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentsIDcard> StudentsIDcards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsSupervisor> StudentsSupervisors { get; set; }
     }

@@ -135,6 +135,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SessionAuthentication.cs" />
+    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\StudentAttendanceController.cs" />
     <Compile Include="Areas\Courses\Controllers\MyCoursesController.cs" />
     <Compile Include="Areas\Courses\CoursesAreaRegistration.cs" />
     <Compile Include="Areas\Fees\Controllers\MyFeesController.cs" />
@@ -397,10 +399,10 @@
     <Compile Include="Models\ProjectInvestigatedByEmpForm.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectInvestigationType.cs">
+    <Compile Include="Models\ProjectInvestigatedByStudent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectStudentsInvestigatedBy.cs">
+    <Compile Include="Models\ProjectInvestigationType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjectType.cs">
@@ -448,6 +450,9 @@
     <Compile Include="Models\Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentAttendance.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentCours.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -463,16 +468,25 @@
     <Compile Include="Models\StudentFee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentProgramChangeHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentsAdvisor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentSemester.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentsIDcard.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentsSupervisor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubMenu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeacherAttendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TeacherCours.cs">
@@ -725,6 +739,10 @@
     <Content Include="Areas\Fees\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Fees\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Fees\Views\MyFees\AllFee.cshtml" />
+    <Content Include="Areas\Attendance\Views\web.config" />
+    <Content Include="Areas\Attendance\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Attendance\Views\StudentAttendance\AllAttendance.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -761,6 +779,7 @@
     <Folder Include="ApplicantCNICFormB\" />
     <Folder Include="ApplicantFatherCNIC\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Attendance\Data\" />
     <Folder Include="Areas\Courses\Data\" />
     <Folder Include="Areas\Courses\Views\Shared\" />
     <Folder Include="Areas\Fees\Data\" />

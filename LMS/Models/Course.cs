@@ -26,10 +26,12 @@ namespace LMS.Models
             this.CoursePreRequisites1 = new HashSet<CoursePreRequisite>();
             this.CourseProgramLevels = new HashSet<CourseProgramLevel>();
             this.CoursePublications = new HashSet<CoursePublication>();
+            this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
+            this.TeacherCourses = new HashSet<TeacherCours>();
         }
     
         public int ID { get; set; }
@@ -68,6 +70,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursePublication> CoursePublications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCours> StudentCourses { get; set; }
@@ -75,5 +79,7 @@ namespace LMS.Models
         public virtual ICollection<StudentCourseSelection> StudentCourseSelections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
     }
 }

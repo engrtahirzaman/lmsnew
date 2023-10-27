@@ -14,6 +14,12 @@ namespace LMS.Models
     
     public partial class TeacherCours
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TeacherCours()
+        {
+            this.TeacherAttendances = new HashSet<TeacherAttendance>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> CampusID { get; set; }
         public Nullable<int> EmpFormID { get; set; }
@@ -21,13 +27,21 @@ namespace LMS.Models
         public int CourseID { get; set; }
         public string Section { get; set; }
         public bool Finalized { get; set; }
+        public bool IsWithdraw { get; set; }
+        public Nullable<int> WithdrawBy { get; set; }
+        public Nullable<System.DateTime> IsWithdrawDate { get; set; }
+        public Nullable<System.TimeSpan> IsWithdrawTime { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
+        public Nullable<System.TimeSpan> CrTime { get; set; }
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
     
         public virtual Campus Campus { get; set; }
+        public virtual Course Course { get; set; }
         public virtual EmpForm EmpForm { get; set; }
         public virtual Session Session { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherAttendance> TeacherAttendances { get; set; }
     }
 }

@@ -19,11 +19,13 @@ namespace LMS.Models
         {
             this.Admissions = new HashSet<Admission>();
             this.Applicants = new HashSet<Applicant>();
+            this.BatchWiseCourses = new HashSet<BatchWiseCours>();
             this.MeritListMarksCriterias = new HashSet<MeritListMarksCriteria>();
             this.ProgramEligibilities = new HashSet<ProgramEligibility>();
             this.ProgramOffereds = new HashSet<ProgramOffered>();
             this.ProgramPreferences = new HashSet<ProgramPreference>();
             this.SessionWiseMeritLists = new HashSet<SessionWiseMeritList>();
+            this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
@@ -47,6 +49,8 @@ namespace LMS.Models
         public virtual ICollection<Admission> Admissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applicant> Applicants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BatchWiseCours> BatchWiseCourses { get; set; }
         public virtual Campus Campus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MeritListMarksCriteria> MeritListMarksCriterias { get; set; }
@@ -58,6 +62,8 @@ namespace LMS.Models
         public virtual ICollection<ProgramPreference> ProgramPreferences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionWiseMeritList> SessionWiseMeritLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

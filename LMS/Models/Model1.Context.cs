@@ -77,6 +77,7 @@ namespace LMS.Models
         public virtual DbSet<FacultyHead> FacultyHeads { get; set; }
         public virtual DbSet<FeeCriteria> FeeCriterias { get; set; }
         public virtual DbSet<FeeHead> FeeHeads { get; set; }
+        public virtual DbSet<FinanceUnpaidDataForLMControl> FinanceUnpaidDataForLMControls { get; set; }
         public virtual DbSet<Grading> Gradings { get; set; }
         public virtual DbSet<GradingPolicy> GradingPolicies { get; set; }
         public virtual DbSet<JobNature> JobNatures { get; set; }
@@ -101,8 +102,8 @@ namespace LMS.Models
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectAwardedByOrganization> ProjectAwardedByOrganizations { get; set; }
         public virtual DbSet<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
+        public virtual DbSet<ProjectInvestigatedByStudent> ProjectInvestigatedByStudents { get; set; }
         public virtual DbSet<ProjectInvestigationType> ProjectInvestigationTypes { get; set; }
-        public virtual DbSet<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
         public virtual DbSet<ProjectType> ProjectTypes { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
@@ -117,16 +118,20 @@ namespace LMS.Models
         public virtual DbSet<SessionWiseMeritList> SessionWiseMeritLists { get; set; }
         public virtual DbSet<SessionWiseMeritListDet> SessionWiseMeritListDets { get; set; }
         public virtual DbSet<SMSConfig> SMSConfigs { get; set; }
+        public virtual DbSet<StudentAttendance> StudentAttendances { get; set; }
         public virtual DbSet<StudentCourseDropped> StudentCourseDroppeds { get; set; }
         public virtual DbSet<StudentCours> StudentCourses { get; set; }
         public virtual DbSet<StudentCourseSelection> StudentCourseSelections { get; set; }
         public virtual DbSet<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
         public virtual DbSet<StudentFee> StudentFees { get; set; }
+        public virtual DbSet<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentsAdvisor> StudentsAdvisors { get; set; }
         public virtual DbSet<StudentSemester> StudentSemesters { get; set; }
+        public virtual DbSet<StudentsIDcard> StudentsIDcards { get; set; }
         public virtual DbSet<StudentsSupervisor> StudentsSupervisors { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
+        public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
         public virtual DbSet<TeacherCours> TeacherCourses { get; set; }
         public virtual DbSet<TestApplicant> TestApplicants { get; set; }
         public virtual DbSet<TestCalender> TestCalenders { get; set; }
@@ -141,6 +146,5 @@ namespace LMS.Models
         public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
         public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
         public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
-        public virtual DbSet<FinanceUnpaidDataForLMControl> FinanceUnpaidDataForLMControls { get; set; }
     }
 }

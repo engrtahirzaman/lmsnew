@@ -399,12 +399,14 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CampusID" Type="Int32" />
     <Property Name="BatchID" Type="Int32" Nullable="false" />
+    <Property Name="SessionID" Type="Int32" />
     <Property Name="SemesterNo" Type="Int32" Nullable="false" />
     <Property Name="CourseID" Type="Int32" Nullable="false" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_BatchWiseCourses_Sessions" FromRole="BatchWiseCourses" ToRole="Sessions" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_SemesterwiseCourses_Campuses" FromRole="BatchWiseCourses" ToRole="Campuses" />
     <NavigationProperty Name="Course" Relationship="Self.FK_SemesterwiseCourses_Course" FromRole="BatchWiseCourses" ToRole="Course" />
     <NavigationProperty Name="ProgramOffered" Relationship="Self.FK_SemesterwiseCourses_ProgramOffered" FromRole="BatchWiseCourses" ToRole="ProgramOffered" />
@@ -525,10 +527,12 @@
     <NavigationProperty Name="CoursePreRequisites1" Relationship="Self.FK_CoursePreRequisite_CoursePreRequisiteID" FromRole="Course" ToRole="CoursePreRequisite" />
     <NavigationProperty Name="CourseProgramLevels" Relationship="Self.FK_CourseProgramLevel_Course" FromRole="Course" ToRole="CourseProgramLevel" />
     <NavigationProperty Name="CoursePublications" Relationship="Self.FK_CoursePublication_Course" FromRole="Course" ToRole="CoursePublication" />
+    <NavigationProperty Name="StudentAttendances" Relationship="Self.FK_StudentAttendance_Course" FromRole="Course" ToRole="StudentAttendance" />
     <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Course" FromRole="Course" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Course" FromRole="Course" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Course" FromRole="Course" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Course" FromRole="Course" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Course" FromRole="Course" ToRole="TeacherCourses" />
   </EntityType>
   <EntityType Name="CourseCategoryInstitutional">
     <Key>
@@ -1210,6 +1214,16 @@
     <NavigationProperty Name="ScholarshipHeadsApplyOnFeeHeads" Relationship="Self.FK_ScholarhipHeadsApplyOnFeeHead_FeeHead" FromRole="FeeHeads" ToRole="ScholarshipHeadsApplyOnFeeHead" />
     <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="FeeHeads" ToRole="StudentFee" />
   </EntityType>
+  <EntityType Name="FinanceUnpaidDataForLMControl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsPaid" Type="Boolean" />
+  </EntityType>
   <EntityType Name="Grading">
     <Key>
       <PropertyRef Name="ID" />
@@ -1603,7 +1617,7 @@
     <NavigationProperty Name="ProjectType" Relationship="Self.FK_Project_ProjectType" FromRole="Project" ToRole="ProjectType" />
     <NavigationProperty Name="ProjectAwardedByOrganizations" Relationship="Self.FK_ProjectAwardedBy_Project" FromRole="Project" ToRole="ProjectAwardedByOrganization" />
     <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_Project" FromRole="Project" ToRole="ProjectInvestigatedByEmpForm" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="Project" ToRole="ProjectStudentsInvestigatedBy" />
+    <NavigationProperty Name="ProjectInvestigatedByStudents" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="Project" ToRole="ProjectInvestigatedByStudents" />
   </EntityType>
   <EntityType Name="ProjectAwardedByOrganization">
     <Key>
@@ -1653,22 +1667,7 @@
     <NavigationProperty Name="Project" Relationship="Self.FK_ProjectInvestigatedBy_Project" FromRole="ProjectInvestigatedByEmpForm" ToRole="Project" />
     <NavigationProperty Name="ProjectInvestigationType" Relationship="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigatedByEmpForm" ToRole="ProjectInvestigationType" />
   </EntityType>
-  <EntityType Name="ProjectInvestigationType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigationType" ToRole="ProjectInvestigatedByEmpForm" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectInvestigationType" ToRole="ProjectStudentsInvestigatedBy" />
-  </EntityType>
-  <EntityType Name="ProjectStudentsInvestigatedBy">
+  <EntityType Name="ProjectInvestigatedByStudent">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1683,9 +1682,24 @@
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <Property Name="Utime" Type="Time" Precision="7" />
-    <NavigationProperty Name="Project" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="ProjectStudentsInvestigatedBy" ToRole="Project" />
-    <NavigationProperty Name="ProjectInvestigationType" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectStudentsInvestigatedBy" ToRole="ProjectInvestigationType" />
-    <NavigationProperty Name="Student" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="ProjectStudentsInvestigatedBy" ToRole="Students" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Project" FromRole="ProjectInvestigatedByStudents" ToRole="Project" />
+    <NavigationProperty Name="ProjectInvestigationType" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectInvestigatedByStudents" ToRole="ProjectInvestigationType" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="ProjectInvestigatedByStudents" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="ProjectInvestigationType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="Utime" Type="Time" Precision="7" />
+    <NavigationProperty Name="ProjectInvestigatedByEmpForms" Relationship="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType" FromRole="ProjectInvestigationType" ToRole="ProjectInvestigatedByEmpForm" />
+    <NavigationProperty Name="ProjectInvestigatedByStudents" Relationship="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" FromRole="ProjectInvestigationType" ToRole="ProjectInvestigatedByStudents" />
   </EntityType>
   <EntityType Name="ProjectType">
     <Key>
@@ -1722,15 +1736,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="Edition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DateOfPublication" Type="DateTime" Precision="0" />
     <Property Name="Author" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-    <Property Name="Publisher" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="PublicationWebLink" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="PublisherWebLink" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-    <Property Name="DOI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ISSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Publisher" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="PublicationWebLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PublisherWebLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DOI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ISSN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Venue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Pages" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PublicationTypeID" Type="Int32" />
@@ -1858,12 +1872,14 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Admissions" Relationship="Self.FK_Admission_Sessions" FromRole="Sessions" ToRole="Admission" />
     <NavigationProperty Name="Applicants" Relationship="Self.FK_Applicants_Sessions" FromRole="Sessions" ToRole="Applicants" />
+    <NavigationProperty Name="BatchWiseCourses" Relationship="Self.FK_BatchWiseCourses_Sessions" FromRole="Sessions" ToRole="BatchWiseCourses" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_Sessions_Campuses" FromRole="Sessions" ToRole="Campuses" />
     <NavigationProperty Name="MeritListMarksCriterias" Relationship="Self.FK_MeritListMarksCriteria_Sessions" FromRole="Sessions" ToRole="MeritListMarksCriteria" />
     <NavigationProperty Name="ProgramEligibilities" Relationship="Self.FK_ProgramEligibility_Sessions" FromRole="Sessions" ToRole="ProgramEligibility" />
     <NavigationProperty Name="ProgramOffereds" Relationship="Self.FK_ProgramOffered_Sessions" FromRole="Sessions" ToRole="ProgramOffered" />
     <NavigationProperty Name="ProgramPreferences" Relationship="Self.FK_ProgramPreferences_Sessions" FromRole="Sessions" ToRole="ProgramPreferences" />
     <NavigationProperty Name="SessionWiseMeritLists" Relationship="Self.FK_SessionWiseMertiList_Sessions" FromRole="Sessions" ToRole="SessionWiseMeritList" />
+    <NavigationProperty Name="StudentAttendances" Relationship="Self.FK_StudentAttendance_Sessions" FromRole="Sessions" ToRole="StudentAttendance" />
     <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Sessions" FromRole="Sessions" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Sessions" FromRole="Sessions" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Sessions" FromRole="Sessions" ToRole="StudentCourseSelection" />
@@ -1880,6 +1896,8 @@
     <Property Name="SessionID" Type="Int32" Nullable="false" />
     <Property Name="DepartmentProgramID" Type="Int32" Nullable="false" />
     <Property Name="MeritListNo" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
     <Property Name="IsRecommended" Type="Boolean" Nullable="false" />
     <Property Name="RecommendedBy" Type="Int32" />
     <Property Name="RecommendedDate" Type="DateTime" Precision="0" />
@@ -1928,6 +1946,31 @@
     <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="APIKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentAttendance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" Nullable="false" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Section" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="IsPresent" Type="Boolean" Nullable="false" />
+    <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AttendanceTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="AttendanceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_StudentAttendance_Course" FromRole="StudentAttendance" ToRole="Course" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentAttendance_Sessions" FromRole="StudentAttendance" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentAttendance_Students" FromRole="StudentAttendance" ToRole="Students" />
   </EntityType>
   <EntityType Name="StudentCourseDropped">
     <Key>
@@ -2077,6 +2120,21 @@
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
   </EntityType>
+  <EntityType Name="StudentProgramChangeHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="FromBatchID" Type="Int32" Nullable="false" />
+    <Property Name="ToBatchID" Type="Int32" Nullable="false" />
+    <Property Name="OldRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NewRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DuringSemesterNo" Type="Int32" Nullable="false" />
+    <Property Name="ChangedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ChangedTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ChangedBy" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="Student">
     <Key>
       <PropertyRef Name="ID" />
@@ -2085,6 +2143,7 @@
     <Property Name="AdmissionID" Type="Int32" Nullable="false" />
     <Property Name="BatchID" Type="Int32" Nullable="false" />
     <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RegNumber" Type="Int32" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="IsFreezed" Type="Boolean" Nullable="false" />
@@ -2099,7 +2158,8 @@
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Admission" Relationship="Self.FK_Students_Admission" FromRole="Students" ToRole="Admission" />
     <NavigationProperty Name="ProgramOffered" Relationship="Self.FK_Students_ProgramOffered" FromRole="Students" ToRole="ProgramOffered" />
-    <NavigationProperty Name="ProjectStudentsInvestigatedBies" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="Students" ToRole="ProjectStudentsInvestigatedBy" />
+    <NavigationProperty Name="ProjectInvestigatedByStudents" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="Students" ToRole="ProjectInvestigatedByStudents" />
+    <NavigationProperty Name="StudentAttendances" Relationship="Self.FK_StudentAttendance_Students" FromRole="Students" ToRole="StudentAttendance" />
     <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Students" FromRole="Students" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Students" FromRole="Students" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Students" FromRole="Students" ToRole="StudentCourseSelection" />
@@ -2107,6 +2167,7 @@
     <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Students" FromRole="Students" ToRole="StudentFee" />
     <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_Students" FromRole="Students" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Students" FromRole="Students" ToRole="StudentSemester" />
+    <NavigationProperty Name="StudentsIDcards" Relationship="Self.FK_StudentsIDcard_Students" FromRole="Students" ToRole="StudentsIDcard" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_Students" FromRole="Students" ToRole="StudentsSupervisor" />
   </EntityType>
   <EntityType Name="StudentsAdvisor">
@@ -2154,6 +2215,21 @@
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentSessions_Sessions" FromRole="StudentSemester" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentSemester_Students" FromRole="StudentSemester" ToRole="Students" />
   </EntityType>
+  <EntityType Name="StudentsIDcard">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentsIDcard_Students" FromRole="StudentsIDcard" ToRole="Students" />
+  </EntityType>
   <EntityType Name="StudentsSupervisor">
     <Key>
       <PropertyRef Name="ID" />
@@ -2199,6 +2275,26 @@
     <NavigationProperty Name="Menu" Relationship="Self.FK_SubMenus_Menus" FromRole="SubMenus" ToRole="Menus" />
     <NavigationProperty Name="RoleWiseMenus" Relationship="Self.FK_RoleWiseMenus_SubMenus" FromRole="SubMenus" ToRole="RoleWiseMenus" />
   </EntityType>
+  <EntityType Name="TeacherAttendance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" Nullable="false" />
+    <Property Name="TeacherCourseID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="IsPresent" Type="Boolean" Nullable="false" />
+    <Property Name="TeacherComments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
+    <Property Name="AttendanceTime" Type="Time" Precision="7" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <NavigationProperty Name="TeacherCours" Relationship="Self.FK_TeacherAttendance_TeacherCourses" FromRole="TeacherAttendance" ToRole="TeacherCourses" />
+  </EntityType>
   <EntityType Name="TeacherCours">
     <Key>
       <PropertyRef Name="ID" />
@@ -2210,13 +2306,20 @@
     <Property Name="CourseID" Type="Int32" Nullable="false" />
     <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Finalized" Type="Boolean" Nullable="false" />
+    <Property Name="IsWithdraw" Type="Boolean" Nullable="false" />
+    <Property Name="WithdrawBy" Type="Int32" />
+    <Property Name="IsWithdrawDate" Type="DateTime" Precision="0" />
+    <Property Name="IsWithdrawTime" Type="Time" Precision="7" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_TeacherCourses_Campuses" FromRole="TeacherCourses" ToRole="Campuses" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_TeacherCourses_Course" FromRole="TeacherCourses" ToRole="Course" />
     <NavigationProperty Name="EmpForm" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="TeacherCourses" ToRole="EmpForm" />
     <NavigationProperty Name="Session" Relationship="Self.FK_TeacherCourses_Sessions" FromRole="TeacherCourses" ToRole="Sessions" />
+    <NavigationProperty Name="TeacherAttendances" Relationship="Self.FK_TeacherAttendance_TeacherCourses" FromRole="TeacherCourses" ToRole="TeacherAttendance" />
   </EntityType>
   <EntityType Name="TestApplicant">
     <Key>
@@ -3082,6 +3185,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BatchWiseCourses_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
+    <End Role="BatchWiseCourses" Type="Self.BatchWiseCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BatchWiseCourses">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SemesterwiseCourses_Campuses">
     <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
     <End Role="BatchWiseCourses" Type="Self.BatchWiseCours" Multiplicity="*" />
@@ -3466,6 +3581,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentAttendance_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourseDropped_Course">
     <End Role="Course" Type="Self.Course" Multiplicity="1" />
     <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
@@ -3510,6 +3637,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherCourses_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="TeacherCourses" Type="Self.TeacherCours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TeacherCourses">
         <PropertyRef Name="CourseID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4452,12 +4591,12 @@
   </Association>
   <Association Name="FK_ProjectStudentsInvestigatedBy_Project">
     <End Role="Project" Type="Self.Project" Multiplicity="1" />
-    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <End Role="ProjectInvestigatedByStudents" Type="Self.ProjectInvestigatedByStudent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
+      <Dependent Role="ProjectInvestigatedByStudents">
         <PropertyRef Name="ProjectID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4476,24 +4615,24 @@
   </Association>
   <Association Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
     <End Role="ProjectInvestigationType" Type="Self.ProjectInvestigationType" Multiplicity="1" />
-    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <End Role="ProjectInvestigatedByStudents" Type="Self.ProjectInvestigatedByStudent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProjectInvestigationType">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
+      <Dependent Role="ProjectInvestigatedByStudents">
         <PropertyRef Name="ProjectInvestigationTypeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectStudentsInvestigatedBy_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
-    <End Role="ProjectStudentsInvestigatedBy" Type="Self.ProjectStudentsInvestigatedBy" Multiplicity="*" />
+    <End Role="ProjectInvestigatedByStudents" Type="Self.ProjectInvestigatedByStudent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Students">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ProjectStudentsInvestigatedBy">
+      <Dependent Role="ProjectInvestigatedByStudents">
         <PropertyRef Name="StudentsID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4554,6 +4693,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="SessionWiseMeritList">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentAttendance_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
         <PropertyRef Name="SessionID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4654,6 +4805,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentAttendance_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourseDropped_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentCourseDropped" Type="Self.StudentCourseDropped" Multiplicity="*" />
@@ -4750,6 +4913,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentsIDcard_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentsIDcard" Type="Self.StudentsIDcard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentsIDcard">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentsSupervisor_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentsSupervisor" Type="Self.StudentsSupervisor" Multiplicity="*" />
@@ -4759,6 +4934,18 @@
       </Principal>
       <Dependent Role="StudentsSupervisor">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeacherAttendance_TeacherCourses">
+    <End Role="TeacherCourses" Type="Self.TeacherCours" Multiplicity="1" />
+    <End Role="TeacherAttendance" Type="Self.TeacherAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TeacherCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TeacherAttendance">
+        <PropertyRef Name="TeacherCourseID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4923,6 +5110,7 @@
     <EntitySet Name="FacultyHeads" EntityType="Self.FacultyHead" />
     <EntitySet Name="FeeCriterias" EntityType="Self.FeeCriteria" />
     <EntitySet Name="FeeHeads" EntityType="Self.FeeHead" />
+    <EntitySet Name="FinanceUnpaidDataForLMControls" EntityType="Self.FinanceUnpaidDataForLMControl" />
     <EntitySet Name="Gradings" EntityType="Self.Grading" />
     <EntitySet Name="GradingPolicies" EntityType="Self.GradingPolicy" />
     <EntitySet Name="JobNatures" EntityType="Self.JobNature" />
@@ -4947,8 +5135,8 @@
     <EntitySet Name="Projects" EntityType="Self.Project" />
     <EntitySet Name="ProjectAwardedByOrganizations" EntityType="Self.ProjectAwardedByOrganization" />
     <EntitySet Name="ProjectInvestigatedByEmpForms" EntityType="Self.ProjectInvestigatedByEmpForm" />
+    <EntitySet Name="ProjectInvestigatedByStudents" EntityType="Self.ProjectInvestigatedByStudent" />
     <EntitySet Name="ProjectInvestigationTypes" EntityType="Self.ProjectInvestigationType" />
-    <EntitySet Name="ProjectStudentsInvestigatedBies" EntityType="Self.ProjectStudentsInvestigatedBy" />
     <EntitySet Name="ProjectTypes" EntityType="Self.ProjectType" />
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="Publications" EntityType="Self.Publication" />
@@ -4963,16 +5151,20 @@
     <EntitySet Name="SessionWiseMeritLists" EntityType="Self.SessionWiseMeritList" />
     <EntitySet Name="SessionWiseMeritListDets" EntityType="Self.SessionWiseMeritListDet" />
     <EntitySet Name="SMSConfigs" EntityType="Self.SMSConfig" />
+    <EntitySet Name="StudentAttendances" EntityType="Self.StudentAttendance" />
     <EntitySet Name="StudentCourseDroppeds" EntityType="Self.StudentCourseDropped" />
     <EntitySet Name="StudentCourses" EntityType="Self.StudentCours" />
     <EntitySet Name="StudentCourseSelections" EntityType="Self.StudentCourseSelection" />
     <EntitySet Name="StudentCourseWithDrawns" EntityType="Self.StudentCourseWithDrawn" />
     <EntitySet Name="StudentFees" EntityType="Self.StudentFee" />
+    <EntitySet Name="StudentProgramChangeHistories" EntityType="Self.StudentProgramChangeHistory" />
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="StudentsAdvisors" EntityType="Self.StudentsAdvisor" />
     <EntitySet Name="StudentSemesters" EntityType="Self.StudentSemester" />
+    <EntitySet Name="StudentsIDcards" EntityType="Self.StudentsIDcard" />
     <EntitySet Name="StudentsSupervisors" EntityType="Self.StudentsSupervisor" />
     <EntitySet Name="SubMenus" EntityType="Self.SubMenu" />
+    <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="TeacherCourses" EntityType="Self.TeacherCours" />
     <EntitySet Name="TestApplicants" EntityType="Self.TestApplicant" />
     <EntitySet Name="TestCalenders" EntityType="Self.TestCalender" />
@@ -5159,6 +5351,10 @@
       <End Role="Applicants" EntitySet="Applicants" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
+    <AssociationSet Name="FK_BatchWiseCourses_Sessions" Association="Self.FK_BatchWiseCourses_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="BatchWiseCourses" EntitySet="BatchWiseCourses" />
+    </AssociationSet>
     <AssociationSet Name="FK_SemesterwiseCourses_Campuses" Association="Self.FK_SemesterwiseCourses_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="BatchWiseCourses" EntitySet="BatchWiseCourses" />
@@ -5287,6 +5483,10 @@
       <End Role="Course" EntitySet="Courses" />
       <End Role="CoursePublication" EntitySet="CoursePublications" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentAttendance_Course" Association="Self.FK_StudentAttendance_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourseDropped_Course" Association="Self.FK_StudentCourseDropped_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
@@ -5302,6 +5502,10 @@
     <AssociationSet Name="FK_StudentCourseWithDrawn_Course" Association="Self.FK_StudentCourseWithDrawn_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherCourses_Course" Association="Self.FK_TeacherCourses_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="TeacherCourses" EntitySet="TeacherCourses" />
     </AssociationSet>
     <AssociationSet Name="FK_CourseProgramLevel_ProgramLevels" Association="Self.FK_CourseProgramLevel_ProgramLevels">
       <End Role="ProgramLevels" EntitySet="ProgramLevels" />
@@ -5617,7 +5821,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Project" Association="Self.FK_ProjectStudentsInvestigatedBy_Project">
       <End Role="Project" EntitySet="Projects" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
+      <End Role="ProjectInvestigatedByStudents" EntitySet="ProjectInvestigatedByStudents" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectInvestigatedBy_ProjectInvestigationType" Association="Self.FK_ProjectInvestigatedBy_ProjectInvestigationType">
       <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
@@ -5625,11 +5829,11 @@
     </AssociationSet>
     <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID" Association="Self.FK_ProjectStudentsInvestigatedBy_ProjectInvestigationTypeID">
       <End Role="ProjectInvestigationType" EntitySet="ProjectInvestigationTypes" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
+      <End Role="ProjectInvestigatedByStudents" EntitySet="ProjectInvestigatedByStudents" />
     </AssociationSet>
     <AssociationSet Name="FK_ProjectStudentsInvestigatedBy_Students" Association="Self.FK_ProjectStudentsInvestigatedBy_Students">
       <End Role="Students" EntitySet="Students" />
-      <End Role="ProjectStudentsInvestigatedBy" EntitySet="ProjectStudentsInvestigatedBies" />
+      <End Role="ProjectInvestigatedByStudents" EntitySet="ProjectInvestigatedByStudents" />
     </AssociationSet>
     <AssociationSet Name="FK_Publishing_PublishingType" Association="Self.FK_Publishing_PublishingType">
       <End Role="PublicationType" EntitySet="PublicationTypes" />
@@ -5650,6 +5854,10 @@
     <AssociationSet Name="FK_SessionWiseMertiList_Sessions" Association="Self.FK_SessionWiseMertiList_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentAttendance_Sessions" Association="Self.FK_StudentAttendance_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendances" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentCourseDropped_Sessions" Association="Self.FK_StudentCourseDropped_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
@@ -5683,6 +5891,10 @@
       <End Role="SessionWiseMeritList" EntitySet="SessionWiseMeritLists" />
       <End Role="SessionWiseMeritListDet" EntitySet="SessionWiseMeritListDets" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentAttendance_Students" Association="Self.FK_StudentAttendance_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourseDropped_Students" Association="Self.FK_StudentCourseDropped_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourseDropped" EntitySet="StudentCourseDroppeds" />
@@ -5715,9 +5927,17 @@
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentSemester" EntitySet="StudentSemesters" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentsIDcard_Students" Association="Self.FK_StudentsIDcard_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsIDcard" EntitySet="StudentsIDcards" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentsSupervisor_Students" Association="Self.FK_StudentsSupervisor_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeacherAttendance_TeacherCourses" Association="Self.FK_TeacherAttendance_TeacherCourses">
+      <End Role="TeacherCourses" EntitySet="TeacherCourses" />
+      <End Role="TeacherAttendance" EntitySet="TeacherAttendances" />
     </AssociationSet>
     <AssociationSet Name="FK_TestApplicants_TestCalenders" Association="Self.FK_TestApplicants_TestCalenders">
       <End Role="TestCalenders" EntitySet="TestCalenders" />
@@ -5755,16 +5975,5 @@
       <End Role="TestSessions" EntitySet="TestSessions" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
-    <EntitySet Name="FinanceUnpaidDataForLMControls" EntityType="CMSModel.FinanceUnpaidDataForLMControl" />
   </EntityContainer>
-  <EntityType Name="FinanceUnpaidDataForLMControl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Amount" Type="Int32" />
-    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsPaid" Type="Boolean" />
-  </EntityType>
 </Schema>

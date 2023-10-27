@@ -19,7 +19,7 @@ namespace LMS.Models
         {
             this.ProjectAwardedByOrganizations = new HashSet<ProjectAwardedByOrganization>();
             this.ProjectInvestigatedByEmpForms = new HashSet<ProjectInvestigatedByEmpForm>();
-            this.ProjectStudentsInvestigatedBies = new HashSet<ProjectStudentsInvestigatedBy>();
+            this.ProjectInvestigatedByStudents = new HashSet<ProjectInvestigatedByStudent>();
         }
     
         public int ID { get; set; }
@@ -48,6 +48,6 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectInvestigatedByEmpForm> ProjectInvestigatedByEmpForms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProjectStudentsInvestigatedBy> ProjectStudentsInvestigatedBies { get; set; }
+        public virtual ICollection<ProjectInvestigatedByStudent> ProjectInvestigatedByStudents { get; set; }
     }
 }

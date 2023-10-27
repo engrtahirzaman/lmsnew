@@ -10,13 +10,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Courses/Views/MyCourses/AllCourses.cshtml">
-      <publishTime>10/16/2023 11:45:38</publishTime>
+      <publishTime>10/19/2023 14:03:30</publishTime>
     </File>
     <File Include="Areas/Courses/Views/MyCourses/ApplyCourses.cshtml">
-      <publishTime>10/13/2023 18:59:43</publishTime>
+      <publishTime>10/19/2023 13:47:26</publishTime>
     </File>
     <File Include="Areas/Courses/Views/MyCourses/PrintCourses.cshtml">
-      <publishTime>05/10/2023 13:36:07</publishTime>
+      <publishTime>10/20/2023 15:34:49</publishTime>
     </File>
     <File Include="Areas/Courses/Views/web.config">
       <publishTime>05/10/2023 13:36:07</publishTime>
@@ -34,7 +34,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:07</publishTime>
     </File>
     <File Include="Areas/StudentAccount/Views/Account/Login.cshtml">
-      <publishTime>10/17/2023 10:57:52</publishTime>
+      <publishTime>10/17/2023 13:21:52</publishTime>
     </File>
     <File Include="Areas/StudentAccount/Views/StudentProfile/ChangePassword.cshtml">
       <publishTime>05/10/2023 13:36:07</publishTime>
@@ -64,10 +64,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:09</publishTime>
     </File>
     <File Include="bin/LMS.dll">
-      <publishTime>10/17/2023 11:04:12</publishTime>
+      <publishTime>10/26/2023 17:53:43</publishTime>
     </File>
     <File Include="bin/LMS.pdb">
-      <publishTime>10/17/2023 11:04:12</publishTime>
+      <publishTime>10/26/2023 17:53:43</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/10/2023 13:36:09</publishTime>

@@ -1,0 +1,143 @@
+﻿@model IEnumerable<LMS.Models.StudentAttendance>
+@{
+    ViewBag.Title = "Student Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("Index","MyDashboard", new { area =""})">Dashboard</a>
+        </li>
+        <li class="active">My Attendance Records</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="page-header">
+                <h1>
+                    <a href="@Url.Action("Index","MyDashboard", new { area =""})" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    |
+                    My Attendance Records
+                </h1>
+            </div>
+            <!-- div.table-responsive -->
+            <!-- div.dataTables_borderWrap -->
+            <h1 class="text-danger">@ViewBag.Error</h1>
+            @Html.Raw(TempData["Sucess"])
+            @Html.Raw(TempData["Failed"])
+            <div>
+
+                @foreach (var item in Model.GroupBy(t => t.SessionID).SelectMany(group => group))
+                {
+
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-flat">
+                            <h5 class="widget-title lighter">
+                                <i class="ace-icon fa fa-money orange"></i>
+                                @item.Session.Session1 Wise Attendance Records.
+                            </h5>
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="ace-icon fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main no-padding" style="overflow-y: scroll;">
+
+                                <strong>The following vouchers have been created for the @(item.Course.Title).</strong>
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th width="10%">Date</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @item.Session.Session1
+                                        </td>
+                                        <td>
+                                            @if (item.IsPresent == true)
+                                            {
+                                                <span class="label label-white label-success middle">Present</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-white label-danger middle">Present</span>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <hr />
+                                <strong>The following vouchers details...</strong>
+
+                                @*<table class="table table-bordered table-striped">
+                                        <thead class="thin-border-bottom">
+                                            <tr>
+                                                <th width="5%">S#</th>
+                                                <th width="10%">
+                                                    Fee Head
+                                                </th>
+                                                <th width="10%">
+                                                    Amount
+                                                </th>
+                                                <th width="5%">Date of Payment</th>
+                                                <th width="5%">Status</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @{ int sno = 1;}
+                                            @foreach (var item in Model.Where(t => t.SessionID == session.Key))
+                                            {
+                                                <tr>
+                                                    <td>@sno</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.FeeHead.HeadName)</td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Amount)
+                                                    </td>
+                                                    <td>
+                                                        @String.Format("{0:dd-MMM-yyyy}", item.PaymentDate)
+                                                    </td>
+                                                    <td>
+                                                        @if (item.IsPaid == true)
+                                                        {
+                                                            <span class="label label-white label-success middle">Paid</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="label label-white label-info middle">Pending</span>
+                                                        }
+                                                        @if (item.IsVerified == true)
+                                                        {
+                                                            <span class="label label-white label-success middle"><i class="fa fa-check-circle-o"></i> Verified</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="label label-white label-danger middle"><i class="fa fa-times-circle-o"></i> Not Verified</span>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                sno++;
+                                            }
+                                        </tbody>
+                                    </table>*@
+                            </div><!-- /.widget-main -->
+                        </div><!-- /.widget-body -->
+                    </div>
+                }
+            </div>
+
+        </div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.page-content -->
+<!-- Modal -->

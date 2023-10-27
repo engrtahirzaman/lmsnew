@@ -24,6 +24,8 @@ namespace LMS.Models
         public int SessionID { get; set; }
         public int DepartmentProgramID { get; set; }
         public int MeritListNo { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public bool IsRecommended { get; set; }
         public Nullable<int> RecommendedBy { get; set; }
         public Nullable<System.DateTime> RecommendedDate { get; set; }
