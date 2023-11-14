@@ -5,10 +5,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\lenovo\Desktop\lms-pub</_PublishTargetUrl>
-    <History>True|2023-10-05T10:26:44.6111862Z;True|2023-10-05T14:35:18.2759668+05:00;True|2023-10-05T14:33:48.3039308+05:00;True|2023-10-05T14:24:03.5050705+05:00;True|2023-10-05T14:23:57.1746976+05:00;True|2023-10-05T13:55:55.0060640+05:00;True|2023-09-26T11:28:37.1649108+05:00;True|2023-09-22T11:23:14.6009131+05:00;</History>
+    <History>True|2023-10-30T06:22:17.7803114Z;True|2023-10-05T15:26:44.6111862+05:00;True|2023-10-05T14:35:18.2759668+05:00;True|2023-10-05T14:33:48.3039308+05:00;True|2023-10-05T14:24:03.5050705+05:00;True|2023-10-05T14:23:57.1746976+05:00;True|2023-10-05T13:55:55.0060640+05:00;True|2023-09-26T11:28:37.1649108+05:00;True|2023-09-22T11:23:14.6009131+05:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
+    <File Include="Areas/Attendance/Views/Shared/_Layout.cshtml">
+      <publishTime>10/27/2023 14:18:48</publishTime>
+    </File>
+    <File Include="Areas/Attendance/Views/StudentAttendance/AllAttendance.cshtml">
+      <publishTime>10/27/2023 14:32:04</publishTime>
+    </File>
+    <File Include="Areas/Attendance/Views/web.config">
+      <publishTime>10/27/2023 14:17:33</publishTime>
+    </File>
+    <File Include="Areas/Attendance/Views/_ViewStart.cshtml">
+      <publishTime>10/27/2023 14:18:48</publishTime>
+    </File>
     <File Include="Areas/Courses/Views/MyCourses/AllCourses.cshtml">
       <publishTime>10/19/2023 14:03:30</publishTime>
     </File>
@@ -64,10 +76,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:09</publishTime>
     </File>
     <File Include="bin/LMS.dll">
-      <publishTime>10/26/2023 17:53:43</publishTime>
+      <publishTime>11/02/2023 16:14:16</publishTime>
     </File>
     <File Include="bin/LMS.pdb">
-      <publishTime>10/26/2023 17:53:43</publishTime>
+      <publishTime>11/02/2023 16:14:16</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/10/2023 13:36:09</publishTime>
@@ -841,7 +853,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:07</publishTime>
     </File>
     <File Include="Models/Model1.edmx.diagram">
-      <publishTime>05/10/2023 15:24:59</publishTime>
+      <publishTime>10/27/2023 14:53:20</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>05/10/2023 13:36:07</publishTime>
@@ -916,7 +928,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:07</publishTime>
     </File>
     <File Include="Views/MyDashboard/Index.cshtml">
-      <publishTime>10/13/2023 11:45:46</publishTime>
+      <publishTime>10/27/2023 14:33:13</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/10/2023 13:36:07</publishTime>
@@ -931,7 +943,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/10/2023 13:36:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/10/2023 13:55:53</publishTime>
+      <publishTime>10/30/2023 11:22:17</publishTime>
     </File>
   </ItemGroup>
 </Project>
