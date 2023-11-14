@@ -146,5 +146,23 @@ namespace LMS.Models
         public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
         public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
         public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
+        public virtual DbSet<CLO> CLOes { get; set; }
+        public virtual DbSet<EvaluationCycle> EvaluationCycles { get; set; }
+        public virtual DbSet<MissionUniversity> MissionUniversities { get; set; }
+        public virtual DbSet<PEO> PEOs { get; set; }
+        public virtual DbSet<PLO> PLOes { get; set; }
+        public virtual DbSet<QuestionType> QuestionTypes { get; set; }
+        public virtual DbSet<StudentsGroupColor> StudentsGroupColors { get; set; }
+        public virtual DbSet<Survey> Surveys { get; set; }
+        public virtual DbSet<SurveyHeading> SurveyHeadings { get; set; }
+        public virtual DbSet<SurveyHeadingQA> SurveyHeadingQAs { get; set; }
+        public virtual DbSet<SurveyHeadingQAResponse> SurveyHeadingQAResponses { get; set; }
+        public virtual DbSet<SurveyInitiated> SurveyInitiateds { get; set; }
+        public virtual DbSet<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
+        public virtual DbSet<SurveyType> SurveyTypes { get; set; }
+        public virtual DbSet<TaxonomyActionVerb> TaxonomyActionVerbs { get; set; }
+        public virtual DbSet<TaxonomyDomain> TaxonomyDomains { get; set; }
+        public virtual DbSet<TaxonomyLevel> TaxonomyLevels { get; set; }
+        public virtual DbSet<VissionUniversity> VissionUniversities { get; set; }
     }
 }

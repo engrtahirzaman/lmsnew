@@ -32,6 +32,7 @@ namespace LMS.Models
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
             this.TeacherCourses = new HashSet<TeacherCours>();
+            this.CLOes = new HashSet<CLO>();
         }
     
         public int ID { get; set; }
@@ -48,6 +49,8 @@ namespace LMS.Models
         public Nullable<System.DateTime> CrDate { get; set; }
         public Nullable<int> UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
+        public bool IsSupervisionBased { get; set; }
+        public bool ISLab { get; set; }
     
         public virtual ACM ACM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -81,5 +84,7 @@ namespace LMS.Models
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLO> CLOes { get; set; }
     }
 }

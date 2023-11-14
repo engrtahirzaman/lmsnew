@@ -102,7 +102,8 @@ namespace LMS.Areas.Fees.Controllers
             var TotalinWords = ConvertAmountToWords(Convert.ToDecimal(Total));
 
 
-            var DueDate = "07-Nov-2023";//due date changed by fida sb....
+            //var DueDate = "07-Nov-2023";//due date changed by fida sb....
+            var DueDate = studentFee.FirstOrDefault()?.DueDate.Value.ToString("dd-MM-yyyy");
             var IssueDate = "20-Oct-2023";
 
             // Create a PDF converter object

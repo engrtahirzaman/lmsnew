@@ -48,6 +48,7 @@ namespace LMS.Models
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
     
         public virtual Campus Campus { get; set; }
         public virtual FeeHead FeeHead { get; set; }

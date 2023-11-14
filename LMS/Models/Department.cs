@@ -21,6 +21,7 @@ namespace LMS.Models
             this.DepartmentEmpForms = new HashSet<DepartmentEmpForm>();
             this.DepartmentHeads = new HashSet<DepartmentHead>();
             this.DepartmentPrograms = new HashSet<DepartmentProgram>();
+            this.BOS = new HashSet<BO>();
         }
     
         public int ID { get; set; }
@@ -50,5 +51,7 @@ namespace LMS.Models
         public virtual ICollection<DepartmentProgram> DepartmentPrograms { get; set; }
         public virtual DepartmentType DepartmentType { get; set; }
         public virtual Faculty Faculty { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BO> BOS { get; set; }
     }
 }

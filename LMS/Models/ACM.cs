@@ -21,6 +21,11 @@ namespace LMS.Models
             this.Courses = new HashSet<Course>();
             this.GradingPolicies = new HashSet<GradingPolicy>();
             this.Programs = new HashSet<Program>();
+            this.CLOes = new HashSet<CLO>();
+            this.MissionUniversities = new HashSet<MissionUniversity>();
+            this.PEOs = new HashSet<PEO>();
+            this.PLOes = new HashSet<PLO>();
+            this.VissionUniversities = new HashSet<VissionUniversity>();
         }
     
         public int ID { get; set; }
@@ -44,5 +49,15 @@ namespace LMS.Models
         public virtual ICollection<GradingPolicy> GradingPolicies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Program> Programs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLO> CLOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MissionUniversity> MissionUniversities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEO> PEOs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PLO> PLOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VissionUniversity> VissionUniversities { get; set; }
     }
 }

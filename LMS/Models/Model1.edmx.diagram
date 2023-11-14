@@ -325,6 +325,60 @@
         <AssociationConnector Association="CMSModel.FK_Tests_TestSessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_TestVouchers_Tests" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_TestVouchers_TestSessions" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CMSModel.CLO" Width="1.5" PointX="11.25" PointY="181.125" />
+        <EntityTypeShape EntityType="CMSModel.EvaluationCycle" Width="1.5" PointX="9" PointY="196" />
+        <EntityTypeShape EntityType="CMSModel.MissionUniversity" Width="1.5" PointX="8.25" PointY="204.125" />
+        <EntityTypeShape EntityType="CMSModel.PEO" Width="1.5" PointX="10.5" PointY="155" />
+        <EntityTypeShape EntityType="CMSModel.PLO" Width="1.5" PointX="13.5" PointY="155" />
+        <EntityTypeShape EntityType="CMSModel.QuestionType" Width="1.5" PointX="31.5" PointY="154.625" />
+        <EntityTypeShape EntityType="CMSModel.StudentsGroupColor" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CMSModel.Survey" Width="1.5" PointX="29.25" PointY="127.375" />
+        <EntityTypeShape EntityType="CMSModel.SurveyHeading" Width="1.5" PointX="31.5" PointY="158.125" />
+        <EntityTypeShape EntityType="CMSModel.SurveyHeadingQA" Width="1.5" PointX="33.75" PointY="155.75" />
+        <EntityTypeShape EntityType="CMSModel.SurveyHeadingQAResponse" Width="1.5" PointX="33.75" PointY="148.75" />
+        <EntityTypeShape EntityType="CMSModel.SurveyInitiated" Width="1.5" PointX="11.25" PointY="168.125" />
+        <EntityTypeShape EntityType="CMSModel.SurveyInitiatedResponse" Width="1.5" PointX="31.5" PointY="148.875" />
+        <EntityTypeShape EntityType="CMSModel.SurveyType" Width="1.5" PointX="27" PointY="128.125" />
+        <EntityTypeShape EntityType="CMSModel.TaxonomyActionVerb" Width="1.5" PointX="9" PointY="200.125" />
+        <EntityTypeShape EntityType="CMSModel.TaxonomyDomain" Width="1.5" PointX="4.5" PointY="200.25" />
+        <EntityTypeShape EntityType="CMSModel.TaxonomyLevel" Width="1.5" PointX="6.75" PointY="200.125" />
+        <EntityTypeShape EntityType="CMSModel.VissionUniversity" Width="1.5" PointX="8.25" PointY="209" />
+        <AssociationConnector Association="CMSModel.FK__CLO__ACMID__34DEB3C1" />
+        <AssociationConnector Association="CMSModel.FK_MissionUniversity_ACM" />
+        <AssociationConnector Association="CMSModel.FK_PEO_ACM" />
+        <AssociationConnector Association="CMSModel.FK_PLO_ACM" />
+        <AssociationConnector Association="CMSModel.FK_VissionUniversity_ACM" />
+        <AssociationConnector Association="CMSModel.FK__CLO__BOFID__33EA8F88" />
+        <AssociationConnector Association="CMSModel.FK_BOF_Faculty" />
+        <AssociationConnector Association="CMSModel.FK_PEO_BOF" />
+        <AssociationConnector Association="CMSModel.FK_PLO_BOF" />
+        <AssociationConnector Association="CMSModel.FK__CLO__BOSID__32F66B4F" />
+        <AssociationConnector Association="CMSModel.FK_BOS_Departments" />
+        <AssociationConnector Association="CMSModel.FK_PEO_BOS" />
+        <AssociationConnector Association="CMSModel.FK_PLO_BOS" />
+        <AssociationConnector Association="CMSModel.FK__CLO__CourseID__32024716" />
+        <AssociationConnector Association="CMSModel.FK__CLO__TaxonomyDes__310E22DD" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiated_EvaluationCycle" />
+        <AssociationConnector Association="CMSModel.FK_PEO_ProgramID" />
+        <AssociationConnector Association="CMSModel.FK_PLO_ProgramID" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeadingQA_QuestionType" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeadingQAResponse_QuestionType" />
+        <AssociationConnector Association="CMSModel.FK_StudentProgramChangeHistory_Sessions" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiated_Sessions" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_StudentCourses" />
+        <AssociationConnector Association="CMSModel.FK_StudentProgramChangeHistory_Students" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_Students" />
+        <AssociationConnector Association="CMSModel.FK_Survey_SurveyType" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeading_Survey" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiated_Survey" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_Survey" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeadingQA_SurveyHeading" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeadingQAResponse_SurveyHeading" />
+        <AssociationConnector Association="CMSModel.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_SurveyInitiated" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_TeacherCourses" />
+        <AssociationConnector Association="CMSModel.FK__TaxonomyD__Taxon__2C496DC0" />
+        <AssociationConnector Association="CMSModel.FK__TaxonomyL__Taxon__296D0115" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

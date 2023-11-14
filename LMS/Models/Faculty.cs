@@ -19,6 +19,7 @@ namespace LMS.Models
         {
             this.Departments = new HashSet<Department>();
             this.FacultyHeads = new HashSet<FacultyHead>();
+            this.BOFs = new HashSet<BOF>();
         }
     
         public int ID { get; set; }
@@ -36,5 +37,7 @@ namespace LMS.Models
         public virtual ICollection<Department> Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacultyHead> FacultyHeads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BOF> BOFs { get; set; }
     }
 }

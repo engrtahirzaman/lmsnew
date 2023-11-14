@@ -24,5 +24,10 @@ namespace LMS.Models
         public System.DateTime ChangedDate { get; set; }
         public System.TimeSpan ChangedTime { get; set; }
         public int ChangedBy { get; set; }
+        public Nullable<int> SessionID { get; set; }
+        public int ToSemesterNo { get; set; }
+    
+        public virtual Session Session { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

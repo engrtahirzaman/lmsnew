@@ -18,6 +18,9 @@ namespace LMS.Models
         public BOF()
         {
             this.Programs = new HashSet<Program>();
+            this.CLOes = new HashSet<CLO>();
+            this.PEOs = new HashSet<PEO>();
+            this.PLOes = new HashSet<PLO>();
         }
     
         public int ID { get; set; }
@@ -30,8 +33,18 @@ namespace LMS.Models
         public System.DateTime CrDate { get; set; }
         public Nullable<int> UBy { get; set; }
         public System.DateTime UDate { get; set; }
+        public Nullable<int> FacultyID { get; set; }
+        public string MinutesFile { get; set; }
+        public string AgendaFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Program> Programs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLO> CLOes { get; set; }
+        public virtual Faculty Faculty { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PEO> PEOs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PLO> PLOes { get; set; }
     }
 }

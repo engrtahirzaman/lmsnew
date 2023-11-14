@@ -104,6 +104,7 @@ namespace LMS.Models
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
+        public string Section { get; set; }
     
         public virtual Campus Campus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

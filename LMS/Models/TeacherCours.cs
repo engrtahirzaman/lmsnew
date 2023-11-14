@@ -18,6 +18,7 @@ namespace LMS.Models
         public TeacherCours()
         {
             this.TeacherAttendances = new HashSet<TeacherAttendance>();
+            this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
         }
     
         public int ID { get; set; }
@@ -43,5 +44,7 @@ namespace LMS.Models
         public virtual Session Session { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherAttendance> TeacherAttendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
     }
 }

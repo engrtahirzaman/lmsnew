@@ -33,6 +33,8 @@ namespace LMS.Models
             this.StudentFees = new HashSet<StudentFee>();
             this.StudentSemesters = new HashSet<StudentSemester>();
             this.TeacherCourses = new HashSet<TeacherCours>();
+            this.StudentProgramChangeHistories = new HashSet<StudentProgramChangeHistory>();
+            this.SurveyInitiateds = new HashSet<SurveyInitiated>();
         }
     
         public int ID { get; set; }
@@ -78,5 +80,9 @@ namespace LMS.Models
         public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyInitiated> SurveyInitiateds { get; set; }
     }
 }
