@@ -16,15 +16,15 @@
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CLOes" Relationship="Self.FK__CLO__ACMID__34DEB3C1" FromRole="ACM" ToRole="CLO" />
     <NavigationProperty Name="AssessmentPolicies" Relationship="Self.FK_AssessmentPolicy_ACM" FromRole="ACM" ToRole="AssessmentPolicy" />
     <NavigationProperty Name="Courses" Relationship="Self.FK_Course_ACM" FromRole="ACM" ToRole="Course" />
     <NavigationProperty Name="GradingPolicies" Relationship="Self.FK_GradingPolicy_ACM" FromRole="ACM" ToRole="GradingPolicy" />
+    <NavigationProperty Name="MissionUniversities" Relationship="Self.FK_MissionUniversity_ACM" FromRole="ACM" ToRole="MissionUniversity" />
+    <NavigationProperty Name="PEOs" Relationship="Self.FK_PEO_ACM" FromRole="ACM" ToRole="PEO" />
+    <NavigationProperty Name="PLOes" Relationship="Self.FK_PLO_ACM" FromRole="ACM" ToRole="PLO" />
     <NavigationProperty Name="Programs" Relationship="Self.FK_Programs_ACM" FromRole="ACM" ToRole="Programs" />
-    <NavigationProperty Name="CLOes" Relationship="CMSModel.FK__CLO__ACMID__34DEB3C1" FromRole="ACM" ToRole="CLO" />
-    <NavigationProperty Name="MissionUniversities" Relationship="CMSModel.FK_MissionUniversity_ACM" FromRole="ACM" ToRole="MissionUniversity" />
-    <NavigationProperty Name="PEOs" Relationship="CMSModel.FK_PEO_ACM" FromRole="ACM" ToRole="PEO" />
-    <NavigationProperty Name="PLOes" Relationship="CMSModel.FK_PLO_ACM" FromRole="ACM" ToRole="PLO" />
-    <NavigationProperty Name="VissionUniversities" Relationship="CMSModel.FK_VissionUniversity_ACM" FromRole="ACM" ToRole="VissionUniversity" />
+    <NavigationProperty Name="VissionUniversities" Relationship="Self.FK_VissionUniversity_ACM" FromRole="ACM" ToRole="VissionUniversity" />
   </EntityType>
   <EntityType Name="Admission">
     <Key>
@@ -373,6 +373,37 @@
     <NavigationProperty Name="TestApplicants" Relationship="Self.FK_TestApplicants_Applicants" FromRole="Applicants" ToRole="TestApplicants" />
     <NavigationProperty Name="TestVouchers" Relationship="Self.FK_TestVouchers_Applicants" FromRole="Applicants" ToRole="TestVouchers" />
   </EntityType>
+  <EntityType Name="AssessmentDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="AssessmentsID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="ObtainedMarks" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsAbsent" Type="Boolean" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Assessment" Relationship="Self.FK_AssessmentDetails_Assessments" FromRole="AssessmentDetails" ToRole="Assessments" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_AssessmentDetails_Students" FromRole="AssessmentDetails" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="AssessmentName">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SortBy" Type="Int32" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Campus" Relationship="Self.FK_AssessmentNames_Campuses" FromRole="AssessmentNames" ToRole="Campuses" />
+    <NavigationProperty Name="Assessments" Relationship="Self.FK_Assessments_AssessmentNames" FromRole="AssessmentNames" ToRole="Assessments" />
+  </EntityType>
   <EntityType Name="AssessmentPolicy">
     <Key>
       <PropertyRef Name="ID" />
@@ -396,6 +427,35 @@
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="ACM" Relationship="Self.FK_AssessmentPolicy_ACM" FromRole="AssessmentPolicy" ToRole="ACM" />
+  </EntityType>
+  <EntityType Name="Assessment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="TeacherCourseID" Type="Int32" Nullable="false" />
+    <Property Name="AssessmentNameID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="TotalMarks" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Weightage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MarksType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="PassingMarks" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" Nullable="false" />
+    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="IsAttachment" Type="Boolean" />
+    <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AssessmentDetails" Relationship="Self.FK_AssessmentDetails_Assessments" FromRole="Assessments" ToRole="AssessmentDetails" />
+    <NavigationProperty Name="AssessmentName" Relationship="Self.FK_Assessments_AssessmentNames" FromRole="Assessments" ToRole="AssessmentNames" />
+    <NavigationProperty Name="TeacherCours" Relationship="Self.FK_Assessments_TeacherCourses" FromRole="Assessments" ToRole="TeacherCourses" />
+    <NavigationProperty Name="QPQuestionPapers" Relationship="Self.FK_QPQuestionPaper_Assessments" FromRole="Assessments" ToRole="QPQuestionPaper" />
   </EntityType>
   <EntityType Name="BatchWiseCours">
     <Key>
@@ -433,18 +493,18 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Agenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MeetingMinutes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FacultyID" Type="Int32" />
+    <Property Name="MinutesFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgendaFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CLOes" Relationship="Self.FK__CLO__BOFID__33EA8F88" FromRole="BOF" ToRole="CLO" />
+    <NavigationProperty Name="Faculty" Relationship="Self.FK_BOF_Faculty" FromRole="BOF" ToRole="Faculty" />
+    <NavigationProperty Name="PEOs" Relationship="Self.FK_PEO_BOF" FromRole="BOF" ToRole="PEO" />
+    <NavigationProperty Name="PLOes" Relationship="Self.FK_PLO_BOF" FromRole="BOF" ToRole="PLO" />
     <NavigationProperty Name="Programs" Relationship="Self.FK_Programs_BOF" FromRole="BOF" ToRole="Programs" />
-    <Property Name="FacultyID" Type="Int32" />
-    <Property Name="MinutesFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="AgendaFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CLOes" Relationship="CMSModel.FK__CLO__BOFID__33EA8F88" FromRole="BOF" ToRole="CLO" />
-    <NavigationProperty Name="Faculty" Relationship="CMSModel.FK_BOF_Faculty" FromRole="BOF" ToRole="Faculty" />
-    <NavigationProperty Name="PEOs" Relationship="CMSModel.FK_PEO_BOF" FromRole="BOF" ToRole="PEO" />
-    <NavigationProperty Name="PLOes" Relationship="CMSModel.FK_PLO_BOF" FromRole="BOF" ToRole="PLO" />
   </EntityType>
   <EntityType Name="BO">
     <Key>
@@ -456,18 +516,18 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Agenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MeetingMinutes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="MinutesFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AgendaFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CLOes" Relationship="Self.FK__CLO__BOSID__32F66B4F" FromRole="BOS" ToRole="CLO" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_BOS_Departments" FromRole="BOS" ToRole="Departments" />
+    <NavigationProperty Name="PEOs" Relationship="Self.FK_PEO_BOS" FromRole="BOS" ToRole="PEO" />
+    <NavigationProperty Name="PLOes" Relationship="Self.FK_PLO_BOS" FromRole="BOS" ToRole="PLO" />
     <NavigationProperty Name="Programs" Relationship="Self.FK_Programs_BOS" FromRole="BOS" ToRole="Programs" />
-    <Property Name="DepartmentID" Type="Int32" />
-    <Property Name="MinutesFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="AgendaFile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CLOes" Relationship="CMSModel.FK__CLO__BOSID__32F66B4F" FromRole="BO" ToRole="CLO" />
-    <NavigationProperty Name="Department" Relationship="CMSModel.FK_BOS_Departments" FromRole="BO" ToRole="Department" />
-    <NavigationProperty Name="PEOs" Relationship="CMSModel.FK_PEO_BOS" FromRole="BO" ToRole="PEO" />
-    <NavigationProperty Name="PLOes" Relationship="CMSModel.FK_PLO_BOS" FromRole="BO" ToRole="PLO" />
   </EntityType>
   <EntityType Name="Campus">
     <Key>
@@ -484,6 +544,7 @@
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="AssessmentNames" Relationship="Self.FK_AssessmentNames_Campuses" FromRole="Campuses" ToRole="AssessmentNames" />
     <NavigationProperty Name="BatchWiseCourses" Relationship="Self.FK_SemesterwiseCourses_Campuses" FromRole="Campuses" ToRole="BatchWiseCourses" />
     <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_Campuses" FromRole="Campuses" ToRole="Departments" />
     <NavigationProperty Name="EmpForms" Relationship="Self.FK_EmpForm_Campuses" FromRole="Campuses" ToRole="EmpForm" />
@@ -502,6 +563,33 @@
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Campuses" FromRole="Campuses" ToRole="StudentSemester" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Campuses" FromRole="Campuses" ToRole="TeacherCourses" />
     <NavigationProperty Name="Tests" Relationship="Self.FK_Tests_Campuses" FromRole="Campuses" ToRole="Tests" />
+  </EntityType>
+  <EntityType Name="CLO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CLOStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CLONumber" Type="Int32" />
+    <Property Name="TaxonomyActionVerbID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" />
+    <Property Name="BOSID" Type="Int32" />
+    <Property Name="BOFID" Type="Int32" />
+    <Property Name="ACMID" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="isNotActiveBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ACM" Relationship="Self.FK__CLO__ACMID__34DEB3C1" FromRole="CLO" ToRole="ACM" />
+    <NavigationProperty Name="BOF" Relationship="Self.FK__CLO__BOFID__33EA8F88" FromRole="CLO" ToRole="BOF" />
+    <NavigationProperty Name="BO" Relationship="Self.FK__CLO__BOSID__32F66B4F" FromRole="CLO" ToRole="BOS" />
+    <NavigationProperty Name="Course" Relationship="Self.FK__CLO__CourseID__32024716" FromRole="CLO" ToRole="Course" />
+    <NavigationProperty Name="TaxonomyActionVerb" Relationship="Self.FK__CLO__TaxonomyDes__310E22DD" FromRole="CLO" ToRole="TaxonomyActionVerb" />
+    <NavigationProperty Name="QPQuestions" Relationship="Self.FK_QPQuestion_CLO" FromRole="CLO" ToRole="QPQuestion" />
   </EntityType>
   <EntityType Name="CMSUser">
     <Key>
@@ -531,12 +619,15 @@
     <Property Name="Outlines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ACMID" Type="Int32" />
     <Property Name="CourseCategoryInstitutionalID" Type="Int32" />
+    <Property Name="IsSupervisionBased" Type="Boolean" Nullable="false" />
+    <Property Name="ISLab" Type="Boolean" Nullable="false" />
     <Property Name="CrBy" Type="Int32" />
     <Property Name="CrDate" Type="DateTime" Precision="0" />
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="ACM" Relationship="Self.FK_Course_ACM" FromRole="Course" ToRole="ACM" />
     <NavigationProperty Name="BatchWiseCourses" Relationship="Self.FK_SemesterwiseCourses_Course" FromRole="Course" ToRole="BatchWiseCourses" />
+    <NavigationProperty Name="CLOes" Relationship="Self.FK__CLO__CourseID__32024716" FromRole="Course" ToRole="CLO" />
     <NavigationProperty Name="CourseCategoryInstitutional" Relationship="Self.FK_Course_CourseCategoryInstitutional" FromRole="Course" ToRole="CourseCategoryInstitutional" />
     <NavigationProperty Name="CourseCoRequisites" Relationship="Self.FK_CourseCoRequisite_Course" FromRole="Course" ToRole="CourseCoRequisite" />
     <NavigationProperty Name="CourseCoRequisites1" Relationship="Self.FK_CourseCoRequisite_CourseCoRequisiteID" FromRole="Course" ToRole="CourseCoRequisite" />
@@ -546,15 +637,14 @@
     <NavigationProperty Name="CoursePreRequisites1" Relationship="Self.FK_CoursePreRequisite_CoursePreRequisiteID" FromRole="Course" ToRole="CoursePreRequisite" />
     <NavigationProperty Name="CourseProgramLevels" Relationship="Self.FK_CourseProgramLevel_Course" FromRole="Course" ToRole="CourseProgramLevel" />
     <NavigationProperty Name="CoursePublications" Relationship="Self.FK_CoursePublication_Course" FromRole="Course" ToRole="CoursePublication" />
+    <NavigationProperty Name="ExamDateSheets" Relationship="Self.FK_ExamDateSheet_Course" FromRole="Course" ToRole="ExamDateSheet" />
     <NavigationProperty Name="StudentAttendances" Relationship="Self.FK_StudentAttendance_Course" FromRole="Course" ToRole="StudentAttendance" />
     <NavigationProperty Name="StudentCourseDroppeds" Relationship="Self.FK_StudentCourseDropped_Course" FromRole="Course" ToRole="StudentCourseDropped" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Course" FromRole="Course" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Course" FromRole="Course" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Course" FromRole="Course" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Course" FromRole="Course" ToRole="SurveyInitiatedResponse" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Course" FromRole="Course" ToRole="TeacherCourses" />
-    <Property Name="IsSupervisionBased" Type="Boolean" Nullable="false" />
-    <Property Name="ISLab" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="CLOes" Relationship="CMSModel.FK__CLO__CourseID__32024716" FromRole="Course" ToRole="CLO" />
   </EntityType>
   <EntityType Name="CourseCategoryInstitutional">
     <Key>
@@ -790,6 +880,7 @@
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="DateOfCreation" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BOS" Relationship="Self.FK_BOS_Departments" FromRole="Departments" ToRole="BOS" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_Departments_Campuses" FromRole="Departments" ToRole="Campuses" />
     <NavigationProperty Name="DepartmentCoordinators" Relationship="Self.FK__Departmen__Depar__20ECC9AD" FromRole="Departments" ToRole="DepartmentCoordinator" />
     <NavigationProperty Name="DepartmentEmpForms" Relationship="Self.FK_DepartmentEmpForm_Departments" FromRole="Departments" ToRole="DepartmentEmpForm" />
@@ -797,7 +888,6 @@
     <NavigationProperty Name="DepartmentPrograms" Relationship="Self.FK_DepartmentPrograms_Departments" FromRole="Departments" ToRole="DepartmentPrograms" />
     <NavigationProperty Name="DepartmentType" Relationship="Self.FK_Departments_DepartmentTypes" FromRole="Departments" ToRole="DepartmentTypes" />
     <NavigationProperty Name="Faculty" Relationship="Self.FK_Departments_Faculty" FromRole="Departments" ToRole="Faculty" />
-    <NavigationProperty Name="BOS" Relationship="CMSModel.FK_BOS_Departments" FromRole="Department" ToRole="BO" />
   </EntityType>
   <EntityType Name="DepartmentType">
     <Key>
@@ -988,6 +1078,7 @@
     <Property Name="NextOfKinUDate" Type="DateTime" Precision="0" />
     <Property Name="NextofKinTime" Type="Time" Precision="7" />
     <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
@@ -1023,7 +1114,6 @@
     <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_EmpForm" FromRole="EmpForm" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_EmpForm" FromRole="EmpForm" ToRole="StudentsSupervisor" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="EmpForm" ToRole="TeacherCourses" />
-    <Property Name="Section" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="EmpFormJobNature">
     <Key>
@@ -1164,6 +1254,92 @@
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="EmpForm" Relationship="Self.FK_EmpTraining_EmpForm" FromRole="EmpTraining" ToRole="EmpForm" />
   </EntityType>
+  <EntityType Name="EvaluationCycle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="SurveyInitiateds" Relationship="Self.FK_SurveyInitiated_EvaluationCycle" FromRole="EvaluationCycle" ToRole="SurveyInitiated" />
+  </EntityType>
+  <EntityType Name="ExamDateSheet">
+    <Key>
+      <PropertyRef Name="ExamDateSheetID" />
+    </Key>
+    <Property Name="ExamDateSheetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_ExamDateSheet_Course" FromRole="ExamDateSheet" ToRole="Course" />
+    <NavigationProperty Name="Exam" Relationship="Self.FK_ExamDateSheet_Exams" FromRole="ExamDateSheet" ToRole="Exams" />
+    <NavigationProperty Name="ExamSeatingPlans" Relationship="Self.FK_ExamSeatingPlan_ExamSeatingPlan" FromRole="ExamDateSheet" ToRole="ExamSeatingPlan" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="ExamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="ExamTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ExamDateSheets" Relationship="Self.FK_ExamDateSheet_Exams" FromRole="Exams" ToRole="ExamDateSheet" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_Exams_Sessions" FromRole="Exams" ToRole="Sessions" />
+  </EntityType>
+  <EntityType Name="ExamSeatingPlan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamDateSheetID" Type="Int32" Nullable="false" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="ExamDateSheet" Relationship="Self.FK_ExamSeatingPlan_ExamSeatingPlan" FromRole="ExamSeatingPlan" ToRole="ExamDateSheet" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_ExamSeatingPlan_Locations" FromRole="ExamSeatingPlan" ToRole="Locations" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_ExamSeatingPlan_Students" FromRole="ExamSeatingPlan" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="ExamStudentsRollNumber">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="RollNo" Type="Int32" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_ExamStudentsRollNumbers_Sessions" FromRole="ExamStudentsRollNumbers" ToRole="Sessions" />
+  </EntityType>
   <EntityType Name="Faculty">
     <Key>
       <PropertyRef Name="ID" />
@@ -1177,10 +1353,10 @@
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="DateOfCreation" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BOFs" Relationship="Self.FK_BOF_Faculty" FromRole="Faculty" ToRole="BOF" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_Faculty_Campuses" FromRole="Faculty" ToRole="Campuses" />
     <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_Faculty" FromRole="Faculty" ToRole="Departments" />
     <NavigationProperty Name="FacultyHeads" Relationship="Self.FK__FacultyHe__Facul__194BA7E5" FromRole="Faculty" ToRole="FacultyHead" />
-    <NavigationProperty Name="BOFs" Relationship="CMSModel.FK_BOF_Faculty" FromRole="Faculty" ToRole="BOF" />
   </EntityType>
   <EntityType Name="FacultyHead">
     <Key>
@@ -1331,6 +1507,21 @@
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="EmpFormJobTypes" Relationship="Self.FK_EmpFormJobType_JobType" FromRole="JobType" ToRole="EmpFormJobType" />
   </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Slots" Type="Int32" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CrTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="ExamSeatingPlans" Relationship="Self.FK_ExamSeatingPlan_Locations" FromRole="Locations" ToRole="ExamSeatingPlan" />
+  </EntityType>
   <EntityType Name="MajorSubject">
     <Key>
       <PropertyRef Name="ID" />
@@ -1384,6 +1575,27 @@
     <NavigationProperty Name="DepartmentProgram" Relationship="Self.FK_MeritListMarksCriteria_DepartmentPrograms" FromRole="MeritListMarksCriteria" ToRole="DepartmentPrograms" />
     <NavigationProperty Name="EducationLevel" Relationship="Self.FK_MeritListMarksCriteria_EducationLevel" FromRole="MeritListMarksCriteria" ToRole="EducationLevel" />
     <NavigationProperty Name="Session" Relationship="Self.FK_MeritListMarksCriteria_Sessions" FromRole="MeritListMarksCriteria" ToRole="Sessions" />
+  </EntityType>
+  <EntityType Name="MissionUniversity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MissionStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ACMID" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ACM" Relationship="Self.FK_MissionUniversity_ACM" FromRole="MissionUniversity" ToRole="ACM" />
   </EntityType>
   <EntityType Name="Nationality">
     <Key>
@@ -1494,6 +1706,56 @@
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <Property Name="Utime" Type="Time" Precision="7" />
     <NavigationProperty Name="Organizations" Relationship="Self.FK_Organization_OrganizationSectorType" FromRole="OrganizationSectorType" ToRole="Organization" />
+  </EntityType>
+  <EntityType Name="PEO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProgramID" Type="Int32" />
+    <Property Name="BOSID" Type="Int32" />
+    <Property Name="BOFID" Type="Int32" />
+    <Property Name="ACMID" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ACM" Relationship="Self.FK_PEO_ACM" FromRole="PEO" ToRole="ACM" />
+    <NavigationProperty Name="BOF" Relationship="Self.FK_PEO_BOF" FromRole="PEO" ToRole="BOF" />
+    <NavigationProperty Name="BO" Relationship="Self.FK_PEO_BOS" FromRole="PEO" ToRole="BOS" />
+    <NavigationProperty Name="Program" Relationship="Self.FK_PEO_ProgramID" FromRole="PEO" ToRole="Programs" />
+  </EntityType>
+  <EntityType Name="PLO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProgramID" Type="Int32" />
+    <Property Name="BOSID" Type="Int32" />
+    <Property Name="BOFID" Type="Int32" />
+    <Property Name="ACMID" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ACM" Relationship="Self.FK_PLO_ACM" FromRole="PLO" ToRole="ACM" />
+    <NavigationProperty Name="BOF" Relationship="Self.FK_PLO_BOF" FromRole="PLO" ToRole="BOF" />
+    <NavigationProperty Name="BO" Relationship="Self.FK_PLO_BOS" FromRole="PLO" ToRole="BOS" />
+    <NavigationProperty Name="Program" Relationship="Self.FK_PLO_ProgramID" FromRole="PLO" ToRole="Programs" />
   </EntityType>
   <EntityType Name="ProgramCoordinator">
     <Key>
@@ -1613,10 +1875,10 @@
     <NavigationProperty Name="BO" Relationship="Self.FK_Programs_BOS" FromRole="Programs" ToRole="BOS" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_Programs_Campuses" FromRole="Programs" ToRole="Campuses" />
     <NavigationProperty Name="DepartmentPrograms" Relationship="Self.FK_DepartmentPrograms_Programs" FromRole="Programs" ToRole="DepartmentPrograms" />
+    <NavigationProperty Name="PEOs" Relationship="Self.FK_PEO_ProgramID" FromRole="Programs" ToRole="PEO" />
+    <NavigationProperty Name="PLOes" Relationship="Self.FK_PLO_ProgramID" FromRole="Programs" ToRole="PLO" />
     <NavigationProperty Name="ProgramCoordinators" Relationship="Self.FK__ProgramCo__Progr__24BD5A91" FromRole="Programs" ToRole="ProgramCoordinator" />
     <NavigationProperty Name="ProgramLevel" Relationship="Self.FK_Programs_ProgramLevels" FromRole="Programs" ToRole="ProgramLevels" />
-    <NavigationProperty Name="PEOs" Relationship="CMSModel.FK_PEO_ProgramID" FromRole="Program" ToRole="PEO" />
-    <NavigationProperty Name="PLOes" Relationship="CMSModel.FK_PLO_ProgramID" FromRole="Program" ToRole="PLO" />
   </EntityType>
   <EntityType Name="Project">
     <Key>
@@ -1794,6 +2056,114 @@
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Publications" Relationship="Self.FK_Publishing_PublishingType" FromRole="PublicationType" ToRole="Publication" />
   </EntityType>
+  <EntityType Name="QPQuestion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SrNo" Type="Int32" />
+    <Property Name="SectionID" Type="Int32" />
+    <Property Name="CLOID" Type="Int32" />
+    <Property Name="QuestionTypeID" Type="Int32" />
+    <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaximumMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PassingMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Attachment" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="AttachmentRefTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DurationInMinutes" Type="Int32" />
+    <Property Name="Option1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Option2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Option3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Option4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="CLO" Relationship="Self.FK_QPQuestion_CLO" FromRole="QPQuestion" ToRole="CLO" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK_QPQuestion_QuestionType" FromRole="QPQuestion" ToRole="QuestionType" />
+    <NavigationProperty Name="QPSection" Relationship="Self.FK_Question_Section" FromRole="QPQuestion" ToRole="QPSection" />
+  </EntityType>
+  <EntityType Name="QPQuestionPaper">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssessmentID" Type="Int32" />
+    <Property Name="DurationInMinutes" Type="Int32" />
+    <Property Name="PaperScheduledDate" Type="DateTime" Precision="3" />
+    <Property Name="PaperStartTime" Type="Time" Precision="7" />
+    <Property Name="QPType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaximumMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PassingMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Assessment" Relationship="Self.FK_QPQuestionPaper_Assessments" FromRole="QPQuestionPaper" ToRole="Assessments" />
+    <NavigationProperty Name="QPSections" Relationship="Self.FK_Section_QPQuestionPaper" FromRole="QPQuestionPaper" ToRole="QPSection" />
+  </EntityType>
+  <EntityType Name="QPSection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SrNo" Type="Int32" />
+    <Property Name="QuestionPaperId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Attachment" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="AttachmentRefTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaximumMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PassingMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DurationInMinutes" Type="Int32" />
+    <Property Name="OnSeparatePages" Type="Boolean" Nullable="false" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="QPQuestions" Relationship="Self.FK_Question_Section" FromRole="QPSection" ToRole="QPQuestion" />
+    <NavigationProperty Name="QPQuestionPaper" Relationship="Self.FK_Section_QPQuestionPaper" FromRole="QPSection" ToRole="QPQuestionPaper" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="QPQuestions" Relationship="Self.FK_QPQuestion_QuestionType" FromRole="QuestionType" ToRole="QPQuestion" />
+    <NavigationProperty Name="QuestionTypeAnswerOptions" Relationship="Self.FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption" FromRole="QuestionType" ToRole="QuestionTypeAnswerOption" />
+    <NavigationProperty Name="SurveyHeadingQAs" Relationship="Self.FK_SurveyHeadingQA_QuestionType" FromRole="QuestionType" ToRole="SurveyHeadingQA" />
+    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_QuestionType" FromRole="QuestionType" ToRole="SurveyHeadingQAResponse" />
+  </EntityType>
+  <EntityType Name="QuestionTypeAnswerOption">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
+    <Property Name="OptionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InputType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption" FromRole="QuestionTypeAnswerOption" ToRole="QuestionType" />
+  </EntityType>
   <EntityType Name="Religion">
     <Key>
       <PropertyRef Name="ID" />
@@ -1901,6 +2271,8 @@
     <NavigationProperty Name="Applicants" Relationship="Self.FK_Applicants_Sessions" FromRole="Sessions" ToRole="Applicants" />
     <NavigationProperty Name="BatchWiseCourses" Relationship="Self.FK_BatchWiseCourses_Sessions" FromRole="Sessions" ToRole="BatchWiseCourses" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_Sessions_Campuses" FromRole="Sessions" ToRole="Campuses" />
+    <NavigationProperty Name="Exams" Relationship="Self.FK_Exams_Sessions" FromRole="Sessions" ToRole="Exams" />
+    <NavigationProperty Name="ExamStudentsRollNumbers" Relationship="Self.FK_ExamStudentsRollNumbers_Sessions" FromRole="Sessions" ToRole="ExamStudentsRollNumbers" />
     <NavigationProperty Name="MeritListMarksCriterias" Relationship="Self.FK_MeritListMarksCriteria_Sessions" FromRole="Sessions" ToRole="MeritListMarksCriteria" />
     <NavigationProperty Name="ProgramEligibilities" Relationship="Self.FK_ProgramEligibility_Sessions" FromRole="Sessions" ToRole="ProgramEligibility" />
     <NavigationProperty Name="ProgramOffereds" Relationship="Self.FK_ProgramOffered_Sessions" FromRole="Sessions" ToRole="ProgramOffered" />
@@ -1912,10 +2284,11 @@
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Sessions" FromRole="Sessions" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Sessions" FromRole="Sessions" ToRole="StudentCourseWithDrawn" />
     <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Sessions" FromRole="Sessions" ToRole="StudentFee" />
+    <NavigationProperty Name="StudentProgramChangeHistories" Relationship="Self.FK_StudentProgramChangeHistory_Sessions" FromRole="Sessions" ToRole="StudentProgramChangeHistory" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSessions_Sessions" FromRole="Sessions" ToRole="StudentSemester" />
+    <NavigationProperty Name="SurveyInitiateds" Relationship="Self.FK_SurveyInitiated_Sessions" FromRole="Sessions" ToRole="SurveyInitiated" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Sessions" FromRole="Sessions" ToRole="SurveyInitiatedResponse" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Sessions" FromRole="Sessions" ToRole="TeacherCourses" />
-    <NavigationProperty Name="StudentProgramChangeHistories" Relationship="CMSModel.FK_StudentProgramChangeHistory_Sessions" FromRole="Session" ToRole="StudentProgramChangeHistory" />
-    <NavigationProperty Name="SurveyInitiateds" Relationship="CMSModel.FK_SurveyInitiated_Sessions" FromRole="Session" ToRole="SurveyInitiated" />
   </EntityType>
   <EntityType Name="SessionWiseMeritList">
     <Key>
@@ -2035,10 +2408,19 @@
     <Property Name="CourseID" Type="Int32" />
     <Property Name="TeacherCourseID" Type="Int32" Nullable="false" />
     <Property Name="Section" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="TakenCrHr" Type="Int32" />
+    <Property Name="EarnedCrHr" Type="Int32" />
     <Property Name="GP" Type="Double" />
     <Property Name="Grade" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="GradingDate" Type="DateTime" Precision="0" />
+    <Property Name="GradingTime" Type="Time" Precision="7" />
+    <Property Name="GradingBy" Type="Int32" />
     <Property Name="IsCourseLock" Type="Boolean" Nullable="false" />
     <Property Name="IsResultFinalized" Type="Boolean" Nullable="false" />
+    <Property Name="ResultFinalizedDate" Type="DateTime" Precision="0" />
+    <Property Name="ResultFinalizedTime" Type="Time" Precision="7" />
+    <Property Name="ResultFinalizedBy" Type="Int32" />
+    <Property Name="IsRepeated" Type="Boolean" Nullable="false" />
     <Property Name="IsMakeUp" Type="Boolean" Nullable="false" />
     <Property Name="IsDropped" Type="Boolean" Nullable="false" />
     <Property Name="IsDroppedDate" Type="DateTime" Precision="0" />
@@ -2057,7 +2439,7 @@
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentCourses_Sessions" FromRole="StudentCourses" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourses_Students" FromRole="StudentCourses" ToRole="Students" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_StudentCourses" FromRole="StudentCourses" ToRole="StudentsSupervisor" />
-    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_StudentCourses" FromRole="StudentCours" ToRole="SurveyInitiatedResponse" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_StudentCourses" FromRole="StudentCourses" ToRole="SurveyInitiatedResponse" />
   </EntityType>
   <EntityType Name="StudentCourseSelection">
     <Key>
@@ -2119,6 +2501,7 @@
     <Property Name="Amount" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <Property Name="VoucherNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
     <Property Name="BankVoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2149,26 +2532,25 @@
     <NavigationProperty Name="FeeHead" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHeads" />
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
-    <Property Name="DueDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="StudentProgramChangeHistory">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SessionID" Type="Int32" />
     <Property Name="StudentID" Type="Int32" Nullable="false" />
     <Property Name="FromBatchID" Type="Int32" Nullable="false" />
     <Property Name="ToBatchID" Type="Int32" Nullable="false" />
     <Property Name="OldRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="NewRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DuringSemesterNo" Type="Int32" Nullable="false" />
+    <Property Name="ToSemesterNo" Type="Int32" Nullable="false" />
     <Property Name="ChangedDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ChangedTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="ChangedBy" Type="Int32" Nullable="false" />
-    <Property Name="SessionID" Type="Int32" />
-    <Property Name="ToSemesterNo" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_StudentProgramChangeHistory_Sessions" FromRole="StudentProgramChangeHistory" ToRole="Session" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentProgramChangeHistory_Students" FromRole="StudentProgramChangeHistory" ToRole="Student" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentProgramChangeHistory_Sessions" FromRole="StudentProgramChangeHistory" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentProgramChangeHistory_Students" FromRole="StudentProgramChangeHistory" ToRole="Students" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -2187,11 +2569,14 @@
     <Property Name="IsAdmissionCancelled" Type="Boolean" Nullable="false" />
     <Property Name="IsAdmissionCancelledBy" Type="Int32" />
     <Property Name="IsAdmissionCancelledDate" Type="DateTime" Precision="0" />
+    <Property Name="StudentGroup" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Admission" Relationship="Self.FK_Students_Admission" FromRole="Students" ToRole="Admission" />
+    <NavigationProperty Name="AssessmentDetails" Relationship="Self.FK_AssessmentDetails_Students" FromRole="Students" ToRole="AssessmentDetails" />
+    <NavigationProperty Name="ExamSeatingPlans" Relationship="Self.FK_ExamSeatingPlan_Students" FromRole="Students" ToRole="ExamSeatingPlan" />
     <NavigationProperty Name="ProgramOffered" Relationship="Self.FK_Students_ProgramOffered" FromRole="Students" ToRole="ProgramOffered" />
     <NavigationProperty Name="ProjectInvestigatedByStudents" Relationship="Self.FK_ProjectStudentsInvestigatedBy_Students" FromRole="Students" ToRole="ProjectInvestigatedByStudents" />
     <NavigationProperty Name="StudentAttendances" Relationship="Self.FK_StudentAttendance_Students" FromRole="Students" ToRole="StudentAttendance" />
@@ -2200,13 +2585,12 @@
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Students" FromRole="Students" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Students" FromRole="Students" ToRole="StudentCourseWithDrawn" />
     <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Students" FromRole="Students" ToRole="StudentFee" />
+    <NavigationProperty Name="StudentProgramChangeHistories" Relationship="Self.FK_StudentProgramChangeHistory_Students" FromRole="Students" ToRole="StudentProgramChangeHistory" />
     <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_Students" FromRole="Students" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Students" FromRole="Students" ToRole="StudentSemester" />
     <NavigationProperty Name="StudentsIDcards" Relationship="Self.FK_StudentsIDcard_Students" FromRole="Students" ToRole="StudentsIDcard" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_Students" FromRole="Students" ToRole="StudentsSupervisor" />
-    <Property Name="StudentGroup" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="StudentProgramChangeHistories" Relationship="CMSModel.FK_StudentProgramChangeHistory_Students" FromRole="Student" ToRole="StudentProgramChangeHistory" />
-    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_Students" FromRole="Student" ToRole="SurveyInitiatedResponse" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Students" FromRole="Students" ToRole="SurveyInitiatedResponse" />
   </EntityType>
   <EntityType Name="StudentsAdvisor">
     <Key>
@@ -2244,7 +2628,10 @@
     <Property Name="ScholorshipHeadID" Type="Int32" Nullable="false" />
     <Property Name="SGPA" Type="Double" Nullable="false" />
     <Property Name="CGPA" Type="Double" Nullable="false" />
+    <Property Name="TotalTakenCrHr" Type="Int32" />
+    <Property Name="TotalEarnedCrHr" Type="Int32" />
     <Property Name="ResultFinalized" Type="Boolean" Nullable="false" />
+    <Property Name="Probation" Type="Int32" />
     <Property Name="CrBy" Type="Int32" Nullable="false" />
     <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
@@ -2252,6 +2639,20 @@
     <NavigationProperty Name="Campus" Relationship="Self.FK_StudentSemester_Campuses" FromRole="StudentSemester" ToRole="Campuses" />
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentSessions_Sessions" FromRole="StudentSemester" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentSemester_Students" FromRole="StudentSemester" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="StudentsGroupColor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
   </EntityType>
   <EntityType Name="StudentsIDcard">
     <Key>
@@ -2313,6 +2714,217 @@
     <NavigationProperty Name="Menu" Relationship="Self.FK_SubMenus_Menus" FromRole="SubMenus" ToRole="Menus" />
     <NavigationProperty Name="RoleWiseMenus" Relationship="Self.FK_RoleWiseMenus_SubMenus" FromRole="SubMenus" ToRole="RoleWiseMenus" />
   </EntityType>
+  <EntityType Name="Survey">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="SurveyTypeID" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="SurveyType" Relationship="Self.FK_Survey_SurveyType" FromRole="Survey" ToRole="SurveyType" />
+    <NavigationProperty Name="SurveyHeadings" Relationship="Self.FK_SurveyHeading_Survey" FromRole="Survey" ToRole="SurveyHeading" />
+    <NavigationProperty Name="SurveyInitiateds" Relationship="Self.FK_SurveyInitiated_Survey" FromRole="Survey" ToRole="SurveyInitiated" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Survey" FromRole="Survey" ToRole="SurveyInitiatedResponse" />
+  </EntityType>
+  <EntityType Name="SurveyHeading">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SortNo" Type="Int32" />
+    <Property Name="SurveyID" Type="Int32" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Survey" Relationship="Self.FK_SurveyHeading_Survey" FromRole="SurveyHeading" ToRole="Survey" />
+    <NavigationProperty Name="SurveyHeadingQAs" Relationship="Self.FK_SurveyHeadingQA_SurveyHeading" FromRole="SurveyHeading" ToRole="SurveyHeadingQA" />
+    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyHeading" FromRole="SurveyHeading" ToRole="SurveyHeadingQAResponse" />
+  </EntityType>
+  <EntityType Name="SurveyHeadingQA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SurveyHeadingID" Type="Int32" Nullable="false" />
+    <Property Name="StronglyDisagree" Type="Boolean" />
+    <Property Name="Disagree" Type="Boolean" />
+    <Property Name="Uncertain" Type="Boolean" />
+    <Property Name="Agree" Type="Boolean" />
+    <Property Name="StronglyAgree" Type="Boolean" />
+    <Property Name="SortNo" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK_SurveyHeadingQA_QuestionType" FromRole="SurveyHeadingQA" ToRole="QuestionType" />
+    <NavigationProperty Name="SurveyHeading" Relationship="Self.FK_SurveyHeadingQA_SurveyHeading" FromRole="SurveyHeadingQA" ToRole="SurveyHeading" />
+    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyHeadingQA" FromRole="SurveyHeadingQA" ToRole="SurveyHeadingQAResponse" />
+  </EntityType>
+  <EntityType Name="SurveyHeadingQAResponse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SurveyInitiatedResponseID" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
+    <Property Name="SurveyHeadingQAID" Type="Int32" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SurveyHeadingID" Type="Int32" Nullable="false" />
+    <Property Name="StronglyDisagree" Type="Boolean" />
+    <Property Name="Disagree" Type="Boolean" />
+    <Property Name="Uncertain" Type="Boolean" />
+    <Property Name="Agree" Type="Boolean" />
+    <Property Name="StronglyAgree" Type="Boolean" />
+    <Property Name="SortNo" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="QuestionType" Relationship="Self.FK_SurveyHeadingQAResponse_QuestionType" FromRole="SurveyHeadingQAResponse" ToRole="QuestionType" />
+    <NavigationProperty Name="SurveyHeading" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyHeading" FromRole="SurveyHeadingQAResponse" ToRole="SurveyHeading" />
+    <NavigationProperty Name="SurveyHeadingQA" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyHeadingQA" FromRole="SurveyHeadingQAResponse" ToRole="SurveyHeadingQA" />
+    <NavigationProperty Name="SurveyInitiatedResponse" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyHeadingQAResponse" ToRole="SurveyInitiatedResponse" />
+  </EntityType>
+  <EntityType Name="SurveyInitiated">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="SessionID" Type="Int32" />
+    <Property Name="OpeningDate" Type="DateTime" Precision="0" />
+    <Property Name="ClosingDate" Type="DateTime" Precision="0" />
+    <Property Name="SurveyID" Type="Int32" />
+    <Property Name="EvaluationCycleID" Type="Int32" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="EvaluationCycle" Relationship="Self.FK_SurveyInitiated_EvaluationCycle" FromRole="SurveyInitiated" ToRole="EvaluationCycle" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_SurveyInitiated_Sessions" FromRole="SurveyInitiated" ToRole="Sessions" />
+    <NavigationProperty Name="Survey" Relationship="Self.FK_SurveyInitiated_Survey" FromRole="SurveyInitiated" ToRole="Survey" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiated" ToRole="SurveyInitiatedResponse" />
+  </EntityType>
+  <EntityType Name="SurveyInitiatedResponse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SurveyInititatedID" Type="Int32" />
+    <Property Name="SurveyID" Type="Int32" />
+    <Property Name="StudentCourseID" Type="Int32" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="TeacherCoursesID" Type="Int32" />
+    <Property Name="SessionID" Type="Int32" />
+    <Property Name="CourseID" Type="Int32" />
+    <Property Name="Section" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Submitted" Type="Boolean" />
+    <Property Name="SubmittedBy" Type="Int32" />
+    <Property Name="SubmittedDate" Type="DateTime" Precision="0" />
+    <Property Name="SubmittedTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_SurveyInitiatedResponse_Course" FromRole="SurveyInitiatedResponse" ToRole="Course" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_SurveyInitiatedResponse_Sessions" FromRole="SurveyInitiatedResponse" ToRole="Sessions" />
+    <NavigationProperty Name="StudentCours" Relationship="Self.FK_SurveyInitiatedResponse_StudentCourses" FromRole="SurveyInitiatedResponse" ToRole="StudentCourses" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_SurveyInitiatedResponse_Students" FromRole="SurveyInitiatedResponse" ToRole="Students" />
+    <NavigationProperty Name="Survey" Relationship="Self.FK_SurveyInitiatedResponse_Survey" FromRole="SurveyInitiatedResponse" ToRole="Survey" />
+    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyInitiatedResponse" ToRole="SurveyHeadingQAResponse" />
+    <NavigationProperty Name="SurveyInitiated" Relationship="Self.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiatedResponse" ToRole="SurveyInitiated" />
+    <NavigationProperty Name="TeacherCours" Relationship="Self.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="SurveyInitiatedResponse" ToRole="TeacherCourses" />
+  </EntityType>
+  <EntityType Name="SurveyType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="UDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Surveys" Relationship="Self.FK_Survey_SurveyType" FromRole="SurveyType" ToRole="Survey" />
+  </EntityType>
+  <EntityType Name="TaxonomyActionVerb">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TaxonomyLevelID" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CLOes" Relationship="Self.FK__CLO__TaxonomyDes__310E22DD" FromRole="TaxonomyActionVerb" ToRole="CLO" />
+    <NavigationProperty Name="TaxonomyLevel" Relationship="Self.FK__TaxonomyD__Taxon__2C496DC0" FromRole="TaxonomyActionVerb" ToRole="TaxonomyLevel" />
+  </EntityType>
+  <EntityType Name="TaxonomyDomain">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Short" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TaxonomyLevels" Relationship="Self.FK__TaxonomyL__Taxon__296D0115" FromRole="TaxonomyDomain" ToRole="TaxonomyLevel" />
+  </EntityType>
+  <EntityType Name="TaxonomyLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LevelNo" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TaxonomyDomainID" Type="Int32" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="3" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TaxonomyActionVerbs" Relationship="Self.FK__TaxonomyD__Taxon__2C496DC0" FromRole="TaxonomyLevel" ToRole="TaxonomyActionVerb" />
+    <NavigationProperty Name="TaxonomyDomain" Relationship="Self.FK__TaxonomyL__Taxon__296D0115" FromRole="TaxonomyLevel" ToRole="TaxonomyDomain" />
+  </EntityType>
   <EntityType Name="TeacherAttendance">
     <Key>
       <PropertyRef Name="ID" />
@@ -2353,12 +2965,13 @@
     <Property Name="CrTime" Type="Time" Precision="7" />
     <Property Name="UBy" Type="Int32" Nullable="false" />
     <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Assessments" Relationship="Self.FK_Assessments_TeacherCourses" FromRole="TeacherCourses" ToRole="Assessments" />
     <NavigationProperty Name="Campus" Relationship="Self.FK_TeacherCourses_Campuses" FromRole="TeacherCourses" ToRole="Campuses" />
     <NavigationProperty Name="Course" Relationship="Self.FK_TeacherCourses_Course" FromRole="TeacherCourses" ToRole="Course" />
     <NavigationProperty Name="EmpForm" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="TeacherCourses" ToRole="EmpForm" />
     <NavigationProperty Name="Session" Relationship="Self.FK_TeacherCourses_Sessions" FromRole="TeacherCourses" ToRole="Sessions" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="TeacherCourses" ToRole="SurveyInitiatedResponse" />
     <NavigationProperty Name="TeacherAttendances" Relationship="Self.FK_TeacherAttendance_TeacherCourses" FromRole="TeacherCourses" ToRole="TeacherAttendance" />
-    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="TeacherCours" ToRole="SurveyInitiatedResponse" />
   </EntityType>
   <EntityType Name="TestApplicant">
     <Key>
@@ -2523,6 +3136,27 @@
     <Property Name="CrDate" Type="DateTime" Precision="0" />
     <Property Name="UBy" Type="Int32" />
     <Property Name="UDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="VissionUniversity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="VissionStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ACMID" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="isNotActiveBy" Type="Int32" />
+    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
+    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
+    <Property Name="CrBy" Type="Int32" />
+    <Property Name="CrDate" Type="DateTime" Precision="0" />
+    <Property Name="CrTime" Type="Time" Precision="7" />
+    <Property Name="UBy" Type="Int32" />
+    <Property Name="UTime" Type="Time" Precision="7" />
+    <Property Name="UDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ACM" Relationship="Self.FK_VissionUniversity_ACM" FromRole="VissionUniversity" ToRole="ACM" />
   </EntityType>
   <EntityType Name="MajorSubjectListOfCours">
     <Key>
@@ -2708,6 +3342,18 @@
     <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IsAttend" Type="Boolean" Nullable="false" />
   </EntityType>
+  <Association Name="FK__CLO__ACMID__34DEB3C1">
+    <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
+    <End Role="CLO" Type="Self.CLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CLO">
+        <PropertyRef Name="ACMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AssessmentPolicy_ACM">
     <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
     <End Role="AssessmentPolicy" Type="Self.AssessmentPolicy" Multiplicity="*" />
@@ -2744,6 +3390,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_MissionUniversity_ACM">
+    <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
+    <End Role="MissionUniversity" Type="Self.MissionUniversity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MissionUniversity">
+        <PropertyRef Name="ACMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEO_ACM">
+    <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
+    <End Role="PEO" Type="Self.PEO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PEO">
+        <PropertyRef Name="ACMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLO_ACM">
+    <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
+    <End Role="PLO" Type="Self.PLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLO">
+        <PropertyRef Name="ACMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Programs_ACM">
     <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
     <End Role="Programs" Type="Self.Program" Multiplicity="*" />
@@ -2752,6 +3434,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Programs">
+        <PropertyRef Name="ACMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VissionUniversity_ACM">
+    <End Role="ACM" Type="Self.ACM" Multiplicity="0..1" />
+    <End Role="VissionUniversity" Type="Self.VissionUniversity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VissionUniversity">
         <PropertyRef Name="ACMID" />
       </Dependent>
     </ReferentialConstraint>
@@ -3224,6 +3918,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AssessmentDetails_Assessments">
+    <End Role="Assessments" Type="Self.Assessment" Multiplicity="1" />
+    <End Role="AssessmentDetails" Type="Self.AssessmentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Assessments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssessmentDetails">
+        <PropertyRef Name="AssessmentsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssessmentDetails_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="AssessmentDetails" Type="Self.AssessmentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssessmentDetails">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssessmentNames_Campuses">
+    <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
+    <End Role="AssessmentNames" Type="Self.AssessmentName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campuses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssessmentNames">
+        <PropertyRef Name="CampusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assessments_AssessmentNames">
+    <End Role="AssessmentNames" Type="Self.AssessmentName" Multiplicity="1" />
+    <End Role="Assessments" Type="Self.Assessment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssessmentNames">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assessments">
+        <PropertyRef Name="AssessmentNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Assessments_TeacherCourses">
+    <End Role="TeacherCourses" Type="Self.TeacherCours" Multiplicity="1" />
+    <End Role="Assessments" Type="Self.Assessment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TeacherCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assessments">
+        <PropertyRef Name="TeacherCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QPQuestionPaper_Assessments">
+    <End Role="Assessments" Type="Self.Assessment" Multiplicity="0..1" />
+    <End Role="QPQuestionPaper" Type="Self.QPQuestionPaper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Assessments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QPQuestionPaper">
+        <PropertyRef Name="AssessmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BatchWiseCourses_Sessions">
     <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
     <End Role="BatchWiseCourses" Type="Self.BatchWiseCours" Multiplicity="*" />
@@ -3272,6 +4038,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__CLO__BOFID__33EA8F88">
+    <End Role="BOF" Type="Self.BOF" Multiplicity="0..1" />
+    <End Role="CLO" Type="Self.CLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOF">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CLO">
+        <PropertyRef Name="BOFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BOF_Faculty">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="BOF" Type="Self.BOF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BOF">
+        <PropertyRef Name="FacultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEO_BOF">
+    <End Role="BOF" Type="Self.BOF" Multiplicity="0..1" />
+    <End Role="PEO" Type="Self.PEO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOF">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PEO">
+        <PropertyRef Name="BOFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLO_BOF">
+    <End Role="BOF" Type="Self.BOF" Multiplicity="0..1" />
+    <End Role="PLO" Type="Self.PLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOF">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLO">
+        <PropertyRef Name="BOFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Programs_BOF">
     <End Role="BOF" Type="Self.BOF" Multiplicity="0..1" />
     <End Role="Programs" Type="Self.Program" Multiplicity="*" />
@@ -3281,6 +4095,54 @@
       </Principal>
       <Dependent Role="Programs">
         <PropertyRef Name="BOFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CLO__BOSID__32F66B4F">
+    <End Role="BOS" Type="Self.BO" Multiplicity="0..1" />
+    <End Role="CLO" Type="Self.CLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CLO">
+        <PropertyRef Name="BOSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BOS_Departments">
+    <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="BOS" Type="Self.BO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BOS">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEO_BOS">
+    <End Role="BOS" Type="Self.BO" Multiplicity="0..1" />
+    <End Role="PEO" Type="Self.PEO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PEO">
+        <PropertyRef Name="BOSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLO_BOS">
+    <End Role="BOS" Type="Self.BO" Multiplicity="0..1" />
+    <End Role="PLO" Type="Self.PLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLO">
+        <PropertyRef Name="BOSID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3500,6 +4362,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__CLO__CourseID__32024716">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CLO" Type="Self.CLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CLO">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CLO__TaxonomyDes__310E22DD">
+    <End Role="TaxonomyActionVerb" Type="Self.TaxonomyActionVerb" Multiplicity="1" />
+    <End Role="CLO" Type="Self.CLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxonomyActionVerb">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CLO">
+        <PropertyRef Name="TaxonomyActionVerbID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QPQuestion_CLO">
+    <End Role="CLO" Type="Self.CLO" Multiplicity="0..1" />
+    <End Role="QPQuestion" Type="Self.QPQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QPQuestion">
+        <PropertyRef Name="CLOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CMSUsers_EmpForm">
     <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="1" />
     <End Role="CMSUsers" Type="Self.CMSUser" Multiplicity="*" />
@@ -3620,6 +4518,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ExamDateSheet_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="ExamDateSheet" Type="Self.ExamDateSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ExamDateSheet">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentAttendance_Course">
     <End Role="Course" Type="Self.Course" Multiplicity="1" />
     <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
@@ -3676,6 +4586,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
         <PropertyRef Name="CourseID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4340,6 +5262,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SurveyInitiated_EvaluationCycle">
+    <End Role="EvaluationCycle" Type="Self.EvaluationCycle" Multiplicity="0..1" />
+    <End Role="SurveyInitiated" Type="Self.SurveyInitiated" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EvaluationCycle">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiated">
+        <PropertyRef Name="EvaluationCycleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamDateSheet_Exams">
+    <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
+    <End Role="ExamDateSheet" Type="Self.ExamDateSheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exams">
+        <PropertyRef Name="ExamID" />
+      </Principal>
+      <Dependent Role="ExamDateSheet">
+        <PropertyRef Name="ExamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamSeatingPlan_ExamSeatingPlan">
+    <End Role="ExamDateSheet" Type="Self.ExamDateSheet" Multiplicity="1" />
+    <End Role="ExamSeatingPlan" Type="Self.ExamSeatingPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamDateSheet">
+        <PropertyRef Name="ExamDateSheetID" />
+      </Principal>
+      <Dependent Role="ExamSeatingPlan">
+        <PropertyRef Name="ExamDateSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exams_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="Exams" Type="Self.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Exams">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamSeatingPlan_Locations">
+    <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+    <End Role="ExamSeatingPlan" Type="Self.ExamSeatingPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="ExamSeatingPlan">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamSeatingPlan_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="ExamSeatingPlan" Type="Self.ExamSeatingPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ExamSeatingPlan">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamStudentsRollNumbers_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="ExamStudentsRollNumbers" Type="Self.ExamStudentsRollNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ExamStudentsRollNumbers">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__FacultyHe__Facul__194BA7E5">
     <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
     <End Role="FacultyHead" Type="Self.FacultyHead" Multiplicity="*" />
@@ -4505,6 +5511,30 @@
       </Principal>
       <Dependent Role="ProjectAwardedByOrganization">
         <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEO_ProgramID">
+    <End Role="Programs" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="PEO" Type="Self.PEO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PEO">
+        <PropertyRef Name="ProgramID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLO_ProgramID">
+    <End Role="Programs" Type="Self.Program" Multiplicity="0..1" />
+    <End Role="PLO" Type="Self.PLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLO">
+        <PropertyRef Name="ProgramID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4688,6 +5718,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_QPQuestion_QuestionType">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="0..1" />
+    <End Role="QPQuestion" Type="Self.QPQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QPQuestion">
+        <PropertyRef Name="QuestionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_Section">
+    <End Role="QPSection" Type="Self.QPSection" Multiplicity="0..1" />
+    <End Role="QPQuestion" Type="Self.QPQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QPSection">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QPQuestion">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Section_QPQuestionPaper">
+    <End Role="QPQuestionPaper" Type="Self.QPQuestionPaper" Multiplicity="0..1" />
+    <End Role="QPSection" Type="Self.QPSection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QPQuestionPaper">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QPSection">
+        <PropertyRef Name="QuestionPaperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+    <End Role="QuestionTypeAnswerOption" Type="Self.QuestionTypeAnswerOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuestionTypeAnswerOption">
+        <PropertyRef Name="QuestionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQA_QuestionType">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+    <End Role="SurveyHeadingQA" Type="Self.SurveyHeadingQA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQA">
+        <PropertyRef Name="QuestionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQAResponse_QuestionType">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+    <End Role="SurveyHeadingQAResponse" Type="Self.SurveyHeadingQAResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQAResponse">
+        <PropertyRef Name="QuestionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_RoleWiseMenus_Roles1">
     <End Role="Roles" Type="Self.Role" Multiplicity="1" />
     <End Role="RoleWiseMenus" Type="Self.RoleWiseMenu" Multiplicity="*" />
@@ -4808,6 +5910,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentProgramChangeHistory_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
+    <End Role="StudentProgramChangeHistory" Type="Self.StudentProgramChangeHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentProgramChangeHistory">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentSessions_Sessions">
     <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
     <End Role="StudentSemester" Type="Self.StudentSemester" Multiplicity="*" />
@@ -4816,6 +5930,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentSemester">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiated_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
+    <End Role="SurveyInitiated" Type="Self.SurveyInitiated" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiated">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
         <PropertyRef Name="SessionID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4892,6 +6030,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SurveyInitiatedResponse_StudentCourses">
+    <End Role="StudentCourses" Type="Self.StudentCours" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="StudentCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentCourseSelection_Students">
     <End Role="Students" Type="Self.Student" Multiplicity="1" />
     <End Role="StudentCourseSelection" Type="Self.StudentCourseSelection" Multiplicity="*" />
@@ -4924,6 +6074,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentFee">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentProgramChangeHistory_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentProgramChangeHistory" Type="Self.StudentProgramChangeHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentProgramChangeHistory">
         <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4973,6 +6135,162 @@
       </Principal>
       <Dependent Role="StudentsSupervisor">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Survey_SurveyType">
+    <End Role="SurveyType" Type="Self.SurveyType" Multiplicity="0..1" />
+    <End Role="Survey" Type="Self.Survey" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Survey">
+        <PropertyRef Name="SurveyTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeading_Survey">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+    <End Role="SurveyHeading" Type="Self.SurveyHeading" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeading">
+        <PropertyRef Name="SurveyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiated_Survey">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="0..1" />
+    <End Role="SurveyInitiated" Type="Self.SurveyInitiated" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiated">
+        <PropertyRef Name="SurveyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_Survey">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="SurveyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQA_SurveyHeading">
+    <End Role="SurveyHeading" Type="Self.SurveyHeading" Multiplicity="1" />
+    <End Role="SurveyHeadingQA" Type="Self.SurveyHeadingQA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyHeading">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQA">
+        <PropertyRef Name="SurveyHeadingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQAResponse_SurveyHeading">
+    <End Role="SurveyHeading" Type="Self.SurveyHeading" Multiplicity="1" />
+    <End Role="SurveyHeadingQAResponse" Type="Self.SurveyHeadingQAResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyHeading">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQAResponse">
+        <PropertyRef Name="SurveyHeadingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQAResponse_SurveyHeadingQA">
+    <End Role="SurveyHeadingQA" Type="Self.SurveyHeadingQA" Multiplicity="0..1" />
+    <End Role="SurveyHeadingQAResponse" Type="Self.SurveyHeadingQAResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyHeadingQA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQAResponse">
+        <PropertyRef Name="SurveyHeadingQAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyHeadingQAResponse_SurveyInitiatedResponse">
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="1" />
+    <End Role="SurveyHeadingQAResponse" Type="Self.SurveyHeadingQAResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyInitiatedResponse">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyHeadingQAResponse">
+        <PropertyRef Name="SurveyInitiatedResponseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_SurveyInitiated">
+    <End Role="SurveyInitiated" Type="Self.SurveyInitiated" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SurveyInitiated">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="SurveyInititatedID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyInitiatedResponse_TeacherCourses">
+    <End Role="TeacherCourses" Type="Self.TeacherCours" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TeacherCourses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="TeacherCoursesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TaxonomyD__Taxon__2C496DC0">
+    <End Role="TaxonomyLevel" Type="Self.TaxonomyLevel" Multiplicity="0..1" />
+    <End Role="TaxonomyActionVerb" Type="Self.TaxonomyActionVerb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxonomyLevel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TaxonomyActionVerb">
+        <PropertyRef Name="TaxonomyLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TaxonomyL__Taxon__296D0115">
+    <End Role="TaxonomyDomain" Type="Self.TaxonomyDomain" Multiplicity="0..1" />
+    <End Role="TaxonomyLevel" Type="Self.TaxonomyLevel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxonomyDomain">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TaxonomyLevel">
+        <PropertyRef Name="TaxonomyDomainID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5109,12 +6427,16 @@
     <EntitySet Name="ApplicantInterviewMarks" EntityType="Self.ApplicantInterviewMark" />
     <EntitySet Name="ApplicantPreferences" EntityType="Self.ApplicantPreference" />
     <EntitySet Name="Applicants" EntityType="Self.Applicant" />
+    <EntitySet Name="AssessmentDetails" EntityType="Self.AssessmentDetail" />
+    <EntitySet Name="AssessmentNames" EntityType="Self.AssessmentName" />
     <EntitySet Name="AssessmentPolicies" EntityType="Self.AssessmentPolicy" />
+    <EntitySet Name="Assessments" EntityType="Self.Assessment" />
     <EntitySet Name="BatchWiseCourses" EntityType="Self.BatchWiseCours" />
     <EntitySet Name="Boards" EntityType="Self.Board" />
     <EntitySet Name="BOFs" EntityType="Self.BOF" />
     <EntitySet Name="BOS" EntityType="Self.BO" />
     <EntitySet Name="Campuses" EntityType="Self.Campus" />
+    <EntitySet Name="CLOes" EntityType="Self.CLO" />
     <EntitySet Name="CMSUsers" EntityType="Self.CMSUser" />
     <EntitySet Name="Courses" EntityType="Self.Course" />
     <EntitySet Name="CourseCategoryInstitutionals" EntityType="Self.CourseCategoryInstitutional" />
@@ -5145,6 +6467,11 @@
     <EntitySet Name="EmpQualifications" EntityType="Self.EmpQualification" />
     <EntitySet Name="EmpReferences" EntityType="Self.EmpReference" />
     <EntitySet Name="EmpTrainings" EntityType="Self.EmpTraining" />
+    <EntitySet Name="EvaluationCycles" EntityType="Self.EvaluationCycle" />
+    <EntitySet Name="ExamDateSheets" EntityType="Self.ExamDateSheet" />
+    <EntitySet Name="Exams" EntityType="Self.Exam" />
+    <EntitySet Name="ExamSeatingPlans" EntityType="Self.ExamSeatingPlan" />
+    <EntitySet Name="ExamStudentsRollNumbers" EntityType="Self.ExamStudentsRollNumber" />
     <EntitySet Name="Faculties" EntityType="Self.Faculty" />
     <EntitySet Name="FacultyHeads" EntityType="Self.FacultyHead" />
     <EntitySet Name="FeeCriterias" EntityType="Self.FeeCriteria" />
@@ -5156,15 +6483,19 @@
     <EntitySet Name="JobPositions" EntityType="Self.JobPosition" />
     <EntitySet Name="JobScales" EntityType="Self.JobScale" />
     <EntitySet Name="JobTypes" EntityType="Self.JobType" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
     <EntitySet Name="MajorSubjects" EntityType="Self.MajorSubject" />
     <EntitySet Name="Menus" EntityType="Self.Menu" />
     <EntitySet Name="MeritListMarksCriterias" EntityType="Self.MeritListMarksCriteria" />
+    <EntitySet Name="MissionUniversities" EntityType="Self.MissionUniversity" />
     <EntitySet Name="Nationalities" EntityType="Self.Nationality" />
     <EntitySet Name="OnlinePaymentMappings" EntityType="Self.OnlinePaymentMapping" />
     <EntitySet Name="OnlinePaymentVenders" EntityType="Self.OnlinePaymentVender" />
     <EntitySet Name="Organizations" EntityType="Self.Organization" />
     <EntitySet Name="OrganizationLegalTypes" EntityType="Self.OrganizationLegalType" />
     <EntitySet Name="OrganizationSectorTypes" EntityType="Self.OrganizationSectorType" />
+    <EntitySet Name="PEOs" EntityType="Self.PEO" />
+    <EntitySet Name="PLOes" EntityType="Self.PLO" />
     <EntitySet Name="ProgramCoordinators" EntityType="Self.ProgramCoordinator" />
     <EntitySet Name="ProgramEligibilities" EntityType="Self.ProgramEligibility" />
     <EntitySet Name="ProgramLevels" EntityType="Self.ProgramLevel" />
@@ -5180,6 +6511,11 @@
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="Publications" EntityType="Self.Publication" />
     <EntitySet Name="PublicationTypes" EntityType="Self.PublicationType" />
+    <EntitySet Name="QPQuestions" EntityType="Self.QPQuestion" />
+    <EntitySet Name="QPQuestionPapers" EntityType="Self.QPQuestionPaper" />
+    <EntitySet Name="QPSections" EntityType="Self.QPSection" />
+    <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+    <EntitySet Name="QuestionTypeAnswerOptions" EntityType="Self.QuestionTypeAnswerOption" />
     <EntitySet Name="Religions" EntityType="Self.Religion" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="RoleWiseMenus" EntityType="Self.RoleWiseMenu" />
@@ -5200,9 +6536,20 @@
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="StudentsAdvisors" EntityType="Self.StudentsAdvisor" />
     <EntitySet Name="StudentSemesters" EntityType="Self.StudentSemester" />
+    <EntitySet Name="StudentsGroupColors" EntityType="Self.StudentsGroupColor" />
     <EntitySet Name="StudentsIDcards" EntityType="Self.StudentsIDcard" />
     <EntitySet Name="StudentsSupervisors" EntityType="Self.StudentsSupervisor" />
     <EntitySet Name="SubMenus" EntityType="Self.SubMenu" />
+    <EntitySet Name="Surveys" EntityType="Self.Survey" />
+    <EntitySet Name="SurveyHeadings" EntityType="Self.SurveyHeading" />
+    <EntitySet Name="SurveyHeadingQAs" EntityType="Self.SurveyHeadingQA" />
+    <EntitySet Name="SurveyHeadingQAResponses" EntityType="Self.SurveyHeadingQAResponse" />
+    <EntitySet Name="SurveyInitiateds" EntityType="Self.SurveyInitiated" />
+    <EntitySet Name="SurveyInitiatedResponses" EntityType="Self.SurveyInitiatedResponse" />
+    <EntitySet Name="SurveyTypes" EntityType="Self.SurveyType" />
+    <EntitySet Name="TaxonomyActionVerbs" EntityType="Self.TaxonomyActionVerb" />
+    <EntitySet Name="TaxonomyDomains" EntityType="Self.TaxonomyDomain" />
+    <EntitySet Name="TaxonomyLevels" EntityType="Self.TaxonomyLevel" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="TeacherCourses" EntityType="Self.TeacherCours" />
     <EntitySet Name="TestApplicants" EntityType="Self.TestApplicant" />
@@ -5213,11 +6560,16 @@
     <EntitySet Name="TestVouchers" EntityType="Self.TestVoucher" />
     <EntitySet Name="Titles" EntityType="Self.Title" />
     <EntitySet Name="Universities" EntityType="Self.University" />
+    <EntitySet Name="VissionUniversities" EntityType="Self.VissionUniversity" />
     <EntitySet Name="MajorSubjectListOfCourses" EntityType="Self.MajorSubjectListOfCours" />
     <EntitySet Name="v_MeritList" EntityType="Self.v_MeritList" />
     <EntitySet Name="v_TestAdmitCard" EntityType="Self.v_TestAdmitCard" />
     <EntitySet Name="v_TestCalenders" EntityType="Self.v_TestCalenders" />
     <EntitySet Name="v_TestVouchers" EntityType="Self.v_TestVouchers" />
+    <AssociationSet Name="FK__CLO__ACMID__34DEB3C1" Association="Self.FK__CLO__ACMID__34DEB3C1">
+      <End Role="ACM" EntitySet="ACMs" />
+      <End Role="CLO" EntitySet="CLOes" />
+    </AssociationSet>
     <AssociationSet Name="FK_AssessmentPolicy_ACM" Association="Self.FK_AssessmentPolicy_ACM">
       <End Role="ACM" EntitySet="ACMs" />
       <End Role="AssessmentPolicy" EntitySet="AssessmentPolicies" />
@@ -5230,9 +6582,25 @@
       <End Role="ACM" EntitySet="ACMs" />
       <End Role="GradingPolicy" EntitySet="GradingPolicies" />
     </AssociationSet>
+    <AssociationSet Name="FK_MissionUniversity_ACM" Association="Self.FK_MissionUniversity_ACM">
+      <End Role="ACM" EntitySet="ACMs" />
+      <End Role="MissionUniversity" EntitySet="MissionUniversities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEO_ACM" Association="Self.FK_PEO_ACM">
+      <End Role="ACM" EntitySet="ACMs" />
+      <End Role="PEO" EntitySet="PEOs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLO_ACM" Association="Self.FK_PLO_ACM">
+      <End Role="ACM" EntitySet="ACMs" />
+      <End Role="PLO" EntitySet="PLOes" />
+    </AssociationSet>
     <AssociationSet Name="FK_Programs_ACM" Association="Self.FK_Programs_ACM">
       <End Role="ACM" EntitySet="ACMs" />
       <End Role="Programs" EntitySet="Programs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VissionUniversity_ACM" Association="Self.FK_VissionUniversity_ACM">
+      <End Role="ACM" EntitySet="ACMs" />
+      <End Role="VissionUniversity" EntitySet="VissionUniversities" />
     </AssociationSet>
     <AssociationSet Name="FK_Admission_Applicants" Association="Self.FK_Admission_Applicants">
       <End Role="Applicants" EntitySet="Applicants" />
@@ -5390,6 +6758,30 @@
       <End Role="Applicants" EntitySet="Applicants" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
+    <AssociationSet Name="FK_AssessmentDetails_Assessments" Association="Self.FK_AssessmentDetails_Assessments">
+      <End Role="Assessments" EntitySet="Assessments" />
+      <End Role="AssessmentDetails" EntitySet="AssessmentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssessmentDetails_Students" Association="Self.FK_AssessmentDetails_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="AssessmentDetails" EntitySet="AssessmentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssessmentNames_Campuses" Association="Self.FK_AssessmentNames_Campuses">
+      <End Role="Campuses" EntitySet="Campuses" />
+      <End Role="AssessmentNames" EntitySet="AssessmentNames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assessments_AssessmentNames" Association="Self.FK_Assessments_AssessmentNames">
+      <End Role="AssessmentNames" EntitySet="AssessmentNames" />
+      <End Role="Assessments" EntitySet="Assessments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assessments_TeacherCourses" Association="Self.FK_Assessments_TeacherCourses">
+      <End Role="TeacherCourses" EntitySet="TeacherCourses" />
+      <End Role="Assessments" EntitySet="Assessments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QPQuestionPaper_Assessments" Association="Self.FK_QPQuestionPaper_Assessments">
+      <End Role="Assessments" EntitySet="Assessments" />
+      <End Role="QPQuestionPaper" EntitySet="QPQuestionPapers" />
+    </AssociationSet>
     <AssociationSet Name="FK_BatchWiseCourses_Sessions" Association="Self.FK_BatchWiseCourses_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="BatchWiseCourses" EntitySet="BatchWiseCourses" />
@@ -5406,9 +6798,41 @@
       <End Role="ProgramOffered" EntitySet="ProgramOffereds" />
       <End Role="BatchWiseCourses" EntitySet="BatchWiseCourses" />
     </AssociationSet>
+    <AssociationSet Name="FK__CLO__BOFID__33EA8F88" Association="Self.FK__CLO__BOFID__33EA8F88">
+      <End Role="BOF" EntitySet="BOFs" />
+      <End Role="CLO" EntitySet="CLOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BOF_Faculty" Association="Self.FK_BOF_Faculty">
+      <End Role="Faculty" EntitySet="Faculties" />
+      <End Role="BOF" EntitySet="BOFs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEO_BOF" Association="Self.FK_PEO_BOF">
+      <End Role="BOF" EntitySet="BOFs" />
+      <End Role="PEO" EntitySet="PEOs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLO_BOF" Association="Self.FK_PLO_BOF">
+      <End Role="BOF" EntitySet="BOFs" />
+      <End Role="PLO" EntitySet="PLOes" />
+    </AssociationSet>
     <AssociationSet Name="FK_Programs_BOF" Association="Self.FK_Programs_BOF">
       <End Role="BOF" EntitySet="BOFs" />
       <End Role="Programs" EntitySet="Programs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CLO__BOSID__32F66B4F" Association="Self.FK__CLO__BOSID__32F66B4F">
+      <End Role="BOS" EntitySet="BOS" />
+      <End Role="CLO" EntitySet="CLOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BOS_Departments" Association="Self.FK_BOS_Departments">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="BOS" EntitySet="BOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEO_BOS" Association="Self.FK_PEO_BOS">
+      <End Role="BOS" EntitySet="BOS" />
+      <End Role="PEO" EntitySet="PEOs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLO_BOS" Association="Self.FK_PLO_BOS">
+      <End Role="BOS" EntitySet="BOS" />
+      <End Role="PLO" EntitySet="PLOes" />
     </AssociationSet>
     <AssociationSet Name="FK_Programs_BOS" Association="Self.FK_Programs_BOS">
       <End Role="BOS" EntitySet="BOS" />
@@ -5482,6 +6906,18 @@
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="Tests" EntitySet="Tests" />
     </AssociationSet>
+    <AssociationSet Name="FK__CLO__CourseID__32024716" Association="Self.FK__CLO__CourseID__32024716">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CLO" EntitySet="CLOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CLO__TaxonomyDes__310E22DD" Association="Self.FK__CLO__TaxonomyDes__310E22DD">
+      <End Role="TaxonomyActionVerb" EntitySet="TaxonomyActionVerbs" />
+      <End Role="CLO" EntitySet="CLOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QPQuestion_CLO" Association="Self.FK_QPQuestion_CLO">
+      <End Role="CLO" EntitySet="CLOes" />
+      <End Role="QPQuestion" EntitySet="QPQuestions" />
+    </AssociationSet>
     <AssociationSet Name="FK_CMSUsers_EmpForm" Association="Self.FK_CMSUsers_EmpForm">
       <End Role="EmpForm" EntitySet="EmpForms" />
       <End Role="CMSUsers" EntitySet="CMSUsers" />
@@ -5522,6 +6958,10 @@
       <End Role="Course" EntitySet="Courses" />
       <End Role="CoursePublication" EntitySet="CoursePublications" />
     </AssociationSet>
+    <AssociationSet Name="FK_ExamDateSheet_Course" Association="Self.FK_ExamDateSheet_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="ExamDateSheet" EntitySet="ExamDateSheets" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentAttendance_Course" Association="Self.FK_StudentAttendance_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentAttendance" EntitySet="StudentAttendances" />
@@ -5541,6 +6981,10 @@
     <AssociationSet Name="FK_StudentCourseWithDrawn_Course" Association="Self.FK_StudentCourseWithDrawn_Course">
       <End Role="Course" EntitySet="Courses" />
       <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_Course" Association="Self.FK_SurveyInitiatedResponse_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherCourses_Course" Association="Self.FK_TeacherCourses_Course">
       <End Role="Course" EntitySet="Courses" />
@@ -5762,6 +7206,34 @@
       <End Role="JobType" EntitySet="JobTypes" />
       <End Role="EmpFormJobType" EntitySet="EmpFormJobTypes" />
     </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiated_EvaluationCycle" Association="Self.FK_SurveyInitiated_EvaluationCycle">
+      <End Role="EvaluationCycle" EntitySet="EvaluationCycles" />
+      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamDateSheet_Exams" Association="Self.FK_ExamDateSheet_Exams">
+      <End Role="Exams" EntitySet="Exams" />
+      <End Role="ExamDateSheet" EntitySet="ExamDateSheets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamSeatingPlan_ExamSeatingPlan" Association="Self.FK_ExamSeatingPlan_ExamSeatingPlan">
+      <End Role="ExamDateSheet" EntitySet="ExamDateSheets" />
+      <End Role="ExamSeatingPlan" EntitySet="ExamSeatingPlans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exams_Sessions" Association="Self.FK_Exams_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="Exams" EntitySet="Exams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamSeatingPlan_Locations" Association="Self.FK_ExamSeatingPlan_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="ExamSeatingPlan" EntitySet="ExamSeatingPlans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamSeatingPlan_Students" Association="Self.FK_ExamSeatingPlan_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ExamSeatingPlan" EntitySet="ExamSeatingPlans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamStudentsRollNumbers_Sessions" Association="Self.FK_ExamStudentsRollNumbers_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="ExamStudentsRollNumbers" EntitySet="ExamStudentsRollNumbers" />
+    </AssociationSet>
     <AssociationSet Name="FK__FacultyHe__Facul__194BA7E5" Association="Self.FK__FacultyHe__Facul__194BA7E5">
       <End Role="Faculty" EntitySet="Faculties" />
       <End Role="FacultyHead" EntitySet="FacultyHeads" />
@@ -5817,6 +7289,14 @@
     <AssociationSet Name="FK_ProjectAwardedBy_Organization" Association="Self.FK_ProjectAwardedBy_Organization">
       <End Role="Organization" EntitySet="Organizations" />
       <End Role="ProjectAwardedByOrganization" EntitySet="ProjectAwardedByOrganizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEO_ProgramID" Association="Self.FK_PEO_ProgramID">
+      <End Role="Programs" EntitySet="Programs" />
+      <End Role="PEO" EntitySet="PEOs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLO_ProgramID" Association="Self.FK_PLO_ProgramID">
+      <End Role="Programs" EntitySet="Programs" />
+      <End Role="PLO" EntitySet="PLOes" />
     </AssociationSet>
     <AssociationSet Name="FK__ProgramCo__Progr__24BD5A91" Association="Self.FK__ProgramCo__Progr__24BD5A91">
       <End Role="Programs" EntitySet="Programs" />
@@ -5878,6 +7358,30 @@
       <End Role="PublicationType" EntitySet="PublicationTypes" />
       <End Role="Publication" EntitySet="Publications" />
     </AssociationSet>
+    <AssociationSet Name="FK_QPQuestion_QuestionType" Association="Self.FK_QPQuestion_QuestionType">
+      <End Role="QuestionType" EntitySet="QuestionTypes" />
+      <End Role="QPQuestion" EntitySet="QPQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_Section" Association="Self.FK_Question_Section">
+      <End Role="QPSection" EntitySet="QPSections" />
+      <End Role="QPQuestion" EntitySet="QPQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_QPQuestionPaper" Association="Self.FK_Section_QPQuestionPaper">
+      <End Role="QPQuestionPaper" EntitySet="QPQuestionPapers" />
+      <End Role="QPSection" EntitySet="QPSections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption" Association="Self.FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption">
+      <End Role="QuestionType" EntitySet="QuestionTypes" />
+      <End Role="QuestionTypeAnswerOption" EntitySet="QuestionTypeAnswerOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQA_QuestionType" Association="Self.FK_SurveyHeadingQA_QuestionType">
+      <End Role="QuestionType" EntitySet="QuestionTypes" />
+      <End Role="SurveyHeadingQA" EntitySet="SurveyHeadingQAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQAResponse_QuestionType" Association="Self.FK_SurveyHeadingQAResponse_QuestionType">
+      <End Role="QuestionType" EntitySet="QuestionTypes" />
+      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
+    </AssociationSet>
     <AssociationSet Name="FK_RoleWiseMenus_Roles1" Association="Self.FK_RoleWiseMenus_Roles1">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="RoleWiseMenus" EntitySet="RoleWiseMenus" />
@@ -5918,9 +7422,21 @@
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentFee" EntitySet="StudentFees" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentProgramChangeHistory_Sessions" Association="Self.FK_StudentProgramChangeHistory_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentProgramChangeHistory" EntitySet="StudentProgramChangeHistories" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentSessions_Sessions" Association="Self.FK_StudentSessions_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentSemester" EntitySet="StudentSemesters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiated_Sessions" Association="Self.FK_SurveyInitiated_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_Sessions" Association="Self.FK_SurveyInitiatedResponse_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherCourses_Sessions" Association="Self.FK_TeacherCourses_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
@@ -5946,6 +7462,10 @@
       <End Role="StudentCourses" EntitySet="StudentCourses" />
       <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
     </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_StudentCourses" Association="Self.FK_SurveyInitiatedResponse_StudentCourses">
+      <End Role="StudentCourses" EntitySet="StudentCourses" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentCourseSelection_Students" Association="Self.FK_StudentCourseSelection_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
@@ -5957,6 +7477,10 @@
     <AssociationSet Name="FK_StudentFee_Students" Association="Self.FK_StudentFee_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentProgramChangeHistory_Students" Association="Self.FK_StudentProgramChangeHistory_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentProgramChangeHistory" EntitySet="StudentProgramChangeHistories" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentsAdvisor_Students" Association="Self.FK_StudentsAdvisor_Students">
       <End Role="Students" EntitySet="Students" />
@@ -5973,6 +7497,58 @@
     <AssociationSet Name="FK_StudentsSupervisor_Students" Association="Self.FK_StudentsSupervisor_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentsSupervisor" EntitySet="StudentsSupervisors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_Students" Association="Self.FK_SurveyInitiatedResponse_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Survey_SurveyType" Association="Self.FK_Survey_SurveyType">
+      <End Role="SurveyType" EntitySet="SurveyTypes" />
+      <End Role="Survey" EntitySet="Surveys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeading_Survey" Association="Self.FK_SurveyHeading_Survey">
+      <End Role="Survey" EntitySet="Surveys" />
+      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiated_Survey" Association="Self.FK_SurveyInitiated_Survey">
+      <End Role="Survey" EntitySet="Surveys" />
+      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_Survey" Association="Self.FK_SurveyInitiatedResponse_Survey">
+      <End Role="Survey" EntitySet="Surveys" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQA_SurveyHeading" Association="Self.FK_SurveyHeadingQA_SurveyHeading">
+      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
+      <End Role="SurveyHeadingQA" EntitySet="SurveyHeadingQAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQAResponse_SurveyHeading" Association="Self.FK_SurveyHeadingQAResponse_SurveyHeading">
+      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
+      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQAResponse_SurveyHeadingQA" Association="Self.FK_SurveyHeadingQAResponse_SurveyHeadingQA">
+      <End Role="SurveyHeadingQA" EntitySet="SurveyHeadingQAs" />
+      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" Association="Self.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse">
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_SurveyInitiated" Association="Self.FK_SurveyInitiatedResponse_SurveyInitiated">
+      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_TeacherCourses" Association="Self.FK_SurveyInitiatedResponse_TeacherCourses">
+      <End Role="TeacherCourses" EntitySet="TeacherCourses" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TaxonomyD__Taxon__2C496DC0" Association="Self.FK__TaxonomyD__Taxon__2C496DC0">
+      <End Role="TaxonomyLevel" EntitySet="TaxonomyLevels" />
+      <End Role="TaxonomyActionVerb" EntitySet="TaxonomyActionVerbs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TaxonomyL__Taxon__296D0115" Association="Self.FK__TaxonomyL__Taxon__296D0115">
+      <End Role="TaxonomyDomain" EntitySet="TaxonomyDomains" />
+      <End Role="TaxonomyLevel" EntitySet="TaxonomyLevels" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherAttendance_TeacherCourses" Association="Self.FK_TeacherAttendance_TeacherCourses">
       <End Role="TeacherCourses" EntitySet="TeacherCourses" />
@@ -6014,960 +7590,5 @@
       <End Role="TestSessions" EntitySet="TestSessions" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
-    <EntitySet Name="CLOes" EntityType="CMSModel.CLO" />
-    <EntitySet Name="EvaluationCycles" EntityType="CMSModel.EvaluationCycle" />
-    <EntitySet Name="MissionUniversities" EntityType="CMSModel.MissionUniversity" />
-    <EntitySet Name="PEOs" EntityType="CMSModel.PEO" />
-    <EntitySet Name="PLOes" EntityType="CMSModel.PLO" />
-    <EntitySet Name="QuestionTypes" EntityType="CMSModel.QuestionType" />
-    <EntitySet Name="StudentsGroupColors" EntityType="CMSModel.StudentsGroupColor" />
-    <EntitySet Name="Surveys" EntityType="CMSModel.Survey" />
-    <EntitySet Name="SurveyHeadings" EntityType="CMSModel.SurveyHeading" />
-    <EntitySet Name="SurveyHeadingQAs" EntityType="CMSModel.SurveyHeadingQA" />
-    <EntitySet Name="SurveyHeadingQAResponses" EntityType="CMSModel.SurveyHeadingQAResponse" />
-    <EntitySet Name="SurveyInitiateds" EntityType="CMSModel.SurveyInitiated" />
-    <EntitySet Name="SurveyInitiatedResponses" EntityType="CMSModel.SurveyInitiatedResponse" />
-    <EntitySet Name="SurveyTypes" EntityType="CMSModel.SurveyType" />
-    <EntitySet Name="TaxonomyActionVerbs" EntityType="CMSModel.TaxonomyActionVerb" />
-    <EntitySet Name="TaxonomyDomains" EntityType="CMSModel.TaxonomyDomain" />
-    <EntitySet Name="TaxonomyLevels" EntityType="CMSModel.TaxonomyLevel" />
-    <EntitySet Name="VissionUniversities" EntityType="CMSModel.VissionUniversity" />
-    <AssociationSet Name="FK__CLO__ACMID__34DEB3C1" Association="CMSModel.FK__CLO__ACMID__34DEB3C1">
-      <End Role="ACM" EntitySet="ACMs" />
-      <End Role="CLO" EntitySet="CLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MissionUniversity_ACM" Association="CMSModel.FK_MissionUniversity_ACM">
-      <End Role="ACM" EntitySet="ACMs" />
-      <End Role="MissionUniversity" EntitySet="MissionUniversities" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PEO_ACM" Association="CMSModel.FK_PEO_ACM">
-      <End Role="ACM" EntitySet="ACMs" />
-      <End Role="PEO" EntitySet="PEOs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PLO_ACM" Association="CMSModel.FK_PLO_ACM">
-      <End Role="ACM" EntitySet="ACMs" />
-      <End Role="PLO" EntitySet="PLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VissionUniversity_ACM" Association="CMSModel.FK_VissionUniversity_ACM">
-      <End Role="ACM" EntitySet="ACMs" />
-      <End Role="VissionUniversity" EntitySet="VissionUniversities" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CLO__BOFID__33EA8F88" Association="CMSModel.FK__CLO__BOFID__33EA8F88">
-      <End Role="BOF" EntitySet="BOFs" />
-      <End Role="CLO" EntitySet="CLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BOF_Faculty" Association="CMSModel.FK_BOF_Faculty">
-      <End Role="Faculty" EntitySet="Faculties" />
-      <End Role="BOF" EntitySet="BOFs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PEO_BOF" Association="CMSModel.FK_PEO_BOF">
-      <End Role="BOF" EntitySet="BOFs" />
-      <End Role="PEO" EntitySet="PEOs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PLO_BOF" Association="CMSModel.FK_PLO_BOF">
-      <End Role="BOF" EntitySet="BOFs" />
-      <End Role="PLO" EntitySet="PLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CLO__BOSID__32F66B4F" Association="CMSModel.FK__CLO__BOSID__32F66B4F">
-      <End Role="BO" EntitySet="BOS" />
-      <End Role="CLO" EntitySet="CLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BOS_Departments" Association="CMSModel.FK_BOS_Departments">
-      <End Role="Department" EntitySet="Departments" />
-      <End Role="BO" EntitySet="BOS" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PEO_BOS" Association="CMSModel.FK_PEO_BOS">
-      <End Role="BO" EntitySet="BOS" />
-      <End Role="PEO" EntitySet="PEOs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PLO_BOS" Association="CMSModel.FK_PLO_BOS">
-      <End Role="BO" EntitySet="BOS" />
-      <End Role="PLO" EntitySet="PLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CLO__CourseID__32024716" Association="CMSModel.FK__CLO__CourseID__32024716">
-      <End Role="Course" EntitySet="Courses" />
-      <End Role="CLO" EntitySet="CLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CLO__TaxonomyDes__310E22DD" Association="CMSModel.FK__CLO__TaxonomyDes__310E22DD">
-      <End Role="TaxonomyActionVerb" EntitySet="TaxonomyActionVerbs" />
-      <End Role="CLO" EntitySet="CLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiated_EvaluationCycle" Association="CMSModel.FK_SurveyInitiated_EvaluationCycle">
-      <End Role="EvaluationCycle" EntitySet="EvaluationCycles" />
-      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PEO_ProgramID" Association="CMSModel.FK_PEO_ProgramID">
-      <End Role="Program" EntitySet="Programs" />
-      <End Role="PEO" EntitySet="PEOs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PLO_ProgramID" Association="CMSModel.FK_PLO_ProgramID">
-      <End Role="Program" EntitySet="Programs" />
-      <End Role="PLO" EntitySet="PLOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeadingQA_QuestionType" Association="CMSModel.FK_SurveyHeadingQA_QuestionType">
-      <End Role="QuestionType" EntitySet="QuestionTypes" />
-      <End Role="SurveyHeadingQA" EntitySet="SurveyHeadingQAs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeadingQAResponse_QuestionType" Association="CMSModel.FK_SurveyHeadingQAResponse_QuestionType">
-      <End Role="QuestionType" EntitySet="QuestionTypes" />
-      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentProgramChangeHistory_Sessions" Association="CMSModel.FK_StudentProgramChangeHistory_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="StudentProgramChangeHistory" EntitySet="StudentProgramChangeHistories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiated_Sessions" Association="CMSModel.FK_SurveyInitiated_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiatedResponse_StudentCourses" Association="CMSModel.FK_SurveyInitiatedResponse_StudentCourses">
-      <End Role="StudentCours" EntitySet="StudentCourses" />
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentProgramChangeHistory_Students" Association="CMSModel.FK_StudentProgramChangeHistory_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentProgramChangeHistory" EntitySet="StudentProgramChangeHistories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiatedResponse_Students" Association="CMSModel.FK_SurveyInitiatedResponse_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Survey_SurveyType" Association="CMSModel.FK_Survey_SurveyType">
-      <End Role="SurveyType" EntitySet="SurveyTypes" />
-      <End Role="Survey" EntitySet="Surveys" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeading_Survey" Association="CMSModel.FK_SurveyHeading_Survey">
-      <End Role="Survey" EntitySet="Surveys" />
-      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiated_Survey" Association="CMSModel.FK_SurveyInitiated_Survey">
-      <End Role="Survey" EntitySet="Surveys" />
-      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiatedResponse_Survey" Association="CMSModel.FK_SurveyInitiatedResponse_Survey">
-      <End Role="Survey" EntitySet="Surveys" />
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeadingQA_SurveyHeading" Association="CMSModel.FK_SurveyHeadingQA_SurveyHeading">
-      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
-      <End Role="SurveyHeadingQA" EntitySet="SurveyHeadingQAs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeadingQAResponse_SurveyHeading" Association="CMSModel.FK_SurveyHeadingQAResponse_SurveyHeading">
-      <End Role="SurveyHeading" EntitySet="SurveyHeadings" />
-      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" Association="CMSModel.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse">
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-      <End Role="SurveyHeadingQAResponse" EntitySet="SurveyHeadingQAResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiatedResponse_SurveyInitiated" Association="CMSModel.FK_SurveyInitiatedResponse_SurveyInitiated">
-      <End Role="SurveyInitiated" EntitySet="SurveyInitiateds" />
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SurveyInitiatedResponse_TeacherCourses" Association="CMSModel.FK_SurveyInitiatedResponse_TeacherCourses">
-      <End Role="TeacherCours" EntitySet="TeacherCourses" />
-      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
-    </AssociationSet>
-    <AssociationSet Name="FK__TaxonomyD__Taxon__2C496DC0" Association="CMSModel.FK__TaxonomyD__Taxon__2C496DC0">
-      <End Role="TaxonomyLevel" EntitySet="TaxonomyLevels" />
-      <End Role="TaxonomyActionVerb" EntitySet="TaxonomyActionVerbs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__TaxonomyL__Taxon__296D0115" Association="CMSModel.FK__TaxonomyL__Taxon__296D0115">
-      <End Role="TaxonomyDomain" EntitySet="TaxonomyDomains" />
-      <End Role="TaxonomyLevel" EntitySet="TaxonomyLevels" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="CLO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CLOStatement" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CLONumber" Type="Int32" />
-    <Property Name="TaxonomyActionVerbID" Type="Int32" Nullable="false" />
-    <Property Name="CourseID" Type="Int32" />
-    <Property Name="BOSID" Type="Int32" />
-    <Property Name="BOFID" Type="Int32" />
-    <Property Name="ACMID" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" />
-    <Property Name="isNotActiveBy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ACM" Relationship="CMSModel.FK__CLO__ACMID__34DEB3C1" FromRole="CLO" ToRole="ACM" />
-    <NavigationProperty Name="BOF" Relationship="CMSModel.FK__CLO__BOFID__33EA8F88" FromRole="CLO" ToRole="BOF" />
-    <NavigationProperty Name="BO" Relationship="CMSModel.FK__CLO__BOSID__32F66B4F" FromRole="CLO" ToRole="BO" />
-    <NavigationProperty Name="Course" Relationship="CMSModel.FK__CLO__CourseID__32024716" FromRole="CLO" ToRole="Course" />
-    <NavigationProperty Name="TaxonomyActionVerb" Relationship="CMSModel.FK__CLO__TaxonomyDes__310E22DD" FromRole="CLO" ToRole="TaxonomyActionVerb" />
-  </EntityType>
-  <EntityType Name="EvaluationCycle">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="SurveyInitiateds" Relationship="CMSModel.FK_SurveyInitiated_EvaluationCycle" FromRole="EvaluationCycle" ToRole="SurveyInitiated" />
-  </EntityType>
-  <EntityType Name="MissionUniversity">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Number" Type="Int32" />
-    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="MissionStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ACMID" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ACM" Relationship="CMSModel.FK_MissionUniversity_ACM" FromRole="MissionUniversity" ToRole="ACM" />
-  </EntityType>
-  <EntityType Name="PEO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Number" Type="Int32" />
-    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProgramID" Type="Int32" />
-    <Property Name="BOSID" Type="Int32" />
-    <Property Name="BOFID" Type="Int32" />
-    <Property Name="ACMID" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ACM" Relationship="CMSModel.FK_PEO_ACM" FromRole="PEO" ToRole="ACM" />
-    <NavigationProperty Name="BOF" Relationship="CMSModel.FK_PEO_BOF" FromRole="PEO" ToRole="BOF" />
-    <NavigationProperty Name="BO" Relationship="CMSModel.FK_PEO_BOS" FromRole="PEO" ToRole="BO" />
-    <NavigationProperty Name="Program" Relationship="CMSModel.FK_PEO_ProgramID" FromRole="PEO" ToRole="Program" />
-  </EntityType>
-  <EntityType Name="PLO">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Number" Type="Int32" />
-    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProgramID" Type="Int32" />
-    <Property Name="BOSID" Type="Int32" />
-    <Property Name="BOFID" Type="Int32" />
-    <Property Name="ACMID" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ACM" Relationship="CMSModel.FK_PLO_ACM" FromRole="PLO" ToRole="ACM" />
-    <NavigationProperty Name="BOF" Relationship="CMSModel.FK_PLO_BOF" FromRole="PLO" ToRole="BOF" />
-    <NavigationProperty Name="BO" Relationship="CMSModel.FK_PLO_BOS" FromRole="PLO" ToRole="BO" />
-    <NavigationProperty Name="Program" Relationship="CMSModel.FK_PLO_ProgramID" FromRole="PLO" ToRole="Program" />
-  </EntityType>
-  <EntityType Name="QuestionType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SurveyHeadingQAs" Relationship="CMSModel.FK_SurveyHeadingQA_QuestionType" FromRole="QuestionType" ToRole="SurveyHeadingQA" />
-    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="CMSModel.FK_SurveyHeadingQAResponse_QuestionType" FromRole="QuestionType" ToRole="SurveyHeadingQAResponse" />
-  </EntityType>
-  <EntityType Name="StudentsGroupColor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-  </EntityType>
-  <EntityType Name="Survey">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="SurveyTypeID" Type="Int32" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="SurveyType" Relationship="CMSModel.FK_Survey_SurveyType" FromRole="Survey" ToRole="SurveyType" />
-    <NavigationProperty Name="SurveyHeadings" Relationship="CMSModel.FK_SurveyHeading_Survey" FromRole="Survey" ToRole="SurveyHeading" />
-    <NavigationProperty Name="SurveyInitiateds" Relationship="CMSModel.FK_SurveyInitiated_Survey" FromRole="Survey" ToRole="SurveyInitiated" />
-    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_Survey" FromRole="Survey" ToRole="SurveyInitiatedResponse" />
-  </EntityType>
-  <EntityType Name="SurveyHeading">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="SortNo" Type="Int32" />
-    <Property Name="SurveyID" Type="Int32" Nullable="false" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Survey" Relationship="CMSModel.FK_SurveyHeading_Survey" FromRole="SurveyHeading" ToRole="Survey" />
-    <NavigationProperty Name="SurveyHeadingQAs" Relationship="CMSModel.FK_SurveyHeadingQA_SurveyHeading" FromRole="SurveyHeading" ToRole="SurveyHeadingQA" />
-    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="CMSModel.FK_SurveyHeadingQAResponse_SurveyHeading" FromRole="SurveyHeading" ToRole="SurveyHeadingQAResponse" />
-  </EntityType>
-  <EntityType Name="SurveyHeadingQA">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
-    <Property Name="AnswerInDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="SurveyHeadingID" Type="Int32" Nullable="false" />
-    <Property Name="StronglyDisagree" Type="Boolean" />
-    <Property Name="Disagree" Type="Boolean" />
-    <Property Name="Uncertain" Type="Boolean" />
-    <Property Name="Agree" Type="Boolean" />
-    <Property Name="StronglyAgree" Type="Boolean" />
-    <Property Name="SortNo" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="QuestionType" Relationship="CMSModel.FK_SurveyHeadingQA_QuestionType" FromRole="SurveyHeadingQA" ToRole="QuestionType" />
-    <NavigationProperty Name="SurveyHeading" Relationship="CMSModel.FK_SurveyHeadingQA_SurveyHeading" FromRole="SurveyHeadingQA" ToRole="SurveyHeading" />
-  </EntityType>
-  <EntityType Name="SurveyHeadingQAResponse">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SurveyInitiatedResponseID" Type="Int32" Nullable="false" />
-    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
-    <Property Name="AnswerInDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="SurveyHeadingID" Type="Int32" Nullable="false" />
-    <Property Name="StronglyDisagree" Type="Boolean" />
-    <Property Name="Disagree" Type="Boolean" />
-    <Property Name="Uncertain" Type="Boolean" />
-    <Property Name="Agree" Type="Boolean" />
-    <Property Name="StronglyAgree" Type="Boolean" />
-    <Property Name="SortNo" Type="Int32" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="QuestionType" Relationship="CMSModel.FK_SurveyHeadingQAResponse_QuestionType" FromRole="SurveyHeadingQAResponse" ToRole="QuestionType" />
-    <NavigationProperty Name="SurveyHeading" Relationship="CMSModel.FK_SurveyHeadingQAResponse_SurveyHeading" FromRole="SurveyHeadingQAResponse" ToRole="SurveyHeading" />
-    <NavigationProperty Name="SurveyInitiatedResponse" Relationship="CMSModel.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyHeadingQAResponse" ToRole="SurveyInitiatedResponse" />
-  </EntityType>
-  <EntityType Name="SurveyInitiated">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CampusID" Type="Int32" />
-    <Property Name="SessionID" Type="Int32" />
-    <Property Name="OpeningDate" Type="DateTime" Precision="0" />
-    <Property Name="ClosingDate" Type="DateTime" Precision="0" />
-    <Property Name="SurveyID" Type="Int32" />
-    <Property Name="EvaluationCycleID" Type="Int32" />
-    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="EvaluationCycle" Relationship="CMSModel.FK_SurveyInitiated_EvaluationCycle" FromRole="SurveyInitiated" ToRole="EvaluationCycle" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_SurveyInitiated_Sessions" FromRole="SurveyInitiated" ToRole="Session" />
-    <NavigationProperty Name="Survey" Relationship="CMSModel.FK_SurveyInitiated_Survey" FromRole="SurveyInitiated" ToRole="Survey" />
-    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiated" ToRole="SurveyInitiatedResponse" />
-  </EntityType>
-  <EntityType Name="SurveyInitiatedResponse">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SurveyInititatedID" Type="Int32" />
-    <Property Name="SurveyID" Type="Int32" />
-    <Property Name="StudentCourseID" Type="Int32" />
-    <Property Name="StudentID" Type="Int32" />
-    <Property Name="TeacherCoursesID" Type="Int32" />
-    <Property Name="Section" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Submitted" Type="Boolean" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <NavigationProperty Name="StudentCours" Relationship="CMSModel.FK_SurveyInitiatedResponse_StudentCourses" FromRole="SurveyInitiatedResponse" ToRole="StudentCours" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_SurveyInitiatedResponse_Students" FromRole="SurveyInitiatedResponse" ToRole="Student" />
-    <NavigationProperty Name="Survey" Relationship="CMSModel.FK_SurveyInitiatedResponse_Survey" FromRole="SurveyInitiatedResponse" ToRole="Survey" />
-    <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="CMSModel.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyInitiatedResponse" ToRole="SurveyHeadingQAResponse" />
-    <NavigationProperty Name="SurveyInitiated" Relationship="CMSModel.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiatedResponse" ToRole="SurveyInitiated" />
-    <NavigationProperty Name="TeacherCours" Relationship="CMSModel.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="SurveyInitiatedResponse" ToRole="TeacherCours" />
-  </EntityType>
-  <EntityType Name="SurveyType">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <Property Name="UDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Surveys" Relationship="CMSModel.FK_Survey_SurveyType" FromRole="SurveyType" ToRole="Survey" />
-  </EntityType>
-  <EntityType Name="TaxonomyActionVerb">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="TaxonomyLevelID" Type="Int32" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CLOes" Relationship="CMSModel.FK__CLO__TaxonomyDes__310E22DD" FromRole="TaxonomyActionVerb" ToRole="CLO" />
-    <NavigationProperty Name="TaxonomyLevel" Relationship="CMSModel.FK__TaxonomyD__Taxon__2C496DC0" FromRole="TaxonomyActionVerb" ToRole="TaxonomyLevel" />
-  </EntityType>
-  <EntityType Name="TaxonomyDomain">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Short" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="TaxonomyLevels" Relationship="CMSModel.FK__TaxonomyL__Taxon__296D0115" FromRole="TaxonomyDomain" ToRole="TaxonomyLevel" />
-  </EntityType>
-  <EntityType Name="TaxonomyLevel">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="LevelNo" Type="Int32" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="TaxonomyDomainID" Type="Int32" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="3" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="TaxonomyActionVerbs" Relationship="CMSModel.FK__TaxonomyD__Taxon__2C496DC0" FromRole="TaxonomyLevel" ToRole="TaxonomyActionVerb" />
-    <NavigationProperty Name="TaxonomyDomain" Relationship="CMSModel.FK__TaxonomyL__Taxon__296D0115" FromRole="TaxonomyLevel" ToRole="TaxonomyDomain" />
-  </EntityType>
-  <EntityType Name="VissionUniversity">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Number" Type="Int32" />
-    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="VissionStatement" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ACMID" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" Nullable="false" />
-    <Property Name="isNotActiveBy" Type="Int32" />
-    <Property Name="isNotActiveDate" Type="DateTime" Precision="0" />
-    <Property Name="isNotActiveTime" Type="Time" Precision="7" />
-    <Property Name="CrBy" Type="Int32" />
-    <Property Name="CrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrTime" Type="Time" Precision="7" />
-    <Property Name="UBy" Type="Int32" />
-    <Property Name="UTime" Type="Time" Precision="7" />
-    <Property Name="UDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ACM" Relationship="CMSModel.FK_VissionUniversity_ACM" FromRole="VissionUniversity" ToRole="ACM" />
-  </EntityType>
-  <Association Name="FK__CLO__ACMID__34DEB3C1">
-    <End Type="CMSModel.ACM" Role="ACM" Multiplicity="0..1" />
-    <End Type="CMSModel.CLO" Role="CLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLO">
-        <PropertyRef Name="ACMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MissionUniversity_ACM">
-    <End Type="CMSModel.ACM" Role="ACM" Multiplicity="0..1" />
-    <End Type="CMSModel.MissionUniversity" Role="MissionUniversity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="MissionUniversity">
-        <PropertyRef Name="ACMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PEO_ACM">
-    <End Type="CMSModel.ACM" Role="ACM" Multiplicity="0..1" />
-    <End Type="CMSModel.PEO" Role="PEO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PEO">
-        <PropertyRef Name="ACMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PLO_ACM">
-    <End Type="CMSModel.ACM" Role="ACM" Multiplicity="0..1" />
-    <End Type="CMSModel.PLO" Role="PLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PLO">
-        <PropertyRef Name="ACMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VissionUniversity_ACM">
-    <End Type="CMSModel.ACM" Role="ACM" Multiplicity="0..1" />
-    <End Type="CMSModel.VissionUniversity" Role="VissionUniversity" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACM">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="VissionUniversity">
-        <PropertyRef Name="ACMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CLO__BOFID__33EA8F88">
-    <End Type="CMSModel.BOF" Role="BOF" Multiplicity="0..1" />
-    <End Type="CMSModel.CLO" Role="CLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOF">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLO">
-        <PropertyRef Name="BOFID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BOF_Faculty">
-    <End Type="CMSModel.Faculty" Role="Faculty" Multiplicity="0..1" />
-    <End Type="CMSModel.BOF" Role="BOF" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Faculty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BOF">
-        <PropertyRef Name="FacultyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PEO_BOF">
-    <End Type="CMSModel.BOF" Role="BOF" Multiplicity="0..1" />
-    <End Type="CMSModel.PEO" Role="PEO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOF">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PEO">
-        <PropertyRef Name="BOFID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PLO_BOF">
-    <End Type="CMSModel.BOF" Role="BOF" Multiplicity="0..1" />
-    <End Type="CMSModel.PLO" Role="PLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOF">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PLO">
-        <PropertyRef Name="BOFID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CLO__BOSID__32F66B4F">
-    <End Type="CMSModel.BO" Role="BO" Multiplicity="0..1" />
-    <End Type="CMSModel.CLO" Role="CLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BO">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLO">
-        <PropertyRef Name="BOSID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BOS_Departments">
-    <End Type="CMSModel.Department" Role="Department" Multiplicity="0..1" />
-    <End Type="CMSModel.BO" Role="BO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Department">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BO">
-        <PropertyRef Name="DepartmentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PEO_BOS">
-    <End Type="CMSModel.BO" Role="BO" Multiplicity="0..1" />
-    <End Type="CMSModel.PEO" Role="PEO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BO">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PEO">
-        <PropertyRef Name="BOSID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PLO_BOS">
-    <End Type="CMSModel.BO" Role="BO" Multiplicity="0..1" />
-    <End Type="CMSModel.PLO" Role="PLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BO">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PLO">
-        <PropertyRef Name="BOSID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CLO__CourseID__32024716">
-    <End Type="CMSModel.Course" Role="Course" Multiplicity="0..1" />
-    <End Type="CMSModel.CLO" Role="CLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLO">
-        <PropertyRef Name="CourseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CLO__TaxonomyDes__310E22DD">
-    <End Type="CMSModel.TaxonomyActionVerb" Role="TaxonomyActionVerb" Multiplicity="1" />
-    <End Type="CMSModel.CLO" Role="CLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TaxonomyActionVerb">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLO">
-        <PropertyRef Name="TaxonomyActionVerbID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiated_EvaluationCycle">
-    <End Type="CMSModel.EvaluationCycle" Role="EvaluationCycle" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiated" Role="SurveyInitiated" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EvaluationCycle">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiated">
-        <PropertyRef Name="EvaluationCycleID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PEO_ProgramID">
-    <End Type="CMSModel.Program" Role="Program" Multiplicity="0..1" />
-    <End Type="CMSModel.PEO" Role="PEO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Program">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PEO">
-        <PropertyRef Name="ProgramID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PLO_ProgramID">
-    <End Type="CMSModel.Program" Role="Program" Multiplicity="0..1" />
-    <End Type="CMSModel.PLO" Role="PLO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Program">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PLO">
-        <PropertyRef Name="ProgramID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeadingQA_QuestionType">
-    <End Type="CMSModel.QuestionType" Role="QuestionType" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeadingQA" Role="SurveyHeadingQA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="QuestionType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeadingQA">
-        <PropertyRef Name="QuestionTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeadingQAResponse_QuestionType">
-    <End Type="CMSModel.QuestionType" Role="QuestionType" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeadingQAResponse" Role="SurveyHeadingQAResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="QuestionType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeadingQAResponse">
-        <PropertyRef Name="QuestionTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentProgramChangeHistory_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="0..1" />
-    <End Type="CMSModel.StudentProgramChangeHistory" Role="StudentProgramChangeHistory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentProgramChangeHistory">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiated_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiated" Role="SurveyInitiated" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiated">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiatedResponse_StudentCourses">
-    <End Type="CMSModel.StudentCours" Role="StudentCours" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StudentCours">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiatedResponse">
-        <PropertyRef Name="StudentCourseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentProgramChangeHistory_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentProgramChangeHistory" Role="StudentProgramChangeHistory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentProgramChangeHistory">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiatedResponse_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiatedResponse">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Survey_SurveyType">
-    <End Type="CMSModel.SurveyType" Role="SurveyType" Multiplicity="0..1" />
-    <End Type="CMSModel.Survey" Role="Survey" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SurveyType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Survey">
-        <PropertyRef Name="SurveyTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeading_Survey">
-    <End Type="CMSModel.Survey" Role="Survey" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeading" Role="SurveyHeading" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Survey">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeading">
-        <PropertyRef Name="SurveyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiated_Survey">
-    <End Type="CMSModel.Survey" Role="Survey" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiated" Role="SurveyInitiated" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Survey">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiated">
-        <PropertyRef Name="SurveyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiatedResponse_Survey">
-    <End Type="CMSModel.Survey" Role="Survey" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Survey">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiatedResponse">
-        <PropertyRef Name="SurveyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeadingQA_SurveyHeading">
-    <End Type="CMSModel.SurveyHeading" Role="SurveyHeading" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeadingQA" Role="SurveyHeadingQA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SurveyHeading">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeadingQA">
-        <PropertyRef Name="SurveyHeadingID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeadingQAResponse_SurveyHeading">
-    <End Type="CMSModel.SurveyHeading" Role="SurveyHeading" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeadingQAResponse" Role="SurveyHeadingQAResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SurveyHeading">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeadingQAResponse">
-        <PropertyRef Name="SurveyHeadingID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyHeadingQAResponse_SurveyInitiatedResponse">
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="1" />
-    <End Type="CMSModel.SurveyHeadingQAResponse" Role="SurveyHeadingQAResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SurveyInitiatedResponse">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyHeadingQAResponse">
-        <PropertyRef Name="SurveyInitiatedResponseID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiatedResponse_SurveyInitiated">
-    <End Type="CMSModel.SurveyInitiated" Role="SurveyInitiated" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SurveyInitiated">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiatedResponse">
-        <PropertyRef Name="SurveyInititatedID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SurveyInitiatedResponse_TeacherCourses">
-    <End Type="CMSModel.TeacherCours" Role="TeacherCours" Multiplicity="0..1" />
-    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TeacherCours">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="SurveyInitiatedResponse">
-        <PropertyRef Name="TeacherCoursesID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__TaxonomyD__Taxon__2C496DC0">
-    <End Type="CMSModel.TaxonomyLevel" Role="TaxonomyLevel" Multiplicity="0..1" />
-    <End Type="CMSModel.TaxonomyActionVerb" Role="TaxonomyActionVerb" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TaxonomyLevel">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TaxonomyActionVerb">
-        <PropertyRef Name="TaxonomyLevelID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__TaxonomyL__Taxon__296D0115">
-    <End Type="CMSModel.TaxonomyDomain" Role="TaxonomyDomain" Multiplicity="0..1" />
-    <End Type="CMSModel.TaxonomyLevel" Role="TaxonomyLevel" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TaxonomyDomain">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TaxonomyLevel">
-        <PropertyRef Name="TaxonomyDomainID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

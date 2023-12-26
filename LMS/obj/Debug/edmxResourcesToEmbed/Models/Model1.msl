@@ -327,6 +327,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AssessmentDetails">
+      <EntityTypeMapping TypeName="CMSModel.AssessmentDetail">
+        <MappingFragment StoreEntitySet="AssessmentDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+          <ScalarProperty Name="AssessmentsID" ColumnName="AssessmentsID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="ObtainedMarks" ColumnName="ObtainedMarks" />
+          <ScalarProperty Name="IsAbsent" ColumnName="IsAbsent" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssessmentNames">
+      <EntityTypeMapping TypeName="CMSModel.AssessmentName">
+        <MappingFragment StoreEntitySet="AssessmentNames">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortBy" ColumnName="SortBy" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AssessmentPolicies">
       <EntityTypeMapping TypeName="CMSModel.AssessmentPolicy">
         <MappingFragment StoreEntitySet="AssessmentPolicy">
@@ -348,6 +377,32 @@
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Assessments">
+      <EntityTypeMapping TypeName="CMSModel.Assessment">
+        <MappingFragment StoreEntitySet="Assessments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+          <ScalarProperty Name="TeacherCourseID" ColumnName="TeacherCourseID" />
+          <ScalarProperty Name="AssessmentNameID" ColumnName="AssessmentNameID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="Weightage" ColumnName="Weightage" />
+          <ScalarProperty Name="MarksType" ColumnName="MarksType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+          <ScalarProperty Name="IsAttachment" ColumnName="IsAttachment" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -384,6 +439,9 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Agenda" ColumnName="Agenda" />
           <ScalarProperty Name="MeetingMinutes" ColumnName="MeetingMinutes" />
+          <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+          <ScalarProperty Name="MinutesFile" ColumnName="MinutesFile" />
+          <ScalarProperty Name="AgendaFile" ColumnName="AgendaFile" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -400,6 +458,9 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Agenda" ColumnName="Agenda" />
           <ScalarProperty Name="MeetingMinutes" ColumnName="MeetingMinutes" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="MinutesFile" ColumnName="MinutesFile" />
+          <ScalarProperty Name="AgendaFile" ColumnName="AgendaFile" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -419,6 +480,28 @@
           <ScalarProperty Name="Short" ColumnName="Short" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLOes">
+      <EntityTypeMapping TypeName="CMSModel.CLO">
+        <MappingFragment StoreEntitySet="CLO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CLOStatement" ColumnName="CLOStatement" />
+          <ScalarProperty Name="CLONumber" ColumnName="CLONumber" />
+          <ScalarProperty Name="TaxonomyActionVerbID" ColumnName="TaxonomyActionVerbID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="BOSID" ColumnName="BOSID" />
+          <ScalarProperty Name="BOFID" ColumnName="BOFID" />
+          <ScalarProperty Name="ACMID" ColumnName="ACMID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
         </MappingFragment>
@@ -451,6 +534,8 @@
           <ScalarProperty Name="Outlines" ColumnName="Outlines" />
           <ScalarProperty Name="ACMID" ColumnName="ACMID" />
           <ScalarProperty Name="CourseCategoryInstitutionalID" ColumnName="CourseCategoryInstitutionalID" />
+          <ScalarProperty Name="IsSupervisionBased" ColumnName="IsSupervisionBased" />
+          <ScalarProperty Name="ISLab" ColumnName="ISLab" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -852,6 +937,7 @@
           <ScalarProperty Name="NextOfKinUDate" ColumnName="NextOfKinUDate" />
           <ScalarProperty Name="NextofKinTime" ColumnName="NextofKinTime" />
           <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -993,6 +1079,87 @@
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EvaluationCycles">
+      <EntityTypeMapping TypeName="CMSModel.EvaluationCycle">
+        <MappingFragment StoreEntitySet="EvaluationCycle">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamDateSheets">
+      <EntityTypeMapping TypeName="CMSModel.ExamDateSheet">
+        <MappingFragment StoreEntitySet="ExamDateSheet">
+          <ScalarProperty Name="ExamDateSheetID" ColumnName="ExamDateSheetID" />
+          <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exams">
+      <EntityTypeMapping TypeName="CMSModel.Exam">
+        <MappingFragment StoreEntitySet="Exams">
+          <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="ExamTitle" ColumnName="ExamTitle" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamSeatingPlans">
+      <EntityTypeMapping TypeName="CMSModel.ExamSeatingPlan">
+        <MappingFragment StoreEntitySet="ExamSeatingPlan">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ExamDateSheetID" ColumnName="ExamDateSheetID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamStudentsRollNumbers">
+      <EntityTypeMapping TypeName="CMSModel.ExamStudentsRollNumber">
+        <MappingFragment StoreEntitySet="ExamStudentsRollNumbers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1154,6 +1321,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="CMSModel.Location">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="Slots" ColumnName="Slots" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MajorSubjects">
       <EntityTypeMapping TypeName="CMSModel.MajorSubject">
         <MappingFragment StoreEntitySet="MajorSubject">
@@ -1195,6 +1377,27 @@
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MissionUniversities">
+      <EntityTypeMapping TypeName="CMSModel.MissionUniversity">
+        <MappingFragment StoreEntitySet="MissionUniversity">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MissionStatement" ColumnName="MissionStatement" />
+          <ScalarProperty Name="ACMID" ColumnName="ACMID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1303,6 +1506,50 @@
           <ScalarProperty Name="UBy" ColumnName="UBy" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
           <ScalarProperty Name="Utime" ColumnName="Utime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEOs">
+      <EntityTypeMapping TypeName="CMSModel.PEO">
+        <MappingFragment StoreEntitySet="PEO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="BOSID" ColumnName="BOSID" />
+          <ScalarProperty Name="BOFID" ColumnName="BOFID" />
+          <ScalarProperty Name="ACMID" ColumnName="ACMID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLOes">
+      <EntityTypeMapping TypeName="CMSModel.PLO">
+        <MappingFragment StoreEntitySet="PLO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="BOSID" ColumnName="BOSID" />
+          <ScalarProperty Name="BOFID" ColumnName="BOFID" />
+          <ScalarProperty Name="ACMID" ColumnName="ACMID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1569,6 +1816,107 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="QPQuestions">
+      <EntityTypeMapping TypeName="CMSModel.QPQuestion">
+        <MappingFragment StoreEntitySet="QPQuestion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="CLOID" ColumnName="CLOID" />
+          <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="MaximumMarks" ColumnName="MaximumMarks" />
+          <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="AttachmentRefTitle" ColumnName="AttachmentRefTitle" />
+          <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+          <ScalarProperty Name="Option1" ColumnName="Option1" />
+          <ScalarProperty Name="Option2" ColumnName="Option2" />
+          <ScalarProperty Name="Option3" ColumnName="Option3" />
+          <ScalarProperty Name="Option4" ColumnName="Option4" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QPQuestionPapers">
+      <EntityTypeMapping TypeName="CMSModel.QPQuestionPaper">
+        <MappingFragment StoreEntitySet="QPQuestionPaper">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssessmentID" ColumnName="AssessmentID" />
+          <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+          <ScalarProperty Name="PaperScheduledDate" ColumnName="PaperScheduledDate" />
+          <ScalarProperty Name="PaperStartTime" ColumnName="PaperStartTime" />
+          <ScalarProperty Name="QPType" ColumnName="QPType" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+          <ScalarProperty Name="MaximumMarks" ColumnName="MaximumMarks" />
+          <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QPSections">
+      <EntityTypeMapping TypeName="CMSModel.QPSection">
+        <MappingFragment StoreEntitySet="QPSection">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+          <ScalarProperty Name="QuestionPaperId" ColumnName="QuestionPaperId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="AttachmentRefTitle" ColumnName="AttachmentRefTitle" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+          <ScalarProperty Name="MaximumMarks" ColumnName="MaximumMarks" />
+          <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
+          <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+          <ScalarProperty Name="OnSeparatePages" ColumnName="OnSeparatePages" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionTypes">
+      <EntityTypeMapping TypeName="CMSModel.QuestionType">
+        <MappingFragment StoreEntitySet="QuestionType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionTypeAnswerOptions">
+      <EntityTypeMapping TypeName="CMSModel.QuestionTypeAnswerOption">
+        <MappingFragment StoreEntitySet="QuestionTypeAnswerOption">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+          <ScalarProperty Name="OptionName" ColumnName="OptionName" />
+          <ScalarProperty Name="InputType" ColumnName="InputType" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Religions">
       <EntityTypeMapping TypeName="CMSModel.Religion">
         <MappingFragment StoreEntitySet="Religion">
@@ -1775,10 +2123,19 @@
           <ScalarProperty Name="CourseID" ColumnName="CourseID" />
           <ScalarProperty Name="TeacherCourseID" ColumnName="TeacherCourseID" />
           <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="TakenCrHr" ColumnName="TakenCrHr" />
+          <ScalarProperty Name="EarnedCrHr" ColumnName="EarnedCrHr" />
           <ScalarProperty Name="GP" ColumnName="GP" />
           <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="GradingDate" ColumnName="GradingDate" />
+          <ScalarProperty Name="GradingTime" ColumnName="GradingTime" />
+          <ScalarProperty Name="GradingBy" ColumnName="GradingBy" />
           <ScalarProperty Name="IsCourseLock" ColumnName="IsCourseLock" />
           <ScalarProperty Name="IsResultFinalized" ColumnName="IsResultFinalized" />
+          <ScalarProperty Name="ResultFinalizedDate" ColumnName="ResultFinalizedDate" />
+          <ScalarProperty Name="ResultFinalizedTime" ColumnName="ResultFinalizedTime" />
+          <ScalarProperty Name="ResultFinalizedBy" ColumnName="ResultFinalizedBy" />
+          <ScalarProperty Name="IsRepeated" ColumnName="IsRepeated" />
           <ScalarProperty Name="IsMakeUp" ColumnName="IsMakeUp" />
           <ScalarProperty Name="IsDropped" ColumnName="IsDropped" />
           <ScalarProperty Name="IsDroppedDate" ColumnName="IsDroppedDate" />
@@ -1848,6 +2205,7 @@
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
           <ScalarProperty Name="BankVoucherNo" ColumnName="BankVoucherNo" />
           <ScalarProperty Name="BankName" ColumnName="BankName" />
           <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
@@ -1881,12 +2239,14 @@
       <EntityTypeMapping TypeName="CMSModel.StudentProgramChangeHistory">
         <MappingFragment StoreEntitySet="StudentProgramChangeHistory">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="FromBatchID" ColumnName="FromBatchID" />
           <ScalarProperty Name="ToBatchID" ColumnName="ToBatchID" />
           <ScalarProperty Name="OldRegNo" ColumnName="OldRegNo" />
           <ScalarProperty Name="NewRegNo" ColumnName="NewRegNo" />
           <ScalarProperty Name="DuringSemesterNo" ColumnName="DuringSemesterNo" />
+          <ScalarProperty Name="ToSemesterNo" ColumnName="ToSemesterNo" />
           <ScalarProperty Name="ChangedDate" ColumnName="ChangedDate" />
           <ScalarProperty Name="ChangedTime" ColumnName="ChangedTime" />
           <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
@@ -1909,6 +2269,7 @@
           <ScalarProperty Name="IsAdmissionCancelled" ColumnName="IsAdmissionCancelled" />
           <ScalarProperty Name="IsAdmissionCancelledBy" ColumnName="IsAdmissionCancelledBy" />
           <ScalarProperty Name="IsAdmissionCancelledDate" ColumnName="IsAdmissionCancelledDate" />
+          <ScalarProperty Name="StudentGroup" ColumnName="StudentGroup" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -1950,11 +2311,29 @@
           <ScalarProperty Name="ScholorshipHeadID" ColumnName="ScholorshipHeadID" />
           <ScalarProperty Name="SGPA" ColumnName="SGPA" />
           <ScalarProperty Name="CGPA" ColumnName="CGPA" />
+          <ScalarProperty Name="TotalTakenCrHr" ColumnName="TotalTakenCrHr" />
+          <ScalarProperty Name="TotalEarnedCrHr" ColumnName="TotalEarnedCrHr" />
           <ScalarProperty Name="ResultFinalized" ColumnName="ResultFinalized" />
+          <ScalarProperty Name="Probation" ColumnName="Probation" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentsGroupColors">
+      <EntityTypeMapping TypeName="CMSModel.StudentsGroupColor">
+        <MappingFragment StoreEntitySet="StudentsGroupColor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2008,6 +2387,195 @@
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="ImgIcon" ColumnName="ImgIcon" />
           <ScalarProperty Name="IsHide" ColumnName="IsHide" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Surveys">
+      <EntityTypeMapping TypeName="CMSModel.Survey">
+        <MappingFragment StoreEntitySet="Survey">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="SurveyTypeID" ColumnName="SurveyTypeID" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyHeadings">
+      <EntityTypeMapping TypeName="CMSModel.SurveyHeading">
+        <MappingFragment StoreEntitySet="SurveyHeading">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+          <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyHeadingQAs">
+      <EntityTypeMapping TypeName="CMSModel.SurveyHeadingQA">
+        <MappingFragment StoreEntitySet="SurveyHeadingQA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="SurveyHeadingID" ColumnName="SurveyHeadingID" />
+          <ScalarProperty Name="StronglyDisagree" ColumnName="StronglyDisagree" />
+          <ScalarProperty Name="Disagree" ColumnName="Disagree" />
+          <ScalarProperty Name="Uncertain" ColumnName="Uncertain" />
+          <ScalarProperty Name="Agree" ColumnName="Agree" />
+          <ScalarProperty Name="StronglyAgree" ColumnName="StronglyAgree" />
+          <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyHeadingQAResponses">
+      <EntityTypeMapping TypeName="CMSModel.SurveyHeadingQAResponse">
+        <MappingFragment StoreEntitySet="SurveyHeadingQAResponse">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SurveyInitiatedResponseID" ColumnName="SurveyInitiatedResponseID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+          <ScalarProperty Name="SurveyHeadingQAID" ColumnName="SurveyHeadingQAID" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="SurveyHeadingID" ColumnName="SurveyHeadingID" />
+          <ScalarProperty Name="StronglyDisagree" ColumnName="StronglyDisagree" />
+          <ScalarProperty Name="Disagree" ColumnName="Disagree" />
+          <ScalarProperty Name="Uncertain" ColumnName="Uncertain" />
+          <ScalarProperty Name="Agree" ColumnName="Agree" />
+          <ScalarProperty Name="StronglyAgree" ColumnName="StronglyAgree" />
+          <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyInitiateds">
+      <EntityTypeMapping TypeName="CMSModel.SurveyInitiated">
+        <MappingFragment StoreEntitySet="SurveyInitiated">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+          <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+          <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+          <ScalarProperty Name="EvaluationCycleID" ColumnName="EvaluationCycleID" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyInitiatedResponses">
+      <EntityTypeMapping TypeName="CMSModel.SurveyInitiatedResponse">
+        <MappingFragment StoreEntitySet="SurveyInitiatedResponse">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SurveyInititatedID" ColumnName="SurveyInititatedID" />
+          <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+          <ScalarProperty Name="StudentCourseID" ColumnName="StudentCourseID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="TeacherCoursesID" ColumnName="TeacherCoursesID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Submitted" ColumnName="Submitted" />
+          <ScalarProperty Name="SubmittedBy" ColumnName="SubmittedBy" />
+          <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+          <ScalarProperty Name="SubmittedTime" ColumnName="SubmittedTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SurveyTypes">
+      <EntityTypeMapping TypeName="CMSModel.SurveyType">
+        <MappingFragment StoreEntitySet="SurveyType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxonomyActionVerbs">
+      <EntityTypeMapping TypeName="CMSModel.TaxonomyActionVerb">
+        <MappingFragment StoreEntitySet="TaxonomyActionVerb">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TaxonomyLevelID" ColumnName="TaxonomyLevelID" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxonomyDomains">
+      <EntityTypeMapping TypeName="CMSModel.TaxonomyDomain">
+        <MappingFragment StoreEntitySet="TaxonomyDomain">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Short" ColumnName="Short" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxonomyLevels">
+      <EntityTypeMapping TypeName="CMSModel.TaxonomyLevel">
+        <MappingFragment StoreEntitySet="TaxonomyLevel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LevelNo" ColumnName="LevelNo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TaxonomyDomainID" ColumnName="TaxonomyDomainID" />
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
@@ -2201,6 +2769,27 @@
           <ScalarProperty Name="CrBy" ColumnName="CrBy" />
           <ScalarProperty Name="CrDate" ColumnName="CrDate" />
           <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VissionUniversities">
+      <EntityTypeMapping TypeName="CMSModel.VissionUniversity">
+        <MappingFragment StoreEntitySet="VissionUniversity">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="VissionStatement" ColumnName="VissionStatement" />
+          <ScalarProperty Name="ACMID" ColumnName="ACMID" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isNotActiveBy" ColumnName="isNotActiveBy" />
+          <ScalarProperty Name="isNotActiveDate" ColumnName="isNotActiveDate" />
+          <ScalarProperty Name="isNotActiveTime" ColumnName="isNotActiveTime" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="CrTime" ColumnName="CrTime" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UTime" ColumnName="UTime" />
           <ScalarProperty Name="UDate" ColumnName="UDate" />
         </MappingFragment>
       </EntityTypeMapping>

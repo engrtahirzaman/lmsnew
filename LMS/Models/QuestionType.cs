@@ -17,6 +17,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuestionType()
         {
+            this.QPQuestions = new HashSet<QPQuestion>();
+            this.QuestionTypeAnswerOptions = new HashSet<QuestionTypeAnswerOption>();
             this.SurveyHeadingQAs = new HashSet<SurveyHeadingQA>();
             this.SurveyHeadingQAResponses = new HashSet<SurveyHeadingQAResponse>();
         }
@@ -29,6 +31,10 @@ namespace LMS.Models
         public Nullable<int> UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QPQuestion> QPQuestions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionTypeAnswerOption> QuestionTypeAnswerOptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyHeadingQA> SurveyHeadingQAs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

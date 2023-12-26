@@ -14,6 +14,12 @@ namespace LMS.Models
     
     public partial class CLO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CLO()
+        {
+            this.QPQuestions = new HashSet<QPQuestion>();
+        }
+    
         public int ID { get; set; }
         public string CLOStatement { get; set; }
         public Nullable<int> CLONumber { get; set; }
@@ -36,5 +42,7 @@ namespace LMS.Models
         public virtual BO BO { get; set; }
         public virtual Course Course { get; set; }
         public virtual TaxonomyActionVerb TaxonomyActionVerb { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QPQuestion> QPQuestions { get; set; }
     }
 }

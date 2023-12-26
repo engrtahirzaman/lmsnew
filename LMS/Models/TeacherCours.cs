@@ -17,8 +17,9 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TeacherCours()
         {
-            this.TeacherAttendances = new HashSet<TeacherAttendance>();
+            this.Assessments = new HashSet<Assessment>();
             this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
+            this.TeacherAttendances = new HashSet<TeacherAttendance>();
         }
     
         public int ID { get; set; }
@@ -38,13 +39,15 @@ namespace LMS.Models
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Assessment> Assessments { get; set; }
         public virtual Campus Campus { get; set; }
         public virtual Course Course { get; set; }
         public virtual EmpForm EmpForm { get; set; }
         public virtual Session Session { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherAttendance> TeacherAttendances { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherAttendance> TeacherAttendances { get; set; }
     }
 }

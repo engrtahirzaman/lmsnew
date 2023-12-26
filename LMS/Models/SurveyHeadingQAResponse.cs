@@ -18,7 +18,8 @@ namespace LMS.Models
         public int SurveyInitiatedResponseID { get; set; }
         public string Question { get; set; }
         public int QuestionTypeID { get; set; }
-        public string AnswerInDescription { get; set; }
+        public Nullable<int> SurveyHeadingQAID { get; set; }
+        public string Answer { get; set; }
         public int SurveyHeadingID { get; set; }
         public Nullable<bool> StronglyDisagree { get; set; }
         public Nullable<bool> Disagree { get; set; }
@@ -35,6 +36,7 @@ namespace LMS.Models
     
         public virtual QuestionType QuestionType { get; set; }
         public virtual SurveyHeading SurveyHeading { get; set; }
+        public virtual SurveyHeadingQA SurveyHeadingQA { get; set; }
         public virtual SurveyInitiatedResponse SurveyInitiatedResponse { get; set; }
     }
 }

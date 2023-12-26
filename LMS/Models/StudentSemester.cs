@@ -22,7 +22,10 @@ namespace LMS.Models
         public int ScholorshipHeadID { get; set; }
         public double SGPA { get; set; }
         public double CGPA { get; set; }
+        public Nullable<int> TotalTakenCrHr { get; set; }
+        public Nullable<int> TotalEarnedCrHr { get; set; }
         public bool ResultFinalized { get; set; }
+        public Nullable<int> Probation { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }

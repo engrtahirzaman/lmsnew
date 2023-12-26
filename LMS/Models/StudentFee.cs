@@ -22,6 +22,7 @@ namespace LMS.Models
         public decimal Amount { get; set; }
         public string Description { get; set; }
         public string VoucherNo { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
         public string BankVoucherNo { get; set; }
         public string BankName { get; set; }
         public string BranchCode { get; set; }
@@ -48,7 +49,6 @@ namespace LMS.Models
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
-        public Nullable<System.DateTime> DueDate { get; set; }
     
         public virtual Campus Campus { get; set; }
         public virtual FeeHead FeeHead { get; set; }
