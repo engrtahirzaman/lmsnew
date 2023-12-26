@@ -28,10 +28,19 @@ namespace LMS.Models
         public Nullable<int> CourseID { get; set; }
         public int TeacherCourseID { get; set; }
         public string Section { get; set; }
+        public Nullable<int> TakenCrHr { get; set; }
+        public Nullable<int> EarnedCrHr { get; set; }
         public Nullable<double> GP { get; set; }
         public string Grade { get; set; }
+        public Nullable<System.DateTime> GradingDate { get; set; }
+        public Nullable<System.TimeSpan> GradingTime { get; set; }
+        public Nullable<int> GradingBy { get; set; }
         public bool IsCourseLock { get; set; }
         public bool IsResultFinalized { get; set; }
+        public Nullable<System.DateTime> ResultFinalizedDate { get; set; }
+        public Nullable<System.TimeSpan> ResultFinalizedTime { get; set; }
+        public Nullable<int> ResultFinalizedBy { get; set; }
+        public bool IsRepeated { get; set; }
         public bool IsMakeUp { get; set; }
         public bool IsDropped { get; set; }
         public Nullable<System.DateTime> IsDroppedDate { get; set; }

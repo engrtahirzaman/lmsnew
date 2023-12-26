@@ -4,6 +4,7 @@
     ViewBag.Title = "AllCourses";
     Layout = "~/Views/Shared/_Layout.cshtml";
     CMSEntities db = new CMSEntities();
+    //check if surveys have been initiated.
 }
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
@@ -73,8 +74,8 @@
                                         @foreach (var item in Model.Where(t => t.SessionID == session.Key))
                                         {
                                             var teacherCourse = db.TeacherCourses.Where(t => t.SessionID == item.SessionID && t.Section == item.Section
-                                            && t.CourseID == item.CourseID).Select(t => t.EmpForm.Title.Title1 + t.EmpForm.Name).ToList();
-                                            var teachers = string.Join("<br />", teacherCourse);
+                                            && t.CourseID == item.CourseID && t.IsWithdraw != true).ToList();
+                                           // var teachers = string.Join("<br />", teacherCourse.Select(t => t.EmpForm.Title.Title1 + t.EmpForm.Name));
                                             <tr>
                                                 <td>@sno</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Course.Code)</td>
@@ -84,7 +85,25 @@
                                                 </td>
                                                 <td>@Html.DisplayFor(modelItem => item.Course.CrHr)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Section)</td>
-                                                <td>@Html.Raw(teachers)</td>
+                                                <td>@*@Html.Raw(teachers)*@
+                                                @foreach(var teacherC in teacherCourse)
+                                                {
+                                                    <span>@teacherC.EmpForm.Title.Title1 @teacherC.EmpForm.Name</span>
+                                                    <span>
+                                                        @using (Html.BeginForm("TeacherSurvey", "Survey", FormMethod.Post, new { @class = "TeacherSrvyform" }))
+                                                        {
+                                                            <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                            <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                            <input type="hidden" name="stdCourseID" value="@item.ID" />
+                                                            <input type="hidden" name="TeacherCourseID" value="@teacherC.ID" />
+                                                            <input type="hidden" name="TeacherName" value="@teacherC.EmpForm.Title.Title1 @teacherC.EmpForm.Name" />
+                                                            <input type="submit" value="Submit" style="display:none">
+                                                        }
+                                                        <a href="#" class="TeacherSurveyCourseLink" title="Instructor Survey"><i class="fa fa-paper-plane"></i>Instructor Survey (FeedBack)</a>
+                                                    </span>
+                                                <br />
+                                                }
+                                                </td>
                                                 <td>
                                                     @if (item.IsWithdraw == false && item.IsDropped == false)
                                                     {
@@ -107,6 +126,44 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+
+                                                            <li>
+                                                                @using (Html.BeginForm("GetCourseAttendance", "MyCourses", FormMethod.Post, new { @class = "GetCourseAttendanceform" }))
+                                                                {
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="hidden" name="Section" value="@item.Section" />
+                                                                    <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="GetCourseAttendanceLink" title="Course Attendance"><i class="fa fa-calendar-times-o"></i>Attendance Record</a>
+                                                            </li>
+                                                            <li>
+                                                                @using (Html.BeginForm("GetCourseCard", "MyCourses", FormMethod.Post, new { @class = "GetCourseCardform" }))
+                                                                {
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="hidden" name="Section" value="@item.Section" />
+                                                                    <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="GetCourseCardLink" title="Course Card"><i class="fa fa-credit-card-alt"></i>Course Card</a>
+                                                            </li>
+                                                            <li>
+                                                                @using (Html.BeginForm("CourseSurvey", "Survey", FormMethod.Post, new { @class = "CourseSrvyform" }))
+                                                                {
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="hidden" name="stdCourseID" value="@item.ID" />
+                                                                    <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="CourseSurveyCourseLink" title="Survey Course"><i class="fa fa-paper-plane"></i>Course Survey</a>
+                                                            </li>
+
+                                                            <li class="divider">
+
+                                                            </li>
                                                             <li>
                                                                 @using (Html.BeginForm("DropCourse", "MyCourses", FormMethod.Post, new { @class = "dropform" }))
                                                                 {
@@ -148,6 +205,37 @@
 </div><!-- /.page-content -->
 <script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
 <script>
+    
+    $(document).on("click", ".GetCourseAttendanceLink", function (e) {
+        // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".GetCourseAttendanceform").submit();
+        }
+    });
+    $(document).on("click", ".GetCourseCardLink", function (e) {
+        // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".GetCourseCardform").submit();
+        }
+    });
+    $(document).on("click", ".CourseSurveyCourseLink", function (e) {
+       // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".CourseSrvyform").submit();
+        }
+    });
+
+    $(document).on("click", ".TeacherSurveyCourseLink", function (e) {
+        //var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".TeacherSrvyform").submit();
+        }
+    });
+
 
     $(document).on("click", ".dropCourseLink", function (e) {
         var Okay = confirm("Are you sure you want to drop this course?");
@@ -164,6 +252,5 @@
             $(this).prev(".withdrawform").submit();
         }
     });
-
 
 </script>

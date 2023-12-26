@@ -57,46 +57,62 @@ namespace LMS.Areas.Courses.Controllers
 
                 _dateTimeProvider.Update();//get current date and time...
 
-                StudentCourseSelection studentCourseSelection = new StudentCourseSelection();
-                
-                string addedCourseNames = string.Empty;
-                foreach (int courseID in Courses)
+                int currentSemester  = Methods.GetStudentCurrentSemesterNumber(StudentID);
+                var std  = db.Students.Find(StudentID);
+                int stdProgramLevel = std.ProgramOffered.DepartmentProgram.Program.ProgramLevel_ID;
+
+                //First Check if a student is in the First Semester of Bachelor, he is not allowed to register the courses through LMS. It shall be directly assigned by HoD or Admin.
+                if (stdProgramLevel == 1 && currentSemester == 1)
+                {
+                    TempData["Failed"] = "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                               "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                               "<strong>Failed ! </strong> Dear " + std.Admission.Title.Title1 +" "+ std.Admission.FirstName +" "+ std.Admission.LastName + ", the students of First Semester of the Bachelor Programs are not allowed to register courses using LMS." +
+                               " Therefore, contact your HoD, or CMS office for further clearification/course registration.</div>";
+                }
+                else
                 {
 
-                    if (!db.StudentCourseSelections.Any(t => t.StudentID.Equals(StudentID) && t.SessionID.Equals(StudentCurrentSessionID) && t.CourseID.Equals(courseID)))
-                    {
-                        studentCourseSelection.StudentID = StudentID;
-                        studentCourseSelection.SessionID = StudentCurrentSessionID;
-                        studentCourseSelection.CourseID = courseID;
-                        studentCourseSelection.CourseRequestedDate = _dateTimeProvider.CurrentDate;
-                        studentCourseSelection.CourseRequestedTime = _dateTimeProvider.CurrentTime;
-                        studentCourseSelection.CrDate = _dateTimeProvider.CurrentDate;
-                        db.StudentCourseSelections.Add(studentCourseSelection);
-                        db.SaveChanges();
+                    StudentCourseSelection studentCourseSelection = new StudentCourseSelection();
 
-
-                        TempData["Sucess"] = "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">\r\n  " +
-                            "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
-                            "<strong>Done! </strong>" + " You have successfully applied. Now, click on the 'Print' button to obtain a printout of the course registration form, sign the form, and submit it to your advisor.</strong>." +
-                         "</div>";
-                    }
-                    else
+                    string addedCourseNames = string.Empty;
+                    foreach (int courseID in Courses)
                     {
-                        Course existingCourse = db.Courses.FirstOrDefault(c => c.ID == courseID);
-                        if (existingCourse != null)
+
+                        if (!db.StudentCourseSelections.Any(t => t.StudentID.Equals(StudentID) && t.SessionID.Equals(StudentCurrentSessionID) && t.CourseID.Equals(courseID)))
                         {
-                            if (!string.IsNullOrEmpty(addedCourseNames))
+                            studentCourseSelection.StudentID = StudentID;
+                            studentCourseSelection.SessionID = StudentCurrentSessionID;
+                            studentCourseSelection.CourseID = courseID;
+                            studentCourseSelection.CourseRequestedDate = _dateTimeProvider.CurrentDate;
+                            studentCourseSelection.CourseRequestedTime = _dateTimeProvider.CurrentTime;
+                            studentCourseSelection.CrDate = _dateTimeProvider.CurrentDate;
+                            db.StudentCourseSelections.Add(studentCourseSelection);
+                            db.SaveChanges();
+
+
+                            TempData["Sucess"] = "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                                "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                                "<strong>Done! </strong>" + " You have successfully applied. Now, click on the 'Print' button to obtain a printout of the course registration form, sign the form, and submit it to your advisor.</strong>." +
+                             "</div>";
+                        }
+                        else
+                        {
+                            Course existingCourse = db.Courses.FirstOrDefault(c => c.ID == courseID);
+                            if (existingCourse != null)
                             {
-                                addedCourseNames += ", ";
+                                if (!string.IsNullOrEmpty(addedCourseNames))
+                                {
+                                    addedCourseNames += ", ";
+                                }
+                                addedCourseNames += existingCourse.Title;
                             }
-                            addedCourseNames += existingCourse.Title;
+
+                            TempData["Failed"] = "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                                "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                                "<strong>Failed ! </strong>" + "The course has already been selected for " + db.Sessions.Find(StudentCurrentSessionID).Session1 + " (" + addedCourseNames + ")</div>";
                         }
 
-                        TempData["Failed"] = "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
-                            "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
-                            "<strong>Failed ! </strong>" + "The course has already been selected for " + db.Sessions.Find(StudentCurrentSessionID).Session1+ " (" + addedCourseNames + ")</div>";
                     }
-
                 }
             }
             return RedirectToAction("ApplyCourses");
@@ -197,6 +213,107 @@ namespace LMS.Areas.Courses.Controllers
             }
             return RedirectToAction("AllCourses");
         }
+
+
+        /// <summary>
+        /// Returns the individual student data of the attendance for specific student, course, section, and session
+        /// </summary>
+        /// <param name="studentID"></param>
+        /// <param name="courseID"></param>
+        /// <param name="section"></param>
+        /// <param name="sessionID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetCourseAttendance()
+        {
+            int SessionID = Convert.ToInt32(Request.Form["SessionID"]);
+            int CourseID = Convert.ToInt32(Request.Form["CourseID"]);
+            string Section = Request.Form["Section"];
+
+            int StudentID = Convert.ToInt32(Session["StudentID"]);
+            if (StudentID == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.AccessByInstructor = true;
+
+            //if (!string.IsNullOrEmpty(Request.Form["TeacherID"]))
+            //{
+            //    FormID = Convert.ToInt32(Request.Form["TeacherID"]);
+            //    ViewBag.AccessByInstructor = false;
+            //    // Now you can safely convert it to an integer if it's not empty
+            //}
+
+            ////check if the details are valid...
+            //var teacherCourse = db.TeacherCourses.FirstOrDefault(t => t.EmpFormID == FormID && t.SessionID == SessionID && t.CourseID == t.CourseID && t.Section == Section);
+
+            //if (teacherCourse == null)
+            //{
+            //    // The record doesn't exist or is not valid
+            //    return HttpNotFound();
+            //}
+
+            //ViewBag.Session = teacherCourse.Session.Session1;
+            //ViewBag.SessionID = SessionID;
+            //ViewBag.Course = teacherCourse.Course.Title + " (" + teacherCourse.Course.CrHr + "/" + teacherCourse.Course.ContHr + ") ";
+            //ViewBag.Section = Section;
+            //ViewBag.Instructor = teacherCourse.EmpForm.Title.Title1 + " " + teacherCourse.EmpForm.Name;
+            var studentAttendances = db.StudentAttendances.Where(t => t.StudentID == StudentID && t.SessionID == SessionID && t.CourseID == CourseID && t.Section == Section).OrderByDescending(i => i.Date)
+                                        .ToList();
+
+
+            ViewBag.Total = studentAttendances.Count;
+            ViewBag.Present = studentAttendances.Count(t => t.IsPresent);
+            ViewBag.Absent = studentAttendances.Count(t => t.IsPresent == false);
+            ViewBag.Percentage = (double)ViewBag.Present / ViewBag.Total * 100;
+
+            if(studentAttendances.Count <1) {
+                return RedirectToAction("NoAttendnaceFound");
+            }
+
+            //return View(await studentAttendances);
+
+            return View(studentAttendances);
+        }
+
+        public ActionResult NoAttendnaceFound()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult GetCourseCard()
+        {
+            int SessionID = Convert.ToInt32(Request.Form["SessionID"]);
+            int CourseID = Convert.ToInt32(Request.Form["CourseID"]);
+            string Section = Request.Form["Section"];
+
+            int StudentID = Convert.ToInt32(Session["StudentID"]);
+            if (StudentID == null)
+            {
+                return HttpNotFound();
+            }
+
+            var std = db.Students.FirstOrDefault(t => t.ID == StudentID);
+
+            ViewBag.CurrentSemester = Methods.GetStudentCurrentSemesterNumber(StudentID);
+            ViewBag.Batch = std.ProgramOffered.BatchTitle;
+            ViewBag.Group = std.StudentGroup;
+           
+
+
+            ViewBag.SessionID = SessionID;
+            ViewBag.Section = Section;
+            var course = db.Courses.Find(CourseID);
+            return View(course);
+        }
+
+
+
+
+
 
 
         protected override void Dispose(bool disposing)

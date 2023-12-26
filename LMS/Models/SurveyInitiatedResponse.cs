@@ -26,8 +26,13 @@ namespace LMS.Models
         public Nullable<int> StudentCourseID { get; set; }
         public Nullable<int> StudentID { get; set; }
         public Nullable<int> TeacherCoursesID { get; set; }
+        public Nullable<int> SessionID { get; set; }
+        public Nullable<int> CourseID { get; set; }
         public string Section { get; set; }
         public Nullable<bool> Submitted { get; set; }
+        public Nullable<int> SubmittedBy { get; set; }
+        public Nullable<System.DateTime> SubmittedDate { get; set; }
+        public Nullable<System.TimeSpan> SubmittedTime { get; set; }
         public Nullable<int> CrBy { get; set; }
         public Nullable<System.DateTime> CrDate { get; set; }
         public Nullable<System.TimeSpan> CrTime { get; set; }
@@ -35,6 +40,8 @@ namespace LMS.Models
         public Nullable<System.DateTime> UDate { get; set; }
         public Nullable<System.TimeSpan> UTime { get; set; }
     
+        public virtual Course Course { get; set; }
+        public virtual Session Session { get; set; }
         public virtual StudentCours StudentCours { get; set; }
         public virtual Student Student { get; set; }
         public virtual Survey Survey { get; set; }

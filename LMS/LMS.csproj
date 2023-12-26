@@ -138,6 +138,7 @@
     <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
     <Compile Include="Areas\Attendance\Controllers\StudentAttendanceController.cs" />
     <Compile Include="Areas\Courses\Controllers\MyCoursesController.cs" />
+    <Compile Include="Areas\Courses\Controllers\SurveyController.cs" />
     <Compile Include="Areas\Courses\CoursesAreaRegistration.cs" />
     <Compile Include="Areas\Fees\Controllers\MyFeesController.cs" />
     <Compile Include="Areas\Fees\FeesAreaRegistration.cs" />
@@ -186,6 +187,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicantPreference.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assessment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssessmentDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssessmentName.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AssessmentPolicy.cs">
@@ -302,6 +312,18 @@
     <Compile Include="Models\EvaluationCycle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Exam.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamDateSheet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamSeatingPlan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamStudentsRollNumber.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -333,6 +355,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JobType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MajorSubject.cs">
@@ -434,7 +459,19 @@
     <Compile Include="Models\PublicationType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QPQuestion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QPQuestionPaper.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QPSection.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\QuestionType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionTypeAnswerOption.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Religion.cs">
@@ -799,6 +836,10 @@
     <Content Include="Areas\Attendance\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Attendance\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Attendance\Views\StudentAttendance\AllAttendance.cshtml" />
+    <Content Include="Areas\Courses\Views\Survey\CourseSurvey.cshtml" />
+    <Content Include="Areas\Courses\Views\Survey\TeacherSurvey.cshtml" />
+    <Content Include="Areas\Courses\Views\MyCourses\GetCourseAttendance.cshtml" />
+    <Content Include="Areas\Courses\Views\MyCourses\GetCourseCard.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>

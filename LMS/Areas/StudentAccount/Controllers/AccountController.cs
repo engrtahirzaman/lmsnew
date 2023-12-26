@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -36,8 +37,35 @@ namespace LMS.Areas.StudentAccount.Controllers
 
                     //checking if record exists,active,not expelled and not blocked...
                     bool IsDefaulter = db.FinanceUnpaidDataForLMControls.Any(t => t.RegNo.ToLower() == model.RegNo.ToLower());
-                    if (!IsDefaulter)
+
+                    //checking if studentfee records are due 
+                    DateTime currentDate = DateTime.Now;
+                    var hasValidRecord = db.StudentFees.Where(t =>t.Student.RegNo == model.RegNo).ToList();
+
+                    var hasDue = hasValidRecord.Any(t =>t.IsVerified == false && (t.DueDate < currentDate.Date || t.DueDate == null));
+
+                    if(hasValidRecord.Count() == 0)
                     {
+                        TempData["Failed"] = "<style>.danger {background-color: #ffdddd; border-left: 6px solid #f44336;}</style><div class=\"alert alert-danger danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                         "<strong>Outstanding Dues! </strong><br>Dear Student,<br> Please note that you have pending dues. To access the Learning Management System (LMS), ensure your dues are cleared. " +
+                           "Please visit Finance Section (Management Block, 1st Floor) and clear these dues promptly to avoid academic or administrative issues." +
+                           "</div>";
+                        return View(model);
+                    }
+                    else if (IsDefaulter || hasDue)
+                    {
+                        TempData["Failed"] = "<style>.danger {background-color: #ffdddd; border-left: 6px solid #f44336;}</style><div class=\"alert alert-danger danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
+                          "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
+                          "<strong>Outstanding Dues! </strong><br>Dear Student,<br> Please note that you have pending dues. To access the Learning Management System (LMS), ensure your dues are cleared. " +
+                            "Please visit Finance Section (Management Block, 1st Floor) and clear these dues promptly to avoid academic or administrative issues." +
+                            "</div>";
+                        return View(model);
+
+                       
+                    }
+                    else {
+
                         //checking if record exists,active,not expelled and not blocked...
                         bool IsValidUser = db.Students.Any(t => t.RegNo.ToLower() == model.RegNo.ToLower()
                     && t.Password == model.Password);
@@ -55,21 +83,9 @@ namespace LMS.Areas.StudentAccount.Controllers
 
                             //return RedirectToAction("Index", "MyDashboard", new { Area = "" });
                             //return RedirectToAction("UpdateProfile", "StudentProfile", new { Area = "StudentAccount" });
-                           return RedirectToAction("Index", "MyDashboard", new { Area = "" });
+                            return RedirectToAction("Index", "MyDashboard", new { Area = "" });
                         }
-                    }
-                    else {
-                        TempData["Failed"] = "<style>.danger {background-color: #ffdddd; border-left: 6px solid #f44336;}</style><div class=\"alert alert-danger danger alert-dismissible fade in\" role=\"alert\">\r\n  " +
-                          "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" style=\"font-size:30px\">&times;</a>" +
-                          "<strong>Outstanding Dues/Fees! </strong><br>Dear Student,<br> You currently have Rs." + db.FinanceUnpaidDataForLMControls.Where(t => t.RegNo == model.RegNo).Select(t=>t.Amount)?.FirstOrDefault() + "/- outstanding dues/ fees from previous semesters, marking you as a defaulter in the Account Section. " +
-                            "Please visit Finance Section (Management Block, 1st Floor) and clear these payments promptly to avoid academic or administrative issues." +
-                            "<br>When you settle your dues/fees, you will regain access to your login </div>";
-                        
-                        //ModelState.AddModelError("Important Notice: Outstanding Dues/Fees Defaulter",
-                        //    "Dear Student,<br /> You currently have outstanding dues/fees from previous semesters, marking you as a defaulter in the Account Section. " +
-                        //    "Please visit and Finance Section (Management Block, 1st Floor) clear these payments promptly to avoid academic or administrative issues." +
-                        //    "<br />When you settle your dues/fees, you will regain access to your login");
-                        return View(model);
+
                     }
 
                 }

@@ -1,0 +1,231 @@
+﻿@model LMS.Models.Course
+@using LMS.Models
+@{
+    ViewBag.Title = "Course Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int SessionID = ViewBag.SessionID;
+    String Section = ViewBag.Section;
+
+    CMSEntities db = new CMSEntities();
+    var TeacherCourse = db.TeacherCourses.Where(t => t.SessionID == SessionID && t.Section == Section && t.CourseID == Model.ID).FirstOrDefault();
+    
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("Index","MyDashboard", new { area =""})">Dashboard</a>
+        </li>
+        <li>
+            <i class="ace-icon fa fa-book"></i>
+            <a href="@Url.Action("AllCourses","MyCourses", new { area ="Courses"})">My Courses</a>
+        </li>
+        <li class="active">Course's Attendnace'</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="page-header">
+                <h1>
+                    <a href="javascript:history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    |
+                    My Course Card
+
+                </h1>
+            </div>
+            <!-- div.table-responsive -->
+            <!-- div.dataTables_borderWrap -->
+            <h1 class="text-danger">@ViewBag.Error</h1>
+            @Html.Raw(TempData["Sucess"])
+            @Html.Raw(TempData["Failed"])
+
+        <div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr style="background-color:#000000;" class="center">
+                        <th colspan="4">@Model.Code @Model.Title  (@Model.CrHr/@Model.ContHr)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Session
+                        </td>
+                        <td>@TeacherCourse.Session.Session1</td>
+                        <td style="font-weight: bold;">Semester</td>
+                        <td>@ViewBag.CurrentSemester</td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Instructor
+                        </td>
+                        <td>@TeacherCourse.EmpForm.Title.Title1 @TeacherCourse.EmpForm.Name</td>
+                        <td style="font-weight: bold;">Prerequisite(s)</td>
+                        <td>
+                            <ol>
+                                @foreach (var item in Model.CoursePreRequisites)
+                                {
+                                    if (item.IsExpired != true)
+                                    {
+                                        <li>@item.Course1.Code @item.Course1.Title ( @item.Course1.CrHr/ @item.Course1.ContHr)</li>
+
+                                    }
+                                }
+                            </ol>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Class
+                        </td>
+                        <td>@ViewBag.Batch</td>
+                        <td style="font-weight: bold;">Section</td>
+                        <td>@Section</td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Office of Instructor
+                        </td>
+                        <td>Academic Block</td>
+                        <td style="font-weight: bold;">E-Mail</td>
+                        <td>@TeacherCourse.EmpForm.OfficialEmailAddress</td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Lectures
+                        </td>
+                        <td>Day and Time</td>
+                        <td style="font-weight: bold;">Counsling Hours</td>
+                        <td>Day and Time</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                @*<thead>
+                <tr style="background-color: #337ab7; color: white;">
+                    <th>Course Title and Code</th>
+                </tr>
+            </thead>*@
+
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Course Description
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>@Model.Description</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Course Objectives
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>@Model.Objectives</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Course Oulines
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>@Model.Outlines</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                @*<thead>
+                <tr style="background-color: #337ab7; color: white;">
+                    <th>Course Title and Code</th>
+                </tr>
+            </thead>*@
+
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Course Learning Outcomes (CLOs)
+                        </td>
+                    </tr>
+                    @if (Model.CLOes.Count(t => t.isActive != true) > 0)
+                    {
+                        
+                            <tr>
+                                <td>
+                                    @foreach (var item in Model.CLOes.Where(t => t.isActive != true).OrderBy(m => m.CLONumber))
+                                    {
+                                       <strong>  CLO-@item.CLONumber</strong> <span> @item.CLOStatement</span> <strong>Domain:</strong> @item.TaxonomyActionVerb.TaxonomyLevel.TaxonomyDomain.Name  <strong>Level:</strong> @item.TaxonomyActionVerb.TaxonomyLevel.Name 
+                                <strong>ActionVerb:</strong> @item.TaxonomyActionVerb.Name<br />
+                                    }
+                                </td>
+                            </tr>
+                       
+                    }
+                    else
+                    {
+                        <tr><td>No CLOs are defined.</td></tr>
+                    }
+                </tbody>
+            </table>
+
+            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                @*<thead>
+                <tr style="background-color: #337ab7; color: white;">
+                    <th>Course Title and Code</th>
+                </tr>
+            </thead>*@
+
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold;">
+                            Reference Materials
+                        </td>
+                    </tr>
+                    @if (Model.CoursePublications.Count(t => t.IsExpiredDate != null) > 0)
+                    {
+                        <tr>
+                            <td>
+                                <ol>
+                                    @foreach (var item in Model.CoursePublications.Where(t => t.IsExpiredDate != null && t.Category == "Text Book"))
+                                    {
+                                        <li>
+                                           <strong>@item.Category </strong> @item.Publication.Title (@item.Publication.DateOfPublication.Value.ToShortDateString()), @item.Publication.Author, @item.Publication.Edition, @item.Publication.Publisher
+                                        </li>
+                                    }
+                                </ol>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr><td>No Reference Material (Text/Reference Books) is listed. Please consult your instructor</td></tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+</div>
+</div>
+</div>
+

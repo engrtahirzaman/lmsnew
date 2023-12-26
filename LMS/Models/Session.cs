@@ -20,6 +20,8 @@ namespace LMS.Models
             this.Admissions = new HashSet<Admission>();
             this.Applicants = new HashSet<Applicant>();
             this.BatchWiseCourses = new HashSet<BatchWiseCours>();
+            this.Exams = new HashSet<Exam>();
+            this.ExamStudentsRollNumbers = new HashSet<ExamStudentsRollNumber>();
             this.MeritListMarksCriterias = new HashSet<MeritListMarksCriteria>();
             this.ProgramEligibilities = new HashSet<ProgramEligibility>();
             this.ProgramOffereds = new HashSet<ProgramOffered>();
@@ -31,10 +33,11 @@ namespace LMS.Models
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
             this.StudentFees = new HashSet<StudentFee>();
-            this.StudentSemesters = new HashSet<StudentSemester>();
-            this.TeacherCourses = new HashSet<TeacherCours>();
             this.StudentProgramChangeHistories = new HashSet<StudentProgramChangeHistory>();
+            this.StudentSemesters = new HashSet<StudentSemester>();
             this.SurveyInitiateds = new HashSet<SurveyInitiated>();
+            this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
+            this.TeacherCourses = new HashSet<TeacherCours>();
         }
     
         public int ID { get; set; }
@@ -54,6 +57,10 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BatchWiseCours> BatchWiseCourses { get; set; }
         public virtual Campus Campus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exam> Exams { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamStudentsRollNumber> ExamStudentsRollNumbers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MeritListMarksCriteria> MeritListMarksCriterias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,12 +84,14 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFee> StudentFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyInitiated> SurveyInitiateds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
     }
 }

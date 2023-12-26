@@ -17,6 +17,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.AssessmentDetails = new HashSet<AssessmentDetail>();
+            this.ExamSeatingPlans = new HashSet<ExamSeatingPlan>();
             this.ProjectInvestigatedByStudents = new HashSet<ProjectInvestigatedByStudent>();
             this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
@@ -24,11 +26,11 @@ namespace LMS.Models
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
             this.StudentFees = new HashSet<StudentFee>();
+            this.StudentProgramChangeHistories = new HashSet<StudentProgramChangeHistory>();
             this.StudentsAdvisors = new HashSet<StudentsAdvisor>();
             this.StudentSemesters = new HashSet<StudentSemester>();
             this.StudentsIDcards = new HashSet<StudentsIDcard>();
             this.StudentsSupervisors = new HashSet<StudentsSupervisor>();
-            this.StudentProgramChangeHistories = new HashSet<StudentProgramChangeHistory>();
             this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
         }
     
@@ -45,13 +47,17 @@ namespace LMS.Models
         public bool IsAdmissionCancelled { get; set; }
         public Nullable<int> IsAdmissionCancelledBy { get; set; }
         public Nullable<System.DateTime> IsAdmissionCancelledDate { get; set; }
+        public string StudentGroup { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
-        public string StudentGroup { get; set; }
     
         public virtual Admission Admission { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssessmentDetail> AssessmentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamSeatingPlan> ExamSeatingPlans { get; set; }
         public virtual ProgramOffered ProgramOffered { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProjectInvestigatedByStudent> ProjectInvestigatedByStudents { get; set; }
@@ -68,6 +74,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFee> StudentFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsAdvisor> StudentsAdvisors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentSemester> StudentSemesters { get; set; }
@@ -75,8 +83,6 @@ namespace LMS.Models
         public virtual ICollection<StudentsIDcard> StudentsIDcards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsSupervisor> StudentsSupervisors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
     }

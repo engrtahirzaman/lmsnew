@@ -862,7 +862,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
             var BankName = Request.Form["BankName"];
             var BranchCode = Request.Form["BranchCode"];
             var BankBranch = Request.Form["BankBranch"];
-            var PaymentDate = Request.Form["PaymentDate"];
+            DateTime PaymentDate = Convert.ToDateTime(Request.Form["PaymentDate"]);
 
             if ((file != null) && (BankVoucherNo != null) && (BankName != null) && (BranchCode != null) && (BankBranch != null) && (PaymentDate != null)
                 && (string.Equals(Path.GetExtension(file.FileName), ".jpg", StringComparison.OrdinalIgnoreCase)
@@ -888,7 +888,7 @@ The deposited copy shall be uploaded to the admission portal. In case of a probl
                     item.BankBranch = BankBranch;
                     item.IsPaid = true;
                     item.IsFake = false;
-                    item.PaymentDate = _dateTimeProvider.CurrentDate;
+                    item.PaymentDate = PaymentDate;
                     item.PaymentTime = _dateTimeProvider.CurrentTime;
                     item.Attachment = VoucherNo + Path.GetExtension(file.FileName);
                     item.UDate = _dateTimeProvider.CurrentDate;

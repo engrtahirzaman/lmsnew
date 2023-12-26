@@ -15,17 +15,17 @@ namespace LMS.Models
     public partial class StudentProgramChangeHistory
     {
         public int ID { get; set; }
+        public Nullable<int> SessionID { get; set; }
         public int StudentID { get; set; }
         public int FromBatchID { get; set; }
         public int ToBatchID { get; set; }
         public string OldRegNo { get; set; }
         public string NewRegNo { get; set; }
         public int DuringSemesterNo { get; set; }
+        public int ToSemesterNo { get; set; }
         public System.DateTime ChangedDate { get; set; }
         public System.TimeSpan ChangedTime { get; set; }
         public int ChangedBy { get; set; }
-        public Nullable<int> SessionID { get; set; }
-        public int ToSemesterNo { get; set; }
     
         public virtual Session Session { get; set; }
         public virtual Student Student { get; set; }

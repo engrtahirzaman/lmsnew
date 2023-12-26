@@ -100,11 +100,11 @@ namespace LMS.Models
         public Nullable<System.DateTime> NextOfKinUDate { get; set; }
         public Nullable<System.TimeSpan> NextofKinTime { get; set; }
         public string Color { get; set; }
+        public string Section { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
-        public string Section { get; set; }
     
         public virtual Campus Campus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

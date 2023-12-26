@@ -84,10 +84,7 @@ D:\PakAustria\LMS\LMS\obj\Release\LMS.csproj.CoreCompileInputs.cache
 D:\PakAustria\LMS\LMS\obj\Release\LMS.csproj.CopyComplete
 D:\PakAustria\LMS\LMS\obj\Release\LMS.dll
 D:\PakAustria\LMS\LMS\obj\Release\LMS.pdb
-D:\PakAustria\LMS\LMS\bin\Select.Pdf.dll
-D:\PakAustria\LMS\LMS\bin\Select.Pdf.xml
 D:\PakAustria\LMS\LMS\bin\Select.Html.dep
-D:\PakAustria\LMS\LMS\bin\Select.Tools.dep
 D:\PakAustria\LMSNEW\LMS\bin\LMS.dll.config
 D:\PakAustria\LMSNEW\LMS\bin\LMS.dll
 D:\PakAustria\LMSNEW\LMS\bin\LMS.pdb
@@ -177,3 +174,5 @@ D:\PakAustria\LMSNEW\LMS\obj\Release\LMS.csproj.CoreCompileInputs.cache
 D:\PakAustria\LMSNEW\LMS\obj\Release\LMS.csproj.CopyComplete
 D:\PakAustria\LMSNEW\LMS\obj\Release\LMS.dll
 D:\PakAustria\LMSNEW\LMS\obj\Release\LMS.pdb
+D:\PakAustria\LMS\LMS\bin\Select.HtmlToPdf.dll
+D:\PakAustria\LMS\LMS\bin\Select.HtmlToPdf.xml

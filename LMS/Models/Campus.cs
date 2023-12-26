@@ -17,6 +17,7 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Campus()
         {
+            this.AssessmentNames = new HashSet<AssessmentName>();
             this.BatchWiseCourses = new HashSet<BatchWiseCours>();
             this.Departments = new HashSet<Department>();
             this.EmpForms = new HashSet<EmpForm>();
@@ -49,6 +50,8 @@ namespace LMS.Models
         public int UBy { get; set; }
         public System.DateTime UDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AssessmentName> AssessmentNames { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BatchWiseCours> BatchWiseCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

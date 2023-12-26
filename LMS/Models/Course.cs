@@ -18,6 +18,7 @@ namespace LMS.Models
         public Course()
         {
             this.BatchWiseCourses = new HashSet<BatchWiseCours>();
+            this.CLOes = new HashSet<CLO>();
             this.CourseCoRequisites = new HashSet<CourseCoRequisite>();
             this.CourseCoRequisites1 = new HashSet<CourseCoRequisite>();
             this.CourseEquivalents = new HashSet<CourseEquivalent>();
@@ -26,13 +27,14 @@ namespace LMS.Models
             this.CoursePreRequisites1 = new HashSet<CoursePreRequisite>();
             this.CourseProgramLevels = new HashSet<CourseProgramLevel>();
             this.CoursePublications = new HashSet<CoursePublication>();
+            this.ExamDateSheets = new HashSet<ExamDateSheet>();
             this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentCourseDroppeds = new HashSet<StudentCourseDropped>();
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
+            this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
             this.TeacherCourses = new HashSet<TeacherCours>();
-            this.CLOes = new HashSet<CLO>();
         }
     
         public int ID { get; set; }
@@ -45,16 +47,18 @@ namespace LMS.Models
         public string Outlines { get; set; }
         public Nullable<int> ACMID { get; set; }
         public Nullable<int> CourseCategoryInstitutionalID { get; set; }
+        public bool IsSupervisionBased { get; set; }
+        public bool ISLab { get; set; }
         public Nullable<int> CrBy { get; set; }
         public Nullable<System.DateTime> CrDate { get; set; }
         public Nullable<int> UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
-        public bool IsSupervisionBased { get; set; }
-        public bool ISLab { get; set; }
     
         public virtual ACM ACM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BatchWiseCours> BatchWiseCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CLO> CLOes { get; set; }
         public virtual CourseCategoryInstitutional CourseCategoryInstitutional { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseCoRequisite> CourseCoRequisites { get; set; }
@@ -73,6 +77,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursePublication> CoursePublications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExamDateSheet> ExamDateSheets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseDropped> StudentCourseDroppeds { get; set; }
@@ -83,8 +89,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
+        public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CLO> CLOes { get; set; }
+        public virtual ICollection<TeacherCours> TeacherCourses { get; set; }
     }
 }

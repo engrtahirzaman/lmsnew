@@ -18,9 +18,9 @@ namespace LMS.Models
         public Program()
         {
             this.DepartmentPrograms = new HashSet<DepartmentProgram>();
-            this.ProgramCoordinators = new HashSet<ProgramCoordinator>();
             this.PEOs = new HashSet<PEO>();
             this.PLOes = new HashSet<PLO>();
+            this.ProgramCoordinators = new HashSet<ProgramCoordinator>();
         }
     
         public int ID { get; set; }
@@ -44,11 +44,11 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepartmentProgram> DepartmentPrograms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProgramCoordinator> ProgramCoordinators { get; set; }
-        public virtual ProgramLevel ProgramLevel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PEO> PEOs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PLO> PLOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProgramCoordinator> ProgramCoordinators { get; set; }
+        public virtual ProgramLevel ProgramLevel { get; set; }
     }
 }

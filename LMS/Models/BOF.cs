@@ -17,10 +17,10 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BOF()
         {
-            this.Programs = new HashSet<Program>();
             this.CLOes = new HashSet<CLO>();
             this.PEOs = new HashSet<PEO>();
             this.PLOes = new HashSet<PLO>();
+            this.Programs = new HashSet<Program>();
         }
     
         public int ID { get; set; }
@@ -29,16 +29,14 @@ namespace LMS.Models
         public System.DateTime Date { get; set; }
         public string Agenda { get; set; }
         public string MeetingMinutes { get; set; }
+        public Nullable<int> FacultyID { get; set; }
+        public string MinutesFile { get; set; }
+        public string AgendaFile { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public Nullable<int> UBy { get; set; }
         public System.DateTime UDate { get; set; }
-        public Nullable<int> FacultyID { get; set; }
-        public string MinutesFile { get; set; }
-        public string AgendaFile { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Program> Programs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLO> CLOes { get; set; }
         public virtual Faculty Faculty { get; set; }
@@ -46,5 +44,7 @@ namespace LMS.Models
         public virtual ICollection<PEO> PEOs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PLO> PLOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Program> Programs { get; set; }
     }
 }

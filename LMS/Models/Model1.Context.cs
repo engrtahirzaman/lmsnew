@@ -37,12 +37,16 @@ namespace LMS.Models
         public virtual DbSet<ApplicantInterviewMark> ApplicantInterviewMarks { get; set; }
         public virtual DbSet<ApplicantPreference> ApplicantPreferences { get; set; }
         public virtual DbSet<Applicant> Applicants { get; set; }
+        public virtual DbSet<AssessmentDetail> AssessmentDetails { get; set; }
+        public virtual DbSet<AssessmentName> AssessmentNames { get; set; }
         public virtual DbSet<AssessmentPolicy> AssessmentPolicies { get; set; }
+        public virtual DbSet<Assessment> Assessments { get; set; }
         public virtual DbSet<BatchWiseCours> BatchWiseCourses { get; set; }
         public virtual DbSet<Board> Boards { get; set; }
         public virtual DbSet<BOF> BOFs { get; set; }
         public virtual DbSet<BO> BOS { get; set; }
         public virtual DbSet<Campus> Campuses { get; set; }
+        public virtual DbSet<CLO> CLOes { get; set; }
         public virtual DbSet<CMSUser> CMSUsers { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseCategoryInstitutional> CourseCategoryInstitutionals { get; set; }
@@ -73,6 +77,11 @@ namespace LMS.Models
         public virtual DbSet<EmpQualification> EmpQualifications { get; set; }
         public virtual DbSet<EmpReference> EmpReferences { get; set; }
         public virtual DbSet<EmpTraining> EmpTrainings { get; set; }
+        public virtual DbSet<EvaluationCycle> EvaluationCycles { get; set; }
+        public virtual DbSet<ExamDateSheet> ExamDateSheets { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
+        public virtual DbSet<ExamSeatingPlan> ExamSeatingPlans { get; set; }
+        public virtual DbSet<ExamStudentsRollNumber> ExamStudentsRollNumbers { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<FacultyHead> FacultyHeads { get; set; }
         public virtual DbSet<FeeCriteria> FeeCriterias { get; set; }
@@ -84,15 +93,19 @@ namespace LMS.Models
         public virtual DbSet<JobPosition> JobPositions { get; set; }
         public virtual DbSet<JobScale> JobScales { get; set; }
         public virtual DbSet<JobType> JobTypes { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<MajorSubject> MajorSubjects { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MeritListMarksCriteria> MeritListMarksCriterias { get; set; }
+        public virtual DbSet<MissionUniversity> MissionUniversities { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<OnlinePaymentMapping> OnlinePaymentMappings { get; set; }
         public virtual DbSet<OnlinePaymentVender> OnlinePaymentVenders { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<OrganizationLegalType> OrganizationLegalTypes { get; set; }
         public virtual DbSet<OrganizationSectorType> OrganizationSectorTypes { get; set; }
+        public virtual DbSet<PEO> PEOs { get; set; }
+        public virtual DbSet<PLO> PLOes { get; set; }
         public virtual DbSet<ProgramCoordinator> ProgramCoordinators { get; set; }
         public virtual DbSet<ProgramEligibility> ProgramEligibilities { get; set; }
         public virtual DbSet<ProgramLevel> ProgramLevels { get; set; }
@@ -108,6 +121,11 @@ namespace LMS.Models
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Publication> Publications { get; set; }
         public virtual DbSet<PublicationType> PublicationTypes { get; set; }
+        public virtual DbSet<QPQuestion> QPQuestions { get; set; }
+        public virtual DbSet<QPQuestionPaper> QPQuestionPapers { get; set; }
+        public virtual DbSet<QPSection> QPSections { get; set; }
+        public virtual DbSet<QuestionType> QuestionTypes { get; set; }
+        public virtual DbSet<QuestionTypeAnswerOption> QuestionTypeAnswerOptions { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RoleWiseMenu> RoleWiseMenus { get; set; }
@@ -128,31 +146,10 @@ namespace LMS.Models
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentsAdvisor> StudentsAdvisors { get; set; }
         public virtual DbSet<StudentSemester> StudentSemesters { get; set; }
+        public virtual DbSet<StudentsGroupColor> StudentsGroupColors { get; set; }
         public virtual DbSet<StudentsIDcard> StudentsIDcards { get; set; }
         public virtual DbSet<StudentsSupervisor> StudentsSupervisors { get; set; }
         public virtual DbSet<SubMenu> SubMenus { get; set; }
-        public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
-        public virtual DbSet<TeacherCours> TeacherCourses { get; set; }
-        public virtual DbSet<TestApplicant> TestApplicants { get; set; }
-        public virtual DbSet<TestCalender> TestCalenders { get; set; }
-        public virtual DbSet<TestCenter> TestCenters { get; set; }
-        public virtual DbSet<Test> Tests { get; set; }
-        public virtual DbSet<TestSession> TestSessions { get; set; }
-        public virtual DbSet<TestVoucher> TestVouchers { get; set; }
-        public virtual DbSet<Title> Titles { get; set; }
-        public virtual DbSet<University> Universities { get; set; }
-        public virtual DbSet<MajorSubjectListOfCours> MajorSubjectListOfCourses { get; set; }
-        public virtual DbSet<v_MeritList> v_MeritList { get; set; }
-        public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
-        public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
-        public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
-        public virtual DbSet<CLO> CLOes { get; set; }
-        public virtual DbSet<EvaluationCycle> EvaluationCycles { get; set; }
-        public virtual DbSet<MissionUniversity> MissionUniversities { get; set; }
-        public virtual DbSet<PEO> PEOs { get; set; }
-        public virtual DbSet<PLO> PLOes { get; set; }
-        public virtual DbSet<QuestionType> QuestionTypes { get; set; }
-        public virtual DbSet<StudentsGroupColor> StudentsGroupColors { get; set; }
         public virtual DbSet<Survey> Surveys { get; set; }
         public virtual DbSet<SurveyHeading> SurveyHeadings { get; set; }
         public virtual DbSet<SurveyHeadingQA> SurveyHeadingQAs { get; set; }
@@ -163,6 +160,21 @@ namespace LMS.Models
         public virtual DbSet<TaxonomyActionVerb> TaxonomyActionVerbs { get; set; }
         public virtual DbSet<TaxonomyDomain> TaxonomyDomains { get; set; }
         public virtual DbSet<TaxonomyLevel> TaxonomyLevels { get; set; }
+        public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
+        public virtual DbSet<TeacherCours> TeacherCourses { get; set; }
+        public virtual DbSet<TestApplicant> TestApplicants { get; set; }
+        public virtual DbSet<TestCalender> TestCalenders { get; set; }
+        public virtual DbSet<TestCenter> TestCenters { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<TestSession> TestSessions { get; set; }
+        public virtual DbSet<TestVoucher> TestVouchers { get; set; }
+        public virtual DbSet<Title> Titles { get; set; }
+        public virtual DbSet<University> Universities { get; set; }
         public virtual DbSet<VissionUniversity> VissionUniversities { get; set; }
+        public virtual DbSet<MajorSubjectListOfCours> MajorSubjectListOfCourses { get; set; }
+        public virtual DbSet<v_MeritList> v_MeritList { get; set; }
+        public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
+        public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
+        public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
     }
 }

@@ -14,10 +14,16 @@ namespace LMS.Models
     
     public partial class SurveyHeadingQA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SurveyHeadingQA()
+        {
+            this.SurveyHeadingQAResponses = new HashSet<SurveyHeadingQAResponse>();
+        }
+    
         public int ID { get; set; }
         public string Question { get; set; }
         public int QuestionTypeID { get; set; }
-        public string AnswerInDescription { get; set; }
+        public string Answer { get; set; }
         public int SurveyHeadingID { get; set; }
         public Nullable<bool> StronglyDisagree { get; set; }
         public Nullable<bool> Disagree { get; set; }
@@ -36,5 +42,7 @@ namespace LMS.Models
     
         public virtual QuestionType QuestionType { get; set; }
         public virtual SurveyHeading SurveyHeading { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SurveyHeadingQAResponse> SurveyHeadingQAResponses { get; set; }
     }
 }
