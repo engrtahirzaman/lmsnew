@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACM">
           <Key>
             <PropertyRef Name="ID" />
@@ -394,6 +394,31 @@
           <Property Name="Attachment" Type="nvarchar(max)" />
           <Property Name="IsLocked" Type="bit" Nullable="false" />
           <Property Name="IsVisibleToStudents" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Assessments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampusID" Type="int" />
+          <Property Name="TeacherCourseID" Type="int" Nullable="false" />
+          <Property Name="AssessmentNameID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="TotalMarks" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Weightage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MarksType" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="PassingMarks" Type="int" />
+          <Property Name="CrBy" Type="int" Nullable="false" />
+          <Property Name="CrDate" Type="date" Nullable="false" />
+          <Property Name="CrTime" Type="time" Precision="7" />
+          <Property Name="UBy" Type="int" Nullable="false" />
+          <Property Name="UDate" Type="date" Nullable="false" />
+          <Property Name="UTime" Type="time" Precision="7" />
+          <Property Name="IsAttachment" Type="bit" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BatchWiseCourses">
           <Key>
@@ -7223,7 +7248,8 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
             <End Role="VissionUniversity" EntitySet="VissionUniversity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -7654,36 +7680,6 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <Property Name="UBy" Type="Int32" />
           <Property Name="UDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ACM" Relationship="Self.FK_AssessmentPolicy_ACM" FromRole="AssessmentPolicy" ToRole="ACM" />
-        </EntityType>
-        <EntityType Name="Assessment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CampusID" Type="Int32" />
-          <Property Name="TeacherCourseID" Type="Int32" Nullable="false" />
-          <Property Name="AssessmentNameID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="TotalMarks" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Weightage" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="MarksType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="PassingMarks" Type="Int32" />
-          <Property Name="CrBy" Type="Int32" Nullable="false" />
-          <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CrTime" Type="Time" Precision="7" />
-          <Property Name="UBy" Type="Int32" Nullable="false" />
-          <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UTime" Type="Time" Precision="7" />
-          <Property Name="IsAttachment" Type="Boolean" />
-          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AssessmentDetails" Relationship="Self.FK_AssessmentDetails_Assessments" FromRole="Assessments" ToRole="AssessmentDetails" />
-          <NavigationProperty Name="AssessmentName" Relationship="Self.FK_Assessments_AssessmentNames" FromRole="Assessments" ToRole="AssessmentNames" />
-          <NavigationProperty Name="TeacherCours" Relationship="Self.FK_Assessments_TeacherCourses" FromRole="Assessments" ToRole="TeacherCourses" />
-          <NavigationProperty Name="QPQuestionPapers" Relationship="Self.FK_QPQuestionPaper_Assessments" FromRole="Assessments" ToRole="QPQuestionPaper" />
-          <Property Name="IsVisibleToStudents" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="BatchWiseCours">
           <Key>
@@ -15199,29 +15195,6 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
                 <ScalarProperty Name="ACMID" ColumnName="ACMID" />
                 <ScalarProperty Name="CrBy" ColumnName="CrBy" />
                 <ScalarProperty Name="CrDate" ColumnName="CrDate" />
-                <ScalarProperty Name="UBy" ColumnName="UBy" />
-                <ScalarProperty Name="UDate" ColumnName="UDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Assessments">
-            <EntityTypeMapping TypeName="CMSModel.Assessment">
-              <MappingFragment StoreEntitySet="Assessments">
-                <ScalarProperty Name="IsVisibleToStudents" ColumnName="IsVisibleToStudents" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CampusID" ColumnName="CampusID" />
-                <ScalarProperty Name="TeacherCourseID" ColumnName="TeacherCourseID" />
-                <ScalarProperty Name="AssessmentNameID" ColumnName="AssessmentNameID" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
-                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
-                <ScalarProperty Name="MarksType" ColumnName="MarksType" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
-                <ScalarProperty Name="CrBy" ColumnName="CrBy" />
-                <ScalarProperty Name="CrDate" ColumnName="CrDate" />
-                <ScalarProperty Name="CrTime" ColumnName="CrTime" />
                 <ScalarProperty Name="UBy" ColumnName="UBy" />
                 <ScalarProperty Name="UDate" ColumnName="UDate" />
                 <ScalarProperty Name="UTime" ColumnName="UTime" />
