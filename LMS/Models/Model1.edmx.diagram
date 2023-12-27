@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="091e7ddd72744b2a9064b64c52b05f2d" Name="Diagram1">
-        <EntityTypeShape EntityType="CMSModel.ACM" Width="1.5" PointX="6.75" PointY="124.125" IsExpanded="true" />
+      <Diagram DiagramId="e17fac032f824f2a90b859d7922c7717" Name="Diagram1">
+        <EntityTypeShape EntityType="CMSModel.ACM" Width="1.5" PointX="6.75" PointY="123.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Admission" Width="1.5" PointX="5.25" PointY="189.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.AdmissionEducation" Width="1.5" PointX="13.5" PointY="193" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.AdmissionEducationDetail" Width="1.5" PointX="15.75" PointY="193.25" IsExpanded="true" />
@@ -19,7 +19,7 @@
         <EntityTypeShape EntityType="CMSModel.Applicant" Width="1.5" PointX="8.25" PointY="190" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.AssessmentDetail" Width="1.5" PointX="7.5" PointY="138.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.AssessmentName" Width="1.5" PointX="3" PointY="139.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.AssessmentPolicy" Width="1.5" PointX="9" PointY="105.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.AssessmentPolicy" Width="1.5" PointX="9" PointY="107.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Assessment" Width="1.5" PointX="5.25" PointY="138.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.BatchWiseCours" Width="1.5" PointX="8.25" PointY="173" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Board" Width="1.5" PointX="2.75" PointY="4.875" IsExpanded="true" />
@@ -28,13 +28,13 @@
         <EntityTypeShape EntityType="CMSModel.Campus" Width="1.5" PointX="0.75" PointY="150.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.CLO" Width="1.5" PointX="13.75" PointY="167.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.CMSUser" Width="1.5" PointX="5.25" PointY="146.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.Course" Width="1.5" PointX="9" PointY="124.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.CourseCategoryInstitutional" Width="1.5" PointX="6.75" PointY="129.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.CourseCoRequisite" Width="1.5" PointX="11.25" PointY="121.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.CourseEquivalent" Width="1.5" PointX="11.25" PointY="126.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.CoursePreRequisite" Width="1.5" PointX="11.25" PointY="116.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.Course" Width="1.5" PointX="9" PointY="123.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.CourseCategoryInstitutional" Width="1.5" PointX="6.75" PointY="128.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.CourseCoRequisite" Width="1.5" PointX="11.25" PointY="120.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.CourseEquivalent" Width="1.5" PointX="11.25" PointY="125.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.CoursePreRequisite" Width="1.5" PointX="11.25" PointY="129.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.CourseProgramLevel" Width="1.5" PointX="8.25" PointY="183.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.CoursePublication" Width="1.5" PointX="11.25" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.CoursePublication" Width="1.5" PointX="11.25" PointY="69.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.DBCredential" Width="1.5" PointX="10.75" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.DepartmentCoordinator" Width="1.5" PointX="14.5" PointY="146.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.DepartmentEmpForm" Width="1.5" PointX="16.5" PointY="155.5" IsExpanded="true" />
@@ -43,11 +43,11 @@
         <EntityTypeShape EntityType="CMSModel.Department" Width="1.5" PointX="5.25" PointY="161.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.DepartmentType" Width="1.5" PointX="3" PointY="165.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.District" Width="1.5" PointX="0.75" PointY="143.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.EducationLevel" Width="1.5" PointX="9" PointY="118.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.EducationLevel" Width="1.5" PointX="9" PointY="132.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmailSendingBox" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmailSettingsTestApplicant" Width="1.5" PointX="2.75" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmpDesignation" Width="1.5" PointX="0.75" PointY="139.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.EmpExperience" Width="1.5" PointX="5.25" PointY="134" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.EmpExperience" Width="1.5" PointX="5.25" PointY="133" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmpForm" Width="1.5" PointX="3" PointY="144.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmpFormJobNature" Width="1.5" PointX="8.25" PointY="152.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.EmpFormJobPosition" Width="1.5" PointX="13" PointY="7.125" IsExpanded="true" />
@@ -67,17 +67,17 @@
         <EntityTypeShape EntityType="CMSModel.FeeCriteria" Width="1.5" PointX="26.5" PointY="165.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.FeeHead" Width="1.5" PointX="3" PointY="179.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.FinanceUnpaidDataForLMControl" Width="1.5" PointX="4.75" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.Grading" Width="1.5" PointX="11.25" PointY="134" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.GradingPolicy" Width="1.5" PointX="9" PointY="134" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.Grading" Width="1.5" PointX="11.25" PointY="103" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.GradingPolicy" Width="1.5" PointX="9" PointY="103" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.JobNature" Width="1.5" PointX="6" PointY="179.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.JobPosition" Width="1.5" PointX="10.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.JobScale" Width="1.5" PointX="10.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.JobType" Width="1.5" PointX="6" PointY="120.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.JobType" Width="1.5" PointX="6" PointY="119.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Location" Width="1.5" PointX="29.5" PointY="198.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.MajorSubject" Width="1.5" PointX="22" PointY="196.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Menu" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.MeritListMarksCriteria" Width="1.5" PointX="24.25" PointY="174.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.MissionUniversity" Width="1.5" PointX="9" PointY="99.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.MissionUniversity" Width="1.5" PointX="9" PointY="97.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Nationality" Width="1.5" PointX="0.75" PointY="158.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.OnlinePaymentMapping" Width="1.5" PointX="14.75" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.OnlinePaymentVender" Width="1.5" PointX="10.75" PointY="15.875" IsExpanded="true" />
@@ -92,12 +92,12 @@
         <EntityTypeShape EntityType="CMSModel.ProgramOffered" Width="1.5" PointX="24.25" PointY="168.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.ProgramPreference" Width="1.5" PointX="24.25" PointY="184.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Program" Width="1.5" PointX="15.75" PointY="161.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.Project" Width="1.5" PointX="9" PointY="111.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.ProjectAwardedByOrganization" Width="1.5" PointX="11.25" PointY="56.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.Project" Width="1.5" PointX="9" PointY="113.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.ProjectAwardedByOrganization" Width="1.5" PointX="11.25" PointY="57.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.ProjectInvestigatedByEmpForm" Width="1.5" PointX="11.25" PointY="157.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.ProjectInvestigatedByStudent" Width="1.5" PointX="31.75" PointY="183.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.ProjectInvestigationType" Width="1.5" PointX="9" PointY="167.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.ProjectType" Width="1.5" PointX="6.75" PointY="112.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.ProjectType" Width="1.5" PointX="6.75" PointY="114.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Province" Width="1.5" PointX="1.5" PointY="135.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Publication" Width="1.5" PointX="8" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.PublicationType" Width="1.5" PointX="5.75" PointY="12.375" IsExpanded="true" />
@@ -105,7 +105,7 @@
         <EntityTypeShape EntityType="CMSModel.QPQuestionPaper" Width="1.5" PointX="7.5" PointY="143.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.QPSection" Width="1.5" PointX="9.75" PointY="143.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.QuestionType" Width="1.5" PointX="9.75" PointY="139.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.QuestionTypeAnswerOption" Width="1.5" PointX="12" PointY="112.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.QuestionTypeAnswerOption" Width="1.5" PointX="12" PointY="116.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Religion" Width="1.5" PointX="0.75" PointY="163.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Role" Width="1.5" PointX="0.75" PointY="166.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.RoleWiseMenu" Width="1.5" PointX="5.25" PointY="85.375" IsExpanded="true" />
@@ -146,11 +146,11 @@
         <EntityTypeShape EntityType="CMSModel.TestCalender" Width="1.5" PointX="14.25" PointY="152" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.TestCenter" Width="1.5" PointX="12" PointY="138.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Test" Width="1.5" PointX="6" PointY="151.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.TestSession" Width="1.5" PointX="3.75" PointY="129.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.TestSession" Width="1.5" PointX="3.75" PointY="128.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.TestVoucher" Width="1.5" PointX="18.75" PointY="173" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Title" Width="1.5" PointX="0.75" PointY="170.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.University" Width="1.5" PointX="15.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.VissionUniversity" Width="1.5" PointX="9" PointY="94.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSModel.VissionUniversity" Width="1.5" PointX="9" PointY="92.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.MajorSubjectListOfCours" Width="1.5" PointX="24.25" PointY="196.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.v_MeritList" Width="1.5" PointX="6.75" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.v_TestAdmitCard" Width="1.5" PointX="15.75" PointY="5.875" IsExpanded="true" />
