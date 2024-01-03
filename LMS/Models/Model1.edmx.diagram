@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ef34df17de5e4ac3965320f7c389a3dc" Name="Diagram1">
+      <Diagram DiagramId="ef34df17de5e4ac3965320f7c389a3dc" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="CMSModel.ACM" Width="1.5" PointX="6.75" PointY="123.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Admission" Width="1.5" PointX="5.25" PointY="189.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.AdmissionEducation" Width="1.5" PointX="13.5" PointY="193" IsExpanded="true" />
@@ -121,7 +121,6 @@
         <EntityTypeShape EntityType="CMSModel.StudentCours" Width="1.5" PointX="34.75" PointY="171.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.StudentCourseSelection" Width="1.5" PointX="31.75" PointY="169.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.StudentCourseWithDrawn" Width="1.5" PointX="34.75" PointY="193.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMSModel.StudentFee" Width="1.5" PointX="37.75" PointY="171.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.StudentProgramChangeHistory" Width="1.5" PointX="34.75" PointY="183.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.Student" Width="1.5" PointX="29.5" PointY="181" IsExpanded="true" />
         <EntityTypeShape EntityType="CMSModel.StudentsAdvisor" Width="1.5" PointX="31.75" PointY="163.125" IsExpanded="true" />
@@ -237,7 +236,6 @@
         <AssociationConnector Association="CMSModel.FK_Sessions_Campuses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourses_Campuses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourseSelection_Campuses" ManuallyRouted="false" />
-        <AssociationConnector Association="CMSModel.FK_StudentFee_Campuses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentSemester_Campuses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_TeacherCourses_Campuses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_Tests_Campuses" ManuallyRouted="false" />
@@ -327,7 +325,6 @@
         <AssociationConnector Association="CMSModel.FK_FeeCriteria_FeeCriteria1" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_FeeCriteria_ProgramOffered" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_ScholarhipHeadsApplyOnFeeHead_FeeHead" ManuallyRouted="false" />
-        <AssociationConnector Association="CMSModel.FK_StudentFee_FeeHeads" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_Grading_GradingPollicy" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_MajorSubjectListOfCourses_MajorSubject" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_ProgramPreferences_MajorSubject" ManuallyRouted="false" />
@@ -369,7 +366,6 @@
         <AssociationConnector Association="CMSModel.FK_StudentCourses_Sessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourseSelection_Sessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourseWithDrawn_Sessions" ManuallyRouted="false" />
-        <AssociationConnector Association="CMSModel.FK_StudentFee_Sessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentProgramChangeHistory_Sessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentSessions_Sessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_SurveyInitiated_Sessions" ManuallyRouted="false" />
@@ -383,7 +379,6 @@
         <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_StudentCourses" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourseSelection_Students" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentCourseWithDrawn_Students" ManuallyRouted="false" />
-        <AssociationConnector Association="CMSModel.FK_StudentFee_Students" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentProgramChangeHistory_Students" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentsAdvisor_Students" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_StudentSemester_Students" ManuallyRouted="false" />
@@ -412,7 +407,12 @@
         <AssociationConnector Association="CMSModel.FK_Tests_TestSessions" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_TestVouchers_Tests" ManuallyRouted="false" />
         <AssociationConnector Association="CMSModel.FK_TestVouchers_TestSessions" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="CMSModel.StudentFee" Width="1.5" PointX="37.75" PointY="171.375" />
+        <AssociationConnector Association="CMSModel.FK_StudentFee_Campuses" />
+        <AssociationConnector Association="CMSModel.FK_StudentFee_FeeHeads" />
+        <AssociationConnector Association="CMSModel.FK_StudentFee_Sessions" />
+        <AssociationConnector Association="CMSModel.FK_StudentFee_Students" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

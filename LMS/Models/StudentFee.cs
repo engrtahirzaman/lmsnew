@@ -45,6 +45,8 @@ namespace LMS.Models
         public Nullable<System.TimeSpan> IsRefundTime { get; set; }
         public string IsRefundComments { get; set; }
         public Nullable<decimal> IsRefundPercent { get; set; }
+        public string OnlinePaymentReferenceID { get; set; }
+        public Nullable<System.DateTime> ReferenceIDCrDate { get; set; }
         public int CrBy { get; set; }
         public System.DateTime CrDate { get; set; }
         public int UBy { get; set; }

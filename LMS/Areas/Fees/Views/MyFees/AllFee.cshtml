@@ -26,7 +26,7 @@
             <!-- div.table-responsive -->
             <!-- div.dataTables_borderWrap -->
             <h1 class="text-danger">@ViewBag.Error</h1>
-            @Html.Raw(TempData["Sucess"])
+            @Html.Raw(TempData["Success"])
             @Html.Raw(TempData["Failed"])
             <div>
                 @foreach (var session in Model.GroupBy(t => t.SessionID))
@@ -53,7 +53,8 @@
                                 <table class="table table-bordered table-striped">
                                     <tr>
                                         <th width="10%">Voucher No</th>
-                                        <th>Action</th>
+                                        <th width="20%">Print/Upload</th>
+                                        <th width="60%">Pay Online / 1-Bill ID</th>
                                     </tr>
 
                                     @foreach (var voucherGroup in session.GroupBy(t => t.VoucherNo))
@@ -88,6 +89,17 @@
                                                         <a href="#" data-toggle="modal" data-target="#myModal" onclick="PayNow('@voucherGroup.Key','@SessionDet')" class="btn btn-minier btn-success" title="Upload"><i class="fa fa-upload"></i> Upload</a>
 
                                                     }
+                                                }                                                
+                                            </td>
+                                            <td>
+                                                @if (voucherGroup.Any(t => t.OnlinePaymentReferenceID == null))
+                                                {
+                                                    <button class="btn btn-inverse btn-minier" data-toggle="modal" data-target="#payOnline" onclick="PayOnline('@voucherGroup.Key')">Pay Online</button>
+                                                }
+                                                else
+                                                {
+                                                 <span class="label label-inverse">100806@(voucherGroup.Select(t=>t.OnlinePaymentReferenceID)?.FirstOrDefault())</span>
+                                                 <strong class="label label-danger">Copy this 1 Bill ID and Go to any online banking app and make the payment using the Bill ID 1.</strong>
                                                 }
                                             </td>
                                         </tr>
@@ -245,10 +257,80 @@
     </div>
 </div>
 
+<!-- Modal for onilne payment -->
+<div id="payOnline" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="lighter blue">
+                    <i class="ace-icon fa fa-money orange"></i>
+                    Payment Gateways
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12">
+                    <div class="widget-box transparent">
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main no-padding">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Pay via any Banking App/EasyPaisa/JazzCash through 1-Bill Reference ID)<br />
+                                                Note: After payment through 1-Bill, you dont need upload/fill the voucher upload. Your payment will automatically be verirfied in few minutes.
+                                                <a href="~/Files/CLINK User Guide.pdf" target="_blank" title="Click to see the Guideline">Click to see the Guideline</a>
+                                            </td>
+                                            <td class="hidden-480">
+                                                @*@if (ApplicantID == 1)
+        {*@
+                                                @using (Html.BeginForm("PayAction", "Payment", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary()
+                                                    <input type="hidden" class="input-large VoucherNo" name="VoucherNo" />
+                                                    
+                                                    <button type="submit" class="btn btn-inverse btn-xs arrowed-right arrowed-in" id="btnGenerate" title="Click to Generate Online 1-Bill ID">Click to Generate Online 1-Bill ID for <strong class="titleVoucherNo" name="VoucherNo"></strong></button>
+                                                }
+                                                @*}
+        else
+        {
+            <strong>Coming soon...</strong>
+        }*@
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div><!-- /.widget-main -->
+                        </div><!-- /.widget-body -->
+                    </div><!-- /.widget-box -->
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script>
     function PayNow(VoucherNo, SessionDet) {
         $("#VoucherNo").val(VoucherNo);
         $(".VoucherDet").html(VoucherNo);
         $(".SessionDet").html(SessionDet);
     }
+
+    function PayOnline(VoucherNo) {
+        $(".VoucherNo").val(VoucherNo);
+        $(".titleVoucherNo").html(VoucherNo);
+    }
+
 </script>

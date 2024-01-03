@@ -1,0 +1,131 @@
+﻿@model IEnumerable<LMS.Models.Assessment>
+@using LMS.Models;
+@{
+    ViewBag.Title = "Get Course Assessment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CMSEntities db = new CMSEntities();
+    //check if surveys have been initiated.
+    int sno = 1;
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("Index", "MyDashboard", new { area = "" })">Dashboard</a>
+        </li>
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("AllCourses", "MyCourses", new { area = "Courses" })">My Courses</a>
+        </li>
+        <li class="active">Course Assessment</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="page-header">
+                <h1>
+                    <a href="javascript:window.history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    |
+                    Course Assesment for <span class="orange"> @ViewBag.CourseCodeTitle </span>
+                </h1>
+            </div>
+            <div class="col-sm-12">
+                <table id="datatable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>S#</th>
+                            <th>Assessment</th>
+                            <th>Start Date</th>
+                            <th>Start Date</th>
+                            <th>Total Marks</th>
+                            <th>Weightage</th>
+                            <th>Assessment Type</th>
+                            <th>Has attachment?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@sno</td>
+                                <td>@item.AssessmentName.Name @item.Description</td>
+                                <td>@item.StartDate.Value.ToShortDateString()</td>
+                                <td>@item.EndDate.Value.ToShortDateString()</td>
+                                <td>@item.TotalMarks</td>
+                                <td>@item.Weightage</td>
+                                <td>@item.MarksType</td>
+                                <td>
+                                    @if (item.IsAttachment == true)
+                                    {
+                                        <span class="label label-success middle">
+                                            <i class="ace-icon fa fa-check-circle bigger-120"></i>
+                                            Yes
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger middle">
+                                            <i class="ace-icon fa fa-close bigger-120"></i>
+                                            No
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>
+
+
+                                    <div class="btn-group">
+                                        <button data-toggle="dropdown" title="More Actions" class="btn btn-info dropdown-toggle btn-sm" aria-expanded="true">
+                                            More Actions
+                                            <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                            <li>
+                                                @using (Html.BeginForm("GetCourseAssessmentMarks", "Assessment", FormMethod.Post, new { @class = "GetCourseAssessmentMarksform" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="AssessmentID" value="@item.ID" />
+                                                    <input type="submit" value="Submit" style="display:none">
+                                                }
+                                                <a href="#" class="GetCourseAssessmentMarksLink" title="Course Assessment Marks"><i class="fa fa-file-text-o"></i>Assessment Marks</a>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            sno++;
+                        }
+                        <tr>
+                            <td colspan="5"><strong class="pull-right">Total Weightage:</strong></td>
+                            <td colspan="4"><strong class="badge badge-inverse">@Model.Sum(t => t.Weightage) %</strong> </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+<script>
+
+    $(document).on("click", ".GetCourseAssessmentMarksLink", function (e) {
+        // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".GetCourseAssessmentMarksform").submit();
+        }
+    });
+
+ </script>

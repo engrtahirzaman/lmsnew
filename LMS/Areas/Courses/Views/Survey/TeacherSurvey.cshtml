@@ -107,7 +107,7 @@
                                 @foreach (var question in heading.SurveyHeadingQAs.Where(q => q.isActive == true))
                                 {
                                     <div id="resultDiv"></div>
-                                    <div class="panel panel-info" style="background-color: aliceblue">
+                                    <div class="panel panel-info" style="background-color: aliceblue; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); ">
                                         <!-- Display QA details, adjust as needed -->
 
                                         <h4 class="widget-title lighter">
@@ -144,12 +144,12 @@
                                                             int radioCounter = 1;
                                                         }
                                                         <div class="control-group">
-                                                            @foreach (var item in question.QuestionType.QuestionTypeAnswerOptions)
+                                                            @foreach (var item in question.QuestionType.QuestionTypeAnswerOptions.OrderByDescending(t=>t.ID))
                                                             {
                                                                 string radioCC = questionCounter.ToString() + radioCounter.ToString();
                                                                 <label>
                                                                     <input type="@item.InputType" id="sd-@questionCounter" name="name" value="@item.OptionName" onclick="submitQuestion('@item.OptionName', @formCounter)" class="ace">
-                                                                    <span class="lbl">@item.OptionName</span>
+                                                                    <span class="lbl"><strong>@item.OptionName</strong></span>
                                                                 </label>
                                                             }
                                                         </div>
@@ -184,12 +184,12 @@
                                                 </a>
 
                                             </form>
+                                            <div class="hr hr-10 hr-dotted"></div>
                                         }
 
 
                                     </div>
-                                    <br />
-                                    <hr />
+                             
                                     questionCounter++;
                                     formCounter++;
                                 }
@@ -218,6 +218,12 @@
 
                     .radio-item {
                         margin-bottom: 10px;
+                    }
+
+                    .control-group {
+                        background: linear-gradient(to right, #43abfa, lightblue, lightgreen, lightyellow, lightcoral);
+                        padding: 5px; /* Add padding as needed */
+                        border-radius: 10px; /* Add border radius for rounded corners */
                     }
                 </style>
             </div>

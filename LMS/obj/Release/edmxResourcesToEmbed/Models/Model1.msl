@@ -403,6 +403,7 @@
           <ScalarProperty Name="IsAttachment" ColumnName="IsAttachment" />
           <ScalarProperty Name="Attachment" ColumnName="Attachment" />
           <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+          <ScalarProperty Name="IsVisibleToStudents" ColumnName="IsVisibleToStudents" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

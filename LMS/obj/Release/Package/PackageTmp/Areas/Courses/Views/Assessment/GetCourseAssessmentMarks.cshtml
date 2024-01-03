@@ -1,0 +1,177 @@
+﻿@model LMS.Models.AssessmentDetail
+
+@{
+    ViewBag.Title = "GetCourseAssessmentMarks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("Index", "MyDashboard", new { area = "" })">Dashboard</a>
+        </li>
+        <li>
+            <i class="ace-icon fa fa-dashboard"></i>
+            <a href="@Url.Action("AllCourses", "MyCourses", new { area = "Courses" })">My Courses</a>
+        </li>
+        <li class="active">Course Assessment Marks</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="page-header">
+                <h1>
+                    <a href="javascript:window.history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                    |
+                    Course Assesment MARKS for <span class="orange"> @ViewBag.CourseCodeTitle </span>
+                </h1>
+            </div>
+            <style>
+                .center-table {
+                    width: 350px; /* Set your desired width */
+                    margin: 0 auto; /* Center the table */
+                    border-collapse: collapse; /* Collapse table borders */
+                    border: 2px solid #ddd; /* Add a border to the table */
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+                }
+
+                    .center-table th, .center-table td {
+                        border: 1px solid #ddd; /* Add borders to table cells */
+                        padding: 1px; /* Add padding to table cells */
+                    }
+
+                    .center-table th {
+                        background-color: #f2f2f2; /* Add a background color to header cells */
+                    }
+
+                    .center-table tr {
+                        border-bottom: 1px solid #ddd; /* Add border to all rows */
+                    }
+
+                    .center-table th, .center-table td {
+                        font-size: 16px; /* Increased font size */
+                    }
+            </style>
+
+            <div>
+                <div style="text-align: center;">
+                    <h2 style="text-align:center; font-weight:800;">Assessemnt Transcript</h2>
+                    <dl class="dl-horizontal center-table ">
+                        <dt style="border-bottom:1px solid black;">
+                            @Html.DisplayNameFor(model => model.Assessment.TeacherCours.Course.Title)
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @Html.DisplayFor(model => model.Assessment.TeacherCours.Course.Code) @Html.DisplayFor(model => model.Assessment.TeacherCours.Course.Title)
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            Instructor
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @Html.DisplayFor(model => model.Assessment.TeacherCours.EmpForm.Title.Title1) @Html.DisplayFor(model => model.Assessment.TeacherCours.EmpForm.Name)
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            Session
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @Html.DisplayFor(model => model.Assessment.TeacherCours.Session.Session1)
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            @Html.DisplayNameFor(model => model.Student.RegNo)
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @Html.DisplayFor(model => model.Student.RegNo)
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            @Html.DisplayNameFor(model => model.Assessment.TeacherCours.Section)
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @Html.DisplayFor(model => model.Assessment.TeacherCours.Section)
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            Assessment Name
+                        </dt>
+
+                        <dd style="border-bottom:1px solid black;">
+                            @ViewBag.Name  (@ViewBag.Description)
+
+                        </dd>
+                        <dt style="border-bottom:1px solid black;">
+                            Max Marks
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @ViewBag.MaxMarks
+                        </dd>
+                        <dt style="border-bottom:1px solid gray;">
+                            @Html.DisplayNameFor(model => model.ObtainedMarks) (OM)
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @Html.DisplayFor(model => model.ObtainedMarks)
+                        </dd>
+                        <dt style="border-bottom:1px solid gray;">
+                            OM%
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @((Model.ObtainedMarks / (decimal)Model.Assessment.TotalMarks).ToString("0.00"))
+                        </dd>
+                        <dt style="border-bottom:1px solid gray;">
+                            Assessment Weightage
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @ViewBag.Weightage
+                        </dd>
+
+
+
+                        <dt style="border-bottom:1px solid gray;">
+                            OM% Out Weightage
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @(((Model.ObtainedMarks/(decimal) Model.Assessment.TotalMarks)* Model.Assessment.Weightage).Value.ToString("0.00"))
+                        </dd>
+
+                        <dt style="border-bottom:1px solid gray;">
+                            Is Absent?
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @Html.DisplayFor(model => model.IsAbsent)
+                        </dd>
+                        <dt style="border-bottom:1px solid gray;">
+                            Assessment Date
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @{
+                                var formattedDate = Model.Assessment.EndDate.Value.ToShortDateString();
+                            }
+                            @Html.DisplayFor(model => formattedDate)
+
+
+                        </dd>
+                        <dt style="border-bottom:1px solid gray;">
+                            Print Date
+                        </dt>
+
+                        <dd style="border-bottom:1px solid gray;">
+                            @DateTime.Today.ToShortDateString()
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

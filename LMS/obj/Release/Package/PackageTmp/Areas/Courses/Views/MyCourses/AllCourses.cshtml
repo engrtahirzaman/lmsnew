@@ -136,7 +136,32 @@
                                                                     <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
                                                                     <input type="submit" value="Submit" style="display:none">
                                                                 }
-                                                                <a href="#" class="GetCourseAttendanceLink" title="Course Attendance"><i class="fa fa-calendar-times-o"></i>Attendance Record</a>
+                                                                <a href="#" class="GetCourseAttendanceLink" title="Course Attendance"><i class="fa fa-calendar-times-o"></i> Attendance Record</a>
+                                                            </li>
+                                                            <li>
+                                                                @using (Html.BeginForm("GetCourseAssessment", "Assessment", FormMethod.Post, new { @class = "GetCourseAssessmentform" }))
+                                                                {
+                                                                    @Html.AntiForgeryToken()
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="hidden" name="Section" value="@item.Section" />
+                                                                    <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="GetCourseAssessmentLink" title="Course Assessment"><i class="fa fa-file-text-o"></i> Assessment</a>
+                                                            </li>
+                                                            <li>
+                                                                @using (Html.BeginForm("GetCourseAssessmentConsolidated", "Assessment", FormMethod.Post, new { @class = "GetCourseAssessmentConsolidatedform" }))
+                                                                {
+                                                                    @Html.AntiForgeryToken()
+                                                                    <input type="hidden" name="SessionID" value="@item.SessionID" />
+                                                                    <input type="hidden" name="CourseID" value="@item.CourseID" />
+                                                                    <input type="hidden" name="Section" value="@item.Section" />
+                                                                    <input type="hidden" name="TeacherCourseID" value="@(teacherCourse.FirstOrDefault()?.ID)" />
+                                                                 
+                                                                    <input type="submit" value="Submit" style="display:none">
+                                                                }
+                                                                <a href="#" class="GetCourseAssessmentConsolidatedLink" title="Course Assessment Consolidated"><i class="fa fa-file-text"></i>Consolidated Marks</a>
                                                             </li>
                                                             <li>
                                                                 @using (Html.BeginForm("GetCourseCard", "MyCourses", FormMethod.Post, new { @class = "GetCourseCardform" }))
@@ -213,6 +238,25 @@
             $(this).prev(".GetCourseAttendanceform").submit();
         }
     });
+
+    $(document).on("click", ".GetCourseAssessmentConsolidatedLink", function (e) {
+        // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".GetCourseAssessmentConsolidatedform").submit();
+        }
+    });
+  
+
+
+    $(document).on("click", ".GetCourseAssessmentLink", function (e) {
+        // var Okay = confirm("Are you sure you want to drop this course?");
+        if (true) {
+            e.preventDefault();
+            $(this).prev(".GetCourseAssessmentform").submit();
+        }
+    });
+
     $(document).on("click", ".GetCourseCardLink", function (e) {
         // var Okay = confirm("Are you sure you want to drop this course?");
         if (true) {

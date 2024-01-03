@@ -282,7 +282,7 @@ namespace LMS.Areas.Courses.Controllers
         public ActionResult loadUnSubmittedSurvey(int SurveryInitiatedID, int StudentCourseID, int TeacherCourseID)
         {
             var allinitiatedSurveys = db.SurveyInitiatedResponses
-                .Where(t => t.StudentCourseID == StudentCourseID && t.TeacherCoursesID == TeacherCourseID)
+                .Where(t => t.SurveyInititatedID == SurveryInitiatedID && t.StudentCourseID == StudentCourseID && t.TeacherCoursesID == TeacherCourseID)
                 .ToList();
             StringBuilder htmlStringBuilder = new StringBuilder();
 
@@ -366,7 +366,7 @@ namespace LMS.Areas.Courses.Controllers
                                     htmlStringBuilder.AppendLine("<div class=\"radio-group\">");
                                     htmlStringBuilder.AppendLine("<div class=\"radio-item\">");
 
-                                    foreach (var option in question.QuestionType.QuestionTypeAnswerOptions)
+                                    foreach (var option in question.QuestionType.QuestionTypeAnswerOptions.OrderByDescending(t=>t.ID))
                                     {
                                         if (question.Answer == option.OptionName)
                                         {

@@ -9,16 +9,12 @@
 
 
     var SurveyInitiatedOpenOnly = Model.Where(t => t.OpeningDate <= DateTime.Now && t.ClosingDate >= DateTime.Now).FirstOrDefault();
+}
 
-    int SurveryInitiatedID = 0;
-    if (SurveyInitiatedOpenOnly != null)
-    {
-        SurveryInitiatedID = SurveyInitiatedOpenOnly.ID;
-    }
-    else
-    {
-        return HttpNotFound();
-    }
+@if (SurveyInitiatedOpenOnly != null)
+{
+    int SurveryInitiatedID = SurveyInitiatedOpenOnly.ID;
+
 
 
     int StudentCourseID = Convert.ToInt32(ViewBag.StudentCourseID);
@@ -29,188 +25,188 @@
     var surveyInitiatedRepsonse = db.SurveyInitiatedResponses.Where(t => t.SurveyInititatedID == SurveryInitiatedID && t.StudentCourseID == StudentCourseID).FirstOrDefault();
     var survey = db.Surveys.Find(SurveyInitiatedOpenOnly.SurveyID);
 
-}
-<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon fa fa-dashboard"></i>
-            <a href="@Url.Action("Index","MyDashboard", new { area =""})">Dashboard</a>
-        </li>
-        <li>
-            <i class="ace-icon fa fa-dashboard"></i>
-            <a href="@Url.Action("AllCourses","MyCourses", new { area ="Courses"})">My Courses</a>
-        </li>
-        <li class="active">My Survey</li>
-    </ul><!-- /.breadcrumb -->
-</div>
-<div class="page-content">
-    <div class="row">
-        <div class="col-xs-12">
-            <!-- PAGE CONTENT BEGINS -->
-            <div class="page-header">
-                <h1>
-                    <a href="javascript:window.history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
-                    |
-                    My   <span class="label label-lg label-pink">@SurveyInitiatedOpenOnly.EvaluationCycle.Name</span> <span class="red">@SurveyInitiatedOpenOnly.Survey.Name</span> for <span class="purple"> @ViewBag.TeacherName </span> <span class="orange"> @ViewBag.CourseCodeTitle </span>
+
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-dashboard"></i>
+                <a href="@Url.Action("Index", "MyDashboard", new { area = "" })">Dashboard</a>
+            </li>
+            <li>
+                <i class="ace-icon fa fa-dashboard"></i>
+                <a href="@Url.Action("AllCourses", "MyCourses", new { area = "Courses" })">My Courses</a>
+            </li>
+            <li class="active">My Survey</li>
+        </ul><!-- /.breadcrumb -->
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="page-header">
+                    <h1>
+                        <a href="javascript:window.history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+                        |
+                        My   <span class="label label-lg label-pink">@SurveyInitiatedOpenOnly.EvaluationCycle.Name</span> <span class="red">@SurveyInitiatedOpenOnly.Survey.Name</span> for <span class="purple"> @ViewBag.TeacherName </span> <span class="orange"> @ViewBag.CourseCodeTitle </span>
 
 
-                </h1>
-            </div>
-            <div class="center">
+                    </h1>
+                </div>
+                <div class="center">
 
-                @if (surveyInitiatedRepsonse == null && surveyInitiatedRepsonse?.Submitted != true)
-                {
-                    <span class="label label-lg label-danger arrowed arrowed-right">
-                        Last Date for Final Submission: @SurveyInitiatedOpenOnly.ClosingDate.Value.ToString("dd/MMMM/yyyy", CultureInfo.InvariantCulture)
-                    </span>
+                    @if (surveyInitiatedRepsonse == null && surveyInitiatedRepsonse?.Submitted != true)
+                    {
+                        <span class="label label-lg label-danger arrowed arrowed-right">
+                            Last Date for Final Submission: @SurveyInitiatedOpenOnly.ClosingDate.Value.ToString("dd/MMMM/yyyy", CultureInfo.InvariantCulture)
+                        </span>
+                    }
+                </div>
+                <!-- div.table-responsive -->
+                <!-- div.dataTables_borderWrap -->
+                <h1 class="text-danger">@ViewBag.Error</h1>
+                @Html.Raw(TempData["Sucess"])
+                @Html.Raw(TempData["Failed"])
+
+
+                @{
+                    int formCounter = 1;
+                    int sectionCounter = 1;
+                    int questionCounter = 1;
+                    int surveyInitiatedRepsonseID = surveyInitiatedRepsonse?.ID ?? -1;
                 }
-            </div>
-            <!-- div.table-responsive -->
-            <!-- div.dataTables_borderWrap -->
-            <h1 class="text-danger">@ViewBag.Error</h1>
-            @Html.Raw(TempData["Sucess"])
-            @Html.Raw(TempData["Failed"])
 
-
-            @{
-                int formCounter = 1;
-                int sectionCounter = 1;
-                int questionCounter = 1;
-                int surveyInitiatedRepsonseID = surveyInitiatedRepsonse?.ID ?? -1;
-            }
-
-            @if (surveyInitiatedRepsonse == null || surveyInitiatedRepsonse.Submitted != true)
-            {
-
-                <!-- Display active SurveyHeadings -->
-                foreach (var heading in survey.SurveyHeadings.Where(s => s.isActive))
+                @if (surveyInitiatedRepsonse == null || surveyInitiatedRepsonse.Submitted != true)
                 {
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Section-@((char)('A' + sectionCounter - 1)): @heading.Name</h3>
-                        </div>
-                        <div class="panel-body">
-                            <!-- Display active SurveyHeadingQA items -->
-                            @foreach (var question in heading.SurveyHeadingQAs.Where(q => q.isActive == true))
-                            {
-                                <div id="resultDiv"></div>
-                                <div class="panel panel-info" style="background-color:lavenderblush">
-                                    <!-- Display QA details, adjust as needed -->
-                                    <p>Q-@questionCounter: @question.Question</p>
-                                    <!-- Add more fields as needed -->
 
-                                    @if (question.QuestionTypeID == 1)
-                                    {
-                                        <!-- Display radio buttons for question type 1 -->
-                                        <div class="rounded-box">
-                                            <div class="radio-group" style="display: flex; justify-content: center;">
+                    <!-- Display active SurveyHeadings -->
+                    foreach (var heading in survey.SurveyHeadings.Where(s => s.isActive))
+                    {
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Section-@((char)('A' + sectionCounter - 1)): @heading.Name</h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- Display active SurveyHeadingQA items -->
+                                @foreach (var question in heading.SurveyHeadingQAs.Where(q => q.isActive == true))
+                                {
+                                    <div id="resultDiv"></div>
+                                    <div class="panel panel-info" style="background-color:lavenderblush">
+                                        <!-- Display QA details, adjust as needed -->
+                                        <p>Q-@questionCounter: @question.Question</p>
+                                        <!-- Add more fields as needed -->
 
-                                                <form id="form-@formCounter" action="@Url.Action("SaveQuestionResponse", "Survey", new { area = "Courses" })" method="post">
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.Hidden("surveyInitiatedRepsonseID", surveyInitiatedRepsonseID)
-                                                    @Html.Hidden("surveyInitiatedID", SurveyInitiatedOpenOnly.ID)
-                                                    @Html.Hidden("surveyID", SurveyInitiatedOpenOnly.SurveyID)
-                                                    @Html.Hidden("SurveyHeadingID", question.SurveyHeadingID)
-                                                    @Html.Hidden("SortNo", question.SortNo)
-                                                    @Html.Hidden("QuestionTypeID", question.QuestionTypeID)
-                                                    @Html.Hidden("Question", question.Question)
-                                                    @Html.Hidden("SessionID", SessionID)
-                                                    @Html.Hidden("StudentCourseID", StudentCourseID)
-                                                    @Html.Hidden("CourseID", CourseID)
-                                                    @Html.Hidden("surveyHeadingQAID", question.ID)
-                                                    @Html.Hidden("TeacherCourseID", TeacherCourseID)
-                                                    <!-- Hidden input field to store the selected value -->
-                                                    <input type="hidden" id="selectedValueInput" name="SelectedValue" value="" />
+                                        @if (question.QuestionTypeID == 1)
+                                        {
+                                            <!-- Display radio buttons for question type 1 -->
+                                            <div class="rounded-box">
+                                                <div class="radio-group" style="display: flex; justify-content: center;">
+
+                                                    <form id="form-@formCounter" action="@Url.Action("SaveQuestionResponse", "Survey", new { area = "Courses" })" method="post">
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.Hidden("surveyInitiatedRepsonseID", surveyInitiatedRepsonseID)
+                                                        @Html.Hidden("surveyInitiatedID", SurveyInitiatedOpenOnly.ID)
+                                                        @Html.Hidden("surveyID", SurveyInitiatedOpenOnly.SurveyID)
+                                                        @Html.Hidden("SurveyHeadingID", question.SurveyHeadingID)
+                                                        @Html.Hidden("SortNo", question.SortNo)
+                                                        @Html.Hidden("QuestionTypeID", question.QuestionTypeID)
+                                                        @Html.Hidden("Question", question.Question)
+                                                        @Html.Hidden("SessionID", SessionID)
+                                                        @Html.Hidden("StudentCourseID", StudentCourseID)
+                                                        @Html.Hidden("CourseID", CourseID)
+                                                        @Html.Hidden("surveyHeadingQAID", question.ID)
+                                                        @Html.Hidden("TeacherCourseID", TeacherCourseID)
+                                                        <!-- Hidden input field to store the selected value -->
+                                                        <input type="hidden" id="selectedValueInput" name="SelectedValue" value="" />
 
 
-                                                    @{
-                                                        int radioCounter = 1;
-                                                    }
-                                                    <div class="control-group">
-                                                        @foreach (var item in question.QuestionType.QuestionTypeAnswerOptions)
-                                                        {
-                                                            string radioCC = questionCounter.ToString() + radioCounter.ToString();
-                                                            <label>
-                                                                <input type="@item.InputType" id="sd-@questionCounter" name="name" value="@item.OptionName" onclick="submitQuestion('@item.OptionName', @formCounter)" class="ace">
-                                                                <span class="lbl">@item.OptionName</span>
-                                                            </label>
+                                                        @{
+                                                            int radioCounter = 1;
                                                         }
-                                                    </div>
-                                                </form>
+                                                        <div class="control-group">
+                                                            @foreach (var item in question.QuestionType.QuestionTypeAnswerOptions.OrderByDescending(t=>t.ID))
+                                                            {
+                                                                string radioCC = questionCounter.ToString() + radioCounter.ToString();
+                                                                <label>
+                                                                    <input type="@item.InputType" id="sd-@questionCounter" name="name" value="@item.OptionName" onclick="submitQuestion('@item.OptionName', @formCounter)" class="ace">
+                                                                    <span class="lbl"><strong>@item.OptionName</strong></span>
+                                                                </label>
+                                                            }
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    }
-                                    else if (question.QuestionTypeID == 2)
-                                    {
-                                        <form id="form-@formCounter" action="@Url.Action("SaveQuestionResponse", "Survey", new { area = "Courses" })" method="post">
-                                            @Html.AntiForgeryToken()
-                                            @Html.Hidden("surveyInitiatedRepsonseID", surveyInitiatedRepsonseID)
-                                            @Html.Hidden("surveyInitiatedID", SurveyInitiatedOpenOnly.ID)
-                                            @Html.Hidden("surveyID", SurveyInitiatedOpenOnly.SurveyID)
-                                            @Html.Hidden("SurveyHeadingID", question.SurveyHeadingID)
-                                            @Html.Hidden("SortNo", question.SortNo)
-                                            @Html.Hidden("QuestionTypeID", question.QuestionTypeID)
-                                            @Html.Hidden("Question", question.Question)
-                                            @Html.Hidden("SessionID", SessionID)
-                                            @Html.Hidden("StudentCourseID", StudentCourseID)
-                                            @Html.Hidden("CourseID", CourseID)
-                                            @Html.Hidden("surveyHeadingQAID", question.ID)
-                                            @Html.Hidden("TeacherCourseID", TeacherCourseID)
-                                            <!-- Hidden input field to store the selected value -->
-                                            <!-- Display a multiline textbox for question type 2 -->
+                                                            }
+                                                            else if (question.QuestionTypeID == 2)
+                                                            {
+                                            <form id="form-@formCounter" action="@Url.Action("SaveQuestionResponse", "Survey", new { area = "Courses" })" method="post">
+                                                @Html.AntiForgeryToken()
+                                                @Html.Hidden("surveyInitiatedRepsonseID", surveyInitiatedRepsonseID)
+                                                @Html.Hidden("surveyInitiatedID", SurveyInitiatedOpenOnly.ID)
+                                                @Html.Hidden("surveyID", SurveyInitiatedOpenOnly.SurveyID)
+                                                @Html.Hidden("SurveyHeadingID", question.SurveyHeadingID)
+                                                @Html.Hidden("SortNo", question.SortNo)
+                                                @Html.Hidden("QuestionTypeID", question.QuestionTypeID)
+                                                @Html.Hidden("Question", question.Question)
+                                                @Html.Hidden("SessionID", SessionID)
+                                                @Html.Hidden("StudentCourseID", StudentCourseID)
+                                                @Html.Hidden("CourseID", CourseID)
+                                                @Html.Hidden("surveyHeadingQAID", question.ID)
+                                                @Html.Hidden("TeacherCourseID", TeacherCourseID)
+                                                <!-- Hidden input field to store the selected value -->
+                                                <!-- Display a multiline textbox for question type 2 -->
 
-                                            @{string tyy = "txt";}
-                                            <textarea name="textType" id="textt" rows="4" style="width: 100%;"></textarea>
-                                            <a class="btn btn-info btn-xs pull-right" title="Save This Answer" onclick="submitQuestion('@tyy', @formCounter)">
-                                                <i class="fa fa-save"></i> Save This Answer
-                                            </a>
+                                                @{string tyy = "txt";}
+                                                <textarea name="textType" id="textt" rows="4" style="width: 100%;"></textarea>
+                                                <a class="btn btn-info btn-xs pull-right" title="Save This Answer" onclick="submitQuestion('@tyy', @formCounter)">
+                                                    <i class="fa fa-save"></i> Save This Answer
+                                                </a>
 
-                                        </form>
-                                    }
+                                            </form>
+                                                    }
 
 
-                                </div>
-                                <br />
-                                <hr />
-                                questionCounter++;
-                                formCounter++;
-                            }
+                                    </div>
+                                    <br />
+                                    <hr />
+                                                        questionCounter++;
+                                                        formCounter++;
+                                                    }
+                            </div>
                         </div>
-                    </div>
-                    sectionCounter++;
-                    questionCounter = 1; // Reset question counter for each section
-                }
-            }
-            <div id="surveyContainer"></div>
-            <style>
-                .rounded-box {
-                    border: 1px solid #ccc;
-                    border-radius: 10px;
-                    padding: 5px;
-                    margin: 5px 0;
-                    text-align: center; /* Center the content */
-                    background-color: white;
-                }
+                                                            sectionCounter++;
+                                                            questionCounter = 1; // Reset question counter for each section
+                                                        }
+                                                    }
+                <div id="surveyContainer"></div>
+                <style>
+                    .rounded-box {
+                        border: 1px solid #ccc;
+                        border-radius: 10px;
+                        padding: 5px;
+                        margin: 5px 0;
+                        text-align: center; /* Center the content */
+                        background-color: white;
+                    }
 
-                .radio-group {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center; /* Center the items horizontally */
-                }
+                    .radio-group {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center; /* Center the items horizontally */
+                    }
 
-                .radio-item {
-                    margin-bottom: 10px;
-                }
-            </style>
-        </div>
+                    .radio-item {
+                        margin-bottom: 10px;
+                    }
+                </style>
+            </div>
 
-        <!-- PAGE CONTENT ENDS -->
-    </div><!-- /.col -->
-</div><!-- /.page-content -->
-<script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.page-content -->
+    <script src="~/Content/assets/js/jquery-2.1.4.min.js"></script>
 
-<script>
+    <script>
 
      function submitQuestion(optionname, questionCounter) {
 
@@ -330,4 +326,50 @@
             spinner.style.display = 'none';
         });
     }
-</script>
+    </script>
+                                                            }
+                                                            else
+                                                            {
+  <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-dashboard"></i>
+                <a href = "@Url.Action("Index", "MyDashboard", new { area = "" })">Dashboard</a>
+            </li>
+            <li>
+                <i class="ace-icon fa fa-dashboard"></i>
+                <a href = "@Url.Action("AllCourses", "MyCourses", new { area = "Courses" })">My Courses</a>
+            </li>
+            <li class="active">My Survey</li>
+        </ul><!-- /.breadcrumb -->
+    </div>
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="page-header">
+                    <h1>
+                        <a href = "javascript:window.history.back();" title="Back"><i class="fa fa-arrow-circle-o-left"></i> Back</a>
+
+                    </h1>
+
+                </div>
+
+                <div class="alert alert-block alert-success">
+                    <button type = "button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button>
+
+                    <i class="ace-icon fa fa-close red"></i>
+
+                    Sorry!
+                    <strong class="red">
+                        No Survey
+                    </strong>,
+                   is initiated yet. Please wait for a while and soon you will find a survey before MSE (Mid Semester Exam) or ESE(End Semester Exam).
+                </div>
+            </div>
+        </div>
+    </div>
+
+ }

@@ -388,6 +388,7 @@
     <Property Name="IsAttachment" Type="bit" />
     <Property Name="Attachment" Type="nvarchar(max)" />
     <Property Name="IsLocked" Type="bit" Nullable="false" />
+    <Property Name="IsVisibleToStudents" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="BatchWiseCourses">
     <Key>

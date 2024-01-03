@@ -452,6 +452,7 @@
     <Property Name="IsAttachment" Type="Boolean" />
     <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+    <Property Name="IsVisibleToStudents" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="AssessmentDetails" Relationship="Self.FK_AssessmentDetails_Assessments" FromRole="Assessments" ToRole="AssessmentDetails" />
     <NavigationProperty Name="AssessmentName" Relationship="Self.FK_Assessments_AssessmentNames" FromRole="Assessments" ToRole="AssessmentNames" />
     <NavigationProperty Name="TeacherCours" Relationship="Self.FK_Assessments_TeacherCourses" FromRole="Assessments" ToRole="TeacherCourses" />
