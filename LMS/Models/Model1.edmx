@@ -395,6 +395,31 @@
           <Property Name="IsLocked" Type="bit" Nullable="false" />
           <Property Name="IsVisibleToStudents" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Assessments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampusID" Type="int" />
+          <Property Name="TeacherCourseID" Type="int" Nullable="false" />
+          <Property Name="AssessmentNameID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="TotalMarks" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Weightage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MarksType" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="PassingMarks" Type="int" />
+          <Property Name="CrBy" Type="int" Nullable="false" />
+          <Property Name="CrDate" Type="date" Nullable="false" />
+          <Property Name="CrTime" Type="time" Precision="7" />
+          <Property Name="UBy" Type="int" Nullable="false" />
+          <Property Name="UDate" Type="date" Nullable="false" />
+          <Property Name="UTime" Type="time" Precision="7" />
+          <Property Name="IsAttachment" Type="bit" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="BatchWiseCourses">
           <Key>
             <PropertyRef Name="ID" />
