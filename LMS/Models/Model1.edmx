@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACM">
           <Key>
             <PropertyRef Name="ID" />
@@ -1832,6 +1832,7 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuestionTypeID" Type="int" Nullable="false" />
           <Property Name="OptionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OptionValue" Type="int" />
           <Property Name="InputType" Type="nvarchar" MaxLength="50" />
           <Property Name="CrBy" Type="int" />
           <Property Name="CrDate" Type="date" />
@@ -2137,6 +2138,8 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
           <Property Name="IsRefundTime" Type="time" Precision="7" />
           <Property Name="IsRefundComments" Type="nvarchar" MaxLength="100" />
           <Property Name="IsRefundPercent" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="OnlinePaymentReferenceID" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReferenceIDCrDate" Type="date" />
           <Property Name="CrBy" Type="int" Nullable="false" />
           <Property Name="CrDate" Type="date" Nullable="false" />
           <Property Name="UBy" Type="int" Nullable="false" />
@@ -2412,6 +2415,7 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
           <Property Name="SubmittedBy" Type="int" />
           <Property Name="SubmittedDate" Type="date" />
           <Property Name="SubmittedTime" Type="time" Precision="7" />
+          <Property Name="FormID" Type="int" />
           <Property Name="CrBy" Type="int" />
           <Property Name="CrDate" Type="date" />
           <Property Name="CrTime" Type="time" Precision="7" />
@@ -5630,6 +5634,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyInitiatedResponse_EmpForm">
+          <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="0..1" />
+          <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpForm">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SurveyInitiatedResponse">
+              <PropertyRef Name="FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyInitiatedResponse_Sessions">
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="0..1" />
           <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
@@ -7126,6 +7142,10 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
             <End Role="Course" EntitySet="Course" />
             <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponse" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyInitiatedResponse_EmpForm" Association="Self.FK_SurveyInitiatedResponse_EmpForm">
+            <End Role="EmpForm" EntitySet="EmpForm" />
+            <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponse" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyInitiatedResponse_Sessions" Association="Self.FK_SurveyInitiatedResponse_Sessions">
             <End Role="Sessions" EntitySet="Sessions" />
             <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponse" />
@@ -7223,8 +7243,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
             <End Role="VissionUniversity" EntitySet="VissionUniversity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -8343,6 +8362,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_EmpForm" FromRole="EmpForm" ToRole="StudentsAdvisor" />
           <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_EmpForm" FromRole="EmpForm" ToRole="StudentsSupervisor" />
           <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="EmpForm" ToRole="TeacherCourses" />
+          <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_EmpForm" FromRole="EmpForm" ToRole="SurveyInitiatedResponse" />
         </EntityType>
         <EntityType Name="EmpFormJobNature">
           <Key>
@@ -9392,6 +9412,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <Property Name="UDate" Type="DateTime" Precision="0" />
           <Property Name="UTime" Type="Time" Precision="7" />
           <NavigationProperty Name="QuestionType" Relationship="Self.FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption" FromRole="QuestionTypeAnswerOption" ToRole="QuestionType" />
+          <Property Name="OptionValue" Type="Int32" />
         </EntityType>
         <EntityType Name="Religion">
           <Key>
@@ -9761,6 +9782,8 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <NavigationProperty Name="FeeHead" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHeads" />
           <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
           <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
+          <Property Name="OnlinePaymentReferenceID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceIDCrDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="StudentProgramChangeHistory">
           <Key>
@@ -10094,6 +10117,8 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyInitiatedResponse" ToRole="SurveyHeadingQAResponse" />
           <NavigationProperty Name="SurveyInitiated" Relationship="Self.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiatedResponse" ToRole="SurveyInitiated" />
           <NavigationProperty Name="TeacherCours" Relationship="Self.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="SurveyInitiatedResponse" ToRole="TeacherCourses" />
+          <Property Name="FormID" Type="Int32" />
+          <NavigationProperty Name="EmpForm" Relationship="CMSModel.FK_SurveyInitiatedResponse_EmpForm" FromRole="SurveyInitiatedResponse" ToRole="EmpForm" />
         </EntityType>
         <EntityType Name="SurveyType">
           <Key>
@@ -14819,7 +14844,23 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
             <End Role="TestSessions" EntitySet="TestSessions" />
             <End Role="TestVouchers" EntitySet="TestVouchers" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyInitiatedResponse_EmpForm" Association="CMSModel.FK_SurveyInitiatedResponse_EmpForm">
+            <End Role="EmpForm" EntitySet="EmpForms" />
+            <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_SurveyInitiatedResponse_EmpForm">
+          <End Type="CMSModel.EmpForm" Role="EmpForm" Multiplicity="0..1" />
+          <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpForm">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SurveyInitiatedResponse">
+              <PropertyRef Name="FormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16730,6 +16771,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <EntitySetMapping Name="QuestionTypeAnswerOptions">
             <EntityTypeMapping TypeName="CMSModel.QuestionTypeAnswerOption">
               <MappingFragment StoreEntitySet="QuestionTypeAnswerOption">
+                <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
                 <ScalarProperty Name="OptionName" ColumnName="OptionName" />
@@ -17023,6 +17065,8 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <EntitySetMapping Name="StudentFees">
             <EntityTypeMapping TypeName="CMSModel.StudentFee">
               <MappingFragment StoreEntitySet="StudentFee">
+                <ScalarProperty Name="ReferenceIDCrDate" ColumnName="ReferenceIDCrDate" />
+                <ScalarProperty Name="OnlinePaymentReferenceID" ColumnName="OnlinePaymentReferenceID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CampusID" ColumnName="CampusID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -17330,6 +17374,7 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
           <EntitySetMapping Name="SurveyInitiatedResponses">
             <EntityTypeMapping TypeName="CMSModel.SurveyInitiatedResponse">
               <MappingFragment StoreEntitySet="SurveyInitiatedResponse">
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SurveyInititatedID" ColumnName="SurveyInititatedID" />
                 <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />

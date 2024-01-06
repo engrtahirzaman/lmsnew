@@ -2195,6 +2195,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="StudentFees">
+      <EntityTypeMapping TypeName="CMSModel.StudentFee">
+        <MappingFragment StoreEntitySet="StudentFee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="FeeHeadID" ColumnName="FeeHeadID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="BankVoucherNo" ColumnName="BankVoucherNo" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+          <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+          <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+          <ScalarProperty Name="VerifiedTime" ColumnName="VerifiedTime" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="IsFake" ColumnName="IsFake" />
+          <ScalarProperty Name="FakeBy" ColumnName="FakeBy" />
+          <ScalarProperty Name="FakeDate" ColumnName="FakeDate" />
+          <ScalarProperty Name="FakeTime" ColumnName="FakeTime" />
+          <ScalarProperty Name="IsRefund" ColumnName="IsRefund" />
+          <ScalarProperty Name="IsRefundBy" ColumnName="IsRefundBy" />
+          <ScalarProperty Name="IsRefundDate" ColumnName="IsRefundDate" />
+          <ScalarProperty Name="IsRefundTime" ColumnName="IsRefundTime" />
+          <ScalarProperty Name="IsRefundComments" ColumnName="IsRefundComments" />
+          <ScalarProperty Name="IsRefundPercent" ColumnName="IsRefundPercent" />
+          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
+          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
+          <ScalarProperty Name="UBy" ColumnName="UBy" />
+          <ScalarProperty Name="UDate" ColumnName="UDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="StudentProgramChangeHistories">
       <EntityTypeMapping TypeName="CMSModel.StudentProgramChangeHistory">
         <MappingFragment StoreEntitySet="StudentProgramChangeHistory">
@@ -2877,49 +2918,6 @@
           <ScalarProperty Name="FakeBy" ColumnName="FakeBy" />
           <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
           <ScalarProperty Name="IsAttend" ColumnName="IsAttend" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StudentFees">
-      <EntityTypeMapping TypeName="CMSModel.StudentFee">
-        <MappingFragment StoreEntitySet="StudentFee">
-          <ScalarProperty Name="UDate" ColumnName="UDate" />
-          <ScalarProperty Name="UBy" ColumnName="UBy" />
-          <ScalarProperty Name="CrDate" ColumnName="CrDate" />
-          <ScalarProperty Name="CrBy" ColumnName="CrBy" />
-          <ScalarProperty Name="ReferenceIDCrDate" ColumnName="ReferenceIDCrDate" />
-          <ScalarProperty Name="OnlinePaymentReferenceID" ColumnName="OnlinePaymentReferenceID" />
-          <ScalarProperty Name="IsRefundPercent" ColumnName="IsRefundPercent" />
-          <ScalarProperty Name="IsRefundComments" ColumnName="IsRefundComments" />
-          <ScalarProperty Name="IsRefundTime" ColumnName="IsRefundTime" />
-          <ScalarProperty Name="IsRefundDate" ColumnName="IsRefundDate" />
-          <ScalarProperty Name="IsRefundBy" ColumnName="IsRefundBy" />
-          <ScalarProperty Name="IsRefund" ColumnName="IsRefund" />
-          <ScalarProperty Name="FakeTime" ColumnName="FakeTime" />
-          <ScalarProperty Name="FakeDate" ColumnName="FakeDate" />
-          <ScalarProperty Name="FakeBy" ColumnName="FakeBy" />
-          <ScalarProperty Name="IsFake" ColumnName="IsFake" />
-          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
-          <ScalarProperty Name="VerifiedTime" ColumnName="VerifiedTime" />
-          <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
-          <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
-          <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
-          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
-          <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
-          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-          <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
-          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-          <ScalarProperty Name="BankName" ColumnName="BankName" />
-          <ScalarProperty Name="BankVoucherNo" ColumnName="BankVoucherNo" />
-          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="FeeHeadID" ColumnName="FeeHeadID" />
-          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="CampusID" ColumnName="CampusID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

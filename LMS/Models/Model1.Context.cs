@@ -141,6 +141,7 @@ namespace LMS.Models
         public virtual DbSet<StudentCours> StudentCourses { get; set; }
         public virtual DbSet<StudentCourseSelection> StudentCourseSelections { get; set; }
         public virtual DbSet<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
+        public virtual DbSet<StudentFee> StudentFees { get; set; }
         public virtual DbSet<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentsAdvisor> StudentsAdvisors { get; set; }
@@ -175,6 +176,5 @@ namespace LMS.Models
         public virtual DbSet<v_TestAdmitCard> v_TestAdmitCard { get; set; }
         public virtual DbSet<v_TestCalenders> v_TestCalenders { get; set; }
         public virtual DbSet<v_TestVouchers> v_TestVouchers { get; set; }
-        public virtual DbSet<StudentFee> StudentFees { get; set; }
     }
 }

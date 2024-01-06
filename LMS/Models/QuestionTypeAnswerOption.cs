@@ -24,6 +24,7 @@ namespace LMS.Models
         public Nullable<int> UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
         public Nullable<System.TimeSpan> UTime { get; set; }
+        public Nullable<int> OptionValue { get; set; }
     
         public virtual QuestionType QuestionType { get; set; }
     }

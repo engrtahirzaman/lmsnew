@@ -39,6 +39,7 @@ namespace LMS.Models
         public Nullable<int> UBy { get; set; }
         public Nullable<System.DateTime> UDate { get; set; }
         public Nullable<System.TimeSpan> UTime { get; set; }
+        public Nullable<int> FormID { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Session Session { get; set; }
@@ -49,5 +50,6 @@ namespace LMS.Models
         public virtual ICollection<SurveyHeadingQAResponse> SurveyHeadingQAResponses { get; set; }
         public virtual SurveyInitiated SurveyInitiated { get; set; }
         public virtual TeacherCours TeacherCours { get; set; }
+        public virtual EmpForm EmpForm { get; set; }
     }
 }

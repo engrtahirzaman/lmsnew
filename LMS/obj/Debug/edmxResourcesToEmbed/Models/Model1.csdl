@@ -560,10 +560,10 @@
     <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Campuses" FromRole="Campuses" ToRole="Sessions" />
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Campuses" FromRole="Campuses" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Campuses" FromRole="Campuses" ToRole="StudentCourseSelection" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Campuses" FromRole="Campuses" ToRole="StudentFee" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Campuses" FromRole="Campuses" ToRole="StudentSemester" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Campuses" FromRole="Campuses" ToRole="TeacherCourses" />
     <NavigationProperty Name="Tests" Relationship="Self.FK_Tests_Campuses" FromRole="Campuses" ToRole="Tests" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Campuses" FromRole="Campus" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="CLO">
     <Key>
@@ -1414,7 +1414,7 @@
     <NavigationProperty Name="Campus" Relationship="Self.FK_FeeHeads_Campuses" FromRole="FeeHeads" ToRole="Campuses" />
     <NavigationProperty Name="FeeCriterias" Relationship="Self.FK_FeeCriteria_FeeCriteria1" FromRole="FeeHeads" ToRole="FeeCriteria" />
     <NavigationProperty Name="ScholarshipHeadsApplyOnFeeHeads" Relationship="Self.FK_ScholarhipHeadsApplyOnFeeHead_FeeHead" FromRole="FeeHeads" ToRole="ScholarshipHeadsApplyOnFeeHead" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_FeeHeads" FromRole="FeeHead" ToRole="StudentFee" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="FeeHeads" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="FinanceUnpaidDataForLMControl">
     <Key>
@@ -2284,12 +2284,12 @@
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Sessions" FromRole="Sessions" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Sessions" FromRole="Sessions" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Sessions" FromRole="Sessions" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Sessions" FromRole="Sessions" ToRole="StudentFee" />
     <NavigationProperty Name="StudentProgramChangeHistories" Relationship="Self.FK_StudentProgramChangeHistory_Sessions" FromRole="Sessions" ToRole="StudentProgramChangeHistory" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSessions_Sessions" FromRole="Sessions" ToRole="StudentSemester" />
     <NavigationProperty Name="SurveyInitiateds" Relationship="Self.FK_SurveyInitiated_Sessions" FromRole="Sessions" ToRole="SurveyInitiated" />
     <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Sessions" FromRole="Sessions" ToRole="SurveyInitiatedResponse" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_Sessions" FromRole="Sessions" ToRole="TeacherCourses" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Sessions" FromRole="Session" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="SessionWiseMeritList">
     <Key>
@@ -2490,6 +2490,50 @@
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentCourseWithDrawn_Sessions" FromRole="StudentCourseWithDrawn" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentCourseWithDrawn_Students" FromRole="StudentCourseWithDrawn" ToRole="Students" />
   </EntityType>
+  <EntityType Name="StudentFee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampusID" Type="Int32" />
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="SessionID" Type="Int32" Nullable="false" />
+    <Property Name="FeeHeadID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="VoucherNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="BankVoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+    <Property Name="PaymentTime" Type="Time" Precision="7" />
+    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+    <Property Name="VerifiedBy" Type="Int32" />
+    <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="VerifiedTime" Type="Time" Precision="7" />
+    <Property Name="Attachment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsFake" Type="Boolean" Nullable="false" />
+    <Property Name="FakeBy" Type="Int32" />
+    <Property Name="FakeDate" Type="DateTime" Precision="0" />
+    <Property Name="FakeTime" Type="Time" Precision="7" />
+    <Property Name="IsRefund" Type="Boolean" Nullable="false" />
+    <Property Name="IsRefundBy" Type="Int32" />
+    <Property Name="IsRefundDate" Type="DateTime" Precision="0" />
+    <Property Name="IsRefundTime" Type="Time" Precision="7" />
+    <Property Name="IsRefundComments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsRefundPercent" Type="Decimal" Precision="6" Scale="2" />
+    <Property Name="CrBy" Type="Int32" Nullable="false" />
+    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UBy" Type="Int32" Nullable="false" />
+    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Campus" Relationship="Self.FK_StudentFee_Campuses" FromRole="StudentFee" ToRole="Campuses" />
+    <NavigationProperty Name="FeeHead" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHeads" />
+    <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
+  </EntityType>
   <EntityType Name="StudentProgramChangeHistory">
     <Key>
       <PropertyRef Name="ID" />
@@ -2541,13 +2585,13 @@
     <NavigationProperty Name="StudentCourses" Relationship="Self.FK_StudentCourses_Students" FromRole="Students" ToRole="StudentCourses" />
     <NavigationProperty Name="StudentCourseSelections" Relationship="Self.FK_StudentCourseSelection_Students" FromRole="Students" ToRole="StudentCourseSelection" />
     <NavigationProperty Name="StudentCourseWithDrawns" Relationship="Self.FK_StudentCourseWithDrawn_Students" FromRole="Students" ToRole="StudentCourseWithDrawn" />
+    <NavigationProperty Name="StudentFees" Relationship="Self.FK_StudentFee_Students" FromRole="Students" ToRole="StudentFee" />
     <NavigationProperty Name="StudentProgramChangeHistories" Relationship="Self.FK_StudentProgramChangeHistory_Students" FromRole="Students" ToRole="StudentProgramChangeHistory" />
     <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_Students" FromRole="Students" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentSemesters" Relationship="Self.FK_StudentSemester_Students" FromRole="Students" ToRole="StudentSemester" />
     <NavigationProperty Name="StudentsIDcards" Relationship="Self.FK_StudentsIDcard_Students" FromRole="Students" ToRole="StudentsIDcard" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_Students" FromRole="Students" ToRole="StudentsSupervisor" />
     <NavigationProperty Name="SurveyInitiatedResponses" Relationship="Self.FK_SurveyInitiatedResponse_Students" FromRole="Students" ToRole="SurveyInitiatedResponse" />
-    <NavigationProperty Name="StudentFees" Relationship="CMSModel.FK_StudentFee_Students" FromRole="Student" ToRole="StudentFee" />
   </EntityType>
   <EntityType Name="StudentsAdvisor">
     <Key>
@@ -4271,6 +4315,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentFee_Campuses">
+    <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campuses">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="CampusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentSemester_Campuses">
     <End Role="Campuses" Type="Self.Campus" Multiplicity="0..1" />
     <End Role="StudentSemester" Type="Self.StudentSemester" Multiplicity="*" />
@@ -5339,6 +5395,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentFee_FeeHeads">
+    <End Role="FeeHeads" Type="Self.FeeHead" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeeHeads">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="FeeHeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Grading_GradingPollicy">
     <End Role="GradingPolicy" Type="Self.GradingPolicy" Multiplicity="1" />
     <End Role="Grading" Type="Self.Grading" Multiplicity="*" />
@@ -5831,6 +5899,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StudentFee_Sessions">
+    <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sessions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
+        <PropertyRef Name="SessionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentProgramChangeHistory_Sessions">
     <End Role="Sessions" Type="Self.Session" Multiplicity="0..1" />
     <End Role="StudentProgramChangeHistory" Type="Self.StudentProgramChangeHistory" Multiplicity="*" />
@@ -5983,6 +6063,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="StudentCourseWithDrawn">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentFee_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentFee">
         <PropertyRef Name="StudentID" />
       </Dependent>
     </ReferentialConstraint>
@@ -6440,6 +6532,7 @@
     <EntitySet Name="StudentCourses" EntityType="Self.StudentCours" />
     <EntitySet Name="StudentCourseSelections" EntityType="Self.StudentCourseSelection" />
     <EntitySet Name="StudentCourseWithDrawns" EntityType="Self.StudentCourseWithDrawn" />
+    <EntitySet Name="StudentFees" EntityType="Self.StudentFee" />
     <EntitySet Name="StudentProgramChangeHistories" EntityType="Self.StudentProgramChangeHistory" />
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="StudentsAdvisors" EntityType="Self.StudentsAdvisor" />
@@ -6798,6 +6891,10 @@
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentCourseSelection" EntitySet="StudentCourseSelections" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Campuses" Association="Self.FK_StudentFee_Campuses">
+      <End Role="Campuses" EntitySet="Campuses" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentSemester_Campuses" Association="Self.FK_StudentSemester_Campuses">
       <End Role="Campuses" EntitySet="Campuses" />
       <End Role="StudentSemester" EntitySet="StudentSemesters" />
@@ -7154,6 +7251,10 @@
       <End Role="FeeHeads" EntitySet="FeeHeads" />
       <End Role="ScholarshipHeadsApplyOnFeeHead" EntitySet="ScholarshipHeadsApplyOnFeeHeads" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_FeeHeads" Association="Self.FK_StudentFee_FeeHeads">
+      <End Role="FeeHeads" EntitySet="FeeHeads" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
     <AssociationSet Name="FK_Grading_GradingPollicy" Association="Self.FK_Grading_GradingPollicy">
       <End Role="GradingPolicy" EntitySet="GradingPolicies" />
       <End Role="Grading" EntitySet="Gradings" />
@@ -7318,6 +7419,10 @@
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
     </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Sessions" Association="Self.FK_StudentFee_Sessions">
+      <End Role="Sessions" EntitySet="Sessions" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentProgramChangeHistory_Sessions" Association="Self.FK_StudentProgramChangeHistory_Sessions">
       <End Role="Sessions" EntitySet="Sessions" />
       <End Role="StudentProgramChangeHistory" EntitySet="StudentProgramChangeHistories" />
@@ -7369,6 +7474,10 @@
     <AssociationSet Name="FK_StudentCourseWithDrawn_Students" Association="Self.FK_StudentCourseWithDrawn_Students">
       <End Role="Students" EntitySet="Students" />
       <End Role="StudentCourseWithDrawn" EntitySet="StudentCourseWithDrawns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentFee_Students" Association="Self.FK_StudentFee_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentFee" EntitySet="StudentFees" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentProgramChangeHistory_Students" Association="Self.FK_StudentProgramChangeHistory_Students">
       <End Role="Students" EntitySet="Students" />
@@ -7482,116 +7591,5 @@
       <End Role="TestSessions" EntitySet="TestSessions" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
-    <EntitySet Name="StudentFees" EntityType="CMSModel.StudentFee" />
-    <AssociationSet Name="FK_StudentFee_Campuses" Association="CMSModel.FK_StudentFee_Campuses">
-      <End Role="Campus" EntitySet="Campuses" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_FeeHeads" Association="CMSModel.FK_StudentFee_FeeHeads">
-      <End Role="FeeHead" EntitySet="FeeHeads" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_Sessions" Association="CMSModel.FK_StudentFee_Sessions">
-      <End Role="Session" EntitySet="Sessions" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StudentFee_Students" Association="CMSModel.FK_StudentFee_Students">
-      <End Role="Student" EntitySet="Students" />
-      <End Role="StudentFee" EntitySet="StudentFees" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="StudentFee">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CampusID" Type="Int32" />
-    <Property Name="StudentID" Type="Int32" Nullable="false" />
-    <Property Name="SessionID" Type="Int32" Nullable="false" />
-    <Property Name="FeeHeadID" Type="Int32" Nullable="false" />
-    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
-    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="VoucherNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="DueDate" Type="DateTime" Precision="0" />
-    <Property Name="BankVoucherNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="BranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="PaymentDate" Type="DateTime" Precision="0" />
-    <Property Name="PaymentTime" Type="Time" Precision="7" />
-    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
-    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
-    <Property Name="VerifiedBy" Type="Int32" />
-    <Property Name="VerifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="VerifiedTime" Type="Time" Precision="7" />
-    <Property Name="Attachment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsFake" Type="Boolean" Nullable="false" />
-    <Property Name="FakeBy" Type="Int32" />
-    <Property Name="FakeDate" Type="DateTime" Precision="0" />
-    <Property Name="FakeTime" Type="Time" Precision="7" />
-    <Property Name="IsRefund" Type="Boolean" Nullable="false" />
-    <Property Name="IsRefundBy" Type="Int32" />
-    <Property Name="IsRefundDate" Type="DateTime" Precision="0" />
-    <Property Name="IsRefundTime" Type="Time" Precision="7" />
-    <Property Name="IsRefundComments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IsRefundPercent" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="OnlinePaymentReferenceID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="ReferenceIDCrDate" Type="DateTime" Precision="0" />
-    <Property Name="CrBy" Type="Int32" Nullable="false" />
-    <Property Name="CrDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="UBy" Type="Int32" Nullable="false" />
-    <Property Name="UDate" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Campus" Relationship="CMSModel.FK_StudentFee_Campuses" FromRole="StudentFee" ToRole="Campus" />
-    <NavigationProperty Name="FeeHead" Relationship="CMSModel.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHead" />
-    <NavigationProperty Name="Session" Relationship="CMSModel.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Session" />
-    <NavigationProperty Name="Student" Relationship="CMSModel.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Student" />
-  </EntityType>
-  <Association Name="FK_StudentFee_Campuses">
-    <End Type="CMSModel.Campus" Role="Campus" Multiplicity="0..1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Campus">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="CampusID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_FeeHeads">
-    <End Type="CMSModel.FeeHead" Role="FeeHead" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FeeHead">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="FeeHeadID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_Sessions">
-    <End Type="CMSModel.Session" Role="Session" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Session">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="SessionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StudentFee_Students">
-    <End Type="CMSModel.Student" Role="Student" Multiplicity="1" />
-    <End Type="CMSModel.StudentFee" Role="StudentFee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StudentFee">
-        <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

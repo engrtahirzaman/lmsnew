@@ -25,13 +25,13 @@ namespace LMS.Models
             this.StudentCourses = new HashSet<StudentCours>();
             this.StudentCourseSelections = new HashSet<StudentCourseSelection>();
             this.StudentCourseWithDrawns = new HashSet<StudentCourseWithDrawn>();
+            this.StudentFees = new HashSet<StudentFee>();
             this.StudentProgramChangeHistories = new HashSet<StudentProgramChangeHistory>();
             this.StudentsAdvisors = new HashSet<StudentsAdvisor>();
             this.StudentSemesters = new HashSet<StudentSemester>();
             this.StudentsIDcards = new HashSet<StudentsIDcard>();
             this.StudentsSupervisors = new HashSet<StudentsSupervisor>();
             this.SurveyInitiatedResponses = new HashSet<SurveyInitiatedResponse>();
-            this.StudentFees = new HashSet<StudentFee>();
         }
     
         public int ID { get; set; }
@@ -72,6 +72,8 @@ namespace LMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourseWithDrawn> StudentCourseWithDrawns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentFee> StudentFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentProgramChangeHistory> StudentProgramChangeHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentsAdvisor> StudentsAdvisors { get; set; }
@@ -83,7 +85,5 @@ namespace LMS.Models
         public virtual ICollection<StudentsSupervisor> StudentsSupervisors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SurveyInitiatedResponse> SurveyInitiatedResponses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentFee> StudentFees { get; set; }
     }
 }

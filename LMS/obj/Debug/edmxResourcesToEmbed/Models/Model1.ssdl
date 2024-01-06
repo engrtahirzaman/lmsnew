@@ -2132,8 +2132,6 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="IsRefundTime" Type="time" Precision="7" />
     <Property Name="IsRefundComments" Type="nvarchar" MaxLength="100" />
     <Property Name="IsRefundPercent" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="OnlinePaymentReferenceID" Type="nvarchar" MaxLength="250" />
-    <Property Name="ReferenceIDCrDate" Type="date" />
     <Property Name="CrBy" Type="int" Nullable="false" />
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />

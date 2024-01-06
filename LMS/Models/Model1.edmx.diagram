@@ -412,6 +412,7 @@
         <AssociationConnector Association="CMSModel.FK_StudentFee_FeeHeads" />
         <AssociationConnector Association="CMSModel.FK_StudentFee_Sessions" />
         <AssociationConnector Association="CMSModel.FK_StudentFee_Students" />
+        <AssociationConnector Association="CMSModel.FK_SurveyInitiatedResponse_EmpForm" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
