@@ -14,6 +14,8 @@
     var stdInfo = db.Students.Find(StudentID);
     decimal assessmentTotall = 0;
     decimal assessmentTotalin1000 = 0;
+    decimal TotalMarksOfAllAssessments = 0;
+    decimal TotalWeightageOfAllAssessments = 0;
 }
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
@@ -140,14 +142,14 @@
                                 Assessment Detail
                             </th>
                             <th>
-                                OM
+                                <span class="label label-success arrowed-right">   OM</span>
                             </th>
                             <th>
                                 OM%
                             </th>
                             <th>
-                                %inWeightage
-                            </th>
+                              <span class="label label-danger arrowed-right">  %inWeightage</span>
+</th>
                         </tr>
                         @foreach (var group in Model.GroupBy(t => t.AssessmentName.Name))
                         {
@@ -185,8 +187,8 @@
                                     <th>
                                         <span class="label label-inverse arrowed-right">@itemDefinedDetails.Description</span>
                                         <span class="label label-info arrowed-right">@itemDefinedDetails.AssessmentName.Name</span>
-                                        <span class="label label-success arrowed-right">@itemDefinedDetails.TotalMarks</span>
-                                        <span class="label label-danger arrowed-right">@itemDefinedDetails.Weightage%</span>
+                                        <span class="label label-success arrowed-right">@itemDefinedDetails.TotalMarks  @{TotalMarksOfAllAssessments += itemDefinedDetails.TotalMarks;} </span>
+                                        <span class="label label-danger arrowed-right">@itemDefinedDetails.Weightage% @{TotalWeightageOfAllAssessments += (decimal)itemDefinedDetails.Weightage;}</span>
                                     </th>
                                     <td>@MarksinAssesment</td>
                                     <td>@omPecentage.ToString("0.00")</td>
@@ -229,10 +231,15 @@
 
                         }
                         <tr style="background-color:lightgray">
-                            <th><h3>Total </h3></th>
-                            <td><h3>@assessmentTotall</h3> </td>
+                            <th>
+                                <span class="label label-large label-inverse arrowed-right bolder">Total </span>
+                                <span class="label label-large label-info arrowed-right bolder">All Assessments </span>
+                                <span class="label label-large label-success arrowed-right bolder"> @TotalMarksOfAllAssessments </span>
+                                <span class="label label-large label-danger arrowed-right bolder">@TotalWeightageOfAllAssessments </span>
+                            </th>
+                            <td><span class="label label-large label-success arrowed-right bolder">@assessmentTotall</span> </td>
                             <td></td>
-                            <td><h3>@assessmentTotalin1000.ToString("0.00")</h3></td>
+                            <td><span class="label label-large label-danger arrowed-right bolder">@assessmentTotalin1000.ToString("0.00")</span></td>
                         </tr>
                         <!-- Add more rows as needed -->
                     </tbody>

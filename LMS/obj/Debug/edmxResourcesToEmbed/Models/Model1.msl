@@ -1905,6 +1905,7 @@
     <EntitySetMapping Name="QuestionTypeAnswerOptions">
       <EntityTypeMapping TypeName="CMSModel.QuestionTypeAnswerOption">
         <MappingFragment StoreEntitySet="QuestionTypeAnswerOption">
+          <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
           <ScalarProperty Name="OptionName" ColumnName="OptionName" />
@@ -2198,6 +2199,8 @@
     <EntitySetMapping Name="StudentFees">
       <EntityTypeMapping TypeName="CMSModel.StudentFee">
         <MappingFragment StoreEntitySet="StudentFee">
+          <ScalarProperty Name="ReferenceIDCrDate" ColumnName="ReferenceIDCrDate" />
+          <ScalarProperty Name="OnlinePaymentReferenceID" ColumnName="OnlinePaymentReferenceID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CampusID" ColumnName="CampusID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -2505,6 +2508,7 @@
     <EntitySetMapping Name="SurveyInitiatedResponses">
       <EntityTypeMapping TypeName="CMSModel.SurveyInitiatedResponse">
         <MappingFragment StoreEntitySet="SurveyInitiatedResponse">
+          <ScalarProperty Name="FormID" ColumnName="FormID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SurveyInititatedID" ColumnName="SurveyInititatedID" />
           <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />

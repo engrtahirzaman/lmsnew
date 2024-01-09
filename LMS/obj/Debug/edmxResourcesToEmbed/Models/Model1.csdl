@@ -1115,6 +1115,7 @@
     <NavigationProperty Name="StudentsAdvisors" Relationship="Self.FK_StudentsAdvisor_EmpForm" FromRole="EmpForm" ToRole="StudentsAdvisor" />
     <NavigationProperty Name="StudentsSupervisors" Relationship="Self.FK_StudentsSupervisor_EmpForm" FromRole="EmpForm" ToRole="StudentsSupervisor" />
     <NavigationProperty Name="TeacherCourses" Relationship="Self.FK_TeacherCourses_EmpRegistration" FromRole="EmpForm" ToRole="TeacherCourses" />
+    <NavigationProperty Name="SurveyInitiatedResponses" Relationship="CMSModel.FK_SurveyInitiatedResponse_EmpForm" FromRole="EmpForm" ToRole="SurveyInitiatedResponse" />
   </EntityType>
   <EntityType Name="EmpFormJobNature">
     <Key>
@@ -2164,6 +2165,7 @@
     <Property Name="UDate" Type="DateTime" Precision="0" />
     <Property Name="UTime" Type="Time" Precision="7" />
     <NavigationProperty Name="QuestionType" Relationship="Self.FK_QuestionTypeAnswerOption_QuestionTypeAnswerOption" FromRole="QuestionTypeAnswerOption" ToRole="QuestionType" />
+    <Property Name="OptionValue" Type="Int32" />
   </EntityType>
   <EntityType Name="Religion">
     <Key>
@@ -2533,6 +2535,8 @@
     <NavigationProperty Name="FeeHead" Relationship="Self.FK_StudentFee_FeeHeads" FromRole="StudentFee" ToRole="FeeHeads" />
     <NavigationProperty Name="Session" Relationship="Self.FK_StudentFee_Sessions" FromRole="StudentFee" ToRole="Sessions" />
     <NavigationProperty Name="Student" Relationship="Self.FK_StudentFee_Students" FromRole="StudentFee" ToRole="Students" />
+    <Property Name="OnlinePaymentReferenceID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceIDCrDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="StudentProgramChangeHistory">
     <Key>
@@ -2866,6 +2870,8 @@
     <NavigationProperty Name="SurveyHeadingQAResponses" Relationship="Self.FK_SurveyHeadingQAResponse_SurveyInitiatedResponse" FromRole="SurveyInitiatedResponse" ToRole="SurveyHeadingQAResponse" />
     <NavigationProperty Name="SurveyInitiated" Relationship="Self.FK_SurveyInitiatedResponse_SurveyInitiated" FromRole="SurveyInitiatedResponse" ToRole="SurveyInitiated" />
     <NavigationProperty Name="TeacherCours" Relationship="Self.FK_SurveyInitiatedResponse_TeacherCourses" FromRole="SurveyInitiatedResponse" ToRole="TeacherCourses" />
+    <Property Name="FormID" Type="Int32" />
+    <NavigationProperty Name="EmpForm" Relationship="CMSModel.FK_SurveyInitiatedResponse_EmpForm" FromRole="SurveyInitiatedResponse" ToRole="EmpForm" />
   </EntityType>
   <EntityType Name="SurveyType">
     <Key>
@@ -7591,5 +7597,21 @@
       <End Role="TestSessions" EntitySet="TestSessions" />
       <End Role="TestVouchers" EntitySet="TestVouchers" />
     </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_EmpForm" Association="CMSModel.FK_SurveyInitiatedResponse_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForms" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponses" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_SurveyInitiatedResponse_EmpForm">
+    <End Type="CMSModel.EmpForm" Role="EmpForm" Multiplicity="0..1" />
+    <End Type="CMSModel.SurveyInitiatedResponse" Role="SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="FormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

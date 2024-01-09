@@ -1827,6 +1827,7 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="QuestionTypeID" Type="int" Nullable="false" />
     <Property Name="OptionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="OptionValue" Type="int" />
     <Property Name="InputType" Type="nvarchar" MaxLength="50" />
     <Property Name="CrBy" Type="int" />
     <Property Name="CrDate" Type="date" />
@@ -2132,6 +2133,8 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="IsRefundTime" Type="time" Precision="7" />
     <Property Name="IsRefundComments" Type="nvarchar" MaxLength="100" />
     <Property Name="IsRefundPercent" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="OnlinePaymentReferenceID" Type="nvarchar" MaxLength="250" />
+    <Property Name="ReferenceIDCrDate" Type="date" />
     <Property Name="CrBy" Type="int" Nullable="false" />
     <Property Name="CrDate" Type="date" Nullable="false" />
     <Property Name="UBy" Type="int" Nullable="false" />
@@ -2407,6 +2410,7 @@ warning 6002: The table/view 'CMS.dbo.MajorSubjectListOfCourses' does not have a
     <Property Name="SubmittedBy" Type="int" />
     <Property Name="SubmittedDate" Type="date" />
     <Property Name="SubmittedTime" Type="time" Precision="7" />
+    <Property Name="FormID" Type="int" />
     <Property Name="CrBy" Type="int" />
     <Property Name="CrDate" Type="date" />
     <Property Name="CrTime" Type="time" Precision="7" />
@@ -5625,6 +5629,18 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SurveyInitiatedResponse_EmpForm">
+    <End Role="EmpForm" Type="Self.EmpForm" Multiplicity="0..1" />
+    <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpForm">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SurveyInitiatedResponse">
+        <PropertyRef Name="FormID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SurveyInitiatedResponse_Sessions">
     <End Role="Sessions" Type="Self.Sessions" Multiplicity="0..1" />
     <End Role="SurveyInitiatedResponse" Type="Self.SurveyInitiatedResponse" Multiplicity="*" />
@@ -7119,6 +7135,10 @@ warning 6002: The table/view 'CMS.dbo.v_TestVouchers' does not have a primary ke
     </AssociationSet>
     <AssociationSet Name="FK_SurveyInitiatedResponse_Course" Association="Self.FK_SurveyInitiatedResponse_Course">
       <End Role="Course" EntitySet="Course" />
+      <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyInitiatedResponse_EmpForm" Association="Self.FK_SurveyInitiatedResponse_EmpForm">
+      <End Role="EmpForm" EntitySet="EmpForm" />
       <End Role="SurveyInitiatedResponse" EntitySet="SurveyInitiatedResponse" />
     </AssociationSet>
     <AssociationSet Name="FK_SurveyInitiatedResponse_Sessions" Association="Self.FK_SurveyInitiatedResponse_Sessions">
